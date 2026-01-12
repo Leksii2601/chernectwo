@@ -187,7 +187,7 @@ export function generateCalendar(year: number): CalendarDay[] {
     // 1. Рухоме велике свято (Великдень, Трійця)
     // 2. Фіксоване велике свято (Різдво)
     // 3. Ім'я першого святого з JSON (якщо немає свята)
-    let title = movableName || fixedName || (extraData.saints && extraData.saints.length > 0 ? extraData.saints[0] : "");
+    const title = movableName || fixedName || (extraData.saints && extraData.saints.length > 0 ? extraData.saints[0] : "");
 
     // Чи є цей день святковим (червоним у календарі)
     const isHoliday = !!(movableName || fixedName);

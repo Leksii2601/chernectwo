@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
-import { generateCalendar, CalendarDay } from '@/utils/calendarGenerator'
+import { generateCalendar } from '@/utils/calendarGenerator'
 import { clsx } from 'clsx'
-import { ChevronLeft, ChevronRight, Snowflake, Sun, Cross } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const MONTHS = [
   "Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень",
@@ -17,19 +17,13 @@ const MONTHS_GENITIVE = [
 
 const WEEKDAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'];
 
-function getSeasonIcon(monthIndex: number) {
-    if (monthIndex === 11 || monthIndex <= 1) return <Snowflake className="w-5 h-5 text-gray-300" />;
-    if (monthIndex >= 5 && monthIndex <= 7) return <Sun className="w-5 h-5 text-amber-400" />;
-    return <Cross className="w-6 h-6 text-gray-400 rotate-45" />; 
-}
-
 export function CalendarSection() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const currentYear = currentDate.getFullYear();
 
   const fullCalendarData = useMemo(() => {
-      const y = currentDate.getFullYear();
-      return [...generateCalendar(y), ...generateCalendar(y + 1)];
-  }, [currentDate.getFullYear()]);
+      return [...generateCalendar(currentYear), ...generateCalendar(currentYear + 1)];
+  }, [currentYear]);
 
   const selectedIndex = useMemo(() => {
     const year = currentDate.getFullYear();
