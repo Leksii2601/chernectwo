@@ -8,7 +8,10 @@ import Image from 'next/image'
 const slides = [
   '/media/hero-1.jpg',
   '/media/hero-2.png',
-  '/media/hero-1.jpg'
+  '/media/hero-3.jpg',
+  '/media/hero-4.png',
+  '/media/hero-5.png',
+
 ]
 
 export function Hero() {
