@@ -1,9 +1,15 @@
 import React from 'react'
 import './styles.css'
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+import '@fontsource/montserrat/400.css';
+import '@fontsource/montserrat/600.css';
+import '@fontsource/montserrat/700.css';
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: 'Zhydychyn Monastery',
+  title: 'Zhydychyn Monastery',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -11,8 +17,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body>
-        <main>{children}</main>
+      <body className="font-sans antialiased">
+        {children}
       </body>
     </html>
   )

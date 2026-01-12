@@ -4,12 +4,18 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+import dotenv from 'dotenv'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { News } from './collections/News'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+dotenv.config({
+  path: path.resolve(dirname, '../.env'),
+})
 
 export default buildConfig({
   admin: {
@@ -18,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, News],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
