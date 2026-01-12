@@ -9,8 +9,8 @@ const slides = [
   '/media/hero-1.jpg',
   '/media/hero-2.png',
   '/media/hero-3.jpg',
-  '/media/hero-4.png',
-  '/media/hero-5.png',
+  '/media/hero-4.jpg',
+  '/media/hero-5.jpg',
 
 ]
 
