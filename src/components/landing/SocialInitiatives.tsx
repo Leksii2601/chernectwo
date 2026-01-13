@@ -5,6 +5,7 @@ import React from 'react';
 export function SocialInitiatives() {
   return (
     <section 
+      id="social-initiatives"
       className="relative w-full min-h-[600px] flex items-center justify-center bg-fixed bg-center bg-cover"
       style={{
         backgroundImage: 'url(/media/social-iniviatives.jpeg)',

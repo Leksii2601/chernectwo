@@ -4,6 +4,8 @@ import { Hero } from '@/components/landing/Hero'
 import { CalendarSection } from '@/components/landing/CalendarSection'
 import { NewsSection } from '@/components/landing/NewsSection'
 import { SocialInitiatives } from '@/components/landing/SocialInitiatives'
+import { FAQ } from '@/components/landing/FAQ'
+import { Footer } from '@/components/landing/Footer'
 import { FloatingButton } from '@/components/landing/FloatingButton'
 import './styles.css'
 
@@ -20,6 +22,8 @@ export default function HomePage() {
       <CalendarSection />
       <NewsSection />
       <SocialInitiatives />
+      <FAQ />
+      <Footer />
       <FloatingButton />
     </main>
   )

@@ -127,7 +127,7 @@ export function CalendarSection() {
                         key={day.date} 
                         onClick={() => handleSelectDate(day.date)}
                         className={`flex items-start gap-6 bg-white p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer ${
-                          index !== upcomingDays.length - 1 ? 'mb-4' : 'flex-1 mb-[5rem]'
+                          index !== upcomingDays.length - 1 ? 'mb-4' : 'flex-1'
                         }`}
                         
                     >
@@ -161,7 +161,6 @@ export function CalendarSection() {
                   )
               })}
               </div>
-
             </div>
 
              {/* RIGHT COLUMN: Calendar Widget (Floating) */}
