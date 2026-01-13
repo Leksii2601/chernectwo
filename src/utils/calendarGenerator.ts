@@ -2,7 +2,7 @@
 // Якщо файл ще не створено або порожній, використовуємо пустий об'єкт, щоб код не ламався.
 import saintsDataRaw from '../data/saintsData.json'; 
 
-// Type casting for TypeScript
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const saintsData: Record<string, { saints?: string[], isFast?: boolean, readings?: string }> = saintsDataRaw as any;
 
 /**
