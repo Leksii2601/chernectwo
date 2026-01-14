@@ -54,7 +54,8 @@ const CTAAnimation = () => {
             clearTimeout(timer1);
             clearTimeout(timer2);
         };
-    }, [inView, animationState]); 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [inView]); 
   
     return (
       <div
