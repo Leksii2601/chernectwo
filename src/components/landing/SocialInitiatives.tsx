@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 
 export function SocialInitiatives() {
   return (
@@ -32,9 +33,11 @@ export function SocialInitiatives() {
         </p>
 
         <div className="mt-12">
-            <button className="border border-white hover:bg-white hover:text-black text-white px-8 py-3 rounded-full transition duration-300 font-sans font-semibold uppercase text-sm tracking-wider">
-                Дивитись
-            </button>
+            <Link href="/social-projects">
+              <button className="border border-white hover:bg-white hover:text-black text-white px-8 py-3 rounded-full transition duration-300 font-sans font-semibold uppercase text-sm tracking-wider">
+                  Дивитись
+              </button>
+            </Link>
         </div>
       </div>
     </section>

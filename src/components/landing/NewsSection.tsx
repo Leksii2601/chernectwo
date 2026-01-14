@@ -2,74 +2,57 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
-const newsData = [
-    {
-      id: 1,
-      date: 'Грудень 19, 2025',
-      title: 'Прихована таємниця чернечого життя',
-      image: '/media/news-1.png',
-      category: 'Публікації'
-    },
-    {
-      id: 2,
-      date: 'Грудень 18, 2025',
-      title: 'Коли секуляризація поглинає членів церкви',
-      image: '/media/news-2.png',
-      category: 'Публікації'
-    },
-    {
-      id: 3,
-      date: 'Грудень 14, 2025',
-      title: 'Не страшно і не соромно. Як сповідатися, щоб отримати прощення?',
-      image: '/media/news-3.png',
-      category: 'Публікації'
-    },
-    {
-      id: 4,
-      date: 'Грудень 08, 2025',
-      title: 'ЗВЕРНЕННЯ ЩОДО ВИКОРИСТАННЯ ПІДЛІТКІВ У ПІДРИВНІЙ РОБОТІ ЗАГАРБНИКІВ',
-      image: '/media/news-4.png',
-      category: 'Публікації'
-    },
-    {
-      id: 5,
-      date: 'Грудень 05, 2025',
-      title: 'World Meeting on Human Fraternity 2025: program',
-      image: '/media/news-2.png',
-      category: 'Публікації'
-    }
-  ];
+export interface NewsItem {
+  id: number | string;
+  date: string;
+  title: string;
+  image: string;
+  category: string;
+}
 
-export function NewsSection() {
+interface NewsSectionProps {
+  news: NewsItem[];
+}
+
+export function NewsSection({ news }: NewsSectionProps) {
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
+
+  // If no news, don't crash, maybe show empty state or hide
+  if (!news || news.length === 0) return null;
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentNewsIndex((prevIndex) => 
-        prevIndex === newsData.length - 1 ? 0 : prevIndex + 1
+        prevIndex === news.length - 1 ? 0 : prevIndex + 1
       );
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []); // Removed newsData.length dependcy to strictly array
+  }, [news.length]); 
 
-  const currentNews = newsData[currentNewsIndex];
+  const currentNews = news[currentNewsIndex];
   
-  // Logic: "Right side is static latest 4 news, Left side cycles through all"
-  const latestNews = newsData.slice(0, 4);
+  // Display latest 4 for the side list, but cycle through ALL in the main view
+  // Or should the side list be the valid navigation?
+  // The original code sliced (0,4) for the side list using `newsData`.
+  const latestNews = news.slice(0, 4); 
 
   return (
     <section className="min-h-screen bg-gray-50 font-montserrat text-gray-900">
       <div className="max-w-7xl mx-auto p-6">
-        <h2 className="text-4xl text-center mb-16 uppercase font-bold text-gray-800 font-montserrat">
-          Новини Монастиря
-        </h2>
+        <Link href="/news">
+          <h2 className="text-4xl text-center mb-16 uppercase font-bold text-gray-800 font-montserrat hover:text-amber-600 transition-colors cursor-pointer">
+            Новини Монастиря
+          </h2>
+        </Link>
         
         <div className="flex gap-6 flex-col lg:flex-row items-stretch">
           
           {/* Main News - Left */}
           <div className="lg:w-2/3 flex flex-col">
+          <Link href={`/news/${currentNews.id}`} className="block w-full h-full"> 
             <div className="relative overflow-hidden shadow-lg group w-full h-full min-h-[500px] lg:min-h-0">
               <Image 
                 src={currentNews.image} 
@@ -88,31 +71,32 @@ export function NewsSection() {
                 <p className="text-gray-300 mt-2 text-sm md:text-base font-medium">{currentNews.date}</p>
               </div>
             </div>
+           </Link>
           </div>
 
           {/* Side News List - Right (Latest 4) */}
           <div className="lg:w-1/3 flex flex-col gap-4">
-            {latestNews.map((news) => (
-              <div 
-                key={news.id}
-                className="flex gap-4 cursor-pointer hover:bg-white transition-all duration-300 group flex-1"
-                onClick={() => setCurrentNewsIndex(newsData.findIndex(n => n.id === news.id))}
+            {latestNews.map((item) => (
+              <Link
+                key={item.id}
+                href={`/news/${item.id}`}
+                className="flex gap-4 cursor-pointer hover:bg-white/50 transition-all duration-300 group flex-1 p-2 rounded-lg"
               >
                 <div className="relative w-36 h-28 flex-shrink-0 overflow-hidden">
                     <Image 
-                    src={news.image} 
-                    alt={news.title}
+                    src={item.image} 
+                    alt={item.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                 </div>
                 <div className="flex flex-col justify-center">
-                  <p className="text-gray-400 text-xs uppercase font-bold mb-2 tracking-wide">{news.date}</p>
+                  <p className="text-gray-400 text-xs uppercase font-bold mb-2 tracking-wide">{item.date}</p>
                   <h3 className="text-gray-900 font-bold text-base leading-snug group-hover:text-amber-600 transition-colors line-clamp-3">
-                    {news.title}
+                    {item.title}
                   </h3>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

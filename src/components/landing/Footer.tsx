@@ -35,12 +35,12 @@ export function Footer() {
               <div>
                 <p className="text-gray-400 text-xs mb-1 uppercase tracking-wide">Адреса</p>
                 <a 
-                  href="https://www.google.com/maps/search/?api=1&query=вул.+Данила+Галицького+8,+с.+Жидичин,+Луцький+р-н,+Волинська+обл." 
+                  href="https://maps.app.goo.gl/iVE1sepfWAnbwx6E8" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-lg leading-relaxed hover:text-orange-500 transition-colors block"
                 >
-                  вул. Данила Галицького 8,<br />
+                  вул. Ковельська,<br />
                   с. Жидичин, Луцький р-н,<br />
                   Волинська обл.
                 </a>

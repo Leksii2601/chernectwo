@@ -1,46 +1,153 @@
-'use client';
-
 import React from 'react';
+import { getPayload } from 'payload';
+import configPromise from '@payload-config';
 import { Header } from '@/components/landing/Header';
 import { Footer } from '@/components/landing/Footer';
 import { FloatingButton } from '@/components/landing/FloatingButton';
-import './styles.css';
+import '../styles.css'; // Just in case, usually in layout
+import { SocialProjectsFeed, Initiative } from '@/components/social/SocialProjectsFeed';
+import { Media } from '@/payload-types';
 
-// Test data simulating database content
-const initiatives = [
+export const metadata = {
+  title: 'Місіонерські Проєкти - Жидичинський Монастир',
+  description: 'Соціальні та місіонерські проєкти Жидичинського монастиря: волонтерство, освіта, культура, допомога громаді.',
+}
+
+export const revalidate = 60;
+
+// Helper to extract text from Lexical JSON
+const extractTextFromRichText = (richText: any): string => {
+    if (!richText) return '';
+    if (typeof richText === 'string') return richText;
+    
+    let text = '';
+    if (richText.root && richText.root.children) {
+        const traverse = (node: any) => {
+            if (node.text) {
+                text += node.text;
+            }
+            if (node.children) {
+                node.children.forEach(traverse);
+            }
+            // Add newlines for paragraphs/blocks if needed (simplified)
+            if (node.type === 'paragraph' || node.type === 'heading') {
+                text += '\n\n';
+            }
+        };
+        richText.root.children.forEach(traverse);
+    }
+    return text.trim();
+};
+
+const staticInitiatives: Initiative[] = [
   {
-    title: "ЦЕНТР ТУРИСТИЧНОЇ ІНФОРМАЦІЇ ТА ПАЛОМНИЦТВА ЖИДИЧИН ЦЕНТР",
-    description: "Жидичинський монастир упродовж століть був не лише духовним осередком, а й простором служіння громаді. Сьогодні ця місія продовжується через соціальні проєкти, що поєднують волонтерство, освіту, культуру, молодіжні ініціативи, підтримку громади та збереження спадщини.",
-    icon: "/media/initiative-1.png" // Placeholder, will need to be replaced or handled
+    title: "ЖИДИЧИН ЦЕНТР",
+    fullTitle: "Жидичин Центр",
+    description: "Інституція, що забезпечує екскурсійний супровід паломників та комунікацію з відвідувачами обителі.",
+    fullDescription: "Центр функціонує з 2019 року та забезпечує розвиток історичної, культурної та духовної спадщини Древнього Жидичина. Місія інституції - відкриваємо Древній Жидичин цілому світу.",
+    directions: [
+      "Прийом паломників і гостей",
+      "Дослідження та осмислення спадщини",
+      "Комунікація, маркетинг і промоція",
+      "Соціальні й освітні ініціативи"
+    ],
+    status: "реалізовано",
+    icon: "/media/socialInitiatives/Жидичин_центр-removebg-preview.png",
+    gallery: [
+      "/media/hero-1.jpg",
+      "/media/hero-2.png",
+      "/media/hero-3.jpg"
+    ]
+  },
+  {
+    title: "ВОЛОНТЕРСЬКИЙ РУХ ІМ. СИМОНА КИРИНЕЙСЬКОГО",
+    fullTitle: "Волонтерський рух ім. Симона Киринейського",
+    description: "Координація та допомога прихожанам під час богослужінь, організація благодійних ярмарків.",
+    fullDescription: "Волонтерський рух функціонує з 2021 року та об’єднує активних вірян довкола питань турботи про духовні, соціальні та фізичні потреби громади.",
+    directions: [
+      "Консультації та комунікації з прихожанами",
+      "Медична допомога під час богослужінь",
+      "Організація благодійних ярмарків",
+      "Реабілітація військових"
+    ],
+    status: "діючий",
+    icon: "/media/socialInitiatives/Волотерський_рух-removebg-preview.jpg", 
+    gallery: [
+       "/media/hero-2.png",
+       "/media/hero-5.jpg"
+    ]
   },
   {
     title: "САДИ АРХІМАНДРІЇ",
-    description: "Жидичинський монастир упродовж століть був не лише духовним осередком, а й простором служіння громаді. Сьогодні ця місія продовжується через соціальні проєкти, що поєднують волонтерство, освіту, культуру, молодіжні ініціативи, підтримку громади та збереження спадщини.",
-    icon: "/media/initiative-2.png" 
-  },
-  {
-    title: "ПАЛАМАР.UA",
-    description: "Жидичинський монастир упродовж століть був не лише духовним осередком, а й простором служіння громаді. Сьогодні ця місія продовжується через соціальні проєкти, що поєднують волонтерство, освіту, культуру, молодіжні ініціативи, підтримку громади та збереження спадщини.",
-    icon: "/media/initiative-3.png" 
-  },
-  {
-    title: "ІСТОРИЧНА АРЕНА: ZHYDYCHYN HISTORY HALL",
-    description: "Жидичинський монастир упродовж століть був не лише духовним осередком, а й простором служіння громаді. Сьогодні ця місія продовжується через соціальні проєкти, що поєднують волонтерство, освіту, культуру, молодіжні ініціативи, підтримку громади та збереження спадщини.",
-    icon: "/media/initiative-4.png" 
-  },
-  {
-    title: "ІНФОРМАЦІЙНА ПЛАТФОРМА ЗАВТРА",
-    description: "Жидичинський монастир упродовж століть був не лише духовним осередком, а й простором служіння громаді. Сьогодні ця місія продовжується через соціальні проєкти, що поєднують волонтерство, освіту, культуру, молодіжні ініціативи, підтримку громади та збереження спадщини.",
-    icon: "/media/initiative-5.png" 
-  },
-  {
-    title: "ХОР ВОСКРЕСІННЯ",
-    description: "Жидичинський монастир упродовж століть був не лише духовним осередком, а й простором служіння громаді. Сьогодні ця місія продовжується через соціальні проєкти, що поєднують волонтерство, освіту, культуру, молодіжні ініціативи, підтримку громади та збереження спадщини.",
-    icon: "/media/initiative-6.png" 
+    fullTitle: "Сади Архімандрії",
+    description: "Відновлення історичних садів монастиря як простору для молитви, праці та відпочинку.",
+    fullDescription: "Відновлення історичних садів монастиря як простору для молитви, праці та відпочинку. Сад стане місцем проведення освітніх заходів з екології та садівництва.",
+    status: "в процесі",
+    icon: "/media/socialInitiatives/Сади_архімандрії__1_-removebg-preview.png",
+    gallery: [
+       "/media/hero-2.png",
+       "/media/hero-1.jpg"
+    ]
   }
 ];
 
-export default function SocialProjectsPage() {
+export default async function SocialProjectsPage() {
+  const payload = await getPayload({ config: configPromise });
+
+  const projectsResult = await payload.find({
+    collection: 'missionary-projects',
+    where: {
+        status: { equals: 'active' } 
+    },
+    limit: 100,
+  });
+
+  const formattedInitiatives: Initiative[] = projectsResult.docs.map((doc) => {
+    // 1. Logo
+    let iconUrl = '/media/placeholder.jpg';
+    if (doc.logo && typeof doc.logo !== 'number') {
+        iconUrl = (doc.logo as Media).url || iconUrl;
+    }
+
+    // 2. Gallery
+    const galleryUrls: string[] = [];
+    if (doc.gallery && Array.isArray(doc.gallery)) {
+        doc.gallery.forEach(item => {
+            if (item.image && typeof item.image !== 'number') {
+                const url = (item.image as Media).url;
+                if (url) galleryUrls.push(url);
+            }
+        });
+    }
+
+    // 3. Directions
+    const directionList: string[] = [];
+    if (doc.directions && Array.isArray(doc.directions)) {
+        doc.directions.forEach(d => {
+            if (d.direction) directionList.push(d.direction);
+        });
+    }
+
+    return {
+        title: doc.title,
+        fullTitle: doc.title,
+        description: doc.shortDescription,
+        // Extract text string from RichText JSON
+        fullDescription: extractTextFromRichText(doc.aboutUs), 
+        icon: iconUrl,
+        directions: directionList,
+        gallery: galleryUrls,
+        status: doc.status || 'active',
+        author: 'Монастирська спільнота',
+        grantAmount: '-',
+        term: 'Постійно',
+        goal: ''
+    };
+  });
+
+  // Combine static and dynamic initiatives
+  const allInitiatives = [...staticInitiatives, ...formattedInitiatives];
+
   return (
     <main className="min-h-screen bg-white">
       <Header />
@@ -61,44 +168,7 @@ export default function SocialProjectsPage() {
         </h1>
       </section>
 
-      {/* Grid Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1800px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
-          {initiatives.map((item, index) => (
-            <div 
-              key={index}
-              className="group relative h-[400px] border border-gray-100 bg-white overflow-hidden"
-            >
-              {/* Content Container */}
-              <div className="absolute inset-0 p-8 flex flex-col items-center text-center transition-all duration-500 group-hover:opacity-10">
-                <div className="w-24 h-24 mb-6 bg-gray-100 rounded-full flex items-center justify-center">
-                  {/* Placeholder for Icon - using first letter for now if no image */}
-                  <span className="text-3xl font-molodo text-black">{item.title[0]}</span>
-                </div>
-                
-                <h3 className="font-molodo text-2xl mb-6 uppercase leading-tight">
-                  {item.title}
-                </h3>
-                
-                <p className="font-sans text-sm leading-relaxed text-gray-600 line-clamp-6">
-                  {item.description}
-                </p>
-              </div>
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out flex flex-col items-center justify-center p-8 text-white z-10">
-                <h3 className="font-molodo text-2xl mb-6 uppercase text-center translate-y-4 group-hover:translate-y-0 transition-all duration-700 delay-100">
-                  {item.title}
-                </h3>
-                
-                <button className="border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-black px-8 py-3 uppercase tracking-widest text-sm font-semibold transition-all duration-300 translate-y-4 group-hover:translate-y-0 delay-200">
-                  Детальніше
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <SocialProjectsFeed initiatives={allInitiatives} />
 
       <Footer />
       <FloatingButton />

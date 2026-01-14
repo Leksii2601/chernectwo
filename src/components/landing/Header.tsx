@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Search, ChevronDown, Menu, X } from 'lucide-react'
 import { clsx } from 'clsx'
+import { useRouter } from 'next/navigation'
 
 const navItems = [
   {
@@ -23,9 +24,9 @@ const navItems = [
     label: 'Новини',
     href: '/news',
     dropdown: [
-      { label: 'Публікації', href: '/news/publications' },
-      { label: 'Анонси', href: '/news/announcements' },
-      { label: 'Офіційно', href: '/news/official' },
+      { label: 'Публікації', href: '/news?category=publications' },
+      { label: 'Анонси', href: '/news?category=announcements' },
+      { label: 'Офіційно', href: '/news?category=official' },
     ],
   },
   { label: 'Соціальні проєкти', href: '/social-projects' },
@@ -38,6 +39,46 @@ export function Header() {
   const [isVisible, setIsVisible] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  
+  // Search State
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isSearchOpen) {
+        document.body.style.overflow = 'hidden';
+        if (searchInputRef.current) {
+            // timeout to ensure visibility transition has started/modal is rendered
+            setTimeout(() => searchInputRef.current?.focus(), 100);
+        }
+    } else {
+        document.body.style.overflow = '';
+    }
+    return () => {
+        document.body.style.overflow = '';
+    }
+  }, [isSearchOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape' && isSearchOpen) {
+            setIsSearchOpen(false);
+        }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchOpen]);
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+        router.push(`/news?search=${encodeURIComponent(searchQuery)}`);
+        setIsSearchOpen(false);
+        setSearchQuery('');
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +99,7 @@ export function Header() {
   }, [])
 
   return (
+    <>
     <header
       className={clsx(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out',
@@ -111,9 +153,15 @@ export function Header() {
             </div>
           ))}
           
-          <button className="hover:text-amber-400 transition-colors">
-            <Search className="w-5 h-5" />
-          </button>
+          <div className="relative flex items-center">
+            <button 
+                onClick={() => setIsSearchOpen(true)}
+                className="hover:text-amber-400 transition-colors"
+                aria-label="Open search"
+            >
+                <Search className="w-5 h-5" />
+            </button>
+          </div>
         </nav>
 
         {/* Language Switcher */}
@@ -180,5 +228,46 @@ export function Header() {
         </div>
       )}
     </header>
+
+    {/* Full Screen Search Modal */}
+    <div 
+        className={clsx(
+            "fixed inset-0 z-[100] bg-black/95 flex items-center justify-center transition-all duration-300 backdrop-blur-sm",
+            isSearchOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        )}
+        onClick={(e) => {
+            if (e.target === e.currentTarget) setIsSearchOpen(false);
+        }}
+    >
+         {/* Close Button */}
+         <button 
+            type="button"
+            onClick={() => setIsSearchOpen(false)} 
+            className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors p-2"
+         >
+             <X className="w-10 h-10" />
+         </button>
+         
+         <form onSubmit={handleSearchSubmit} className="w-full max-w-4xl px-4 flex flex-col items-center gap-8">
+             <div className="relative w-full">
+                <input 
+                    ref={searchInputRef}
+                    type="text" 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Пошук по сайту?"
+                    className="w-full bg-transparent border-b-2 border-white/20 text-white text-3xl md:text-5xl font-light py-4 px-2 focus:outline-none focus:border-amber-400 placeholder:text-white/20 text-center transition-colors"
+                />
+             </div>
+             
+             <button 
+                type="submit" 
+                className="bg-white text-black px-12 py-4 text-lg font-bold tracking-widest hover:bg-amber-400 transition-colors uppercase"
+             >
+                Шукати
+             </button>
+         </form>
+     </div>
+    </>
   )
 }
