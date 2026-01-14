@@ -1,13 +1,9 @@
 import React from 'react';
-import { getPayload } from 'payload';
-import configPromise from '@payload-config';
 import { Header } from '@/components/landing/Header';
 import { Footer } from '@/components/landing/Footer';
 import { FloatingButton } from '@/components/landing/FloatingButton';
-import { NewsFeed, NewsDoc } from '@/components/news/NewsFeed';
-import { Media } from '@/payload-types';
-
-export const dynamic = 'force-dynamic';
+import { NewsFeed } from '@/components/news/NewsFeed';
+import { newsData } from '@/data/newsData';
 
 export default async function NewsPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -17,58 +13,43 @@ export default async function NewsPage(props: {
   const category = typeof searchParams.category === 'string' ? searchParams.category : undefined;
   const search = typeof searchParams.search === 'string' ? searchParams.search : undefined;
 
-  const payload = await getPayload({ config: configPromise });
+  let filteredNews = newsData;
 
-  const whereQuery: any = {
-    and: [
-       { isPublished: { equals: true } }
-    ]
-  };
-
+  // Filter by Category check
+  // newsData.category values are 'Офіційно', 'Публікації', 'Анонси', 'Всі новини'
+  // The URL param might be 'official', 'publications' etc if passed from somewhere, 
+  // OR it might be the label itself if the links were built that way.
+  // Assuming the `NewsFeed` component generates links.
+  
   if (category && category !== 'all') {
-     whereQuery.and.push({ category: { equals: category } });
+      // Simple match or map if needed. 
+      // For now, let's just filter if it matches one of our known categories values
+      filteredNews = filteredNews.filter(n => n.category === category);
   }
 
   if (search) {
-     whereQuery.and.push({
-        or: [
-           { title: { like: search } },
-           { shortDescription: { like: search } }
-        ]
-     });
+     filteredNews = filteredNews.filter(n => n.title.toLowerCase().includes(search.toLowerCase()));
   }
 
-  const newsResult = await payload.find({
-    collection: 'news',
-    sort: '-publishedDate',
-    limit: 12, 
-    page: page,
-    where: whereQuery,
-  });
+  const limit = 12;
+  const totalDocs = filteredNews.length;
+  const totalPages = Math.ceil(totalDocs / limit);
+  // Ensure page is within bounds
+  const safePage = Math.min(Math.max(1, page), totalPages || 1);
+  const paginatedItems = filteredNews.slice((safePage - 1) * limit, safePage * limit);
 
-  const categoryMap: Record<string, string> = {
-    publications: 'Публікації',
-    announcements: 'Анонси',
-    official: 'Офіційно',
-  };
-
-  const formattedNews: NewsDoc[] = newsResult.docs.map((doc) => {
-    // Handle image type (Upload field returns ID or Media object)
-    let imageUrl = '/media/placeholder.jpg'; // Fallback
-    if (doc.mainImage && typeof doc.mainImage !== 'number') {
-      imageUrl = (doc.mainImage as Media).url || imageUrl;
-    }
-
-    return {
-      id: doc.id,
-      title: doc.title,
-      date: new Date(doc.publishedDate).toLocaleDateString('uk-UA'),
-      category: doc.category,
-      categoryLabel: categoryMap[doc.category] || doc.category,
-      shortDescription: doc.shortDescription,
-      image: imageUrl,
-    };
-  });
+  // Map to NewsFeed expected format
+  // NewsDoc usually expects: { id, title, date, category, categoryLabel, shortDescription, image }
+  // My newsData items have: { id, title, date, category, image, shortDescription, content }
+  const formattedNews = paginatedItems.map(item => ({
+      id: item.id, // cast to number if needed, but string preferred normally
+      title: item.title,
+      date: item.date,
+      category: 'news', // internal slug if needed
+      categoryLabel: item.category, // Display text
+      shortDescription: item.shortDescription,
+      image: item.image
+  }));
 
   return (
     <main className="min-h-screen bg-white">
@@ -81,8 +62,8 @@ export default async function NewsPage(props: {
       
       <NewsFeed 
          docs={formattedNews} 
-         totalPages={newsResult.totalPages} 
-         currentPage={newsResult.page || 1} 
+         totalPages={totalPages} 
+         currentPage={safePage} 
       />
 
       <Footer />

@@ -14,7 +14,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({ title }) => {
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
-    if (typeof navigator !== 'undefined' && navigator.share) {
+    if (typeof navigator !== 'undefined' && 'share' in navigator) {
         setCanShareNative(true);
     }
   }, []);

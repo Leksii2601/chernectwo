@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { X, ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { X, ArrowLeft, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 
@@ -16,6 +16,7 @@ export interface Initiative {
   term?: string;
   author?: string;
   goal?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   fullDescription?: any; // Changed to any to handle RichText or string
   directions?: string[];
   gallery?: string[];
@@ -53,7 +54,7 @@ const CTAAnimation = () => {
             clearTimeout(timer1);
             clearTimeout(timer2);
         };
-    }, [inView]); 
+    }, [inView, animationState]); 
   
     return (
       <div

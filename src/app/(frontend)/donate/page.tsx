@@ -84,7 +84,7 @@ export default function DonatePage() {
             <div className="space-y-6">
               <div className="group relative bg-gray-50 p-4 rounded-lg cursor-pointer" onClick={() => copyToClipboard('Bank Name')}>
                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Bank Name</p>
-                <p className="font-medium">JSC "State Savings Bank of Ukraine"</p>
+                <p className="font-medium">JSC &quot;State Savings Bank of Ukraine&quot;</p>
                 <Copy className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
               </div>
 

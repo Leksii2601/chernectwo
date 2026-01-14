@@ -19,10 +19,12 @@ interface NewsSectionProps {
 export function NewsSection({ news }: NewsSectionProps) {
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
 
-  // If no news, don't crash, maybe show empty state or hide
-  if (!news || news.length === 0) return null;
+  // Use a flag for empty news rather than early return before hooks
+  const hasNews = news && news.length > 0;
 
   useEffect(() => {
+    if (!hasNews) return;
+
     const interval = setInterval(() => {
       setCurrentNewsIndex((prevIndex) => 
         prevIndex === news.length - 1 ? 0 : prevIndex + 1
@@ -30,7 +32,10 @@ export function NewsSection({ news }: NewsSectionProps) {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [news.length]); 
+  }, [hasNews, news?.length]); // Added dependencies
+
+  // If no news, don't crash, maybe show empty state or hide
+  if (!hasNews) return null;
 
   const currentNews = news[currentNewsIndex];
   

@@ -7,7 +7,7 @@ import { ChevronDown, ChevronRight, Search, ChevronLeft } from 'lucide-react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 
 export interface NewsDoc {
-  id: number;
+  id: string | number;
   title: string;
   date: string;
   category: string; // The value from DB: 'publications', etc.

@@ -1,8 +1,11 @@
+import { Fragment, JSX } from 'react';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const serializeLexical = (node: any): any => {
     if (!node) return null;
   
     if (Array.isArray(node)) {
-      return node.map((child, i) => <React.Fragment key={i}>{serializeLexical(child)}</React.Fragment>);
+      return node.map((child, i) => <Fragment key={i}>{serializeLexical(child)}</Fragment>);
     }
   
     if (typeof node === 'string') {

@@ -19,14 +19,14 @@ export default function JoinPage() {
         </Link>
         <h1 className="font-molodo text-4xl mb-8 text-center mt-8">Долучитися до ініціативи</h1>
         <p className="text-gray-600 text-center mb-12">
-          Заповніть форму нижче, і ми зв'яжемося з вами найближчим часом.
+          Заповніть форму нижче, і ми зв&apos;яжемося з вами найближчим часом.
         </p>
         
         <form className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Ім'я</label>
-              <input type="text" className="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500" placeholder="Ваше ім'я" />
+              <label className="block text-sm font-medium text-gray-700 mb-2">Ім&apos;я</label>
+              <input type="text" className="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500" placeholder="Ваше ім&apos;я" />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Телефон</label>

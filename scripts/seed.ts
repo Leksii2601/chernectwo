@@ -52,7 +52,8 @@ const seed = async () => {
   }
 
   // Helper for simple RichText
-  const createRichText = (text) => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const createRichText = (text: any) => ({
     root: {
       type: 'root',
       children: [
@@ -177,7 +178,7 @@ const seed = async () => {
       data: {
           ...item,
           content: item.content as any, // Bypass TS check for simple RichText structure
-      },
+      } as any,
     })
     console.log(`Created news: ${item.title}`)
   }
