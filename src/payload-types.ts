@@ -261,6 +261,12 @@ export interface MissionaryProject {
       }[]
     | null;
   status?: ('active' | 'completed') | null;
+  socialLinks: {
+    facebook: string;
+    instagram?: string | null;
+    phone?: string | null;
+    whatsapp?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -456,6 +462,14 @@ export interface MissionaryProjectsSelect<T extends boolean = true> {
         id?: T;
       };
   status?: T;
+  socialLinks?:
+    | T
+    | {
+        facebook?: T;
+        instagram?: T;
+        phone?: T;
+        whatsapp?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Header } from '@/components/landing/Header';
 import { Footer } from '@/components/landing/Footer';
 import { FloatingButton } from '@/components/landing/FloatingButton';
 import { NewsFeed } from '@/components/news/NewsFeed';
 import { newsData } from '@/data/newsData';
+import { PageHeader } from '@/components/PageHeader';
 
 export default async function NewsPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -53,12 +53,7 @@ export default async function NewsPage(props: {
 
   return (
     <main className="min-h-screen bg-white">
-      <div className="bg-black/90 pt-48 pb-30 shadow-lg">
-        <Header />
-         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-end gap-6 text-white">
-            <h1 className="font-molodo text-4xl uppercase tracking-wider">Новини</h1>
-         </div>
-      </div>
+      <PageHeader title="Новини" />
       
       <NewsFeed 
          docs={formattedNews} 

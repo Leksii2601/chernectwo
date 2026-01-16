@@ -13,7 +13,7 @@ const navItems = [
     href: '/about',
     dropdown: [
       { label: 'Історія', href: '/about/history' },
-      { label: 'Богослужіння', href: '/about/schedule' },
+      { label: 'Богослужіння', href: '/#calendar' },
       { label: 'Храмовий комплекс', href: '/about/complex' },
       { label: 'Скити', href: '/about/sketes' },
       { label: 'Життя обителі', href: '/about/life' },
@@ -39,6 +39,24 @@ export function Header() {
   const [isVisible, setIsVisible] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseEnter = (label: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setActiveDropdown(label);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 300);
+  };
+  
+  // Mobile accordion state
+  const [mobileExpanded, setMobileExpanded] = useState<string[]>([]);
   
   // Search State
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -46,11 +64,16 @@ export function Header() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
+  const toggleMobileDropdown = (label: string) => {
+    setMobileExpanded(prev => 
+      prev.includes(label) ? prev.filter(l => l !== label) : [...prev, label]
+    );
+  };
+
   useEffect(() => {
-    if (isSearchOpen) {
+    if (isSearchOpen || mobileMenuOpen) {
         document.body.style.overflow = 'hidden';
-        if (searchInputRef.current) {
-            // timeout to ensure visibility transition has started/modal is rendered
+        if (searchInputRef.current && isSearchOpen) {
             setTimeout(() => searchInputRef.current?.focus(), 100);
         }
     } else {
@@ -59,17 +82,18 @@ export function Header() {
     return () => {
         document.body.style.overflow = '';
     }
-  }, [isSearchOpen]);
+  }, [isSearchOpen, mobileMenuOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape' && isSearchOpen) {
-            setIsSearchOpen(false);
+        if (e.key === 'Escape') {
+             if (isSearchOpen) setIsSearchOpen(false);
+             if (mobileMenuOpen) setMobileMenuOpen(false);
         }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isSearchOpen]);
+  }, [isSearchOpen, mobileMenuOpen]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -103,14 +127,17 @@ export function Header() {
     <header
       className={clsx(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out',
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none',
-        'bg-transparent py-8' // Always clear background now, as it only shows on Hero
+        (isVisible || mobileMenuOpen) ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none',
+        'bg-transparent py-4 md:py-8' // Reduced padding on mobile/opened state handled by content sizing
       )}
     >
       <div className="max-w-[95%] 2xl:max-w-[1800px] mx-auto px-4 md:px-8 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-           <div className="relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center">
+        <Link href="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
+           <div className={clsx(
+               "relative flex items-center justify-center transition-all duration-300 ease-in-out",
+               mobileMenuOpen ? "w-14 h-14" : "w-24 h-24 md:w-32 md:h-32"
+           )}>
              <Image 
                src="/media/logo.webp" 
                alt="Logo" 
@@ -126,24 +153,30 @@ export function Header() {
             <div
               key={item.label}
               className="relative group "
-              onMouseEnter={() => setActiveDropdown(item.label)}
-              onMouseLeave={() => setActiveDropdown(null)}
+              onMouseEnter={() => handleMouseEnter(item.label)}
+              onMouseLeave={handleMouseLeave}
             >
               <Link
                 href={item.href}
-                className="hover:text-amber-400 transition-colors flex items-center gap-1 "
+                className="hover:text-amber-400 transition-colors flex items-center gap-1 py-4"
               >
                 {item.label}
                 {item.dropdown && <ChevronDown className="w-4 h-4" />}
               </Link>
               
               {item.dropdown && activeDropdown === item.label && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-white text-black rounded shadow-lg py-2 animate-fade-in">
+                <div 
+                    className="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-md shadow-2xl rounded-b-sm overflow-hidden animate-fadeInScale border-t-2 border-amber-500/50"
+                    onMouseEnter={() => {
+                        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                    }}
+                    onMouseLeave={handleMouseLeave}
+                >
                   {item.dropdown.map((subItem) => (
                     <Link
                       key={subItem.label}
                       href={subItem.href}
-                      className="block px-4 py-2 hover:bg-gray-100 transition-colors text-xs"
+                      className="block px-6 py-3 hover:bg-amber-50 text-gray-800 hover:text-amber-600 transition-all duration-200 text-sm font-medium tracking-wide border-b border-gray-100 last:border-0"
                     >
                       {subItem.label}
                     </Link>
@@ -173,61 +206,82 @@ export function Header() {
 
         {/* Mobile Menu Button */}
         <button
-          className="xl:hidden text-white"
+          className="xl:hidden text-white relative z-50"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
         </button>
       </div>
+    </header>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="xl:hidden absolute top-full left-0 right-0 bg-black/95 text-white p-4 h-screen overflow-y-auto">
-          <nav className="flex flex-col gap-4 text-center">
-             {/* Mobile Donate Button */}
-            <div className="mb-6 flex justify-center">
-              <Link 
-                href="/donate"
-                onClick={() => setMobileMenuOpen(false)}
-                className="bg-white text-black px-6 py-3 font-bold uppercase tracking-wider rounded-sm hover:bg-amber-400 transition-colors w-full max-w-xs"
-              >
-                Скласти Пожертву
-              </Link>
-            </div>
-
+      {/* Mobile Menu Overlay - OUTSIDE of Header to prevent clipping/transform context issues */}
+      <div className={clsx(
+          "fixed inset-0 bg-black z-40 overflow-y-auto transition-all duration-300 pt-28 px-4 pb-12 flex flex-col",
+          mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+      )}>
+          <nav className="flex flex-col gap-4 text-center flex-grow">
+             
             {navItems.map((item) => (
-              <div key={item.label}>
-                <Link
-                  href={item.href}
-                  className="text-lg font-bold block py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-                {item.dropdown && (
-                  <div className="flex flex-col gap-2 mt-2 pl-4 border-l border-gray-700">
-                    {item.dropdown.map((subItem) => (
-                      <Link
-                        key={subItem.label}
-                        href={subItem.href}
-                        className="text-sm text-gray-400 py-1"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                       {subItem.label}
-                      </Link>
-                    ))}
-                  </div>
+              <div key={item.label} className="flex flex-col items-center">
+                {item.dropdown ? (
+                    <div className="w-full">
+                        <button 
+                            onClick={() => toggleMobileDropdown(item.label)}
+                            className="text-xl font-bold py-2 w-full flex items-center justify-center gap-2 text-white hover:text-amber-400 transition-colors"
+                        >
+                            {item.label}
+                            <ChevronDown className={clsx("w-5 h-5 transition-transform duration-300", mobileExpanded.includes(item.label) ? "rotate-180" : "")} />
+                        </button>
+                        
+                         <div className={clsx(
+                             "overflow-hidden transition-all duration-300 flex flex-col items-center gap-3 bg-white/5 w-full rounded-lg",
+                             mobileExpanded.includes(item.label) ? "max-h-[500px] py-4 mt-2 opacity-100" : "max-h-0 opacity-0"
+                         )}>
+                            {item.dropdown.map(subItem => (
+                                <Link
+                                    key={subItem.label}
+                                    href={subItem.href}
+                                    className="text-gray-300 hover:text-amber-400 py-2 text-base transition-colors"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    {subItem.label}
+                                </Link>
+                            ))}
+                         </div>
+                    </div>
+                ) : (
+                    item.label !== 'Підтримати' && (
+                        <Link
+                          href={item.href}
+                          className="text-xl font-bold block py-2 text-white hover:text-amber-400 transition-colors"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                    )
                 )}
+                {/* Separator line for visual structure */}
+                
               </div>
             ))}
-             <div className="flex justify-center gap-4 mt-8 ">
-                <span>UA</span>
-                <span>EN</span>
-             </div>
           </nav>
-        </div>
-      )}
-    </header>
+            
+            {/* Mobile Footer Area */}
+             <div className="mt-8 flex flex-col items-center gap-6 pb-8">
+                 <Link 
+                    href="/donate"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="bg-white text-black px-8 py-4 font-bold uppercase tracking-wider rounded-sm hover:bg-amber-400 transition-colors w-full max-w-xs text-center text-lg"
+                  >
+                    Скласти Пожертву
+                  </Link>
+
+                 <div className="flex justify-center gap-4 text-white/50 text-lg font-medium">
+                    <span className="text-white">UA</span>
+                    <span>EN</span>
+                 </div>
+             </div>
+      </div>
 
     {/* Full Screen Search Modal */}
     <div 

@@ -11,12 +11,23 @@ export interface ProjectInitiative {
   fullDescription?: string;
   directions?: string[];
   gallery?: string[];
+  socialLinks?: {
+    facebook?: string;
+    instagram?: string;
+    phone?: string;
+    whatsapp?: string;
+  };
 }
 
 export const projectsData: ProjectInitiative[] = [
   {
     title: "ЖИДИЧИН ЦЕНТР",
     fullTitle: "Жидичин Центр",
+    socialLinks: {
+      facebook: "https://www.facebook.com/ZhydychynCenter",
+      instagram: "https://www.instagram.com/zhydychyncenter",
+      phone: "+380123456789"
+    },
     description: "Інституція, що забезпечує екскурсійний супровід паломників та комунікацію з відвідувачами обителі.",
     fullDescription: "Центр функціонує з 2019 року та забезпечує розвиток історичної, культурної та духовної спадщини Древнього Жидичина. Місія інституції - відкриваємо Древній Жидичин цілому світу.",
     directions: [
@@ -46,6 +57,9 @@ export const projectsData: ProjectInitiative[] = [
     ],
     status: "діючий",
     icon: "/media/socialInitiatives/Волотерський_рух-removebg-preview.jpg", 
+    socialLinks: {
+      facebook: "https://www.facebook.com/"
+    },
     gallery: [
        "/media/hero-2.png",
        "/media/hero-5.jpg"

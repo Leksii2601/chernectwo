@@ -76,6 +76,35 @@ export const MissionaryProjects: CollectionConfig = {
         admin: {
             position: 'sidebar'
         }
+    },
+    {
+      name: 'socialLinks',
+      type: 'group',
+      label: 'Соціальні мережі',
+      fields: [
+        {
+          name: 'facebook',
+          type: 'text',
+          label: 'Facebook',
+          required: true, 
+          defaultValue: 'https://www.facebook.com/',
+        },
+        {
+          name: 'instagram',
+          type: 'text',
+          label: 'Instagram',
+        },
+        {
+          name: 'phone',
+          type: 'text',
+          label: 'Телефон',
+        },
+        {
+          name: 'whatsapp',
+          type: 'text',
+          label: 'WhatsApp',
+        }
+      ]
     }
   ],
 }

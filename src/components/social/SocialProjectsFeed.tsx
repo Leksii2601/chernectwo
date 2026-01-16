@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { X, ArrowLeft, ArrowRight } from 'lucide-react';
+import { X, ArrowLeft, ArrowRight, Facebook, Instagram, Phone, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 
@@ -20,13 +20,19 @@ export interface Initiative {
   fullDescription?: any; // Changed to any to handle RichText or string
   directions?: string[];
   gallery?: string[];
+  socialLinks?: {
+    facebook?: string;
+    instagram?: string;
+    phone?: string;
+    whatsapp?: string;
+  };
 }
 
 // CTA Animation Component
-const CTAAnimation = () => {
+const CTAAnimation = ({ socialLinks }: { socialLinks?: Initiative['socialLinks'] }) => {
     const [animationState, setAnimationState] = useState<'hidden' | 'big' | 'shrink' | 'final'>('hidden');
     const { ref, inView } = useInView({
-      threshold: 0.5,
+      threshold: 0.1,
       triggerOnce: false
     });
   
@@ -43,8 +49,8 @@ const CTAAnimation = () => {
                     
                     timer2 = setTimeout(() => {
                         setAnimationState('final');
-                    }, 700); 
-                }, 800); 
+                    }, 400); 
+                }, 400); 
             }
         } else {
             setAnimationState('hidden');
@@ -59,33 +65,41 @@ const CTAAnimation = () => {
   
     return (
       <div
-  ref={ref}
-  className="h-[340px] flex items-center justify-center relative overflow-hidden"
->
-  {/* Фонове світіння */}
-  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-    <div className="w-[360px] h-[360px] rounded-full 
-                    bg-amber-400/20 blur-[120px]" />
-  </div>
+        ref={ref}
+        className="h-[440px] flex flex-col items-center justify-center relative overflow-hidden"
+      >
+        {/* Фонове світіння */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-[360px] h-[360px]
+                          bg-amber-400/20 blur-[120px]" />
+        </div>
+        
         <Link 
             href="/join"
-            className={`group relative flex items-center transition-all duration-[1000ms] ease-out`}
+            className={`group relative flex items-center transition-all duration-[1000ms] ease-out
+                ${/* Mobile Button Styling */ ''}
+                md:bg-transparent md:p-0
+            `}
         >
              <div className={`
                 overflow-hidden whitespace-nowrap transition-all duration-1000 ease-out
-                ${animationState === 'final' ? 'max-w-[500px] opacity-100 mr-6' : 'max-w-0 opacity-0'}
+                ${animationState === 'final' ? 'max-w-[500px] opacity-100 mr-4' : 'max-w-0 opacity-0'}
+                bg-amber-500 md:bg-transparent px-6 py-3 md:px-0 md:py-0
               `}>
-                <span className="font-molodo text-3xl uppercase text-black block text-right leading-tight group-hover:text-amber-600 transition-colors">
-                  Зацікавлені долучитися? <br/> Напишіть нам.
+                <span className="font-molodo text-lg sm:text-2xl md:text-3xl uppercase text-white md:text-black block text-center md:text-right leading-tight md:group-hover:text-amber-600 transition-colors">
+                  Зацікавлені долучитися? <br className="hidden md:block"/> Напишіть нам.
                 </span>
              </div>
+             
              <div
                 className={`
                     flex items-center justify-center rounded-full bg-amber-500 shadow-xl transition-all 
-                    z-10 group-hover:bg-amber-600 group-hover:shadow-2xl group-hover:animate-pulseScale
+                    z-10 md:group-hover:bg-amber-600 md:group-hover:shadow-2xl md:group-hover:animate-pulseScale
+                    /* Mobile Pulsation */
+                    animate-pulse md:animate-none
                     ${animationState === 'big' ? 'w-[120px] h-[120px] scale-100 duration-[800ms] ease-out' : ''}
                     ${animationState === 'shrink' ? 'w-16 h-16 scale-90 duration-[700ms] ease-out' : ''}
-                    ${animationState === 'final' ? 'w-16 h-16 scale-100 duration-[500ms] ease-out' : ''}
+                    ${animationState === 'final' ? 'w-12 h-12 md:w-16 md:h-16 scale-100 duration-[500ms] ease-out' : ''}
                     ${animationState === 'hidden' ? 'w-0 h-0 scale-0 opacity-0 duration-0' : 'opacity-100'}
                 `}
              >
@@ -94,9 +108,142 @@ const CTAAnimation = () => {
                 `} />
              </div>
         </Link>
+
+        {/* Social Networks */}
+        <div className={`flex items-center gap-4 mt-8 transition-all duration-1000 delay-500
+            ${animationState === 'final' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
+        `}>
+            {socialLinks?.facebook && (
+                <a 
+                    href={socialLinks.facebook} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110"
+                    title="Facebook"
+                >
+                    <Facebook className="w-5 h-5" />
+                </a>
+            )}
+            
+            {socialLinks?.instagram && (
+                <a 
+                    href={socialLinks.instagram} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-12 h-12 rounded-full bg-pink-100 text-pink-600 hover:bg-pink-600 hover:text-white transition-all transform hover:scale-110"
+                    title="Instagram"
+                >
+                    <Instagram className="w-5 h-5" />
+                </a>
+            )}
+
+            {socialLinks?.whatsapp && (
+                <a 
+                    href={socialLinks.whatsapp} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-all transform hover:scale-110"
+                    title="WhatsApp"
+                >
+                    <MessageCircle className="w-5 h-5" />
+                </a>
+            )}
+
+            {socialLinks?.phone && (
+                <a 
+                    href={`tel:${socialLinks.phone}`}
+                    className="flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 text-amber-600 hover:bg-amber-600 hover:text-white transition-all transform hover:scale-110"
+                    title="Телефон"
+                >
+                    <Phone className="w-5 h-5" />
+                </a>
+            )}
+        </div>
       </div>
     );
-  };
+};
+
+function SocialProjectCard({ item, onClick }: { item: Initiative; onClick: (item: Initiative) => void }) {
+  const [isMobile, setIsMobile] = useState(false);
+  // Modified to trigger only when the element is in the absolute center of the viewport
+  const { ref, inView } = useInView({
+    threshold: 0, 
+    rootMargin: '-40% 0px -40% 0px', // Adjusted trigger zone
+    triggerOnce: false
+  });
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const isActive = isMobile && inView;
+
+  return (
+    <div 
+      ref={ref}
+      onClick={() => onClick(item)}
+      className={`
+        group relative h-[420px] bg-white border cursor-pointer overflow-hidden transition-all duration-500
+        flex flex-col items-center text-center p-8
+        /* Dynamic Styles based on state */
+        ${isActive 
+            ? 'border-amber-500 shadow-xl' 
+            : 'border-gray-100 hover:border-amber-500 hover:shadow-xl'
+        }
+      `}
+    >
+        {/* Icon Container */}
+        <div className={`
+            relative w-32 h-32 mb-6 flex items-center justify-center transition-transform duration-500 ease-out
+            ${isActive ? 'scale-110 -translate-y-2' : 'group-hover:scale-110 group-hover:-translate-y-2'}
+        `}>
+           <Image 
+             src={item.icon} 
+             alt={item.title}
+             fill
+             className="object-contain"
+           />
+        </div>
+        
+        {/* Title */}
+        <h3 className={`
+            font-molodo text-2xl mb-4 uppercase leading-tight transition-colors duration-300
+            ${isActive ? 'text-amber-600' : 'text-gray-900 group-hover:text-amber-600'}
+        `}>
+          {item.title}
+        </h3>
+        
+        {/* Description */}
+        <p className={`
+            font-sans text-sm leading-relaxed text-gray-600 line-clamp-4 transition-all duration-500
+            ${isActive ? 'opacity-40' : 'group-hover:opacity-40'}
+        `}>
+          {item.description}
+        </p>
+
+        {/* 'Read More' Button / Indicator */}
+        <div className={`
+             absolute bottom-10 left-0 right-0 flex justify-center transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1)
+             ${isActive 
+                ? 'opacity-100 translate-y-0 delay-100' 
+                : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 group-hover:delay-100'}
+        `}>
+             <span className="
+                inline-flex items-center gap-2 
+                text-amber-600 font-bold uppercase tracking-widest text-sm 
+                border-b-2 border-amber-600 pb-1
+                hover:text-amber-700 hover:border-amber-700 transition-colors
+             ">
+                Детальніше
+                <ArrowRight className="w-4 h-4 ml-1" />
+             </span>
+        </div>
+    </div>
+  );
+}
 
 export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] }) {
   const [selectedInitiative, setSelectedInitiative] = useState<Initiative | null>(null);
@@ -170,44 +317,7 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1800px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
           {initiatives.map((item, index) => (
-            <div 
-              key={index}
-              onClick={() => openModal(item)}
-              className="group relative h-[400px] border border-gray-100 bg-white overflow-hidden cursor-pointer"
-            >
-              {/* Content Container */}
-              <div className="absolute inset-0 p-8 flex flex-col items-center text-center transition-all duration-500 group-hover:opacity-10">
-                <div className="relative w-32 h-32 mb-6 flex items-center justify-center">
-                   <Image 
-                     src={item.icon} 
-                     alt={item.title}
-                     fill
-                     className="object-contain"
-                   />
-                </div>
-                
-                <h3 className="font-molodo text-2xl mb-6 uppercase leading-tight">
-                  {item.title}
-                </h3>
-                
-                <p className="font-sans text-sm leading-relaxed text-gray-600 line-clamp-6">
-                  {item.description}
-                </p>
-              </div>
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out flex flex-col items-center justify-center p-8 text-white z-10">
-                <h3 className="font-molodo text-2xl mb-6 uppercase text-center translate-y-4 group-hover:translate-y-0 transition-all duration-700 delay-100">
-                  {item.title}
-                </h3>
-                
-                <button 
-                  className="border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-black px-8 py-3 uppercase tracking-widest text-sm font-semibold transition-all duration-300 translate-y-4 group-hover:translate-y-0 delay-200"
-                >
-                  Детальніше
-                </button>
-              </div>
-            </div>
+            <SocialProjectCard key={index} item={item} onClick={openModal} />
           ))}
         </div>
       </section>
@@ -226,12 +336,12 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
  shadow-2xl relative my-auto ${isClosing ? 'animate-modalOut' : 'animate-modalIn'}`}
               onClick={(e) => e.stopPropagation()}
             >
-            {/* Close Button */}
+            {/* Close Button - more visible */}
             <button 
               onClick={closeModal}
-              className="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+              className="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-white/90 shadow-lg text-black hover:bg-white hover:scale-110 flex items-center justify-center transition-all"
             >
-              <X className="w-8 h-8 text-white" />
+              <X className="w-6 h-6" />
             </button>
 
             {/* Header Image Area (Using Gallery or Default) */}
@@ -312,8 +422,8 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
                    {/* Gradient Overlay */}
                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60"></div>
 
-                   {/* Controls */}
-                   <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                   {/* Controls - Arrows always visible on mobile/default, invisible on md: unless hover */}
+                   <div className="absolute inset-0 flex items-center justify-between p-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                       <button 
                          onClick={prevImage}
                          disabled={isGalleryLoading}
@@ -337,7 +447,7 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
 
               {/* Call to Action Animation Section */}
               <div className="mt-16 border-t border-gray-100">
-                 <CTAAnimation />
+                 <CTAAnimation socialLinks={selectedInitiative.socialLinks} />
               </div>
 
             </div>

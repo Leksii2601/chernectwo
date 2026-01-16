@@ -4,8 +4,8 @@ import React from 'react';
 import { Footer } from '@/components/landing/Footer';
 import '../styles.css';
 import { Copy, CreditCard } from 'lucide-react';
-import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { PageHeader } from '@/components/PageHeader';
 
 export default function DonatePage() {
   const copyToClipboard = (text: string) => {
@@ -16,23 +16,10 @@ export default function DonatePage() {
 
   return (
     <main className="min-h-screen bg-white">
-       <div className="absolute top-0 left-0 w-full z-20">
-  <div className="relative max-w-7xl mx-auto px-4">
-    <Link 
-      href="/social-projects" 
-      className="inline-flex items-center gap-2 mt-8 text-gray-500 hover:text-black transition-colors group"
-    >
-      <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-      <span className="uppercase text-sm tracking-wider font-medium">
-        Назад
-      </span>
-    </Link>
-  </div>
-</div>
+       <PageHeader title="ПІДТРИМАТИ" />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-4 bg-gray-50 text-center">
-        <h1 className="font-molodo text-4xl md:text-5xl mb-6">Підтримати Монастир</h1>
+      <section className="pt-16 pb-16 px-4 bg-gray-50 text-center">
         <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
           Ваша пожертва допомагає нам розвивати соціальні ініціативи, підтримувати історичну спадщину та дбати про нужденних. Нехай Господь благословить!
         </p>

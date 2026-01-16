@@ -46,12 +46,6 @@ export function Footer() {
                 </a>
               </div>
 
-               <div>
-                <p className="text-gray-400 text-xs mb-1 uppercase tracking-wide">Сайт центру</p>
-                <a href="https://zhydychyn.center" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-orange-500 transition-colors">
-                  zhydychyn.center
-                </a>
-              </div>
             </div>
           </div>
 

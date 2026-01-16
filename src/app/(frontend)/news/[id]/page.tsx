@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from '@/components/landing/Header';
+import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: newsItem.title,
     description: newsItem.shortDescription,
-    openGraph: {
-      title: newsItem.title,
-      description: newsItem.shortDescription,
-      images: [newsItem.image],
-    },
+    // openGraph: {
+    //   title: newsItem.title,
+    //   description: newsItem.shortDescription,
+    //   images: [newsItem.image],
+    // },
   };
 }
 
@@ -44,9 +44,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
 
   return (
     <main className="min-h-screen bg-white">
-        <div className="bg-black/90 pt-32 pb-6 shadow-lg"> 
-           <Header />
-        </div>
+        <PageHeader title="НОВИНИ" />
       
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
          <Link href="/news" className="inline-flex items-center text-gray-400 hover:text-amber-600 mb-12 transition-colors text-xs font-bold uppercase tracking-widest group">
