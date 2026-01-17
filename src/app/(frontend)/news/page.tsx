@@ -3,8 +3,6 @@ import { Footer } from '@/components/landing/Footer';
 import { FloatingButton } from '@/components/landing/FloatingButton';
 import { NewsSection } from '@/components/landing/NewsSection';
 import { NewsCategorySection } from '@/components/news/NewsCategorySection';
-import { SearchResults } from '@/components/news/SearchResults';
-import { NewsSearch } from '@/components/news/NewsSearch';
 import { newsData } from '@/data/newsData';
 import { PageHeader } from '@/components/PageHeader';
 
@@ -21,7 +19,7 @@ export default async function NewsPage(props: {
   const official = newsData.filter(n => n.category === 'Офіційно').slice(0, 3);
 
   // Search Logic
-  let filteredResults = [];
+  let filteredResults: typeof newsData = [];
   if (search) {
       filteredResults = newsData.filter(n => n.title.toLowerCase().includes(search.toLowerCase()));
   }

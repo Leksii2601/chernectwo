@@ -3,7 +3,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Search, Menu, ArrowRight, Heart, Globe, X, User } from 'lucide-react';
+import { Search, Menu, ArrowRight, Heart, Globe, User } from 'lucide-react';
 import { clsx } from 'clsx';
 
 const navItems = [

@@ -4,7 +4,6 @@ import React from 'react';
 import { Footer } from '@/components/landing/Footer';
 import '../styles.css';
 import { Copy, CreditCard } from 'lucide-react';
-import Link from 'next/link';
 import { PageHeader } from '@/components/PageHeader';
 
 export default function DonatePage() {

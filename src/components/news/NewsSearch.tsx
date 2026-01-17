@@ -14,6 +14,7 @@ export function NewsSearch() {
     if (urlSearch !== searchTerm) {
        setSearchTerm(urlSearch);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   useEffect(() => {
