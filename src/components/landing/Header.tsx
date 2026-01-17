@@ -24,9 +24,9 @@ const navItems = [
     label: 'Новини',
     href: '/news',
     dropdown: [
-      { label: 'Публікації', href: '/news?category=publications' },
-      { label: 'Анонси', href: '/news?category=announcements' },
-      { label: 'Офіційно', href: '/news?category=official' },
+      { label: 'Публікації', href: '/news#publications' },
+      { label: 'Анонси', href: '/news#announcements' },
+      { label: 'Офіційно', href: '/news#official' },
     ],
   },
   { label: 'Соціальні проєкти', href: '/social-projects' },
@@ -52,7 +52,7 @@ export function Header() {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 300);
+    }, 400); // Increased delay
   };
   
   // Mobile accordion state
@@ -166,7 +166,7 @@ export function Header() {
               
               {item.dropdown && activeDropdown === item.label && (
                 <div 
-                    className="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-md shadow-2xl rounded-b-sm overflow-hidden animate-fadeInScale border-t-2 border-amber-500/50"
+                    className="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-md shadow-2xl rounded-b-sm overflow-hidden animate-fadeInScale border-t-2 border-amber-500/50 pt-2"
                     onMouseEnter={() => {
                         if (timeoutRef.current) clearTimeout(timeoutRef.current);
                     }}

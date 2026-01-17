@@ -203,7 +203,7 @@ export const NewsFeed: React.FC<NewsFeedProps> = ({ docs, totalPages, currentPag
                     <div className="text-gray-400 text-xs font-bold uppercase tracking-wider mb-4">
                         {item.date}
                     </div>
-                    <h3 className="font-molodo text-xl text-gray-900 mb-4 line-clamp-2 leading-tight group-hover:text-amber-700 transition-colors">
+                    <h3 className="font-montserrat text-xl text-gray-900 mb-4 line-clamp-2 leading-tight group-hover:text-amber-700 transition-colors">
                         {item.title}
                     </h3>
                     <p className="text-gray-500 font-sans leading-relaxed text-sm line-clamp-3 mb-6 flex-grow">

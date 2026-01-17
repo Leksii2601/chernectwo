@@ -35,7 +35,7 @@ export const serializeLexical = (node: any): any => {
         );
       case 'heading':
          const Tag = `h${node.tag?.slice(1) || '1'}` as keyof JSX.IntrinsicElements;
-         return <Tag className="font-molodo mb-4 mt-8">{children}</Tag>
+         return <Tag className="font-montserrat mb-4 mt-8">{children}</Tag>
       case 'text':
         let text = <>{node.text}</>;
         if (node.format & 1) text = <strong>{text}</strong>; // Bold

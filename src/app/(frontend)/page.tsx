@@ -24,7 +24,7 @@ export default function HomePage() {
       <Header />
       <Hero />
       <CalendarSection />
-      <NewsSection news={newsData} />
+      <NewsSection news={newsData} title="НОВИНИ" />
       <SocialInitiatives />
       <FAQ />
       <Footer />

@@ -17,8 +17,10 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
   return (
     <html lang="en">
-      <body className="font-sans antialiased">
-        {children}
+      <body className="font-sans antialiased overflow-x-hidden">
+         <div className="min-h-screen w-full relative">
+            {children}
+         </div>
       </body>
     </html>
   )

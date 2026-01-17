@@ -14,7 +14,7 @@ export const metadata = {
 export default function SocialProjectsPage() {
   return (
     <main className="min-h-screen bg-white">
-      <PageHeader title="СОЦІАЛЬНІ ПРОЄКТИ" />
+      <PageHeader backgroundImage="/media/social-initiatives.jpg" title="СОЦІАЛЬНІ ПРОЄКТИ" />
 
       <SocialProjectsFeed initiatives={projectsData} />
 

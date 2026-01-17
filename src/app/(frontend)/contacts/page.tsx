@@ -7,7 +7,7 @@ import { MapPin, Phone, Mail } from 'lucide-react';
 export default function ContactsPage() {
   return (
     <main className="min-h-screen bg-white">
-      <PageHeader title="КОНТАКТИ" />
+      <PageHeader title="КОНТАКТИ" backgroundImage="/media/contacts.jpg" />
       <div className="max-w-[1200px] mx-auto px-4 py-12 lg:py-20">
          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Contact Info */}

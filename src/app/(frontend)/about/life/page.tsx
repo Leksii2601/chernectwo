@@ -6,7 +6,7 @@ import { FloatingButton } from '@/components/landing/FloatingButton';
 export default function LifePage() {
   return (
     <main className="min-h-screen bg-white">
-      <PageHeader title="ЖИТТЯ ОБИТЕЛІ" />
+      <PageHeader title="ЖИТТЯ ОБИТЕЛІ" backgroundImage="/media/life.jpg" />
       <div className="max-w-[1200px] mx-auto px-4 py-12">
          <p className="text-xl text-center text-gray-500">Сторінка знаходиться в розробці</p>
       </div>

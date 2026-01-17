@@ -100,9 +100,10 @@ export function FAQ() {
   return (
     <section className="min-h-screen bg-white py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-16 animate-fadeInUp">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-black tracking-tight">Часті запитання</h1>
-          <div className="h-1 w-24 bg-orange-500 rounded-full"></div>
+        <div className="mb-16 animate-fadeInUp text-center">
+          <h1 className="font-montserrat font-bold text-3xl md:text-5xl uppercase tracking-widest text-black mb-10">
+            ЧАСТІ ЗАПИТАННЯ
+          </h1>
         </div>
 
         <div className="space-y-0">

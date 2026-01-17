@@ -17,7 +17,7 @@ export default function JoinPage() {
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="uppercase text-sm tracking-wider font-medium">Назад</span>
         </Link>
-        <h1 className="font-molodo text-4xl mb-8 text-center mt-8">Долучитися до ініціативи</h1>
+        <h1 className="font-montserrat text-4xl mb-8 text-center mt-8">Долучитися до ініціативи</h1>
         <p className="text-gray-600 text-center mb-12">
           Заповніть форму нижче, і ми зв&apos;яжемося з вами найближчим часом.
         </p>

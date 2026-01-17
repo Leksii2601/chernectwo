@@ -31,7 +31,7 @@ export const NewsGallery: React.FC<NewsGalleryProps> = ({ images }) => {
 
   return (
     <div className="my-12">
-      <h3 className="text-2xl font-bold mb-6 font-molodo uppercase">Фотогалерея</h3>
+      <h3 className="text-2xl font-bold mb-6 font-montserrat uppercase">Фотогалерея</h3>
       
       <div className="relative w-full h-[300px] md:h-[400px] bg-gray-100 rounded-sm overflow-hidden group max-w-4xl mx-auto shadow-md">
         <Image 

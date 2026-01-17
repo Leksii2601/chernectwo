@@ -68,7 +68,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
 
              {/* Right Column: Title & Meta */}
              <div className="lg:col-span-5 flex flex-col">
-                <h1 className="font-molodo text-3xl md:text-4xl lg:text-5xl leading-tight mb-8 text-gray-900">
+                <h1 className="font-montserrat text-3xl md:text-4xl lg:text-5xl leading-tight mb-8 text-gray-900">
                     {newsItem.title}
                 </h1>
 
@@ -96,7 +96,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
             </div>
 
             <div className="border-t border-gray-200 pt-10 mt-20">
-                 <h3 className="font-molodo text-2xl mb-8 text-gray-800 text-center uppercase tracking-widest">
+                 <h3 className="font-montserrat text-2xl mb-8 text-gray-800 text-center uppercase tracking-widest">
                     Поділитися новиною
                  </h3>
                  <div className="flex justify-center">

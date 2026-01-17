@@ -70,7 +70,7 @@ export function CalendarSection() {
   return (
     <section id="calendar" className="py-20 px-2 lg:px-4 bg-gray-50 text-gray-800 font-sans min-h-screen">
       <div className="container mx-auto max-w-7xl">
-        <h2 className="font-sans text-4xl text-center mb-16 uppercase font-bold text-gray-800">
+        <h2 className="font-montserrat font-bold text-3xl md:text-5xl uppercase tracking-widest text-center mb-16 text-gray-800">
           РОЗКЛАД БОГОСЛУЖІНЬ
         </h2>
 

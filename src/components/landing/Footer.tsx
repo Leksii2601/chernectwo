@@ -12,7 +12,7 @@ export function Footer() {
           {/* Logo Section */}
           <div className="flex flex-col justify-between h-full">
             <div className="mb-8 lg:mb-0">
-               <h2 className="font-molodo text-3xl md:text-4xl tracking-wide text-white mb-4">
+               <h2 className="font-montserrat text-3xl md:text-4xl tracking-wide text-white mb-4">
                   Жидичинський<br/>Монастир
                </h2>
             </div>

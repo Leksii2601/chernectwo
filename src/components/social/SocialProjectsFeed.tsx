@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { X, ArrowLeft, ArrowRight, Facebook, Instagram, Phone, MessageCircle } from 'lucide-react';
+import { X, ArrowLeft, ArrowRight, Facebook, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 
@@ -22,9 +22,7 @@ export interface Initiative {
   gallery?: string[];
   socialLinks?: {
     facebook?: string;
-    instagram?: string;
-    phone?: string;
-    whatsapp?: string;
+    website?: string;
   };
 }
 
@@ -66,12 +64,10 @@ const CTAAnimation = ({ socialLinks }: { socialLinks?: Initiative['socialLinks']
     return (
       <div
         ref={ref}
-        className="h-[440px] flex flex-col items-center justify-center relative overflow-hidden"
+        className="h-[240px] flex flex-col items-center justify-center relative overflow-hidden"
       >
         {/* Фонове світіння */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[360px] h-[360px]
-                          bg-amber-400/20 blur-[120px]" />
         </div>
         
         <Link 
@@ -82,12 +78,12 @@ const CTAAnimation = ({ socialLinks }: { socialLinks?: Initiative['socialLinks']
             `}
         >
              <div className={`
-                overflow-hidden whitespace-nowrap transition-all duration-1000 ease-out
-                ${animationState === 'final' ? 'max-w-[500px] opacity-100 mr-4' : 'max-w-0 opacity-0'}
-                bg-amber-500 md:bg-transparent px-6 py-3 md:px-0 md:py-0
+                overflow-hidden whitespace-normal md:whitespace-nowrap transition-all duration-1000 ease-out
+                ${animationState === 'final' ? 'max-w-[300px] sm:max-w-[500px] opacity-100 mr-2 md:mr-4' : 'max-w-0 opacity-0'}
+                bg-transparent p-0
               `}>
-                <span className="font-molodo text-lg sm:text-2xl md:text-3xl uppercase text-white md:text-black block text-center md:text-right leading-tight md:group-hover:text-amber-600 transition-colors">
-                  Зацікавлені долучитися? <br className="hidden md:block"/> Напишіть нам.
+                <span className="font-montserrat text-base sm:text-2xl md:text-3xl uppercase text-black block text-right leading-tight md:group-hover:text-amber-600 transition-colors">
+                  Хочете долучитися? <br /> Напишіть нам
                 </span>
              </div>
              
@@ -118,44 +114,22 @@ const CTAAnimation = ({ socialLinks }: { socialLinks?: Initiative['socialLinks']
                     href={socialLinks.facebook} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 hover:bg-blue-600 hover:text-white transition-all transform hover:scale-110"
+                    className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 text-black hover:bg-black hover:text-white transition-all transform hover:scale-110"
                     title="Facebook"
                 >
                     <Facebook className="w-5 h-5" />
                 </a>
             )}
             
-            {socialLinks?.instagram && (
+            {socialLinks?.website && (
                 <a 
-                    href={socialLinks.instagram} 
+                    href={socialLinks.website} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-12 h-12 rounded-full bg-pink-100 text-pink-600 hover:bg-pink-600 hover:text-white transition-all transform hover:scale-110"
-                    title="Instagram"
+                    className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 text-black hover:bg-black hover:text-white transition-all transform hover:scale-110"
+                    title="Веб-сайт"
                 >
-                    <Instagram className="w-5 h-5" />
-                </a>
-            )}
-
-            {socialLinks?.whatsapp && (
-                <a 
-                    href={socialLinks.whatsapp} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 text-green-600 hover:bg-green-600 hover:text-white transition-all transform hover:scale-110"
-                    title="WhatsApp"
-                >
-                    <MessageCircle className="w-5 h-5" />
-                </a>
-            )}
-
-            {socialLinks?.phone && (
-                <a 
-                    href={`tel:${socialLinks.phone}`}
-                    className="flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 text-amber-600 hover:bg-amber-600 hover:text-white transition-all transform hover:scale-110"
-                    title="Телефон"
-                >
-                    <Phone className="w-5 h-5" />
+                    <Globe className="w-5 h-5" />
                 </a>
             )}
         </div>
@@ -186,39 +160,42 @@ function SocialProjectCard({ item, onClick }: { item: Initiative; onClick: (item
       ref={ref}
       onClick={() => onClick(item)}
       className={`
-        group relative h-[420px] bg-white border cursor-pointer overflow-hidden transition-all duration-500
-        flex flex-col items-center text-center p-8
+        group relative h-[300px] bg-white  cursor-pointer overflow-hidden transition-all duration-500
+        flex flex-col p-8
         /* Dynamic Styles based on state */
         ${isActive 
             ? 'border-amber-500 shadow-xl' 
-            : 'border-gray-100 hover:border-amber-500 hover:shadow-xl'
+            : 'hover:border-amber-500 hover:shadow-xl'
         }
       `}
     >
-        {/* Icon Container */}
-        <div className={`
-            relative w-32 h-32 mb-6 flex items-center justify-center transition-transform duration-500 ease-out
-            ${isActive ? 'scale-110 -translate-y-2' : 'group-hover:scale-110 group-hover:-translate-y-2'}
-        `}>
-           <Image 
-             src={item.icon} 
-             alt={item.title}
-             fill
-             className="object-contain"
-           />
+        {/* Header: Icon Left + Title Right */}
+        <div className="flex items-start mb-6">
+            {/* Icon Container */}
+            <div className={`
+                relative w-24 h-24 flex-shrink-0 flex items-center justify-center transition-transform duration-500 ease-out
+                ${isActive ? 'scale-110' : 'group-hover:scale-110'}
+            `}>
+               <Image 
+                 src={item.icon} 
+                 alt={item.title}
+                 fill
+                 className="object-contain"
+               />
+            </div>
+            
+            {/* Title */}
+            <h3 className={`
+                font-cuprum font-bold text-xl sm:text-lg uppercase leading-tight transition-colors duration-300 text-left
+                ${isActive ? 'text-amber-600' : 'text-gray-900 transition-transform duration-500 ease-out group-hover:scale-110'}
+            `}>
+              {item.title}
+            </h3>
         </div>
-        
-        {/* Title */}
-        <h3 className={`
-            font-molodo text-2xl mb-4 uppercase leading-tight transition-colors duration-300
-            ${isActive ? 'text-amber-600' : 'text-gray-900 group-hover:text-amber-600'}
-        `}>
-          {item.title}
-        </h3>
         
         {/* Description */}
         <p className={`
-            font-sans text-sm leading-relaxed text-gray-600 line-clamp-4 transition-all duration-500
+            font-sans text-sm leading-relaxed text-gray-600 line-clamp-4 transition-all duration-500 text-left
             ${isActive ? 'opacity-40' : 'group-hover:opacity-40'}
         `}>
           {item.description}
@@ -226,7 +203,7 @@ function SocialProjectCard({ item, onClick }: { item: Initiative; onClick: (item
 
         {/* 'Read More' Button / Indicator */}
         <div className={`
-             absolute bottom-10 left-0 right-0 flex justify-center transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1)
+             absolute bottom-6 left-0 right-0 flex justify-center transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1)
              ${isActive 
                 ? 'opacity-100 translate-y-0 delay-100' 
                 : 'opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0 group-hover:delay-100'}
@@ -314,8 +291,8 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
   return (
     <>
       {/* Grid Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-[1800px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
+      <section className="py-24 px-4 sm:px-6 md:px-20 max-w-[1920px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {initiatives.map((item, index) => (
             <SocialProjectCard key={index} item={item} onClick={openModal} />
           ))}
@@ -355,11 +332,11 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
                 />
               ) : (
                 <div className="flex items-center justify-center h-full bg-gray-200">
-                  <span className="font-molodo text-4xl text-gray-400">{selectedInitiative.title[0]}</span>
+                  <span className="font-montserrat text-4xl text-gray-400">{selectedInitiative.title[0]}</span>
                 </div>
               )}
                <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/80 to-transparent">
-                  <h2 className="font-molodo text-4xl text-white tracking-wide">{selectedInitiative.fullTitle || selectedInitiative.title}</h2>
+                  <h2 className="font-montserrat text-4xl text-white tracking-wide">{selectedInitiative.fullTitle || selectedInitiative.title}</h2>
                </div>
             </div>
 
@@ -372,7 +349,7 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
               {/* Main Text Content: About Us & Directions */}
               <div className="space-y-8 mb-12">
                 <div>
-                  <h3 className="font-molodo text-2xl mb-4">Про нас</h3>
+                  <h3 className="font-montserrat text-2xl mb-4">Про нас</h3>
                   {/* Handle potentially complex content */}
                   <div className="text-gray-700 leading-relaxed font-sans text-lg whitespace-pre-line">
                     {typeof selectedInitiative.fullDescription === 'string' 
@@ -384,7 +361,7 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
                 
                 {selectedInitiative.directions && selectedInitiative.directions.length > 0 ? (
                    <div>
-                      <h3 className="font-molodo text-2xl mb-4">Напрямки роботи</h3>
+                      <h3 className="font-montserrat text-2xl mb-4">Напрямки роботи</h3>
                       <ul className="space-y-2">
                         {selectedInitiative.directions.map((dir, idx) => (
                           <li key={idx} className="flex items-start gap-3 text-gray-700 text-lg">
@@ -397,7 +374,7 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
                 ) : (
                   selectedInitiative.goal && (
                     <div>
-                      <h3 className="font-molodo text-2xl mb-4">Мета</h3>
+                      <h3 className="font-montserrat text-2xl mb-4">Мета</h3>
                       <p className="text-gray-700 leading-relaxed font-sans text-lg">
                         {selectedInitiative.goal || "Мета проєкту уточнюється..."}
                       </p>
@@ -446,7 +423,7 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
               )}
 
               {/* Call to Action Animation Section */}
-              <div className="mt-16 border-t border-gray-100">
+              <div className="mt-16">
                  <CTAAnimation socialLinks={selectedInitiative.socialLinks} />
               </div>
 

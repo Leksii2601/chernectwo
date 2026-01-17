@@ -53,7 +53,7 @@ export function Hero() {
           
           {/* Left: Title */}
           <div className="text-center lg:text-right">
-             <h1 className="font-molodo text-4xl md:text-7xl lg:text-7xl leading-none uppercase tracking-wider drop-shadow-lg">
+             <h1 className="font-montserrat font-bold text-2xl md:text-4xl lg:text-5xl leading-tight uppercase tracking-widest drop-shadow-lg">
                Жидичинський <br />
                Свято-Миколаївський <br />
                Монастир

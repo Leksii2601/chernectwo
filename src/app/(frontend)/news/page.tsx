@@ -1,65 +1,63 @@
 import React from 'react';
 import { Footer } from '@/components/landing/Footer';
 import { FloatingButton } from '@/components/landing/FloatingButton';
-import { NewsFeed } from '@/components/news/NewsFeed';
+import { NewsSection } from '@/components/landing/NewsSection';
+import { NewsCategorySection } from '@/components/news/NewsCategorySection';
+import { SearchResults } from '@/components/news/SearchResults';
+import { NewsSearch } from '@/components/news/NewsSearch';
 import { newsData } from '@/data/newsData';
 import { PageHeader } from '@/components/PageHeader';
+
 
 export default async function NewsPage(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const searchParams = await props.searchParams;
-  const page = parseInt(typeof searchParams.page === 'string' ? searchParams.page : '1') || 1;
-  const category = typeof searchParams.category === 'string' ? searchParams.category : undefined;
   const search = typeof searchParams.search === 'string' ? searchParams.search : undefined;
 
-  let filteredNews = newsData;
+  // Filter for Categories
+  const publications = newsData.filter(n => n.category === 'Публікації').slice(0, 3);
+  const announcements = newsData.filter(n => n.category === 'Анонси').slice(0, 3);
+  const official = newsData.filter(n => n.category === 'Офіційно').slice(0, 3);
 
-  // Filter by Category check
-  // newsData.category values are 'Офіційно', 'Публікації', 'Анонси', 'Всі новини'
-  // The URL param might be 'official', 'publications' etc if passed from somewhere, 
-  // OR it might be the label itself if the links were built that way.
-  // Assuming the `NewsFeed` component generates links.
-  
-  if (category && category !== 'all') {
-      // Simple match or map if needed. 
-      // For now, let's just filter if it matches one of our known categories values
-      filteredNews = filteredNews.filter(n => n.category === category);
-  }
-
+  // Search Logic
+  let filteredResults = [];
   if (search) {
-     filteredNews = filteredNews.filter(n => n.title.toLowerCase().includes(search.toLowerCase()));
+      filteredResults = newsData.filter(n => n.title.toLowerCase().includes(search.toLowerCase()));
   }
-
-  const limit = 12;
-  const totalDocs = filteredNews.length;
-  const totalPages = Math.ceil(totalDocs / limit);
-  // Ensure page is within bounds
-  const safePage = Math.min(Math.max(1, page), totalPages || 1);
-  const paginatedItems = filteredNews.slice((safePage - 1) * limit, safePage * limit);
-
-  // Map to NewsFeed expected format
-  // NewsDoc usually expects: { id, title, date, category, categoryLabel, shortDescription, image }
-  // My newsData items have: { id, title, date, category, image, shortDescription, content }
-  const formattedNews = paginatedItems.map(item => ({
-      id: item.id, // cast to number if needed, but string preferred normally
-      title: item.title,
-      date: item.date,
-      category: 'news', // internal slug if needed
-      categoryLabel: item.category, // Display text
-      shortDescription: item.shortDescription,
-      image: item.image
-  }));
 
   return (
     <main className="min-h-screen bg-white">
-      <PageHeader title="Новини" />
+      <PageHeader title="Новини" backgroundImage="/media/news.jpg" />
       
-      <NewsFeed 
-         docs={formattedNews} 
-         totalPages={totalPages} 
-         currentPage={safePage} 
+      {/* 
+         Top Section: NewsSection.
+         If searching:
+           - The Left "Hero" is replaced by Grid of Search Results.
+           - The Right Sidebar stays (with Search Bar).
+      */}
+      <NewsSection 
+          news={newsData} 
+          showSearch={true} 
+          searchResults={filteredResults}
+          isSearching={!!search}
       />
+
+      {/* 
+         Below NewsSection:
+         Only show Category Sections if NOT searching.
+         If searching, the results are already shown inside NewsSection.
+      */}
+      <div className="max-w-[1800px] mx-auto px-4 md:px-8 mt-8 mb-16">
+        {!search && (
+            <div className="flex flex-col gap-16">
+                {/* Categories */}
+                <NewsCategorySection id="official" title="Офіційно" items={official} />
+                <NewsCategorySection id="announcements" title="Анонси" items={announcements} />
+                <NewsCategorySection id="publications" title="Публікації" items={publications} />
+            </div>
+        )}
+      </div>
 
       <Footer />
       <FloatingButton />

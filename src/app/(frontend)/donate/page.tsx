@@ -16,7 +16,7 @@ export default function DonatePage() {
 
   return (
     <main className="min-h-screen bg-white">
-       <PageHeader title="ПІДТРИМАТИ" />
+       <PageHeader title="ПІДТРИМАТИ" backgroundImage="/media/donate.jpg" />
 
       {/* Hero Section */}
       <section className="pt-16 pb-16 px-4 bg-gray-50 text-center">
@@ -35,7 +35,7 @@ export default function DonatePage() {
               <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
                 <span className="font-bold text-xl">₴</span>
               </div>
-              <h2 className="font-molodo text-2xl">Гривня (UAH)</h2>
+              <h2 className="font-montserrat text-2xl">Гривня (UAH)</h2>
             </div>
             
             <div className="space-y-6">
@@ -65,7 +65,7 @@ export default function DonatePage() {
               <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
                 <span className="font-bold text-xl">$</span>
               </div>
-              <h2 className="font-molodo text-2xl">SWIFT (USD / EUR)</h2>
+              <h2 className="font-montserrat text-2xl">SWIFT (USD / EUR)</h2>
             </div>
             
             <div className="space-y-6">

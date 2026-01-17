@@ -9,7 +9,7 @@ export function SocialInitiatives() {
       id="social-initiatives"
       className="relative w-full min-h-[600px] flex items-center justify-center bg-fixed bg-center bg-cover"
       style={{
-        backgroundImage: 'url(/media/social-iniviatives.jpeg)',
+        backgroundImage: 'url(/media/social-initiatives.jpg)',
         backgroundAttachment: 'fixed', // Parallax effect
         backgroundPosition: 'center',
         backgroundSize: 'cover'
@@ -19,8 +19,8 @@ export function SocialInitiatives() {
       <div className="absolute inset-0 bg-black/60 z-0"></div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-white">
-        <h2 className="font-molodo text-4xl md:text-6xl mb-8 tracking-wide">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 text-left text-white">
+        <h2 className="font-montserrat text-4xl md:text-6xl mb-8 tracking-wide">
           Місіонерські проєкти
         </h2>
         

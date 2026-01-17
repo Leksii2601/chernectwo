@@ -27,7 +27,7 @@ function SearchContent() {
     <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Search Input Area */}
         <div className="mb-16">
-            <h1 className="font-molodo text-4xl uppercase tracking-wider mb-8">Пошук</h1>
+            <h1 className="font-montserrat text-4xl uppercase tracking-wider mb-8">Пошук</h1>
             <div className="relative max-w-2xl">
                 <input 
                     type="text" 
@@ -76,10 +76,10 @@ function SearchContent() {
                              <div className="flex items-center gap-3 mb-3">
                                 <span className="text-amber-600 font-bold text-sm tracking-widest uppercase">{item.date}</span>
                                 <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
-                                <h4 className="text-amber-500 font-molodo uppercase text-sm tracking-wider">Новини</h4>
+                                <h4 className="text-amber-500 font-montserrat uppercase text-sm tracking-wider">Новини</h4>
                              </div>
                              
-                             <h3 className="font-molodo text-xl md:text-2xl mb-3 leading-tight text-gray-900 group-hover:text-amber-700 transition-colors">
+                             <h3 className="font-montserrat text-xl md:text-2xl mb-3 leading-tight text-gray-900 group-hover:text-amber-700 transition-colors">
                                 {item.title}
                              </h3>
 

@@ -69,7 +69,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({ title }) => {
         href={fbShareUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-10 h-10 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors"
+        className="flex items-center justify-center w-10 h-10 bg-black hover:bg-gray-800 text-white rounded-full transition-colors"
         title="Facebook"
       >
         <Facebook className="w-5 h-5" />
@@ -80,7 +80,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({ title }) => {
         href={tgShareUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center w-10 h-10 bg-sky-500 hover:bg-sky-600 text-white rounded-full transition-colors"
+        className="flex items-center justify-center w-10 h-10 bg-black hover:bg-gray-800 text-white rounded-full transition-colors"
         title="Telegram"
       >
         <Send className="w-5 h-5 -ml-1" />

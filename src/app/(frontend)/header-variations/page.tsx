@@ -25,7 +25,7 @@ const DemoSection = ({ title, desc, children, className = "bg-white", dark = fal
         <div className="flex items-baseline gap-4 mb-6 px-4">
             <span className="text-amber-500 font-mono text-sm">0{title.split('.')[0]}</span>
             <div>
-                <h2 className="text-3xl font-molodo text-gray-900 uppercase tracking-tight">{title.split('. ')[1]}</h2>
+                <h2 className="text-3xl font-montserrat text-gray-900 uppercase tracking-tight">{title.split('. ')[1]}</h2>
                 <p className="text-gray-500 font-sans text-sm mt-1">{desc}</p>
             </div>
         </div>
@@ -51,7 +51,7 @@ export default function HeaderVariationsPage() {
   return (
     <main className="min-h-screen bg-white p-8 md:p-16 max-w-[1600px] mx-auto">
         <header className="mb-24 text-center max-w-2xl mx-auto">
-            <h1 className="font-molodo text-6xl mb-6">MODERN HEADERS</h1>
+            <h1 className="font-montserrat text-6xl mb-6">MODERN HEADERS</h1>
             <p className="text-gray-500 font-sans text-lg">
                 Добірка сучасних UX/UI рішень для навігації. <br/>
                 Акцент на мікро-анімаціях, прозорості та типографіці.
@@ -140,7 +140,7 @@ export default function HeaderVariationsPage() {
                     </div>
 
                     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                         <span className="font-molodo text-2xl text-white tracking-widest uppercase">Zhydychyn</span>
+                         <span className="font-montserrat text-2xl text-white tracking-widest uppercase">Zhydychyn</span>
                     </div>
 
                     <a href="#" className="group flex items-center gap-2 bg-amber-500/20 hover:bg-amber-500 text-amber-500 hover:text-white px-5 py-2 rounded-lg border border-amber-500/50 transition-all duration-300">
@@ -174,7 +174,7 @@ export default function HeaderVariationsPage() {
                  </div>
              </aside>
              <div className="flex-1 bg-gray-50 relative p-8">
-                <h3 className="font-molodo text-4xl text-gray-200 uppercase">Page Content</h3>
+                <h3 className="font-montserrat text-4xl text-gray-200 uppercase">Page Content</h3>
              </div>
         </DemoSection>
 
@@ -189,7 +189,7 @@ export default function HeaderVariationsPage() {
                  
                  <nav className="flex flex-col items-end gap-1">
                      {['Про нас', 'Історія', 'Проєкти', 'Контакти'].map((item, i) => (
-                         <a key={i} href="#" className="font-molodo text-5xl hover:ml-4 hover:text-amber-500 transition-all duration-300 uppercase leading-[0.85] opacity-50 hover:opacity-100">
+                         <a key={i} href="#" className="font-montserrat text-5xl hover:ml-4 hover:text-amber-500 transition-all duration-300 uppercase leading-[0.85] opacity-50 hover:opacity-100">
                              {item}
                          </a>
                      ))}
@@ -262,7 +262,7 @@ export default function HeaderVariationsPage() {
 
              {/* Bottom Center - Optional Text */}
              <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-center text-white">
-                 <p className="font-molodo text-4xl tracking-widest drop-shadow-md">MONASTERY</p>
+                 <p className="font-montserrat text-4xl tracking-widest drop-shadow-md">MONASTERY</p>
              </div>
         </DemoSection>
 
@@ -298,7 +298,7 @@ export default function HeaderVariationsPage() {
         >
              <header className="absolute top-0 left-0 right-0">
                  <div className="border-b border-gray-100 py-6 text-center">
-                      <h1 className="font-molodo text-5xl tracking-tight text-gray-900">ZHYDYCHYN</h1>
+                      <h1 className="font-montserrat text-5xl tracking-tight text-gray-900">ZHYDYCHYN</h1>
                  </div>
                  <div className="border-b border-gray-100 py-3 flex justify-center sticky top-0 bg-white/80 backdrop-blur-md z-10">
                      <nav className="flex items-center gap-12">

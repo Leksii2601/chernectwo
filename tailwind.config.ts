@@ -13,9 +13,9 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        molodo: ['Molodo', 'sans-serif'],
         sans: ['"Open Sans"', 'sans-serif'],
         montserrat: ['"Montserrat"', 'sans-serif'],
+        cuprum: ['Cuprum', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 1s ease-in-out',
