@@ -130,10 +130,6 @@ export function PilgrimInfo() {
   }, []);
 
   return (
-    <section className="py-24 bg-stone-50">
-
-
-  return (
     <section className="bg-gray-50 py-16 lg:py-24">
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[80px]">
         
