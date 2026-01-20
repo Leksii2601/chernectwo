@@ -144,7 +144,7 @@ export default function PrayerNotePage() {
                         : 'text-gray-500 hover:bg-gray-50'
                     }`}
                 >
-                    За Здоров'я
+                    За Здоров&apos;я
                 </button>
                 <button
                     onClick={() => setNoteType('repose')}
@@ -167,7 +167,7 @@ export default function PrayerNotePage() {
                 >
                     <div>
                         <span className="block font-bold text-gray-900 text-lg">{selectedService.name}</span>
-                        <span className="text-amber-600 font-medium">{selectedService.price} грн / ім'я</span>
+                        <span className="text-amber-600 font-medium">{selectedService.price} грн / ім&apos;я</span>
                     </div>
                     <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
                 </div>

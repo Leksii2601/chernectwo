@@ -2,15 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { X, ArrowRight, ChevronRight, Facebook, Globe, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import { useInView } from 'react-intersection-observer';
+import { X, ChevronRight } from 'lucide-react';
 
 export interface PilgrimItem {
   title: string;
   description: string;
   fullTitle?: string;
-  fullDescription?: any; // String or rich content
+  fullDescription?: string; // String or rich content
   icon?: string; // Optional icon if we want to use one, though screenshot doesn't show big icons
   gallery?: string[];
   rules?: string[]; // Specific for pilgrims?
@@ -104,12 +102,10 @@ const pilgrimData: PilgrimItem[] = [
 export function PilgrimInfo() {
   const [selectedItem, setSelectedItem] = useState<PilgrimItem | null>(null);
   const [isClosing, setIsClosing] = useState(false);
-  const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0); 
 
   const openModal = (item: PilgrimItem) => {
     setSelectedItem(item);
     setIsClosing(false);
-    setCurrentGalleryIndex(0);
     document.body.style.overflow = 'hidden';
   };
 
@@ -131,21 +127,10 @@ export function PilgrimInfo() {
         window.removeEventListener('keydown', handleEsc);
         document.body.style.overflow = 'unset';
     };
-  }, []); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    const nextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedItem?.gallery) {
-      setCurrentGalleryIndex((prev) => (prev + 1) % selectedItem.gallery!.length);
-    }
-  };
-
-  const prevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (selectedItem?.gallery) {
-      setCurrentGalleryIndex((prev) => (prev - 1 + selectedItem.gallery!.length) % selectedItem.gallery!.length);
-    }
-  };
+  return (
+    <section className="py-24 bg-stone-50">
 
 
   return (

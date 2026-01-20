@@ -144,7 +144,7 @@ export function ExploreMore() {
                     className="flex gap-4 lg:gap-6 overflow-x-auto py-4 lg:py-6 snap-x snap-mandatory scrollbar-hide -mx-4 px-4 md:-mx-0 md:px-0"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-                    {exploreItems.map((item, index) => (
+                    {exploreItems.map((item) => (
                         <Link 
                             key={item.label} 
                             href={item.href}
