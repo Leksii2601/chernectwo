@@ -4,6 +4,7 @@ import { Hero } from '@/components/landing/Hero'
 import { CalendarSection } from '@/components/landing/CalendarSection'
 import { NewsSection } from '@/components/landing/NewsSection'
 import { SocialInitiatives } from '@/components/landing/SocialInitiatives'
+import { ExploreMore } from '@/components/landing/ExploreMore'
 import { FAQ } from '@/components/landing/FAQ'
 import { Footer } from '@/components/landing/Footer'
 import { FloatingButton } from '@/components/landing/FloatingButton'
@@ -26,6 +27,7 @@ export default function HomePage() {
       <CalendarSection />
       <NewsSection news={newsData} title="НОВИНИ" />
       <SocialInitiatives />
+      <ExploreMore />
       <FAQ />
       <Footer />
       <FloatingButton />

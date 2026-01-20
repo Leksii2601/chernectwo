@@ -46,7 +46,7 @@ export default async function NewsPage(props: {
          Only show Category Sections if NOT searching.
          If searching, the results are already shown inside NewsSection.
       */}
-      <div className="max-w-[1800px] mx-auto px-4 md:px-8 mt-8 mb-16">
+      <div className="max-w-[1920px] mx-auto px-4 md:px-6 lg:px-[80px] mt-8 mb-16">
         {!search && (
             <div className="flex flex-col gap-16">
                 {/* Categories */}

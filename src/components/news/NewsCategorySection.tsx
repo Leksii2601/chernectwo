@@ -13,15 +13,15 @@ export function NewsCategorySection({ title, items, id }: NewsCategorySectionPro
   if (items.length === 0) return null;
 
   return (
-    <div id={id} className="max-w-[1920px] mx-auto px-0 mb-16 scroll-mt-32">
+    <div id={id} className="w-full scroll-mt-32">
       <div className="bg-black text-white px-6 py-3 mb-8">
         <h2 className="text-xl uppercase font-serif tracking-wider">{title}</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {items.map((item) => (
           <Link key={item.id} href={`/news/${item.id}`} className="group block">
-             <div className="relative h-48 md:h-56 mb-4 overflow-hidden">
+             <div className="relative h-48 md:h-64 lg:h-72 mb-4 overflow-hidden">
                 <Image 
                     src={item.image} 
                     alt={item.title} 
