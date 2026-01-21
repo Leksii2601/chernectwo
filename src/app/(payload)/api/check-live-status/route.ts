@@ -51,9 +51,7 @@ export async function GET() {
             const currentTime = hours * 60 + minutes;
 
             // Schedule Config from Payload (defaults if empty)
-            // @ts-expect-error - dynamic types from Payload config
             const startStr = liveSettings.sundayStartTime || '09:30';
-             // @ts-expect-error - dynamic types from Payload config
             const endStr = liveSettings.sundayEndTime || '12:30';
 
             const [startH, startM] = startStr.split(':').map(Number);
