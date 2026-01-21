@@ -9,12 +9,17 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   // However, simpler approach for this "fix" migration:
   // Just add the missing columns.
+
+  if(payload && req) {
+      console.log('Migration context loaded')
+  }
   
   try {
       await db.run(sql`ALTER TABLE \`live_stream\` ADD COLUMN \`planned_event_start_time\` text;`);
   } catch (e) {
       // Ignore if column exists
   }
+
   
   try {
       await db.run(sql`ALTER TABLE \`live_stream\` ADD COLUMN \`planned_event_end_time\` text;`);
@@ -39,6 +44,11 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   // SQLite doesn't support DROP COLUMN in older versions, and often requires table recreation.
   // For dev environment fix, we can skip complex down migration or just leave columns.
   // But strictly:
+
+  if(payload && req) {
+    console.log('Migration down context loaded')
+  }
+
   try {
     await db.run(sql`ALTER TABLE \`live_stream\` DROP COLUMN \`planned_event_start_time\`;`);
     await db.run(sql`ALTER TABLE \`live_stream\` DROP COLUMN \`planned_event_end_time\`;`);

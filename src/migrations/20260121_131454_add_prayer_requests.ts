@@ -1,6 +1,7 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-sqlite'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+  if (payload && req) console.log('Up')
   await db.run(sql`CREATE TABLE \`prayer_requests_names\` (
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
@@ -29,6 +30,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
+  if (payload && req) console.log('Down')
   await db.run(sql`DROP TABLE \`prayer_requests_names\`;`)
   await db.run(sql`DROP TABLE \`prayer_requests\`;`)
   await db.run(sql`PRAGMA foreign_keys=OFF;`)

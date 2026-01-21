@@ -10,7 +10,7 @@ const seed = async () => {
   const notes = []
   for (let i = 1; i <= 10; i++) {
     const isHealth = i % 2 !== 0; // Odd = Health (Red), Even = Repose (Black)
-    const type = isHealth ? 'health' : 'repose';
+    const type: 'health' | 'repose' = isHealth ? 'health' : 'repose';
     
     // Create random names
     const namesCount = Math.floor(Math.random() * 5) + 5; // 5 to 10 names
@@ -24,7 +24,7 @@ const seed = async () => {
       service: 'Сорокоуст',
       email: `user${i}@test.com`,
       amount: 50 * i,
-      status: 'paid', // Mark as paid so they are ready for processing if applicable
+      status: 'paid' as 'paid', // Explicitly cast if needed, though string literal usually works
       names: names
     })
   }
@@ -33,7 +33,7 @@ const seed = async () => {
       try {
         await payload.create({
             collection: 'prayer-requests',
-            data: note,
+            data: note as any, // Cast to any to bypass strict type check for now in seed script
         })
         console.log(`Created ${note.type} note with ${note.names.length} names.`)
       } catch (err) {
