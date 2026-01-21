@@ -196,7 +196,7 @@ export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow 
                        // Live is theoretically active but no Channel ID is configured
                        <div className="px-4">
                            <h2 className="text-2xl md:text-3xl font-bold font-church mb-2">Налаштуйте ID каналу</h2>
-                           <p className="text-gray-400">Трансляція активна за розкладом, але в Адмін панелі не вказано "YouTube Channel ID".</p>
+                           <p className="text-gray-400">Трансляція активна за розкладом, але в Адмін панелі не вказано &quot;YouTube Channel ID&quot;.</p>
                        </div>
                    ) : (
                        <>

@@ -1,5 +1,4 @@
 import { CollectionConfig } from 'payload'
-import { PrintButton } from '@/components/PrintButton'
 
 export const PrayerRequests: CollectionConfig = {
   slug: 'prayer-requests',

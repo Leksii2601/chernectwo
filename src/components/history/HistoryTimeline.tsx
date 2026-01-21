@@ -301,7 +301,6 @@ export const HistoryTimeline = () => {
                         
                         // Varying background shapes - SQUARES mostly
                         let shapeClasses = '';
-                        /* eslint-disable no-fallthrough */
                         switch (randomSizeBase) {
                             case 0:
                                 shapeClasses = 'w-[500px] h-[500px] rounded-full text-amber-50/50'; // Circle

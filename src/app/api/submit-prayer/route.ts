@@ -38,7 +38,6 @@ export async function POST(req: Request) {
          throw new Error('RESEND_API_KEY is missing in environment variables');
       }
 
-      const serviceName = typeof service === 'object' && service !== null ? service.name : service
       const title = type === 'health' ? "ЗА ЗДОРОВ'Я" : "ЗА УПОКІЙ"
 
       // Pad list to 10 items to mimic physical note
@@ -53,9 +52,6 @@ export async function POST(req: Request) {
       // However, Base64 is not well supported in all email clients. 
       // The best practice for local dev is to link to a public URL or use a placeholder service if you don't have a public domain yet.
       // For this demo, let's assume we want to use the structure.
-      
-      const headerUrl = 'https://i.imgur.com/your-header-placeholder.png'; // Ideally, this should come from your Payload media URL
-      // But we can't easily get the public URL of a local file in dev environment for an email client to see.
       
       await payload.sendEmail({
         to: email,
@@ -87,7 +83,7 @@ export async function POST(req: Request) {
 
               <!-- Names List -->
               <div style="padding: 0 20px 20px 20px;">
-                ${fullList.map((n: string, i: number) => `
+                ${fullList.map((n: string) => `
                 <div style="padding: 8px 0; border-bottom: 1px solid #D22626; display: flex; align-items: center; min-height: 24px; justify-content: center;">
                   <span style="color: #000; font-size: 16px; font-family: 'Times New Roman', serif;">${n}</span>
                 </div>

@@ -2,10 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { X, Radio, ExternalLink } from 'lucide-react';
-import { getPayload } from 'payload';
-import configPromise from '@payload-config';
 
-// We'll fetch the status via a Next.js Server Action or API route ideally, 
+// We'll fetch the status via a Next.js Server Action or API route ideally,  
 // but for now, let's create a checking logic.
 
 interface LiveStatus {

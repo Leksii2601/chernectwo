@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
 import { FloatingButton } from '@/components/landing/FloatingButton';
@@ -92,9 +93,9 @@ export default function PrayerNotePage() {
         } else {
             alert('Помилка при обробці запиту.');
         }
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error(error);
-        if (error.name === 'AbortError') {
+        if (typeof error === 'object' && error !== null && 'name' in error && (error as { name: string }).name === 'AbortError') {
             alert('Час очікування вичерпано. Перевірте з\'єднання або спробуйте пізніше.');
         } else {
             alert('Сталася помилка з\'єднання.');
@@ -123,11 +124,12 @@ export default function PrayerNotePage() {
                 <div className="p-0"> {/* Remove padding to let images fit fully if needed */}
                     
                     {/* Header Image/Ornament */}
-                     <div className="w-full h-auto mb-2 flex justify-center pt-6 px-5">
-                        {/* Using standard img tag for simplicity with local files, or could use Next Image */}
-                        <img 
+                     <div className="w-full h-auto mb-2 flex justify-center pt-6 px-5 relative h-[60px]">
+                        <Image 
                             src="/media/header.png" 
                             alt="Ornament" 
+                            width={260}
+                            height={60}
                             className={`w-full h-auto object-contain ${noteType === 'repose' ? 'grayscale opacity-80' : ''}`}
                         />
                     </div>
@@ -163,10 +165,12 @@ export default function PrayerNotePage() {
 
                     {/* Footer Image */}
                      <div className="w-full flex justify-center px-4 pb-6">
-                         <div className="text-center w-full">
-                            <img 
+                         <div className="text-center w-full flex flex-col items-center">
+                            <Image 
                                 src="/media/footer.png" 
                                 alt="Monastery" 
+                                width={260}
+                                height={80}
                                 className={`w-full h-auto object-contain mb-2 ${noteType === 'repose' ? 'grayscale opacity-80' : ''}`}
                             />
                             <p className={`text-[10px] font-serif font-bold uppercase ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
