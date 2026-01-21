@@ -5,11 +5,15 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import dotenv from 'dotenv'
+import { resendAdapter } from '@payloadcms/email-resend'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { MissionaryProjects } from './collections/MissionaryProjects'
+import { PhotoReports } from './collections/PhotoReports'
+import { PrayerRequests } from './collections/PrayerRequests'
+import { LiveStream } from './globals/LiveStream'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +29,8 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, News, MissionaryProjects],
+  collections: [Users, Media, News, MissionaryProjects, PhotoReports, PrayerRequests],
+  globals: [LiveStream],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -35,6 +40,11 @@ export default buildConfig({
     client: {
       url: process.env.DATABASE_URL || '',
     },
+  }),
+  email: resendAdapter({
+    defaultFromAddress: 'onboarding@resend.dev',
+    defaultFromName: 'Monastery Admin',
+    apiKey: process.env.RESEND_API_KEY || '',
   }),
   sharp,
   plugins: [],

@@ -25,6 +25,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --font-mono: 'Roboto Mono', monospace;
   --font-montserrat: 'Montserrat', sans-serif;

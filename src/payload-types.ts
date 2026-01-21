@@ -71,6 +71,8 @@ export interface Config {
     media: Media;
     news: News;
     'missionary-projects': MissionaryProject;
+    'photo-reports': PhotoReport;
+    'prayer-requests': PrayerRequest;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +84,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     'missionary-projects': MissionaryProjectsSelect<false> | MissionaryProjectsSelect<true>;
+    'photo-reports': PhotoReportsSelect<false> | PhotoReportsSelect<true>;
+    'prayer-requests': PrayerRequestsSelect<false> | PrayerRequestsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,8 +95,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'live-stream': LiveStream;
+  };
+  globalsSelect: {
+    'live-stream': LiveStreamSelect<false> | LiveStreamSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -272,6 +280,45 @@ export interface MissionaryProject {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photo-reports".
+ */
+export interface PhotoReport {
+  id: number;
+  title: string;
+  date: string;
+  coverImage: number | Media;
+  gallery?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prayer-requests".
+ */
+export interface PrayerRequest {
+  id: number;
+  type: 'health' | 'repose';
+  service: string;
+  names?:
+    | {
+        name?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  email: string;
+  amount?: number | null;
+  status?: ('pending' | 'paid' | 'failed') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -309,6 +356,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'missionary-projects';
         value: number | MissionaryProject;
+      } | null)
+    | ({
+        relationTo: 'photo-reports';
+        value: number | PhotoReport;
+      } | null)
+    | ({
+        relationTo: 'prayer-requests';
+        value: number | PrayerRequest;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -475,6 +530,43 @@ export interface MissionaryProjectsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photo-reports_select".
+ */
+export interface PhotoReportsSelect<T extends boolean = true> {
+  title?: T;
+  date?: T;
+  coverImage?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prayer-requests_select".
+ */
+export interface PrayerRequestsSelect<T extends boolean = true> {
+  type?: T;
+  service?: T;
+  names?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  email?: T;
+  amount?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -512,6 +604,60 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "live-stream".
+ */
+export interface LiveStream {
+  id: number;
+  /**
+   * Вкючити негайно, ігноруючи будь-який розклад
+   */
+  isManuallyLive?: boolean | null;
+  enableSundaySchedule?: boolean | null;
+  /**
+   * Вкажіть дату та час для разової трансляції. Це спрацює автоматично у вказаний період.
+   */
+  plannedEvent?: {
+    startTime?: string | null;
+    endTime?: string | null;
+  };
+  sundayStartTime?: string | null;
+  sundayEndTime?: string | null;
+  /**
+   * Посилання, куди перенаправляти користувачів
+   */
+  youtubeLink: string;
+  /**
+   * Обов'язково для відображення відео на сайті. Має починатися з "UC". (Наприклад: UCn_sI5a6yX0n5s8d6X7yX8A). Щоб дізнатися ID, відкрийте код сторінки каналу і знайдіть "channelId".
+   */
+  channelID: string;
+  message?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "live-stream_select".
+ */
+export interface LiveStreamSelect<T extends boolean = true> {
+  isManuallyLive?: T;
+  enableSundaySchedule?: T;
+  plannedEvent?:
+    | T
+    | {
+        startTime?: T;
+        endTime?: T;
+      };
+  sundayStartTime?: T;
+  sundayEndTime?: T;
+  youtubeLink?: T;
+  channelID?: T;
+  message?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

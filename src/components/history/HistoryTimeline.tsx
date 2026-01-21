@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { X, Calendar } from 'lucide-react';
+import { X, Calendar, Plus } from 'lucide-react';
 
 interface HistoryEvent {
   year: string;
@@ -11,6 +11,7 @@ interface HistoryEvent {
   fullDescription: string;
   image: string;
   gallery?: string[];
+  side?: 'left' | 'right'; // For chaotic layout
 }
 
 const TIMELINE_DATA: HistoryEvent[] = [
@@ -20,89 +21,151 @@ const TIMELINE_DATA: HistoryEvent[] = [
     shortDescription: 'Перша письмова згадка про Жидичин в Іпатіївському літописі.',
     fullDescription: 'У 975 році в Іпатіївському літописі вперше згадується Жидичин. Це одна з найдавніших згадок про поселення на Волині, що свідчить про глибоке історичне коріння монастиря та його значення у духовному житті краю ще з часів Київської Русі.',
     image: '/media/history.jpg',
+    side: 'left',
+  },
+  {
+    year: '1150',
+    title: 'Розквіт обителі',
+    shortDescription: 'Монастир стає центром духовного життя Волині.',
+    fullDescription: 'У середині XII століття монастир значно розширюється, з’являються нові келії та господарські будівлі. Слава про святість місцевих ченців поширюється далеко за межі князівства.',
+    image: '/media/piligrims.jpg',
+    side: 'right',
   },
   {
     year: '1227',
     title: 'Приїзд Данила Галицького',
     shortDescription: 'Князь Данило Галицький приїздить до Жидичина на поклоніння чудотворній іконі.',
-    fullDescription: 'У 1227 році Великий князь Данило Галицький відвідав Жидичинський монастир, щоб поклонитися чудотворній іконі Святого Миколая. Ця подія підкреслює високий статус обителі як духовного центру, до якого зверталися правителі за молитовною підтримкою.',
+    fullDescription: 'У 1227 році Великий князь Данило Галицький відвідав Жидичинський монастир, щоб поклонитися чудотворній іконі Святого Миколая. Ця подія підкреслює високий статус обителі як духовного центру.',
     image: '/media/piligrims.jpg',
+    side: 'left',
+  },
+  {
+    year: '1300',
+    title: 'Монастирська бібліотека',
+    shortDescription: 'Заснування великої бібліотеки та скрипторію.',
+    fullDescription: 'На початку XIV століття при монастирі засновується скрипторій, де ченці переписують богослужбові книги. Бібліотека монастиря стає однією з найбагатших на західноукраїнських землях.',
+    image: '/media/life.jpg',
+    side: 'right',
   },
   {
     year: '1496',
     title: 'Напад кримських татар',
     shortDescription: 'Спустошливі набіги татарських орд на Волинь та руйнування монастиря.',
-    fullDescription: 'Наприкінці XV століття Жидичинський монастир зазнав значних руйнувань внаслідок набігів кримських татар. Обитель була спалена, але непохитна віра ченців та підтримка місцевого люду дозволили відбудувати святиню з попелу.',
-    image: '/media/history.jpg', // Placeholder
+    fullDescription: 'Наприкінці XV століття Жидичинський монастир зазнав значних руйнувань внаслідок набігів кримських татар. Обитель була спалена, але непохитна віра ченців та підтримка місцевого люду дозволили відбудувати святиню.',
+    image: '/media/history.jpg',
+    side: 'left',
+  },
+  {
+    year: '1550',
+    title: 'Відбудова',
+    shortDescription: 'Масштабна відбудова після руйнувань.',
+    fullDescription: 'У середині XVI століття монастир постає з попелу. Будуються нові кам’яні храми, укріплюються мури. Цей період позначений новим розквітом архітектурного ансамблю.',
+    image: '/media/donate.jpg',
+    side: 'left',
   },
   {
     year: '1608',
     title: 'Унійна доба',
     shortDescription: 'Монастир переходить під юрисдикцію уніатської церкви.',
-    fullDescription: 'На початку XVII століття, внаслідок релігійних змін у Речі Посполитій, Жидичинський монастир перейшов у підпорядкування Греко-Католицької Церкви. Цей період позначився значним архітектурним розбудовою та зміною внутрішнього укладу життя обителі.',
+    fullDescription: 'На початку XVII століття, внаслідок релігійних змін у Речі Посполитій, Жидичинський монастир перейшов у підпорядкування Греко-Католицької Церкви. Цей період позначився значним архітектурним розбудовою.',
     image: '/media/life.jpg',
+    side: 'right',
   },
   {
     year: '1633',
     title: 'Святитель Петро Могила',
     shortDescription: 'Митрополит Петро Могила повертає монастирю давні права та привілеї.',
     fullDescription: 'Видатний київський митрополит Петро Могила опікувався Жидичинським монастирем, сприяючи утвердженню православ’я та розвитку освіти. Його діяльність значно піднесла авторитет обителі.',
-    image: '/media/contacts.jpg', // Placeholder
+    image: '/media/contacts.jpg',
+    side: 'left',
+   },
+   {
+    year: '1700',
+    title: 'Барокова розбудова',
+    shortDescription: 'Архітектурний ансамбль набуває рис українського бароко.',
+    fullDescription: 'На рубежі XVII-XVIII століть храми монастиря перебудовуються у стилі українського бароко. З\'являються вишукані іконостаси та настінні розписи, що вражають своєю красою.',
+    image: '/media/piligrims.jpg',
+    side: 'right',
    },
   {
     year: '1839',
     title: 'Повернення православ\'я',
     shortDescription: 'Монастир повертається в лоно Православної Церкви.',
-    fullDescription: 'Після Полоцького церковного собору 1839 року Жидичинський монастир було повернуто до Православної Церкви. Це стало початком нового етапу відродження давніх православних традицій на цих землях.',
+    fullDescription: 'Після Полоцького церковного собору 1839 року Жидичинський монастир було повернуто до Православної Церкви. Це стало початком нового етапу відродження давніх православних традицій.',
     image: '/media/donate.jpg',
+    side: 'right',
+  },
+  {
+    year: '1890',
+    title: 'Освітній центр',
+    shortDescription: 'Відкриття духовної школи для дітей.',
+    fullDescription: 'Наприкінці XIX століття при монастирі відкривається школа для дітей з навколишніх сіл. Обитель стає не лише духовним, а й освітнім центром регіону.',
+    image: '/media/history.jpg',
+    side: 'left',
   },
   {
     year: '1914',
     title: 'Перша світова війна',
     shortDescription: 'Тяжкі випробування для обителі під час воєнних дій.',
-    fullDescription: 'Перша світова війна принесла руйнування та занепад. Монастирські будівлі постраждали від обстрілів, а ченці були змушені терпіти поневіряння. Однак, незважаючи на труднощі, молитва в обителі не припинялася.',
+    fullDescription: 'Перша світова війна принесла руйнування та занепад. Монастирські будівлі постраждали від обстрілів, а ченці були змушені терпіти поневіряння.',
     image: '/media/contacts.jpg', 
+    side: 'right',
   },
    {
     year: '1930',
     title: 'Міжвоєнний період',
     shortDescription: 'Життя монастиря під владою Польщі у міжвоєнний час.',
-    fullDescription: 'У період між двома світовими війнами монастир продовжував діяти, будучи осередком українського духовного життя на Волині, незважаючи на складні політичні обставини та утиски.',
-    image: '/media/contacts.jpg', // Placeholder
+    fullDescription: 'У період між двома світовими війнами монастир продовжував діяти, будучи осередком українського духовного життя на Волині.',
+    image: '/media/contacts.jpg',
+    side: 'left',
+  },
+  {
+    year: '1990',
+    title: 'Напередодні змін',
+    shortDescription: 'Перші спроби відновити службу Божу.',
+    fullDescription: 'З розпадом Радянського Союзу місцева громада починає відновлювати зруйновані святині. Проводяться перші літургії у вцілілих частинах храму.',
+    image: '/media/life.jpg',
+    side: 'right',
   },
   {
     year: '2003',
     title: 'Відродження',
     shortDescription: 'Початок відновлення чернечого життя в незалежній Україні.',
-    fullDescription: 'У 2003 році з благословення владики Якова розпочалося відродження чернечого життя у Жидичинському монастирі. Братія взялася за відбудову храмів, келій та відновлення духовного ритму життя стародавньої святині.',
+    fullDescription: 'У 2003 році з благословення владики Якова розпочалося відродження чернечого життя у Жидичинському монастирі. Братія взялася за відбудову храмів та келій.',
     image: '/media/contacts.jpg',
+    side: 'right',
   },
   {
     year: '2014',
     title: 'Капеланське служіння',
     shortDescription: 'Ченці монастиря стають духовною опорою для українських воїнів.',
-    fullDescription: 'З початком російської агресії на сході України, братія монастиря активно долучилася до капеланського служіння, підтримуючи наших захисників духовно та гуманітарно на передовій.',
-    image: '/media/contacts.jpg', // Placeholder
+    fullDescription: 'З початком російської агресії на сході України, братія монастиря активно долучилася до капеланського служіння, підтримуючи наших захисників.',
+    image: '/media/contacts.jpg',
+    side: 'left',
   },
     {
     year: '2019',
     title: 'Томос та ПЦУ',
     shortDescription: 'Монастир стає частиною визнаної Православної Церкви України.',
-    fullDescription: 'Після отримання Томосу про автокефалію, Жидичинський монастир став важливою духовною твердинею Православної Церкви України, продовжуючи свою місію служіння Богу та українському народу.',
+    fullDescription: 'Після отримання Томосу про автокефалію, Жидичинський монастир став важливою духовною твердинею Православної Церкви України.',
     image: '/media/piligrims.jpg',
+    side: 'right',
   },
   {
     year: '2022',
     title: 'Волонтерський хаб',
     shortDescription: 'Монастир перетворився на центр допомоги під час повномасштабного вторгнення.',
-    fullDescription: 'З перших днів великої війни монастир став прихистком для біженців та потужним волонтерським центром, з якого відправлялися тисячі тонн допомоги у постраждалі регіони та на фронт.',
-    image: '/media/life.jpg', // Placeholder
+    fullDescription: 'З перших днів великої війни монастир став прихистком для біженців та потужним волонтерським центром, з якого відправлялися тисячі тонн допомоги.',
+    image: '/media/life.jpg',
+    side: 'left',
   },
 ];
 
 export const HistoryTimeline = () => {
     const [selectedEvent, setSelectedEvent] = useState<HistoryEvent | null>(null);
     const [scrollPercentage, setScrollPercentage] = useState(0);
+    const [snappedIndex, setSnappedIndex] = useState<number | null>(null);
+    const [passedIndex, setPassedIndex] = useState(-1);
     const containerRef = useRef<HTMLDivElement>(null);
 
     // Function to calculate exact percentage position of each node could be added
@@ -118,11 +181,11 @@ export const HistoryTimeline = () => {
             const windowHeight = window.innerHeight;
             const elementHeight = rect.height;
             
-            // "Eye Level" = 35% from top of viewport
-            const startOffset = windowHeight * 0.35;
+            // "Eye Level" = 90% from top of viewport (almost bottom)
+            const startOffset = windowHeight * 0.6;
             
-            // If top of container is at 35% of screen, percentage is 0.
-            // If bottom of container is at 35% of screen, percentage is 100.
+            // If top of container is at 90% of screen, percentage is 0.
+            // If bottom of container is at 90% of screen, percentage is 100.
             const currentPos = startOffset - rect.top;
             
             // Raw percentage 0 to 100
@@ -136,35 +199,58 @@ export const HistoryTimeline = () => {
             const nodes = containerRef.current.querySelectorAll('[data-timeline-node]');
             let snappedPercentage = targetPercentage;
             let minDistance = Infinity;
+            let closestNodeIndex = -1;
+            let maxPassedIndex = -1;
 
             const containerRect = containerRef.current.getBoundingClientRect();
-           
+            
+            // Calculate vertical distance in PIXELS for more reliable feel
+            // scrollPercentage 0-100 maps to elementHeight
+            const currentPx = (targetPercentage / 100) * elementHeight;
+
             // Iterate not through items, but through actual DOM node positions
-            nodes.forEach((node) => {
+            nodes.forEach((node, idx) => {
                 const nodeRect = node.getBoundingClientRect();
                 
-                // Calculate where this node is relative to the timeline container's height (0-100%)
-                // We map correct DOM position to percentage
+                // Calculate where this node is relative to current reading "eye level"
+                // The bead follows the 'targetPercentage' which is derived from 'currentPos'
+                // 'currentPos' is distance from 'startOffset' to 'rect.top'.
+                // The 'relativeTop' in previous code was node relative to container top.
+                // We want to snap if 'targetPercentage' is close to 'nodePercentage'.
+                
                 const relativeTop = nodeRect.top - containerRect.top + (nodeRect.height / 2);
                 const nodePercentage = (relativeTop / elementHeight) * 100;
-                
-                const distance = Math.abs(targetPercentage - nodePercentage);
 
-                // If close enough (e.g. within 3% ~ 30-50px depending on height)
-                if (distance < 3) {
-                    if (distance < minDistance) {
-                        minDistance = distance;
+               
+                const nodePx = relativeTop;
+                const distancePx = Math.abs(currentPx - nodePx);
+
+                // Snap if closer than 50px (approx 3rem)
+                if (distancePx < 50) {
+                    if (distancePx < minDistance) {
+                        minDistance = distancePx;
                         snappedPercentage = nodePercentage;
+                        closestNodeIndex = idx;
                     }
+                }
+
+                // Check if this node has been passed by the line
+                // We add a small buffer (e.g. 20px) so it lights up just as the line hits it
+                if (currentPx >= nodePx - 20) {
+                    maxPassedIndex = Math.max(maxPassedIndex, idx);
                 }
             });
             
             // Apply snap if found
             if (minDistance < Infinity) {
                 targetPercentage = snappedPercentage;
+                setSnappedIndex(closestNodeIndex);
+            } else {
+                setSnappedIndex(null);
             }
             
             setScrollPercentage(targetPercentage);
+            setPassedIndex(maxPassedIndex);
         };
 
         const onScroll = () => {
@@ -186,7 +272,7 @@ export const HistoryTimeline = () => {
     }, []);
 
     return (
-        <div ref={containerRef} className="relative py-12 lg:py-24 overflow-hidden" id="timeline-container">
+        <div ref={containerRef} className="relative py-12 lg:py-24 mb-[50vh] overflow-hidden" id="timeline-container">
             {/* Background elements if needed */}
             
             <div className="max-w-[1200px] mx-auto relative px-4 text-center">
@@ -202,130 +288,148 @@ export const HistoryTimeline = () => {
                 
                 {/* PROGRESS LINE - Dynamic Amber Line */}
                 <div 
-                    className="absolute left-8 lg:left-1/2 top-0 w-1 bg-gradient-to-b from-amber-400 to-amber-600 lg:-translate-x-1/2 z-0 rounded-full transition-all duration-300 ease-out shadow-[0_0_15px_rgba(217,119,6,0.5)]"
+                    className="absolute left-8 lg:left-1/2 top-0 w-1 bg-gradient-to-b from-amber-400 to-amber-600 lg:-translate-x-1/2 z-10 rounded-full shadow-[0_0_15px_rgba(217,119,6,0.5)] transition-[height] duration-500 ease-out"
                     style={{ height: `${scrollPercentage}%` }}
                 >
-                    {/* THE TRAVELING BEAD - Stays at the bottom of the progress line */}
-                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-8 h-8 bg-amber-600 rounded-full border-4 border-white shadow-xl z-20 transition-transform duration-300">
-                         {/* Glowing ring effect */}
-                        <div className="absolute inset-0 rounded-full bg-amber-500 animate-ping opacity-75"></div>
-                     </div>
                 </div>
 
-                <div className="space-y-12 lg:space-y-32 relative z-10 pt-12 pb-12">
+                <div className="space-y-16 lg:space-y-24 relative z-10 pt-12 pb-12">
                     {TIMELINE_DATA.map((item, index) => {
-                        const isEven = index % 2 === 0;
-                        const circleSize = index % 3 === 0 ? 'w-64 h-64' : index % 3 === 1 ? 'w-48 h-48' : 'w-56 h-56';
-                        const circleColor = index % 2 === 0 ? 'bg-amber-50' : 'bg-stone-100';
+                        // Use explicit side from data, creating chaotic pattern
+                        const isRight = item.side === 'right';
+                        const randomSizeBase = index % 5;
                         
-                        // Check active logic
-                        // Visual "Fixation" using CSS transitions
-                        const itemThreshold = (index / (TIMELINE_DATA.length - 1)) * 100;
-                        const isPassed = scrollPercentage > itemThreshold;
-                        const isNear = Math.abs(scrollPercentage - itemThreshold) < 5; // Within 5%
+                        // Varying background shapes - SQUARES mostly
+                        let shapeClasses = '';
+                        /* eslint-disable no-fallthrough */
+                        switch (randomSizeBase) {
+                            case 0:
+                                shapeClasses = 'w-[500px] h-[500px] rounded-full text-amber-50/50'; // Circle
+                                break;
+                            case 1:
+                                shapeClasses = 'w-[450px] h-[450px] rotate-12'; // Rotated square
+                                break;
+                            case 2:
+                                shapeClasses = 'w-[600px] h-[600px] rounded-full'; // Large circle
+                                break;
+                            case 3:
+                                shapeClasses = 'w-[450px] h-[450px] rounded-full'; // Medium circle
+                                break;
+                            case 4:
+                                shapeClasses = 'w-[550px] h-[550px] rotate-45'; // Diamond
+                                break;
+                            default:
+                                shapeClasses = 'w-[500px] h-[500px] rounded-full';
+                        }
+                         /* eslint-enable no-fallthrough */
+
+                        const circleColor = isRight ? 'bg-amber-50' : 'bg-stone-100';
+                        
+                        // Check active logic - dependent on passedIndex now for reliability
+                        const isPassed = index <= passedIndex;
+                        const isSnapped = snappedIndex === index;
 
                         return (
-                            <div key={index} className={`relative flex flex-col lg:flex-row items-center lg:justify-between w-full group ${isEven ? '' : 'lg:flex-row-reverse'}`}>
+                            <div key={index} className={`relative flex flex-col lg:flex-row items-center lg:justify-between w-full ${isRight ? '' : 'lg:flex-row-reverse'}`}>
                                 
-                                {/* DECORATIVE BACKGROUND CIRCLE */}
-                                <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 rounded-full opacity-60 -z-10 transition-transform duration-700 ease-out 
-                                    ${circleSize} ${circleColor}
-                                    ${isEven ? 'right-12 translate-x-12' : 'left-12 -translate-x-12'}
-                                    ${isNear ? 'scale-125 bg-amber-100' : 'group-hover:scale-110'}
+                                {/* DECORATIVE BACKGROUND SHAPE - animates only on scroll */}
+                                <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 opacity-50 -z-10 transition-all duration-700 ease-out 
+                                    ${shapeClasses} ${circleColor}
+                                    ${isRight ? 'right-0 translate-x-12' : 'left-0 -translate-x-12'}
+                                    ${isSnapped ? 'scale-110 !opacity-70 !bg-amber-100' : ''}
                                 `}></div>
 
                                 {/* Date / Year (Desktop: One Side, Mobile: Next to line) */}
-                                <div className={`lg:w-5/12 w-full text-left lg:text-right pl-16 lg:pl-0 ${isEven ? 'lg:pr-32 lg:text-right' : 'lg:pl-32 lg:text-left'} mb-2 lg:mb-0 relative`}>
+                                <div className={`lg:w-5/12 w-full text-left lg:text-right pl-16 lg:pl-0 ${isRight ? 'lg:pr-36 lg:text-right' : 'lg:pl-36 lg:text-left'} mb-2 lg:mb-0 relative`}>
                                      {/* Connector line for Year */}
-                                     {/* Increased length w-24 -> w-32 */}
                                      <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 h-px w-32 transition-all duration-500
-                                        ${isEven ? 'right-0' : 'left-0'}
-                                        ${isPassed ? 'bg-amber-400' : 'bg-gray-300'}
+                                        ${isRight ? 'right-0' : 'left-0'}
+                                        ${isPassed ? 'bg-amber-400' : 'bg-gray-200'}
                                     `}>
-                                        <div className={`absolute w-1.5 h-1.5 rounded-full top-1/2 -translate-y-1/2 
-                                            ${isEven ? 'left-0' : 'right-0'}
-                                            ${isPassed ? 'bg-amber-600' : 'bg-gray-400'}
+                                        <div className={`absolute w-1.5 h-1.5 rounded-full top-1/2 -translate-y-1/2 transition-all duration-500
+                                            ${isRight ? 'left-0' : 'right-0'}
+                                            ${isPassed ? 'bg-amber-600' : 'bg-gray-300'}
                                         `}></div>
                                     </div>
 
                                     <h3 
-                                        className={`text-6xl md:text-8xl font-black transition-all duration-700 select-none
-                                        ${isEven ? 'group-hover:translate-x-[-10px]' : 'group-hover:translate-x-[10px]'}
-                                        ${isPassed ? 'opacity-80 text-amber-900' : 'opacity-20 text-gray-900'}
+                                        className={`text-6xl md:text-8xl lg:text-9xl font-black transition-all duration-700 select-none
+                                        ${isPassed ? 'opacity-90 text-amber-800' : 'opacity-15 text-gray-900'}
                                     `}>
                                         {item.year}
                                     </h3>
                                 </div>
 
-                                {/* Central Circle / Node */}
+                                {/* Central Circle / Node - THE CHECKPOINT */}
                                 <div 
                                     data-timeline-node
-                                    className="absolute left-8 lg:left-1/2 top-8 lg:top-1/2 -translate-x-1/2 lg:-translate-y-1/2 flex items-center justify-center"
+                                    className="absolute left-8 lg:left-1/2 top-8 lg:top-1/2 -translate-x-[80%] lg:-translate-x-1/2 lg:-translate-y-1/2 flex items-center justify-center"
                                 >
-                                    {/* The clickable center node */}
+                                    {/* The checkpoint ring - bead snaps INSIDE this */}
                                     <button 
                                         onClick={() => setSelectedEvent(item)}
-                                        className={`relative w-8 h-8 rounded-full border-[6px] focus:outline-none z-20 transition-all duration-300
-                                            ${isPassed ? 'border-amber-600 bg-white' : 'bg-white border-gray-300'}
-                                            ${isNear ? '!bg-transparent !border-white shadow-[0_0_0_4px_rgba(217,119,6,1)] scale-110' : 'group-hover:scale-110'}
+                                        className={`relative w-10 h-10 rounded-full border-[3px] focus:outline-none z-20 transition-all duration-500 ease-out
+                                            ${isPassed ? 'border-amber-500' : 'bg-white/80 border-gray-300'}
+                                            ${isSnapped ? 'border-amber-500 scale-125' : ''}
                                         `}
                                     >
+                                        {/* Inner fill when snapped or passed */}
+                                        <div className={`absolute inset-[3px] rounded-full transition-all duration-500 ease-out
+                                            ${isSnapped || isPassed ? 'bg-amber-500 scale-100 opacity-100' : 'bg-transparent scale-0 opacity-0'}
+                                        `}></div>
                                     </button>
                                     
-                                    {/* Horizontal Line Connector MAIN */}
-                                    {/* Increased length w-40 -> w-60 as requested */}
-                                    <div className={`hidden lg:block absolute h-0.5 w-60 top-1/2 -translate-y-1/2 transition-all duration-500 origin-center
-                                        ${isEven ? 'right-0 translate-x-[-8px]' : 'left-0 translate-x-[8px]'}
-                                        ${isPassed ? 'bg-amber-600' : 'bg-gray-800'}
-                                    `}></div>
-
-                                    {/* Extra connecting dot at the branch end */}
-                                    {/* Adjusted position for longer line (-150px -> -230px, approx) */}
-                                    <div className={`hidden lg:block absolute w-2 h-2 rounded-full top-1/2 -translate-y-1/2 transition-all duration-500
-                                         ${isEven ? 'right-[-230px]' : 'left-[-230px]'}
-                                         ${isPassed ? 'bg-amber-600 scale-125' : 'bg-gray-800'}
+                                    {/* Horizontal Line Connector */}
+                                    <div className={`hidden lg:block absolute h-px w-20 top-1/2 -translate-y-1/2 transition-all duration-500 origin-center
+                                        ${isRight ? 'right-full mr-1' : 'left-full ml-1'}
+                                        ${isPassed ? 'bg-amber-500' : 'bg-gray-300'}
                                     `}></div>
                                 </div>
 
                                 {/* Content Card */}
-                                <div className={`lg:w-5/12 w-full pl-16 lg:pl-0 mt-4 lg:mt-0 ${!isEven ? 'lg:pr-32 lg:text-right' : 'lg:pl-32 lg:text-left'}`}>
+                                <div className={`lg:w-5/12 w-full pl-16 lg:pl-0 mt-4 lg:mt-0 ${!isRight ? 'lg:pr-24 lg:text-right' : 'lg:pl-24 lg:text-left'}`}>
 
                                     <div 
-                                        className="cursor-pointer group-hover:-translate-y-2 transition-transform duration-300 relative inline-block"
+                                        className="cursor-pointer relative inline-block"
                                         onClick={() => setSelectedEvent(item)}
                                     >
                                         
-                                        {/* Image Section with Decorative Borders */}
-                                        <div className={`relative mb-6 ${!isEven ? 'lg:flex lg:justify-end' : ''}`}>
-                                            <div className={`relative w-40 h-40 rounded-full overflow-hidden shadow-2xl border-4 z-10 mx-0
-                                                ${!isEven && 'lg:ml-auto'}
-                                                ${isPassed ? 'border-amber-500 ring-4 ring-amber-100' : 'border-white'}
+                                        {/* Image Section - HOVER ANIMATION ONLY HERE */}
+                                        <div className={`relative mb-4 w-fit lg:w-full ${!isRight ? 'lg:flex lg:justify-end' : ''} group/image`}>
+                                            <div className={`relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-lg border-4 z-10 mx-0
+                                                ${!isRight && 'lg:ml-auto'}
+                                                ${isPassed ? 'border-amber-400' : 'border-white'}
                                                 transition-all duration-500
+                                                group-hover/image:shadow-xl group-hover/image:scale-105
                                             `}>
                                                 <Image 
                                                     src={item.image} 
                                                     alt={item.title} 
                                                     fill 
-                                                    className={`object-cover transition-transform duration-700 ${isNear ? 'scale-110' : 'group-hover:scale-110'}`} 
+                                                    className="object-cover transition-transform duration-500 group-hover/image:scale-110" 
                                                 />
                                             </div>
                                             
-                                            {/* Decorative small circle attached to image */}
-                                            <div className={`absolute bottom-0 w-12 h-12 rounded-full -z-0 flex items-center justify-center text-white
-                                                 ${isEven ? 'right-[-10px]' : 'left-[-10px] lg:left-auto lg:right-[150px]'}
-                                                 ${isPassed ? 'bg-amber-600 scale-110' : 'bg-gray-400'}
+                                            {/* Number badge - HOVER ANIMATION HERE */}
+                                            <div className={`absolute bottom-0 w-14 h-14 rounded-full flex items-center justify-center text-white font-bold text-xl
+                                                 right-0
+                                                 ${isRight ? 'lg:right-0 lg:left-auto' : 'lg:right-[290px] lg:left-0'} 
+                                                 ${isPassed ? 'bg-amber-600' : 'bg-gray-400'}
                                                  transition-all duration-500
+                                                 group-hover/image:scale-110 group-hover/image:bg-amber-500
                                             `}>
-                                              <span className="text-xs font-bold">{index + 1}</span>
+                                              <Plus className="w-8 h-8" />
                                             </div>
                                         </div>
 
-                                        <h4 className={`text-2xl font-bold mb-2 font-serif transition-colors uppercase tracking-wide
-                                            ${isPassed ? 'text-amber-800' : 'text-gray-900 group-hover:text-amber-700'}
+                                        <h4 className={`text-xl font-bold mb-1 font-serif uppercase tracking-wide transition-colors duration-500
+                                            ${isPassed ? 'text-amber-800' : 'text-gray-800'}
                                         `}>
                                             {item.title}
                                         </h4>
-                                        <p className="text-gray-600 text-sm leading-relaxed max-w-sm font-medium">
+                                        <p className={`text-sm leading-relaxed max-w-xs font-medium transition-colors duration-500
+                                            ${isPassed ? 'text-gray-600' : 'text-gray-400'}
+                                        `}>
                                             {item.shortDescription}
                                         </p>
                                     </div>

@@ -13,19 +13,24 @@ const exploreItems = [
     image: '/media/history.jpg',
   },
   {
-    label: 'Храмовий комплекс',
-    href: '/about/complex',
-    image: '/media/church-complex.jpg',
-  },
-  {
     label: 'Життя обителі',
     href: '/about/life',
     image: '/media/life.jpg',
   },
   {
-    label: 'Галерея',
-    href: '/about/gallery',
+    label: 'Розклад богослужінь',
+    href: '/about/schedule',
+    image: '/media/hero-4.jpg',
+  },
+  {
+    label: 'Медіатека',
+    href: '/about/media',
     image: '/media/gallery.jpg',
+  },
+  {
+    label: 'Архітектура',
+    href: '/about/complex',
+    image: '/media/church-complex.jpg',
   },
   {
     label: 'Скити',
@@ -41,6 +46,11 @@ const exploreItems = [
     label: 'Паломнику',
     href: '/pilgrims',
     image: '/media/piligrims.jpg',
+  },
+  {
+    label: 'Долучитися',
+    href: '/join',
+    image: '/media/hero-1.jpg',
   },
   {
     label: 'Підтримати',

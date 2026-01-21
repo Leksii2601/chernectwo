@@ -13,11 +13,10 @@ const navItems = [
     href: '/about',
     dropdown: [
       { label: 'Історія', href: '/about/history' },
-      { label: 'Богослужіння', href: '/#calendar' },
       { label: 'Храмовий комплекс', href: '/about/complex' },
       { label: 'Скити', href: '/about/sketes' },
-      { label: 'Життя обителі', href: '/about/life' },
-      { label: 'Галерея', href: '/about/gallery' },
+      { label: 'Богослужіння', href: '/#calendar' },
+      { label: 'Медіатека', href: '/about/media' },
     ],
   },
   {
@@ -156,13 +155,22 @@ export function Header() {
               onMouseEnter={() => handleMouseEnter(item.label)}
               onMouseLeave={handleMouseLeave}
             >
-              <Link
-                href={item.href}
-                className="hover:text-amber-400 transition-colors flex items-center gap-1 py-4"
-              >
-                {item.label}
-                {item.dropdown && <ChevronDown className="w-4 h-4" />}
-              </Link>
+              {/* If item is "Про монастир" (About), render as span/button to prevent navigation, 
+                  otherwise render as Link */}
+              {item.href === '/about' ? (
+                <span className="hover:text-amber-400 transition-colors flex items-center gap-1 py-4 cursor-default">
+                  {item.label}
+                  {item.dropdown && <ChevronDown className="w-4 h-4" />}
+                </span>
+              ) : (
+                <Link
+                    href={item.href}
+                    className="hover:text-amber-400 transition-colors flex items-center gap-1 py-4"
+                >
+                    {item.label}
+                    {item.dropdown && <ChevronDown className="w-4 h-4" />}
+                </Link>
+              )}
               
               {item.dropdown && activeDropdown === item.label && (
                 <div 

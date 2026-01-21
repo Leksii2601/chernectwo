@@ -24,6 +24,8 @@ export default function PrayerNotePage() {
   const [noteType, setNoteType] = useState<'health' | 'repose'>('health');
   const [names, setNames] = useState<string[]>([]);
   const [currentName, setCurrentName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedService, setSelectedService] = useState<ServiceType>(SERVICES[0]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -52,13 +54,54 @@ export default function PrayerNotePage() {
     return names.length * selectedService.price;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (names.length === 0) {
       alert('Будь ласка, додайте хоча б одне ім\'я');
       return;
     }
-    // Logic for payment or submission would go here
-    alert(`Записку сформовано! Сума до сплати: ${calculateTotal()} грн. Ми переходимо до оплати...`);
+    if (!userEmail || !userEmail.includes('@')) {
+        alert('Будь ласка, введіть коректний Email для отримання підтвердження');
+        return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
+        const res = await fetch('/api/submit-prayer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                names,
+                type: noteType,
+                service: selectedService,
+                amount: calculateTotal(),
+                email: userEmail
+            }),
+            signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        if (res.ok) {
+            alert('Дякуємо! Ваша записка прийнята, а квитанція надіслана на Email.');
+            setNames([]);
+            setUserEmail('');
+        } else {
+            alert('Помилка при обробці запиту.');
+        }
+    } catch (error: any) {
+        console.error(error);
+        if (error.name === 'AbortError') {
+            alert('Час очікування вичерпано. Перевірте з\'єднання або спробуйте пізніше.');
+        } else {
+            alert('Сталася помилка з\'єднання.');
+        }
+    } finally {
+        setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,61 +115,67 @@ export default function PrayerNotePage() {
           {/* LEFT COLUMN: The Note Visual */}
           <div className="w-full lg:w-[450px] flex-shrink-0 flex justify-center perspective-1000 order-2 lg:order-1">
             <div className={`
-                relative w-full max-w-[400px] min-h-[500px] shadow-2xl transition-all duration-500 transform
-                ${noteType === 'health' ? 'bg-[#fdfbf7]' : 'bg-[#f4f4f6]'}
-                border border-gray-200
+                relative w-full max-w-[300px] min-h-[480px] shadow-2xl transition-all duration-500 transform
+                bg-white border border-gray-200
             `}
-                 style={{
-                    backgroundImage: 'linear-gradient(#e5e5e5 1px, transparent 1px)',
-                    backgroundSize: '100% 2.5rem',
-                    backgroundPosition: '0 2.5rem' // align first line
-                 }}
             >
-                {/* Note Header */}
-                <div className="pt-8 pb-4 px-8 text-center border-b-2 border-double border-gray-300 mx-4 bg-opacity-90">
-                    <div className="text-4xl mb-2 flex justify-center">
-                        <span className={`font-serif ${noteType === 'health' ? 'text-red-700' : 'text-black'}`}>
-                            †
-                        </span>
+                {/* Note Content */}
+                <div className="p-0"> {/* Remove padding to let images fit fully if needed */}
+                    
+                    {/* Header Image/Ornament */}
+                     <div className="w-full h-auto mb-2 flex justify-center pt-6 px-5">
+                        {/* Using standard img tag for simplicity with local files, or could use Next Image */}
+                        <img 
+                            src="/media/header.png" 
+                            alt="Ornament" 
+                            className={`w-full h-auto object-contain ${noteType === 'repose' ? 'grayscale opacity-80' : ''}`}
+                        />
                     </div>
-                    <h2 className="font-church text-2xl font-bold uppercase tracking-widest font-serif mb-1">
-                        {noteType === 'health' ? 'ЗА ЗДОРОВ\'Я' : 'ЗА УПОКІЙ'}
-                    </h2>
-                    <p className="text-xs text-gray-500 uppercase tracking-wide">
-                        {selectedService.name}
-                    </p>
-                </div>
 
-                {/* Names List */}
-                <div className="px-8 py-4 space-y-[0.6rem]">
-                    {Array.from({ length: MAX_NAMES }).map((_, index) => (
-                        <div key={index} className="h-8 flex items-end relative group">
-                            <span className="text-gray-400 text-xs absolute left-[-20px] bottom-1 select-none">
-                                {index + 1}.
-                            </span>
-                            {names[index] ? (
-                                <div className="w-full flex justify-between items-center text-xl font-handwriting border-b border-transparent">
-                                    <span className="text-gray-800 font-serif italic text-lg">{names[index]}</span>
-                                    <button 
-                                        onClick={() => removeName(index)}
-                                        className="text-red-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-600"
-                                    >
-                                        <X className="w-4 h-4" />
-                                    </button>
-                                </div>
-                            ) : (
-                                <div className="w-full border-b border-transparent h-6" /> // Empty line placeholder
-                            )}
-                        </div>
-                    ))}
-                </div>
+                    {/* Title */}
+                   <div className="text-center mb-4">
+                        <h2 className={`font-serif text-2xl font-bold uppercase tracking-widest ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
+                            {noteType === 'health' ? 'ЗА ЗДОРОВ\'Я' : 'ЗА УПОКІЙ'}
+                        </h2>
+                    </div>
 
-                {/* Note Footer */}
-                 <div className="absolute bottom-4 left-0 w-full text-center">
-                    <p className="text-xs text-gray-400 font-serif italic">
-                        Жидичинський монастир
-                    </p>
-                 </div>
+
+                    {/* Names List */}
+                     <div className="px-5 space-y-[0.4rem] mb-8">
+                        {Array.from({ length: MAX_NAMES }).map((_, index) => (
+                            <div key={index} className={`h-7 flex items-end relative group border-b ${noteType === 'health' ? 'border-[#D22626]' : 'border-black'}`}>
+                                {names[index] ? (
+                                    <div className="w-full flex justify-center items-center text-lg relative">
+                                        <span className="text-black font-serif italic text-base">{names[index]}</span>
+                                        <button 
+                                            onClick={() => removeName(index)}
+                                            className="absolute right-0 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-600"
+                                        >
+                                            <X className="w-3 h-3" />
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <div className="w-full h-5" /> 
+                                )}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Footer Image */}
+                     <div className="w-full flex justify-center px-4 pb-6">
+                         <div className="text-center w-full">
+                            <img 
+                                src="/media/footer.png" 
+                                alt="Monastery" 
+                                className={`w-full h-auto object-contain mb-2 ${noteType === 'repose' ? 'grayscale opacity-80' : ''}`}
+                            />
+                            <p className={`text-[10px] font-serif font-bold uppercase ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
+                                Свято-Миколаївський<br/>Жидичинський монастир
+                            </p>
+                         </div>
+                     </div>
+
+                </div>
             </div>
           </div>
 
@@ -222,6 +271,20 @@ export default function PrayerNotePage() {
                  )}
             </div>
 
+            {/* Email Section */}
+            <div className="mt-8 transition-all duration-300">
+                <label className="block text-sm font-medium text-gray-500 mb-2 uppercase tracking-wider">
+                    Ваш Email (для квитанції)
+                </label>
+                <input 
+                    type="email" 
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    placeholder="email@example.com"
+                    className="w-full bg-white border border-gray-300 p-4 rounded-xl text-lg outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all shadow-sm"
+                />
+            </div>
+
             {/* Total Block */}
             <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 mt-8">
                 <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-6">
@@ -245,10 +308,10 @@ export default function PrayerNotePage() {
                     </button>
                     <button 
                         onClick={handleSubmit}
-                        disabled={names.length === 0}
+                        disabled={names.length === 0 || isSubmitting}
                         className="flex-1 bg-amber-600 text-white py-4 rounded-xl font-bold text-lg uppercase tracking-wider hover:bg-amber-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
                     >
-                        Подати записку
+                        {isSubmitting ? 'Обробка...' : 'Подати записку'}
                     </button>
                 </div>
             </div>

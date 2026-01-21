@@ -1,0 +1,48 @@
+
+import { getPayload } from 'payload'
+import configPromise from '../src/payload.config'
+
+const seed = async () => {
+  const payload = await getPayload({ config: configPromise })
+
+  console.log('--- SEEDING PRAYER REQUESTS ---')
+
+  const notes = []
+  for (let i = 1; i <= 10; i++) {
+    const isHealth = i % 2 !== 0; // Odd = Health (Red), Even = Repose (Black)
+    const type = isHealth ? 'health' : 'repose';
+    
+    // Create random names
+    const namesCount = Math.floor(Math.random() * 5) + 5; // 5 to 10 names
+    const names = [];
+    for(let j=1; j<=namesCount; j++) {
+        names.push({ name: `Ім'я ${i}-${j}` });
+    }
+
+    notes.push({
+      type,
+      service: 'Сорокоуст',
+      email: `user${i}@test.com`,
+      amount: 50 * i,
+      status: 'paid', // Mark as paid so they are ready for processing if applicable
+      names: names
+    })
+  }
+
+  for (const note of notes) {
+      try {
+        await payload.create({
+            collection: 'prayer-requests',
+            data: note,
+        })
+        console.log(`Created ${note.type} note with ${note.names.length} names.`)
+      } catch (err) {
+        console.error(`Error creating note:`, err)
+      }
+  }
+  
+  console.log('Seeding complete.')
+  process.exit(0)
+}
+
+seed()

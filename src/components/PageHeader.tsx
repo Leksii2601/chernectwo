@@ -12,7 +12,7 @@ interface PageHeaderProps {
 export function PageHeader({ title, subtitle, backgroundImage }: PageHeaderProps) {
   return (
     <div 
-      className="relative h-[50vh] md:h-[60vh] min-h-[400px] shadow-lg bg-cover bg-center bg-no-repeat bg-fixed flex flex-col justify-end pb-10 md:pb-20"
+      className="relative h-[50vh] md:h-[60vh] min-h-[510px] shadow-lg bg-cover bg-center bg-no-repeat bg-fixed flex flex-col justify-end pb-10 md:pb-40"
       style={{ 
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
         backgroundColor: backgroundImage ? undefined : 'rgba(0,0,0,0.9)'
