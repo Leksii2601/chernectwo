@@ -62,7 +62,16 @@ export const PrayerRequests: CollectionConfig = {
         { label: 'Очікує', value: 'pending' },
         { label: 'Оплачено', value: 'paid' },
         { label: 'Відхилено', value: 'failed' },
+        { label: 'Роздруковано', value: 'printed' },
       ],
     },
+    {
+        name: 'printedAt',
+        label: 'Дата друку',
+        type: 'date',
+        admin: {
+            readOnly: true
+        }
+    }
   ],
 }

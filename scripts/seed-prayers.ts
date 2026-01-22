@@ -8,7 +8,7 @@ const seed = async () => {
   console.log('--- SEEDING PRAYER REQUESTS ---')
 
   const notes = []
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 20; i++) {
     const isHealth = i % 2 !== 0; // Odd = Health (Red), Even = Repose (Black)
     const type: 'health' | 'repose' = isHealth ? 'health' : 'repose';
     
@@ -24,7 +24,7 @@ const seed = async () => {
       service: 'Сорокоуст',
       email: `user${i}@test.com`,
       amount: 50 * i,
-      status: 'paid' as 'paid', // Explicitly cast if needed, though string literal usually works
+      status: 'paid',
       names: names
     })
   }
@@ -33,7 +33,8 @@ const seed = async () => {
       try {
         await payload.create({
             collection: 'prayer-requests',
-            data: note as any, // Cast to any to bypass strict type check for now in seed script
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            data: note as any, 
         })
         console.log(`Created ${note.type} note with ${note.names.length} names.`)
       } catch (err) {

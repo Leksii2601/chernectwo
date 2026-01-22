@@ -7,6 +7,7 @@ import React from 'react'
 import { renderToStream, Document, Page, Text, View, StyleSheet, Font, Image } from '@react-pdf/renderer'
 import path from 'path'
 import fs from 'fs'
+import { headers } from 'next/headers'
 
 // Register a font that supports Cyrillic - using local font
 Font.register({
@@ -130,6 +131,20 @@ const PrayerSheet = ({ notes }: { notes: any[] }) => {
                     {note.type === 'health' ? "ЗА ЗДОРОВ'Я" : "ЗА УПОКІЙ"}
                 </Text>
                 
+                {note.service && !note.service.includes('Проста') && (
+                     <Text style={{ 
+                        fontSize: 9, 
+                        textAlign: 'center', 
+                        textTransform: 'uppercase', 
+                        fontFamily: 'CuprumBold', 
+                        color: themeColor,
+                        marginBottom: 3,
+                        marginTop: -3
+                     }}>
+                        ({note.service})
+                    </Text>
+                )}
+                
                 <View style={styles.namesList}>
                     {renderNames.slice(0, 10).map((n: any, i: number) => (
                         <View key={i} style={[styles.lineRow, { borderBottomColor: themeColor }]}>
@@ -150,30 +165,73 @@ const PrayerSheet = ({ notes }: { notes: any[] }) => {
     )
 }
 
-export async function GET() {
+export async function GET(req: Request) {
   const payload = await getPayload({ config: configPromise })
 
+  const { user } = await payload.auth({ headers: await headers() })
+
+  if (!user) {
+    return new NextResponse('Unauthorized', { status: 401 })
+  }
+
+  // Parse Query Params
+  const { searchParams } = new URL(req.url)
+  const typeParam = searchParams.get('type') // 'health' | 'repose' | null (all)
+  const limitParam = searchParams.get('limit') // 'all' | number string
+
+  const where: any = {
+      // Only fetch paid requests that are NOT printed yet
+      and: [
+          { status: { equals: 'paid' } },
+          { 
+              or: [
+                  { printedAt: { exists: false } },
+                  { status: { not_equals: 'printed' } }
+              ]
+          }
+      ]
+  }
+
+  if (typeParam === 'health') {
+    where.and.push({ type: { equals: 'health' } })
+  } else if (typeParam === 'repose') {
+    where.and.push({ type: { equals: 'repose' } })
+  }
+
+  // Determine limit
+  let limit = 10
+  if (limitParam === 'all') {
+    limit = 100 // Hard cap for "all" to prevent crashes, or strictly 'all' if pagination disabled
+  } else if (limitParam && !isNaN(parseInt(limitParam))) {
+    limit = parseInt(limitParam)
+  }
+
   try {
-    // 1. Fetch Oldest Unprocessed Requests
+    // 1. Fetch Requests
     const result = await payload.find({
         collection: 'prayer-requests',
-        limit: 5, 
+        limit: limit, 
         sort: 'createdAt',
+        where: Object.keys(where).length > 0 ? where : undefined
     })
 
     if (result.docs.length === 0) {
-       // Return HTML that closes itself or shows message
-       return new NextResponse('<h1>No new prayer requests found</h1>', { headers: { 'Content-Type': 'text/html' }});
+       return new NextResponse('<h1>Немає нових записок для вибраних критеріїв</h1>', { headers: { 'Content-Type': 'text/html; charset=utf-8' }});
     }
 
     // 2. Generate PDF stream
     const stream = await renderToStream(<PrayerSheet notes={result.docs} />);
     
-    // 3. Delete processed
+    // 3. Mark processed as printed instead of deleting
+    const now = new Date().toISOString()
     for (const doc of result.docs) {
-        await payload.delete({
+        await payload.update({
             collection: 'prayer-requests',
-            id: doc.id
+            id: doc.id,
+            data: {
+                status: 'printed',
+                printedAt: now
+            }
         })
     }
 

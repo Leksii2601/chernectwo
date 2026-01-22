@@ -69,9 +69,29 @@ export function FAQ() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const handleSubmit = () => {
-    alert('Дякуємо! Ваше питання отримано.');
-    setFormData({ name: '', email: '', question: '' });
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.email || !formData.question) {
+        alert('Будь ласка, заповніть всі поля');
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/submit-question', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        if (res.ok) {
+            alert('Дякуємо! Ваше питання отримано.');
+            setFormData({ name: '', email: '', question: '' });
+        } else {
+            alert('Сталася помилка. Спробуйте пізніше.');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Сталася помилка. Спробуйте пізніше.');
+    }
   };
 
   return (

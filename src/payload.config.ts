@@ -13,7 +13,10 @@ import { News } from './collections/News'
 import { MissionaryProjects } from './collections/MissionaryProjects'
 import { PhotoReports } from './collections/PhotoReports'
 import { PrayerRequests } from './collections/PrayerRequests'
+import { JoinRequests } from './collections/JoinRequests'
+import { Questions } from './collections/Questions'
 import { LiveStream } from './globals/LiveStream'
+// import { PrintPrayersLink } from './components/admin/PrintPrayersLink'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -28,8 +31,13 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    /* components: {
+        afterNavLinks: [
+            PrintPrayersLink
+        ]
+    } */
   },
-  collections: [Users, Media, News, MissionaryProjects, PhotoReports, PrayerRequests],
+  collections: [Users, Media, News, MissionaryProjects, PhotoReports, PrayerRequests, JoinRequests, Questions],
   globals: [LiveStream],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

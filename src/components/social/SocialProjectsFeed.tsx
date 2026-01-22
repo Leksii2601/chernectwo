@@ -165,7 +165,7 @@ function SocialProjectCard({ item, onClick }: { item: Initiative; onClick: (item
         /* Dynamic Styles based on state */
         ${isActive 
             ? 'border-amber-500 shadow-xl' 
-            : 'hover:border-amber-500 hover:shadow-xl'
+            : 'hover:border-amber-500 hover:shadow-lg'
         }
       `}
     >
@@ -174,7 +174,7 @@ function SocialProjectCard({ item, onClick }: { item: Initiative; onClick: (item
             {/* Icon Container */}
             <div className={`
                 relative w-24 h-24 flex-shrink-0 flex items-center justify-center transition-transform duration-500 ease-out
-                ${isActive ? 'scale-110' : 'group-hover:scale-110'}
+                ${isActive ? 'scale-105' : 'group-hover:scale-105'}
             `}>
                <Image 
                  src={item.icon} 
@@ -187,7 +187,7 @@ function SocialProjectCard({ item, onClick }: { item: Initiative; onClick: (item
             {/* Title */}
             <h3 className={`
                 font-cuprum font-bold text-xl sm:text-lg uppercase leading-tight transition-colors duration-300 text-left
-                ${isActive ? 'text-amber-600' : 'text-gray-900 transition-transform duration-500 ease-out group-hover:scale-110'}
+                ${isActive ? 'text-amber-600' : 'text-gray-900 transition-transform duration-500 ease-out group-hover:scale-105'}
             `}>
               {item.title}
             </h3>
@@ -196,7 +196,7 @@ function SocialProjectCard({ item, onClick }: { item: Initiative; onClick: (item
         {/* Description */}
         <p className={`
             font-sans text-sm leading-relaxed text-gray-600 line-clamp-4 transition-all duration-500 text-left
-            ${isActive ? 'opacity-40' : 'group-hover:opacity-40'}
+            ${isActive ? 'opacity-40' : 'group-hover:opacity-60'}
         `}>
           {item.description}
         </p>

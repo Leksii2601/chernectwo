@@ -25,65 +25,137 @@ export default function DonatePage() {
       </section>
 
       {/* Donation Methods */}
-      <section className="py-16 px-4 max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section className="py-16 px-4 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* UAH Card */}
-          <div className="border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+          <div className="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
                 <span className="font-bold text-xl">₴</span>
               </div>
-              <h2 className="font-montserrat text-2xl">Гривня (UAH)</h2>
+              <h2 className="font-montserrat text-xl font-bold">Гривня (UAH)</h2>
             </div>
             
-            <div className="space-y-6">
-              <div className="group relative bg-gray-50 p-4 rounded-lg cursor-pointer" onClick={() => copyToClipboard('UA000000000000000000000000000')}>
-                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">IBAN</p>
-                <p className="font-mono text-lg truncate">UA00 0000 0000 0000 0000 0000 0000 0</p>
-                <Copy className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+            <div className="space-y-4">
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('РО СВЯТО-МИКОЛАЇВСЬКИЙ ЧОЛОВІЧИЙ МОНАСТИР')}>
+                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Отримувач</p>
+                 <p className="font-medium text-sm leading-tight">РО СВЯТО-МИКОЛАЇВСЬКИЙ ЧОЛОВІЧИЙ МОНАСТИР</p>
+                 <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
               </div>
 
-              <div className="group relative bg-gray-50 p-4 rounded-lg cursor-pointer" onClick={() => copyToClipboard('00000000')}>
+               <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('26278106')}>
                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">ЄДРПОУ</p>
-                <p className="font-mono text-lg">00000000</p>
-                <Copy className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+                <p className="font-mono text-lg">26278106</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
               </div>
 
-              <div className="group relative bg-gray-50 p-4 rounded-lg cursor-pointer" onClick={() => copyToClipboard('Благодійна пожертва на статутну діяльність')}>
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('UA7730529900000026006000812444')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">IBAN</p>
+                <p className="font-mono text-sm break-all">UA7730529900000026006000812444</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('305299')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">МФО</p>
+                <p className="font-mono text-lg">305299</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('5363542096233375')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Картка ПриватБанку</p>
+                <p className="font-mono text-lg">5363 5420 9623 3375</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('Благодійна пожертва')}>
                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Призначення платежу</p>
-                <p className="font-medium text-gray-800">Благодійна пожертва на статутну діяльність</p>
-                <Copy className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+                <p className="font-medium text-sm">Благодійна пожертва</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
               </div>
             </div>
           </div>
 
-          {/* SWIFT / USD / EUR Card */}
-          <div className="border border-gray-200 rounded-xl p-8 hover:shadow-lg transition-shadow">
+          {/* USD Card */}
+          <div className="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600">
+              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
                 <span className="font-bold text-xl">$</span>
               </div>
-              <h2 className="font-montserrat text-2xl">SWIFT (USD / EUR)</h2>
+              <h2 className="font-montserrat text-xl font-bold">Долар (USD)</h2>
             </div>
             
-            <div className="space-y-6">
-              <div className="group relative bg-gray-50 p-4 rounded-lg cursor-pointer" onClick={() => copyToClipboard('Bank Name')}>
-                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Bank Name</p>
-                <p className="font-medium">JSC &quot;State Savings Bank of Ukraine&quot;</p>
-                <Copy className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+            <div className="space-y-4">
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('PO СВЯТО-МИКОЛАЇВСЬКИЙ ЧОЛОВІЧИЙ МОНАСТИР')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Company Name</p>
+                <p className="font-medium text-xs leading-tight">PO СВЯТО-МИКОЛАЇВСЬКИЙ ЧОЛОВІЧИЙ МОНАСТИР</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
               </div>
 
-              <div className="group relative bg-gray-50 p-4 rounded-lg cursor-pointer" onClick={() => copyToClipboard('SWIFT_CODE_HERE')}>
+               <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('UA6430529900000026000000812785')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">IBAN Code</p>
+                <p className="font-mono text-xs break-all">UA6430529900000026000000812785</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+              
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('PBANUA2X')}>
                 <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">SWIFT Code</p>
-                <p className="font-mono text-lg">OSBUUAUK</p>
-                <Copy className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+                <p className="font-mono text-lg">PBANUA2X</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
               </div>
 
-              <div className="group relative bg-gray-50 p-4 rounded-lg cursor-pointer" onClick={() => copyToClipboard('UA000000000000000000000000000')}>
-                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Account Number (IBAN)</p>
-                <p className="font-mono text-lg truncate">UA00 0000 0000 0000 0000 0000 0000 0</p>
-                <Copy className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+               <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('АТ КБ «ПриватБанк»')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Bank Name</p>
+                <p className="font-medium text-sm">АТ КБ «ПриватБанк»</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('45240, УКРАЇНА, ОБЛ. ВОЛИНСЬКА, Р-Н. ЛУЦЬКИЙ, С. ЖИДИЧИН, ВУЛ. 17 ВЕРЕСНЯ, Б. 1')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Company address</p>
+                <p className="font-medium text-xs leading-4">45240, УКРАЇНА, ОБЛ. ВОЛИНСЬКА, Р-Н. ЛУЦЬКИЙ, С. ЖИДИЧИН, ВУЛ. 17 ВЕРЕСНЯ, Б. 1</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+            </div>
+          </div>
+
+          {/* EUR Card */}
+          <div className="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
+                <span className="font-bold text-xl">€</span>
+              </div>
+              <h2 className="font-montserrat text-xl font-bold">Євро (EUR)</h2>
+            </div>
+            
+             <div className="space-y-4">
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('PO СВЯТО-МИКОЛАЇВСЬКИЙ ЧОЛОВІЧИЙ МОНАСТИР')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Company Name</p>
+                <p className="font-medium text-xs leading-tight">PO СВЯТО-МИКОЛАЇВСЬКИЙ ЧОЛОВІЧИЙ МОНАСТИР</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+
+               <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('UA7230529900000026003030808528')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">IBAN Code</p>
+                <p className="font-mono text-xs break-all">UA7230529900000026003030808528</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+              
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('PBANUA2X')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">SWIFT Code</p>
+                <p className="font-mono text-lg">PBANUA2X</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+
+               <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('АТ КБ «ПриватБанк»')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Bank Name</p>
+                <p className="font-medium text-sm">АТ КБ «ПриватБанк»</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
+              </div>
+
+              <div className="group relative bg-gray-50 p-3 rounded-lg cursor-pointer" onClick={() => copyToClipboard('45240, УКРАЇНА, ОБЛ. ВОЛИНСЬКА, Р-Н. ЛУЦЬКИЙ, С. ЖИДИЧИН, ВУЛ. 17 ВЕРЕСНЯ, Б. 1')}>
+                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Company address</p>
+                <p className="font-medium text-xs leading-4">45240, УКРАЇНА, ОБЛ. ВОЛИНСЬКА, Р-Н. ЛУЦЬКИЙ, С. ЖИДИЧИН, ВУЛ. 17 ВЕРЕСНЯ, Б. 1</p>
+                <Copy className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-hover:text-amber-500 transition-colors" />
               </div>
             </div>
           </div>

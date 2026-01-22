@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Search, ChevronDown, Menu, X } from 'lucide-react'
+import { Search, ChevronDown, Menu, X, MessageSquarePlus } from 'lucide-react'
 import { clsx } from 'clsx'
 import { useRouter } from 'next/navigation'
 
@@ -13,9 +13,9 @@ const navItems = [
     href: '/about',
     dropdown: [
       { label: 'Історія', href: '/about/history' },
+      { label: 'Розклад богослужінь', href: '/#calendar' },
       { label: 'Храмовий комплекс', href: '/about/complex' },
       { label: 'Скити', href: '/about/sketes' },
-      { label: 'Богослужіння', href: '/#calendar' },
       { label: 'Медіатека', href: '/about/media' },
     ],
   },
@@ -258,15 +258,13 @@ export function Header() {
                          </div>
                     </div>
                 ) : (
-                    item.label !== 'Підтримати' && (
-                        <Link
-                          href={item.href}
-                          className="text-xl font-bold block py-2 text-white hover:text-amber-400 transition-colors"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                    )
+                    <Link
+                        href={item.href}
+                        className="text-xl font-bold block py-2 text-white hover:text-amber-400 transition-colors"
+                        onClick={() => setMobileMenuOpen(false)}
+                    >
+                        {item.label}
+                    </Link>
                 )}
                 {/* Separator line for visual structure */}
                 
@@ -275,7 +273,16 @@ export function Header() {
           </nav>
             
             {/* Mobile Footer Area */}
-             <div className="mt-8 flex flex-col items-center gap-6 pb-8">
+             <div className="mt-8 flex flex-col items-center gap-4 pb-8">
+                 <Link 
+                    href="/prayer-requests"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-center gap-2 border border-white/30 text-white px-8 py-4 font-bold uppercase tracking-wider rounded-sm hover:bg-white hover:text-black transition-colors w-full max-w-xs text-center text-lg"
+                 >
+                    <MessageSquarePlus className="w-5 h-5" />
+                    Написати записку
+                 </Link>
+
                  <Link 
                     href="/donate"
                     onClick={() => setMobileMenuOpen(false)}

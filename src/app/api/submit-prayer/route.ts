@@ -79,6 +79,11 @@ export async function POST(req: Request) {
                 <h1 style="margin: 0; color: #D22626; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
                   ${title}
                 </h1>
+                ${service && service.name && !service.name.includes('Проста') ? `
+                    <p style="margin: 5px 0 0 0; color: #D22626; font-size: 10px; text-transform: uppercase; font-weight: bold;">
+                        (${service.name})
+                    </p>
+                ` : ''}
               </div>
 
               <!-- Names List -->

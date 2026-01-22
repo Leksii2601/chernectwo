@@ -73,6 +73,8 @@ export interface Config {
     'missionary-projects': MissionaryProject;
     'photo-reports': PhotoReport;
     'prayer-requests': PrayerRequest;
+    'join-requests': JoinRequest;
+    questions: Question;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +88,8 @@ export interface Config {
     'missionary-projects': MissionaryProjectsSelect<false> | MissionaryProjectsSelect<true>;
     'photo-reports': PhotoReportsSelect<false> | PhotoReportsSelect<true>;
     'prayer-requests': PrayerRequestsSelect<false> | PrayerRequestsSelect<true>;
+    'join-requests': JoinRequestsSelect<false> | JoinRequestsSelect<true>;
+    questions: QuestionsSelect<false> | QuestionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -313,7 +317,33 @@ export interface PrayerRequest {
     | null;
   email: string;
   amount?: number | null;
-  status?: ('pending' | 'paid' | 'failed') | null;
+  status?: ('pending' | 'paid' | 'failed' | 'printed') | null;
+  printedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "join-requests".
+ */
+export interface JoinRequest {
+  id: number;
+  name: string;
+  phone?: string | null;
+  email?: string | null;
+  message?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "questions".
+ */
+export interface Question {
+  id: number;
+  name: string;
+  email: string;
+  question: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -364,6 +394,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'prayer-requests';
         value: number | PrayerRequest;
+      } | null)
+    | ({
+        relationTo: 'join-requests';
+        value: number | JoinRequest;
+      } | null)
+    | ({
+        relationTo: 'questions';
+        value: number | Question;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -562,6 +600,30 @@ export interface PrayerRequestsSelect<T extends boolean = true> {
   email?: T;
   amount?: T;
   status?: T;
+  printedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "join-requests_select".
+ */
+export interface JoinRequestsSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  email?: T;
+  message?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "questions_select".
+ */
+export interface QuestionsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  question?: T;
   updatedAt?: T;
   createdAt?: T;
 }

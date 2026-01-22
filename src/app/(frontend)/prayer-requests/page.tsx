@@ -16,9 +16,7 @@ type ServiceType = {
 const SERVICES: ServiceType[] = [
   { id: 'simple', name: 'Проста записка (разово)', price: 10 },
   { id: 'sorokoust', name: 'Сорокауст (40 днів)', price: 200 },
-  { id: 'half-year', name: 'Півроку', price: 1000 },
   { id: 'year', name: 'Рік', price: 2000 },
-  { id: 'psalter', name: 'Псалтир (1 місяць)', price: 300 },
 ];
 
 export default function PrayerNotePage() {
@@ -139,6 +137,12 @@ export default function PrayerNotePage() {
                         <h2 className={`font-serif text-2xl font-bold uppercase tracking-widest ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
                             {noteType === 'health' ? 'ЗА ЗДОРОВ\'Я' : 'ЗА УПОКІЙ'}
                         </h2>
+                        {/* Service Type Subtitle */}
+                        {selectedService.id !== 'simple' && (
+                             <p className={`font-serif text-[10px] font-bold uppercase tracking-wider mt-1 ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
+                                ({selectedService.name})
+                            </p>
+                        )}
                     </div>
 
 
