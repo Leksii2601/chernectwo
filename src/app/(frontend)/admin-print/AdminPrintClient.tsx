@@ -111,6 +111,13 @@ export const AdminPrintClient = ({ counts }: { counts: Counts }) => {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                          <button 
+                            onClick={() => handlePrint(undefined, 'all')}
+                            disabled={isProcessing || counts.total === 0}
+                            className="bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-6 rounded shadow transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            Всі змішані
+                        </button>
+                         <button 
                             onClick={() => handlePrint('health', 'all')}
                             disabled={isProcessing || counts.health === 0}
                             className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded shadow transition-colors disabled:opacity-50 disabled:cursor-not-allowed"

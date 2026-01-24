@@ -2,17 +2,22 @@
 
 import React from 'react';
 import { Header } from '@/components/landing/Header';
+import { clsx } from 'clsx';
 
 interface PageHeaderProps {
   title: string;
   subtitle?: string;
   backgroundImage?: string;
+  className?: string; // Allow custom classes
 }
 
-export function PageHeader({ title, subtitle, backgroundImage }: PageHeaderProps) {
+export function PageHeader({ title, subtitle, backgroundImage, className }: PageHeaderProps) {
   return (
     <div 
-      className="relative h-[50vh] md:h-[60vh] min-h-[510px] shadow-lg bg-cover bg-center bg-no-repeat bg-fixed flex flex-col justify-end pb-10 md:pb-40"
+      className={clsx(
+          "relative h-[50vh] md:h-[60vh] min-h-[510px] shadow-lg bg-cover bg-center bg-no-repeat bg-fixed flex flex-col justify-end pb-10 md:pb-40",
+          className
+      )}
       style={{ 
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
         backgroundColor: backgroundImage ? undefined : 'rgba(0,0,0,0.9)'

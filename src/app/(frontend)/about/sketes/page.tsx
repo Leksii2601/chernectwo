@@ -1,17 +1,31 @@
 import React from 'react';
 import { PageHeader } from '@/components/PageHeader';
+import { SketesGrid } from '@/components/sketes/SketesGrid';
 import { Footer } from '@/components/landing/Footer';
-import { FloatingButton } from '@/components/landing/FloatingButton';
+import { ScrollRevealSection } from '@/components/animations/ScrollRevealSection';
+import { SketeInfoSection } from '@/components/sketes/SketeInfoSection';
+
+export const metadata = {
+    title: 'Скити та Подвір\'я | Жидичинський Монастир',
+    description: 'Дізнайтеся про скити та подвір\'я Свято-Миколаївського Жидичинського монастиря.'
+};
 
 export default function SketesPage() {
-  return (
-    <main className="min-h-screen bg-white">
-      <PageHeader title="СКИТИ" backgroundImage="/media/sketes.jpg" />
-      <div className="max-w-[1200px] mx-auto px-4 py-12">
-         <p className="text-xl text-center text-gray-500">Сторінка знаходиться в розробці</p>
-      </div>
-      <Footer />
-      <FloatingButton />
-    </main>
-  );
+    return (
+        <main className="min-h-screen bg-black">
+            <PageHeader 
+                title="Скити" 
+                backgroundImage="/media/sketes.jpg"
+                className="!h-[100vh] !min-h-screen !justify-center !pb-0"
+            />
+            
+            <ScrollRevealSection className="relative z-10 bg-zinc-900 border-t border-black/80">
+                <SketesGrid />
+            </ScrollRevealSection>
+
+            <SketeInfoSection />
+
+            <Footer />
+        </main>
+    );
 }

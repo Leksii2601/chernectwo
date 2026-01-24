@@ -88,6 +88,14 @@ const styles = StyleSheet.create({
   }
 })
 
+const chunkArray = (array: any[], size: number) => {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += size) {
+        chunks.push(array.slice(i, i + size));
+    }
+    return chunks;
+}
+
 const PrayerSheet = ({ notes }: { notes: any[] }) => {
     let headerImage: Buffer | undefined, footerImage: Buffer | undefined;
     let headerModifiedImage: Buffer | undefined, footerModifiedImage: Buffer | undefined;
@@ -106,61 +114,67 @@ const PrayerSheet = ({ notes }: { notes: any[] }) => {
         console.error("Error loading print images:", e);
     }
 
+    // Split notes into pages of 5
+    const pages = chunkArray(notes, 5);
+
     return (
     <Document>
-        <Page size="A4" orientation="landscape" style={styles.page}>
-        {notes.map((note, idx) => {
-             const names = note.names || [];
-             const renderNames = [...names];
-             while(renderNames.length < 10) {
-                 renderNames.push({ name: '' });
-             }
+        {pages.map((pageNotes, pageIndex) => (
+            <Page key={pageIndex} size="A4" orientation="landscape" style={styles.page}>
+                {pageNotes.map((note, idx) => {
+                    const names = note.names || [];
+                    const renderNames = [...names];
+                    while(renderNames.length < 10) {
+                        renderNames.push({ name: '' });
+                    }
 
-             const isRepose = note.type === 'repose';
-             const themeColor = isRepose ? '#000000' : '#D22626';
-             const currentHeader = isRepose ? headerModifiedImage : headerImage;
-             const currentFooter = isRepose ? footerModifiedImage : footerImage;
+                    const isRepose = note.type === 'repose';
+                    const themeColor = isRepose ? '#000000' : '#D22626';
+                    const currentHeader = isRepose ? headerModifiedImage : headerImage;
+                    const currentFooter = isRepose ? footerModifiedImage : footerImage;
 
-             return (
-            <View key={idx} style={styles.noteContainer} wrap={false}>
-                <View style={styles.header}>
-                     {currentHeader && <Image src={currentHeader} style={styles.logoImage} />}
-                </View>
-                
-                <Text style={[styles.title, { color: themeColor }]}>
-                    {note.type === 'health' ? "ЗА ЗДОРОВ'Я" : "ЗА УПОКІЙ"}
-                </Text>
-                
-                {note.service && !note.service.includes('Проста') && (
-                     <Text style={{ 
-                        fontSize: 9, 
-                        textAlign: 'center', 
-                        textTransform: 'uppercase', 
-                        fontFamily: 'CuprumBold', 
-                        color: themeColor,
-                        marginBottom: 3,
-                        marginTop: -3
-                     }}>
-                        ({note.service})
-                    </Text>
-                )}
-                
-                <View style={styles.namesList}>
-                    {renderNames.slice(0, 10).map((n: any, i: number) => (
-                        <View key={i} style={[styles.lineRow, { borderBottomColor: themeColor }]}>
-                           <Text style={styles.name}>{n.name}</Text>
+                    return (
+                        <View key={idx} style={styles.noteContainer} wrap={false}>
+                            <View style={styles.header}>
+                                {currentHeader && <Image src={currentHeader} style={styles.logoImage} />}
+                            </View>
+                            
+                            <Text style={[styles.title, { color: themeColor }]}>
+                                {note.type === 'health' ? "ЗА ЗДОРОВ'Я" : "ЗА УПОКІЙ"}
+                            </Text>
+                            
+                            {note.service && !note.service.includes('Проста') && (
+                                <Text style={{ 
+                                    fontSize: 9, 
+                                    textAlign: 'center', 
+                                    textTransform: 'uppercase', 
+                                    fontFamily: 'CuprumBold', 
+                                    color: themeColor,
+                                    marginBottom: 3,
+                                    marginTop: -3
+                                }}>
+                                    ({note.service})
+                                </Text>
+                            )}
+                            
+                            <View style={styles.namesList}>
+                                {renderNames.slice(0, 10).map((n: any, i: number) => (
+                                    <View key={i} style={[styles.lineRow, { borderBottomColor: themeColor }]}>
+                                    <Text style={styles.name}>{n.name}</Text>
+                                    </View>
+                                ))}
+                            </View>
+
+                            <View style={styles.footer}>
+                                {currentFooter && <Image src={currentFooter} style={styles.footerImage} />}
+                                <Text style={{ color: themeColor }}>Свято-Миколаївський</Text>
+                                <Text style={{ color: themeColor }}>Жидичинський монастир</Text>
+                            </View>
                         </View>
-                    ))}
-                </View>
-
-                 <View style={styles.footer}>
-                     {currentFooter && <Image src={currentFooter} style={styles.footerImage} />}
-                     <Text style={{ color: themeColor }}>Свято-Миколаївський</Text>
-                     <Text style={{ color: themeColor }}>Жидичинський монастир</Text>
-                 </View>
-            </View>
-        )})}
-        </Page>
+                    )
+                })}
+            </Page>
+        ))}
     </Document>
     )
 }
