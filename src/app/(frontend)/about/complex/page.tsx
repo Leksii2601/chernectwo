@@ -17,9 +17,9 @@ export default function ComplexPage() {
       <section className="bg-orange-50/30 py-12 border-b border-orange-100">
         <div className="max-w-[1200px] mx-auto px-4">
              <div className="text-center mb-6">
-                <h2 className="text-2xl font-serif text-gray-800 mb-2">Карта Об'єктів</h2>
+                <h2 className="text-2xl font-serif text-gray-800 mb-2">Карта Об&#39;єктів</h2>
                 <p className="text-gray-500 max-w-2xl mx-auto">
-                    Інтерактивна карта території монастиря. Натисніть на об'єкт, щоб дізнатися більше.
+                  Інтерактивна карта території монастиря. Натисніть на об&#39;єкт, щоб дізнатися більше.
                 </p>
              </div>
              

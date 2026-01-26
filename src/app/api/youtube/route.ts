@@ -80,10 +80,8 @@ export async function POST(request: Request) {
         const videosData = await videosRes.json();
 
         // Step 4: Sort into categories
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const videos: any[] = [];
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const streams: any[] = [];
+        const videos: unknown[] = [];
+        const streams: unknown[] = [];
 
         videosData.items.forEach((video: YouTubeVideoDetails) => {
             const isStream = !!video.liveStreamingDetails;

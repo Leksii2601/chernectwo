@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Search, Menu, MessageSquarePlus, Heart, ChevronDown, MapPin, Phone, Clock } from 'lucide-react';
+import { Menu, MessageSquarePlus, ChevronDown, MapPin, Clock } from 'lucide-react';
 import { clsx } from 'clsx';
 
 // Real navigation items from the main site

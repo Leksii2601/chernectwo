@@ -320,7 +320,7 @@ export const HistoryTimeline = () => {
                             default:
                                 shapeClasses = 'w-[500px] h-[500px] rounded-full';
                         }
-                         /* eslint-enable no-fallthrough */
+                         // ...existing code...
 
                         const circleColor = isRight ? 'bg-amber-50' : 'bg-stone-100';
                         

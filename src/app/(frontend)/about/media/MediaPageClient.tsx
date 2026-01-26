@@ -1,3 +1,12 @@
+// Video item type for fetched and mock videos
+interface VideoItem {
+  id: string;
+  title: string;
+  thumbnail: string;
+  duration?: string;
+  publishedAt?: string;
+  date?: string;
+}
 'use client';
 
 import React, { useState } from 'react';
@@ -53,10 +62,8 @@ export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow 
   const [activeTab, setActiveTab] = useState<'gallery' | 'video' | 'live'>(initialTab);
 
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [fetchedVideos, setFetchedVideos] = useState<any[]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [fetchedStreams, setFetchedStreams] = useState<any[]>([]);
+  const [fetchedVideos, setFetchedVideos] = useState<VideoItem[]>([]);
+  const [fetchedStreams, setFetchedStreams] = useState<VideoItem[]>([]);
   
   // Pagination States
   const [galleryLimit, setGalleryLimit] = useState(9);
@@ -114,7 +121,7 @@ export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow 
   const visibleGalleryImages = allGalleryImages.slice(0, galleryLimit);
 
   // Video Pagination Logic
-  const allVideos = fetchedVideos.length > 0 ? fetchedVideos : VIDEOS;
+  const allVideos: VideoItem[] = fetchedVideos.length > 0 ? fetchedVideos : VIDEOS;
   const totalVideoPages = Math.ceil(allVideos.length / VIDEOS_PER_PAGE);
   const currentVideos = allVideos.slice((videoPage - 1) * VIDEOS_PER_PAGE, videoPage * VIDEOS_PER_PAGE);
 
@@ -134,8 +141,7 @@ export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow 
     }
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const fullYoutubeLink = liveConfig?.youtubeLink || 'https://youtube.com';
+  // const fullYoutubeLink = liveConfig?.youtubeLink || 'https://youtube.com';
   
   // Use explicit channel ID if available, otherwise try to fallback (flaky) or empty
   const channelEmbed = liveConfig?.channelID && liveConfig.channelID !== 'UC...' 
@@ -231,31 +237,30 @@ export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow 
         {activeTab === 'video' && (
           <div className="animate-fadeIn">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                    {currentVideos.map((video: any) => (
+                    {currentVideos.map((video: VideoItem) => (
                     <div 
-                        key={video.id} 
-                        onClick={() => setSelectedVideoId(video.id)}
-                        className="bg-white overflow-hidden shadow-sm group cursor-pointer hover:bg-gray-50 transition-colors"
+                      key={video.id} 
+                      onClick={() => setSelectedVideoId(video.id)}
+                      className="bg-white overflow-hidden shadow-sm group cursor-pointer hover:bg-gray-50 transition-colors"
                     >
-                        <div className="relative h-56 bg-gray-200">
-                            <Image 
-                                src={video.thumbnail} 
-                                alt={video.title} 
-                                fill 
-                                className="object-cover group-hover:opacity-90 transition-opacity" 
-                            />
-                        </div>
-                        <div className="p-4">
-                            <h3 className="font-bold text-lg text-gray-900 leading-tight mb-2 group-hover:text-red-800 transition-colors line-clamp-2">
-                                {video.title}
-                            </h3>
-                            {video.publishedAt && (
-                                <p className="text-gray-500 text-sm">
-                                    {new Date(video.publishedAt).toLocaleDateString('uk-UA')}
-                                </p>
-                            )}
-                        </div>
+                      <div className="relative h-56 bg-gray-200">
+                        <Image 
+                          src={video.thumbnail} 
+                          alt={video.title} 
+                          fill 
+                          className="object-cover group-hover:opacity-90 transition-opacity" 
+                        />
+                      </div>
+                      <div className="p-4">
+                        <h3 className="font-bold text-lg text-gray-900 leading-tight mb-2 group-hover:text-red-800 transition-colors line-clamp-2">
+                          {video.title}
+                        </h3>
+                        {video.publishedAt && (
+                          <p className="text-gray-500 text-sm">
+                            {new Date(video.publishedAt).toLocaleDateString('uk-UA')}
+                          </p>
+                        )}
+                      </div>
                     </div>
                     ))}
                 </div>
@@ -377,40 +382,40 @@ export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow 
                         </h3>
                      </div>
                      <div className="flex-1 overflow-y-auto p-2 space-y-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-                        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                        {fetchedStreams.length > 0 ? fetchedStreams.map((video: any) => (
+                        {fetchedStreams.length > 0 ? fetchedStreams.map((video: VideoItem) => (
                              <div 
-                                key={video.id} 
-                                onClick={() => { 
-                                  setActiveStreamId(video.id);
-                                  // Scroll to top on mobile only
-                                  if (window.innerWidth < 1024) {
-                                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                                  }
-                                }}
-                                className={`flex gap-3 p-3 cursor-pointer transition-all border border-transparent hover:border-red-200 hover:bg-white hover:shadow-sm ${activeStreamId === video.id ? 'bg-white border-red-500 shadow-md ring-1 ring-red-500' : 'bg-transparent'}`}
+                              key={video.id} 
+                              onClick={() => { setActiveStreamId(video.id);
+                                // Scroll to top on mobile only
+                                if (window.innerWidth < 1024) {
+                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }
+                              }}
+                              className={`flex gap-3 p-3 cursor-pointer transition-all border border-transparent hover:border-red-200 hover:bg-white hover:shadow-sm ${activeStreamId === video.id ? 'bg-white border-red-500 shadow-md ring-1 ring-red-500' : 'bg-transparent'}`}
                              >
-                                 <div className="relative w-36 h-20 flex-shrink-0 bg-gray-200 overflow-hidden">
-                                     <Image 
-                                         src={video.thumbnail} 
-                                         alt={video.title} 
-                                         fill 
-                                         className="object-cover" 
-                                     />
-                                     {activeStreamId === video.id && (
-                                         <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                                            <Play className="w-6 h-6 text-white drop-shadow-md" />
-                                         </div>
-                                     )}
-                                 </div>
-                                 <div className="flex flex-col justify-center min-w-0">
-                                     <h4 className={`text-xs font-bold leading-tight mb-1 line-clamp-2 ${activeStreamId === video.id ? 'text-red-700' : 'text-gray-800'}`}>
-                                         {video.title}
-                                     </h4>
-                                     <span className="text-[10px] text-gray-500 font-bold uppercase">
-                                         {video.publishedAt || video.date ? new Date(video.publishedAt || video.date).toLocaleDateString('uk-UA') : ''}
-                                     </span>
-                                 </div>
+                               <div className="relative w-36 h-20 flex-shrink-0 bg-gray-200 overflow-hidden">
+                                 <Image 
+                                   src={video.thumbnail} 
+                                   alt={video.title} 
+                                   fill 
+                                   className="object-cover" 
+                                 />
+                                 {activeStreamId === video.id && (
+                                   <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                                    <Play className="w-6 h-6 text-white drop-shadow-md" />
+                                   </div>
+                                 )}
+                               </div>
+                               <div className="flex flex-col justify-center min-w-0">
+                                 <h4 className={`text-xs font-bold leading-tight mb-1 line-clamp-2 ${activeStreamId === video.id ? 'text-red-700' : 'text-gray-800'}`}>
+                                   {video.title}
+                                 </h4>
+                                 <span className="text-[10px] text-gray-500 font-bold uppercase">
+                                         {(video.publishedAt || video.date)
+                                           ? new Date(video.publishedAt ?? video.date ?? '').toLocaleDateString('uk-UA')
+                                           : ''}
+                                 </span>
+                               </div>
                              </div>
                         )) : (
                             <div className="p-8 text-center text-gray-400 text-sm">

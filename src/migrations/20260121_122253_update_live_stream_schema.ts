@@ -16,26 +16,26 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   
   try {
       await db.run(sql`ALTER TABLE \`live_stream\` ADD COLUMN \`planned_event_start_time\` text;`);
-  } catch (e) {
+  } catch (_e) {
       // Ignore if column exists
   }
 
   
   try {
       await db.run(sql`ALTER TABLE \`live_stream\` ADD COLUMN \`planned_event_end_time\` text;`);
-  } catch (e) {
+  } catch (_e) {
       // Ignore
   }
 
   try {
       await db.run(sql`ALTER TABLE \`live_stream\` ADD COLUMN \`sunday_start_time\` text DEFAULT '09:30';`);
-  } catch (e) {
+  } catch (_e) {
       // Ignore
   }
 
   try {
       await db.run(sql`ALTER TABLE \`live_stream\` ADD COLUMN \`sunday_end_time\` text DEFAULT '12:30';`);
-  } catch (e) {
+  } catch (_e) {
       // Ignore
   }
 }
@@ -54,7 +54,7 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
     await db.run(sql`ALTER TABLE \`live_stream\` DROP COLUMN \`planned_event_end_time\`;`);
     await db.run(sql`ALTER TABLE \`live_stream\` DROP COLUMN \`sunday_start_time\`;`);
     await db.run(sql`ALTER TABLE \`live_stream\` DROP COLUMN \`sunday_end_time\`;`);
-  } catch (e) {
+  } catch (_e) {
       // Ignore
   }
 }

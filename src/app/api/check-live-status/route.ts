@@ -31,8 +31,7 @@ export async function GET() {
         if (globalData.isManuallyLive) {
             isLive = true;
         } else {
-             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-             const now = new Date();
+             // const now = new Date();
              
              // Timezone adjustment if needed. 
              // We assume the server time is roughly correct or we rely on UTC match.

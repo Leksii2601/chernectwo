@@ -7,16 +7,16 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
       // Based on previous 'thumbnail_u_r_l', it seems capital letters trigger underscores.
       // Let's assume 'channelID' -> 'channel_i_d'
       await db.run(sql`ALTER TABLE \`live_stream\` ADD COLUMN \`channel_i_d\` text DEFAULT 'UC...';`);
-  } catch (e) {
+    } catch (_e) {
       // Ignore if exists
-  }
+    }
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   if (payload && req) console.log('Down')
   try {
     await db.run(sql`ALTER TABLE \`live_stream\` DROP COLUMN \`channel_i_d\`;`);
-  } catch (e) {
+    } catch (_e) {
       // Ignore
-  }
+    }
 }

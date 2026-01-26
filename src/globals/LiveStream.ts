@@ -1,6 +1,5 @@
 import { GlobalConfig } from 'payload';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { RefreshYouTubeButton } from '@/components/admin/RefreshYouTubeButton';
+// import { RefreshYouTubeButton } from '@/components/admin/RefreshYouTubeButton';
 
 export const LiveStream: GlobalConfig = {
   slug: 'live-stream',
