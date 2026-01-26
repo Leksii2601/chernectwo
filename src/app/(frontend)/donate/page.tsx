@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Footer } from '@/components/landing/Footer';
 import '../styles.css';
-import { Copy, CreditCard, Check, X } from 'lucide-react';
+import { Copy, CreditCard, Check } from 'lucide-react';
 import { PageHeader } from '@/components/PageHeader';
 
 export default function DonatePage() {
