@@ -30,8 +30,9 @@ const sketes = [
 
 export const SketesGrid = () => {
     return (
-        <div className="w-full">
-            <div className="grid grid-cols-1 md:grid-cols-3 w-full">
+        <div className="w-full relative lg:h-[250vh] h-auto">
+            <div className="lg:sticky lg:top-0 w-full h-auto lg:h-screen">
+            <div className="grid grid-cols-1 md:grid-cols-3 w-full h-full">
             {sketes.map((skete) => (
                 <div 
                     key={skete.id} 
@@ -77,6 +78,7 @@ export const SketesGrid = () => {
                     </div>
                 </div>
             ))}
+            </div>
             </div>
         </div>
     );

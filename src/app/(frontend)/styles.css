@@ -206,3 +206,29 @@ html {
   @apply transition-all;
 }
 
+
+/* Custom Scrollbar for Webkit */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 20px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af;
+}
+
+@font-face {
+  font-family: 'KyivTypeTitling';
+  src: url('/fonts/KyivTypeTitling-VarGX.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+.font-kyiv {
+  font-family: 'KyivTypeTitling', sans-serif;
+}

@@ -53,7 +53,7 @@ const sketes: SketeData[] = [
         ),
         contactInfo: {
             address: 'вул. Селищна, Жидичин, Волинська область, 45240',
-            mapEmbedUrl: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d630.3251863809803!2d25.302455253864625!3d50.807066354319794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47259726b2205fb1%3A0x46ea483680fb9da5!2z0KHQstGP0YLQvi3QlNGD0YXRltCy0YHRjNC60LjQuSDRgdC60LjRgg!5e0!3m2!1suk!2sua!4v1740839783911!5m2!1suk!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
+            mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1260.6493299263846!2d25.302466!3d50.807105!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47259726b2205fb1%3A0x46ea483680fb9da5!2z0KHQstGP0YLQvi3QlNGD0YXRltCy0YHRjNC60LjQuSDRgdC60LjRgg!5e0!3m2!1suk!2sua!4v1769424800690!5m2!1suk!2sua',
         }
     },
     {
@@ -75,7 +75,7 @@ const sketes: SketeData[] = [
         ),
         contactInfo: {
             address: 'с. Жидичин',
-            mapEmbedUrl: '<iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2521.860856011235!2d25.309044393436352!3d50.7966872226544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTDCsDQ3JzQ4LjQiTiAyNcKwMTgnMzIuNCJF!5e0!3m2!1suk!2sua!4v1741781413138!5m2!1suk!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> ',
+            mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2521.860856011235!2d25.309044393436352!3d50.7966872226544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTDCsDQ3JzQ4LjQiTiAyNcKwMTgnMzIuNCJF!5e0!3m2!1suk!2sua!4v1741781413138!5m2!1suk!2sua',
         }
     },
     {
@@ -98,7 +98,7 @@ const sketes: SketeData[] = [
         ),
         contactInfo: {
             address: 'Липляни, Волинська область, 45240',
-            mapEmbedUrl: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1261.1379766194657!2d25.29667976652643!3d50.78899427078083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472597bd80d601b7%3A0xde0f9b72812828b9!2z0KHQutC40YIg0J_QtdGC0YDQsCDRliDQn9Cw0LLQu9Cw!5e0!3m2!1suk!2sua!4v1740836628193!5m2!1suk!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> ',
+            mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2522.267335012639!2d25.296588!3d50.789154!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472597bd80d601b7%3A0xde0f9b72812828b9!2z0KHQutC40YIg0J_QtdGC0YDQsCDRliDQn9Cw0LLQu9Cw!5e0!3m2!1suk!2sua!4v1769424998899!5m2!1suk!2sua',
         }
     }
 ];

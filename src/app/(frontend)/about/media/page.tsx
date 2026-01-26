@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 import MediaPageClient from './MediaPageClient';
@@ -92,5 +92,9 @@ export default async function MediaPage() {
     };
   });
 
-  return <MediaPageClient dynamicReports={dynamicReports} liveConfig={liveConfig} isLiveNow={isLiveNow} />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-stone-50" />}>
+        <MediaPageClient dynamicReports={dynamicReports} liveConfig={liveConfig} isLiveNow={isLiveNow} />
+    </Suspense>
+  );
 }

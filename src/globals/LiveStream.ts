@@ -1,22 +1,33 @@
 import { GlobalConfig } from 'payload';
+import { RefreshYouTubeButton } from '@/components/admin/RefreshYouTubeButton';
 
 export const LiveStream: GlobalConfig = {
   slug: 'live-stream',
-  label: 'Пряма Трансляція',
+  label: 'Пряма Трансляція & YouTube',
   access: {
     read: () => true,
   },
   fields: [
     {
+        name: 'youtubeSync',
+        type: 'ui',
+        admin: {
+            position: 'sidebar',
+            components: {
+                Field: '@/components/admin/RefreshYouTubeButton#RefreshYouTubeButton',
+            }
+        }
+    },
+    {
       type: 'row',
       fields: [
         {
           name: 'isManuallyLive',
-          label: '🔴 Ефір зараз (Примусово)',
+          label: '🔴 Примусовий режим "В ефірі"',
           type: 'checkbox',
           defaultValue: false,
           admin: {
-            description: 'Вкючити негайно, ігноруючи будь-який розклад',
+            description: 'Увімкніть це лише якщо автоматичне визначення не спрацювало. Воно змусить сайт показувати плеєр через Channel ID, навіть якщо конкретне відео не знайдено.',
           },
         },
         {
@@ -112,6 +123,43 @@ export const LiveStream: GlobalConfig = {
         label: 'Повідомлення для користувача',
         type: 'text',
         defaultValue: 'Зараз триває пряма трансляція богослужіння',
+    },
+    {
+        name: 'syncStats',
+        type: 'group',
+        label: 'Статистика використання YouTube API',
+        admin: {
+            position: 'sidebar',
+            readOnly: true,
+            description: 'Інформація про останній запит до YouTube',
+        },
+        fields: [
+            { name: 'lastSyncedAt', type: 'date', label: 'Час останнього оновлення', admin: { date: { pickerAppearance: 'dayAndTime' } } },
+            { name: 'itemsFetched', type: 'number', label: 'Отримано відео (шт)' },
+        ]
+    },
+    {
+        name: 'cachedData',
+        type: 'group',
+        label: 'Кешовані дані YouTube',
+        admin: {
+            readOnly: true,
+            description: 'Ці поля оновлюються автоматично кнопкою "Оновити відео зараз"',
+        },
+        fields: [
+            {
+                name: 'videos',
+                type: 'json',
+            },
+            {
+                name: 'streams',
+                type: 'json',
+            },
+            {
+                name: 'lastUpdated',
+                type: 'date',
+            }
+        ]
     }
   ],
 };

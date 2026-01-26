@@ -674,7 +674,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface LiveStream {
   id: number;
   /**
-   * Вкючити негайно, ігноруючи будь-який розклад
+   * Увімкніть це лише якщо автоматичне визначення не спрацювало. Воно змусить сайт показувати плеєр через Channel ID, навіть якщо конкретне відео не знайдено.
    */
   isManuallyLive?: boolean | null;
   enableSundaySchedule?: boolean | null;
@@ -696,6 +696,37 @@ export interface LiveStream {
    */
   channelID: string;
   message?: string | null;
+  /**
+   * Інформація про останній запит до YouTube
+   */
+  syncStats?: {
+    lastSyncedAt?: string | null;
+    itemsFetched?: number | null;
+  };
+  /**
+   * Ці поля оновлюються автоматично кнопкою "Оновити відео зараз"
+   */
+  cachedData?: {
+    videos?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    streams?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    lastUpdated?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -717,6 +748,19 @@ export interface LiveStreamSelect<T extends boolean = true> {
   youtubeLink?: T;
   channelID?: T;
   message?: T;
+  syncStats?:
+    | T
+    | {
+        lastSyncedAt?: T;
+        itemsFetched?: T;
+      };
+  cachedData?:
+    | T
+    | {
+        videos?: T;
+        streams?: T;
+        lastUpdated?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

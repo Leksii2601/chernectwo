@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
 import { FloatingButton } from '@/components/landing/FloatingButton';
 import Image from 'next/image';
-import { Play, Image as ImageIcon, Radio, Calendar, ChevronRight, X } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+import { Play, Image as ImageIcon, Radio, ChevronRight, ChevronLeft, X } from 'lucide-react';
 
 // --- MOCK DATA (Existing) ---
 
@@ -15,7 +16,7 @@ const MOCK_GALLERY_IMAGES = [
   { src: '/media/piligrims.jpg', title: 'Паломництво' },
   { src: '/media/donate.jpg', title: 'Благодійність' },
   { src: '/media/contacts.jpg', title: 'Архітектура' },
-  { src: '/media/socialInitiatives/charity_dinner_2.jpg', title: 'Соціальне служіння' },
+  { src: '/media/donate.jpg', title: 'Соціальне служіння' },
   // Duplicates for grid fullness
   { src: '/media/life.jpg', title: 'Богослужіння' },
   { src: '/media/history.jpg', title: 'Архівні фото' },
@@ -25,11 +26,6 @@ const VIDEOS = [
   { id: '1', title: 'Історія відродження монастиря', thumbnail: '/media/history.jpg', duration: '12:45' },
   { id: '2', title: 'Вечірнє богослужіння', thumbnail: '/media/life.jpg', duration: '45:20' },
   { id: '3', title: 'Проповідь настоятеля', thumbnail: '/media/piligrims.jpg', duration: '15:10' },
-];
-
-const UPCOMING_STREAMS = [
-  { id: '1', date: 'Завтра, 09:00', title: 'Божественна Літургія', status: 'scheduled' },
-  { id: '2', date: 'Неділя, 17:00', title: 'Акафіст до Св. Миколая', status: 'scheduled' },
 ];
 
 interface SimpleImage {
@@ -52,13 +48,92 @@ interface MediaPageClientProps {
 }
 
 export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow = false }: MediaPageClientProps) {
-  const [activeTab, setActiveTab] = useState<'gallery' | 'video' | 'live'>('gallery');
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const initialTab = (searchParams.get('tab') as 'gallery' | 'video' | 'live') || 'gallery';
+  const [activeTab, setActiveTab] = useState<'gallery' | 'video' | 'live'>(initialTab);
+
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+  const [fetchedVideos, setFetchedVideos] = useState<any[]>([]);
+  const [fetchedStreams, setFetchedStreams] = useState<any[]>([]);
+  
+  // Pagination States
+  const [galleryLimit, setGalleryLimit] = useState(9);
+  const [videoPage, setVideoPage] = useState(1);
+  const VIDEOS_PER_PAGE = 9;
+
+  // State for Video Modal (Recent Videos)
+  const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
+
+  // State for Live Tab Player
+  // null = default state (show live if live, or offline message)
+  // string = specific archive ID playing
+  const [activeStreamId, setActiveStreamId] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    // Fetch Cached Data (Videos + Streams)
+    fetch('/api/youtube')
+      .then(res => res.json())
+      .then(data => {
+        if (data.videos) setFetchedVideos(data.videos);
+        if (data.streams) {
+            setFetchedStreams(data.streams);
+            // We DO NOT auto-select stream anymore, initial state is "Placeholder" or "Live"
+        }
+      })
+      .catch(err => console.error('Failed to fetch media', err));
+  }, []);
+
+  // Handle ESC key to close lightboxes & Lock Body Scroll
+  React.useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedImageIndex(null);
+        setSelectedVideoId(null);
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, []);
+
+  // Prevent background scrolling when modal is open
+  React.useEffect(() => {
+      if (selectedImageIndex !== null || selectedVideoId !== null) {
+          document.body.style.overflow = 'hidden';
+      } else {
+          document.body.style.overflow = '';
+      }
+      return () => {
+          document.body.style.overflow = '';
+      };
+  }, [selectedImageIndex, selectedVideoId]);
 
   // Combine mock and dynamic
   const allGalleryImages = [...MOCK_GALLERY_IMAGES, ...dynamicReports];
+  const visibleGalleryImages = allGalleryImages.slice(0, galleryLimit);
+
+  // Video Pagination Logic
+  const allVideos = fetchedVideos.length > 0 ? fetchedVideos : VIDEOS;
+  const totalVideoPages = Math.ceil(allVideos.length / VIDEOS_PER_PAGE);
+  const currentVideos = allVideos.slice((videoPage - 1) * VIDEOS_PER_PAGE, videoPage * VIDEOS_PER_PAGE);
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedImageIndex === null) return;
+    if (selectedImageIndex < allGalleryImages.length - 1) {
+        setSelectedImageIndex(selectedImageIndex + 1);
+    }
+  };
+
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (selectedImageIndex === null) return;
+    if (selectedImageIndex > 0) {
+        setSelectedImageIndex(selectedImageIndex - 1);
+    }
+  };
 
   const fullYoutubeLink = liveConfig?.youtubeLink || 'https://youtube.com';
+  
   // Use explicit channel ID if available, otherwise try to fallback (flaky) or empty
   const channelEmbed = liveConfig?.channelID && liveConfig.channelID !== 'UC...' 
         ? `https://www.youtube.com/embed/live_stream?channel=${liveConfig.channelID}`
@@ -92,7 +167,7 @@ export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow 
             onClick={() => setActiveTab('video')}
             className={`flex items-center justify-center gap-3 px-8 py-4 rounded-full text-lg font-bold uppercase tracking-wider transition-all duration-300
               ${activeTab === 'video' 
-                ? 'bg-red-600 text-white shadow-xl scale-105' 
+                ? 'bg-amber-600 text-white shadow-xl scale-105' 
                 : 'bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 border border-transparent shadow-sm'
               }`}
           >
@@ -104,7 +179,7 @@ export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow 
             onClick={() => setActiveTab('live')}
             className={`flex items-center justify-center gap-3 px-8 py-4 rounded-full text-lg font-bold uppercase tracking-wider transition-all duration-300
               ${activeTab === 'live' 
-                ? 'bg-black text-white shadow-xl scale-105' 
+                ? 'bg-amber-600 text-white shadow-xl scale-105' 
                 : 'bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-900 border border-transparent shadow-sm'
               }`}
           >
@@ -117,172 +192,306 @@ export default function MediaPageClient({ dynamicReports, liveConfig, isLiveNow 
         
         {/* 1. GALLERY GRID */}
         {activeTab === 'gallery' && (
-           <div className="animate-fadeIn grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {allGalleryImages.map((img, idx) => (
-                <div 
-                  key={idx} 
-                  className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500"
-                  onClick={() => setSelectedImage(img.src)}
-                >
-                  <Image 
-                    src={img.src} 
-                    alt={img.title} 
-                    fill 
-                    className="object-cover transition-transform duration-700 group-hover:scale-110" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                    <h3 className="text-white font-bold text-xl font-montserrat">{img.title}</h3>
+           <div className="animate-fadeIn">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                  {visibleGalleryImages.map((img, idx) => (
+                    <div 
+                      key={idx} 
+                      className="group relative h-80 overflow-hidden cursor-pointer shadow-md hover:shadow-2xl transition-all duration-500"
+                      onClick={() => setSelectedImageIndex(idx)}
+                    >
+                      <Image 
+                        src={img.src} 
+                        alt={img.title} 
+                        fill 
+                        className="object-cover transition-transform duration-700 group-hover:scale-110" 
+                      />
+                    </div>
+                  ))}
+              </div>
+              
+              {/* Load More Button */}
+              {galleryLimit < allGalleryImages.length && (
+                  <div className="flex justify-center pb-8">
+                      <button 
+                          onClick={() => setGalleryLimit(prev => prev + 9)}
+                          className="px-8 py-3 bg-white border border-gray-300 text-gray-700 font-bold uppercase tracking-wider hover:bg-gray-50 hover:border-darksilver transition-all shadow-sm"
+                      >
+                          Завантажити ще
+                      </button>
                   </div>
-                </div>
-              ))}
+              )}
            </div>
         )}
 
         {/* 2. VIDEO GRID */}
         {activeTab === 'video' && (
-          <div className="animate-fadeIn grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-             {VIDEOS.map((video) => (
-               <div key={video.id} className="bg-white rounded-2xl overflow-hidden shadow-lg hover:translate-y-[-5px] transition-transform duration-300 group">
-                  <div className="relative h-56 bg-gray-200">
-                     <Image 
-                        src={video.thumbnail} 
-                        alt={video.title} 
-                        fill 
-                        className="object-cover group-hover:opacity-90 transition-opacity" 
-                     />
-                     <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border-2 border-white">
-                           <Play className="w-6 h-6 text-white fill-current translate-x-1" />
+          <div className="animate-fadeIn">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    {currentVideos.map((video: any) => (
+                    <div 
+                        key={video.id} 
+                        onClick={() => setSelectedVideoId(video.id)}
+                        className="bg-white overflow-hidden shadow-sm group cursor-pointer hover:bg-gray-50 transition-colors"
+                    >
+                        <div className="relative h-56 bg-gray-200">
+                            <Image 
+                                src={video.thumbnail} 
+                                alt={video.title} 
+                                fill 
+                                className="object-cover group-hover:opacity-90 transition-opacity" 
+                            />
                         </div>
-                     </div>
-                     <span className="absolute bottom-4 right-4 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded">
-                        {video.duration}
-                     </span>
-                  </div>
-                  <div className="p-6">
-                     <h3 className="font-bold text-lg text-gray-900 leading-tight mb-2 group-hover:text-red-600 transition-colors">
-                        {video.title}
-                     </h3>
-                     <p className="text-gray-500 text-sm">Переглядів: 1.2 тис • 2 дні тому</p>
-                  </div>
-               </div>
-             ))}
+                        <div className="p-4">
+                            <h3 className="font-bold text-lg text-gray-900 leading-tight mb-2 group-hover:text-red-800 transition-colors line-clamp-2">
+                                {video.title}
+                            </h3>
+                            {video.publishedAt && (
+                                <p className="text-gray-500 text-sm">
+                                    {new Date(video.publishedAt).toLocaleDateString('uk-UA')}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                    ))}
+                </div>
+
+                {/* Pagination Controls */}
+                {totalVideoPages > 1 && (
+                    <div className="flex justify-center items-center gap-4 pb-8">
+                        <button 
+                            onClick={() => setVideoPage(p => Math.max(1, p - 1))}
+                            disabled={videoPage === 1}
+                            className={`p-2 rounded-full border ${videoPage === 1 ? 'border-gray-200 text-gray-300 cursor-not-allowed' : 'border-gray-400 text-gray-700 hover:bg-white hover:shadow-sm'}`}
+                        >
+                            <ChevronLeft className="w-6 h-6" />
+                        </button>
+                        
+                        <div className="flex gap-2">
+                            {Array.from({ length: totalVideoPages }, (_, i) => i + 1).map((pageNum) => (
+                                <button
+                                    key={pageNum}
+                                    onClick={() => setVideoPage(pageNum)}
+                                    className={`w-10 h-10 flex items-center justify-center rounded-full font-bold transition-all ${
+                                        videoPage === pageNum 
+                                            ? 'bg-amber-600 text-white shadow-md' 
+                                            : 'text-gray-600 hover:bg-gray-100'
+                                    }`}
+                                >
+                                    {pageNum}
+                                </button>
+                            ))}
+                        </div>
+
+                        <button 
+                            onClick={() => setVideoPage(p => Math.min(totalVideoPages, p + 1))}
+                            disabled={videoPage === totalVideoPages}
+                            className={`p-2 rounded-full border ${videoPage === totalVideoPages ? 'border-gray-200 text-gray-300 cursor-not-allowed' : 'border-gray-400 text-gray-700 hover:bg-white hover:shadow-sm'}`}
+                        >
+                            <ChevronRight className="w-6 h-6" />
+                        </button>
+                    </div>
+                )}
           </div>
         )}
 
-        {/* 3. LIVE STREAMS */}
+        {/* 3. LIVE STREAMS & ARCHIVE */}
         {activeTab === 'live' && (
-          <div className="animate-fadeIn max-w-4xl mx-auto">
+          <div className="animate-fadeIn max-w-[1400px] mx-auto">
              
-             {/* Main Player */}
-             <div className="relative aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl mb-12 border-4 border-gray-900 group">
-                {isLiveNow && channelEmbed ? (
-                   <iframe 
-                      src={channelEmbed} 
-                      title="Live Stream"
-                      className="w-full h-full" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowFullScreen
-                   ></iframe>
-                ) : (
-                /* Offline State */
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
-                   <div className="animate-pulse mb-6">
-                      <div className="w-24 h-24 rounded-full border-4 border-red-600 flex items-center justify-center bg-red-600/20">
-                         <Radio className="w-10 h-10 text-red-600" />
-                      </div>
-                   </div>
-                   {isLiveNow ? (
-                       // Live is theoretically active but no Channel ID is configured
-                       <div className="px-4">
-                           <h2 className="text-2xl md:text-3xl font-bold font-church mb-2">Налаштуйте ID каналу</h2>
-                           <p className="text-gray-400">Трансляція активна за розкладом, але в Адмін панелі не вказано &quot;YouTube Channel ID&quot;.</p>
-                       </div>
-                   ) : (
-                       <>
-                        <h2 className="text-2xl md:text-3xl font-bold font-church mb-2">Наразі немає активних трансляцій</h2>
-                        <p className="text-gray-400">Слідкуйте за розкладом нижче</p>
-                       </>
-                   )}
-                </div>
-                )}
-             </div>
-
-             {/* Schedule */}
-             <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
-                <div className="flex items-center gap-3 mb-8">
-                   <Calendar className="w-6 h-6 text-amber-600" />
-                   <h3 className="text-2xl font-bold text-gray-900 uppercase tracking-wide">Розклад трансляцій</h3>
-                </div>
-                
-                <div className="space-y-4">
-                   {/* Scheduled Sunday Service */}
-                    <div className="flex items-center justify-between p-6 bg-gray-50 rounded-xl hover:bg-amber-50 transition-colors group cursor-pointer border-l-4 border-transparent hover:border-amber-500">
-                         <div className="flex items-center gap-4 md:gap-8">
-                            <div className="flex flex-col items-center justify-center w-16 h-16 bg-white rounded-lg shadow-sm text-center p-2 min-w-[64px]">
-                               <span className="text-xs text-gray-500 uppercase font-bold">НЕДІЛЯ</span>
-                               <span className="text-lg font-black text-amber-600">{liveConfig?.sundayStartTime || '09:30'}</span>
+             {/* Unified Layout: Stacked on Mobile, Two-Column (Height Matched) on Desktop */}
+             <div className="flex flex-col lg:block lg:relative">
+                 
+                 {/* Left Column - Main Content (Dictates Height on Desktop) */}
+                 <div className="w-full lg:w-[66%] lg:inline-block lg:align-top lg:mr-[2%] mb-6 lg:mb-0">
+                    <div className="relative aspect-video bg-black shadow-2xl overflow-hidden border border-gray-800">
+                        {activeStreamId ? (
+                            <iframe 
+                                src={`https://www.youtube.com/embed/${activeStreamId}?autoplay=1`} 
+                                title="Stream Player"
+                                className="w-full h-full absolute inset-0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowFullScreen
+                            ></iframe>
+                        ) : isLiveNow && channelEmbed ? (
+                            <iframe 
+                                src={channelEmbed} 
+                                title="Live Stream"
+                                className="w-full h-full absolute inset-0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowFullScreen
+                            ></iframe>
+                        ) : (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-6 bg-stone-900">
+                                <div className="mb-6 opacity-50">
+                                    <div className="w-20 h-20 rounded-full border-2 border-white/20 flex items-center justify-center mx-auto">
+                                        <Radio className="w-8 h-8 text-white/50" />
+                                    </div>
+                                </div>
+                                <h2 className="text-2xl font-bold font-church mb-3">Наразі пряма трансляція відсутня</h2>
+                                <p className="text-gray-400 max-w-md mb-6">
+                                    Богослужіння завершене або ще не розпочалося. 
+                                    Ви можете переглянути записи попередніх трансляцій зі списку архіву.
+                                </p>
+                                
+                                
                             </div>
-                            <div>
-                               <h4 className="font-bold text-lg text-gray-900 group-hover:text-amber-700 transition-colors">Божественна Літургія</h4>
-                               <span className="text-sm text-gray-500 font-medium">Канал: Чернецтво Волині</span>
-                            </div>
-                         </div>
-                         <a href={fullYoutubeLink} target="_blank" className="hidden md:flex w-10 h-10 rounded-full bg-white border border-gray-200 items-center justify-center text-gray-400 group-hover:text-amber-600 group-hover:border-amber-200 transition-all">
-                             <ChevronRight className="w-5 h-5" />
-                         </a>
+                        )}
                     </div>
-
-                   {UPCOMING_STREAMS.map((stream) => (
-                      <div key={stream.id} className="flex items-center justify-between p-6 bg-gray-50 rounded-xl hover:bg-amber-50 transition-colors group cursor-pointer border-l-4 border-transparent hover:border-amber-500">
-                         <div className="flex items-center gap-4 md:gap-8">
-                            <div className="flex flex-col items-center justify-center w-16 h-16 bg-white rounded-lg shadow-sm text-center p-2 min-w-[64px]">
-                               <span className="text-xs text-gray-500 uppercase font-bold">{stream.date.split(',')[0]}</span>
-                               <span className="text-lg font-black text-amber-600">{stream.date.split(' ')[1]}</span>
+                    
+                    {/* Control Bar */}
+                    <div className="bg-white p-4 border-l border-r border-b border-gray-200">
+                        {activeStreamId ? (
+                             <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+                                 <span className="text-red-600 font-bold uppercase text-sm tracking-wider flex items-center gap-2">
+                                     <Play className="w-4 h-4" /> Архівний запис
+                                 </span>
+                                 <button onClick={() => setActiveStreamId(null)} className="text-gray-500 hover:text-black text-sm underline">
+                                     Повернутися до прямого ефіру
+                                 </button>
+                             </div>
+                        ) : isLiveNow ? (
+                            <div className="flex items-center justify-center sm:justify-start gap-2 text-red-600 animate-pulse">
+                                <span className="relative flex h-3 w-3">
+                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                  <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                                </span>
+                                <span className="font-bold uppercase text-sm tracking-wider">Наживо</span>
                             </div>
-                            <div>
-                               <h4 className="font-bold text-lg text-gray-900 group-hover:text-amber-700 transition-colors">{stream.title}</h4>
-                               <span className="text-sm text-gray-500 font-medium">Канал: Жидичин Центр</span>
-                            </div>
-                         </div>
-                         <button className="hidden md:flex w-10 h-10 rounded-full bg-white border border-gray-200 items-center justify-center text-gray-400 group-hover:text-amber-600 group-hover:border-amber-200 transition-all">
-                             <ChevronRight className="w-5 h-5" />
-                         </button>
-                      </div>
-                   ))}
-                </div>
+                        ) : (
+                            <div className="text-gray-500 text-sm font-medium text-center sm:text-left">Офлайн</div>
+                        )}
+                    </div>
+                 </div>
 
-                <div className="mt-8 text-center">
-                   <a href={fullYoutubeLink} target="_blank" className="inline-flex items-center text-red-600 font-bold hover:underline">
-                      Перейти на YouTube канал
-                      <ChevronRight className="w-4 h-4 ml-1" />
-                   </a>
-                </div>
+                 {/* Right Column - Absolute Overlay on Desktop, Stacked Block on Mobile */}
+                 <div className="w-full h-[400px] lg:h-full lg:absolute lg:top-0 lg:right-0 lg:bottom-0 lg:w-[32%] flex flex-col bg-stone-100 border border-t border-r border-b border-gray-200 shadow-sm overflow-hidden rounded-b-lg lg:rounded-none"> 
+                     <div className="p-4 border-b border-gray-200 bg-stone-100 flex-shrink-0">
+                        <h3 className="font-bold text-gray-800 uppercase tracking-wide flex items-center gap-2">
+                            <Radio className="w-5 h-5" />
+                            Архів трансляцій
+                        </h3>
+                     </div>
+                     <div className="flex-1 overflow-y-auto p-2 space-y-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+                        {fetchedStreams.length > 0 ? fetchedStreams.map((video: any) => (
+                             <div 
+                                key={video.id} 
+                                onClick={() => { 
+                                  setActiveStreamId(video.id);
+                                  // Scroll to top on mobile only
+                                  if (window.innerWidth < 1024) {
+                                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                                  }
+                                }}
+                                className={`flex gap-3 p-3 cursor-pointer transition-all border border-transparent hover:border-red-200 hover:bg-white hover:shadow-sm ${activeStreamId === video.id ? 'bg-white border-red-500 shadow-md ring-1 ring-red-500' : 'bg-transparent'}`}
+                             >
+                                 <div className="relative w-36 h-20 flex-shrink-0 bg-gray-200 overflow-hidden">
+                                     <Image 
+                                         src={video.thumbnail} 
+                                         alt={video.title} 
+                                         fill 
+                                         className="object-cover" 
+                                     />
+                                     {activeStreamId === video.id && (
+                                         <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                                            <Play className="w-6 h-6 text-white drop-shadow-md" />
+                                         </div>
+                                     )}
+                                 </div>
+                                 <div className="flex flex-col justify-center min-w-0">
+                                     <h4 className={`text-xs font-bold leading-tight mb-1 line-clamp-2 ${activeStreamId === video.id ? 'text-red-700' : 'text-gray-800'}`}>
+                                         {video.title}
+                                     </h4>
+                                     <span className="text-[10px] text-gray-500 font-bold uppercase">
+                                         {video.publishedAt || video.date ? new Date(video.publishedAt || video.date).toLocaleDateString('uk-UA') : ''}
+                                     </span>
+                                 </div>
+                             </div>
+                        )) : (
+                            <div className="p-8 text-center text-gray-400 text-sm">
+                                Завантаження архіву...
+                            </div>
+                        )}
+                     </div>
+                 </div>
              </div>
           </div>
         )}
 
       </div>
 
-      {/* LIGHTBOX MODAL */}
-      {selectedImage && (
+      {/* LIGHTBOX MODAL (IMAGES) */}
+      {selectedImageIndex !== null && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn"
-          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center animate-fadeIn"
+          onClick={() => setSelectedImageIndex(null)}
         >
+           {/* Close Button */}
            <button 
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 text-white hover:text-amber-500 transition-colors"
+                onClick={() => setSelectedImageIndex(null)}
+                className="absolute top-4 right-4 z-50 text-white/50 hover:text-white transition-colors p-2"
            >
               <X className="w-10 h-10" />
            </button>
-           <div className="relative w-full max-w-5xl aspect-[4/3] rounded-lg overflow-hidden shadow-2xl">
-              <Image 
-                src={selectedImage} 
-                alt="Fullview" 
-                fill 
-                className="object-contain"
-              />
+
+           {/* Navigation Buttons */}
+           <button
+             onClick={handlePrevImage}
+             disabled={selectedImageIndex === 0}
+             className={`absolute left-2 md:left-8 z-50 p-3 rounded-full transition-all backdrop-blur-sm ${selectedImageIndex === 0 ? 'opacity-30 cursor-not-allowed bg-white/5 text-gray-500' : 'bg-white/10 hover:bg-white/20 text-white'}`}
+           >
+             <ChevronLeft className="w-8 h-8" />
+           </button>
+           
+           <button
+             onClick={handleNextImage}
+             disabled={selectedImageIndex === allGalleryImages.length - 1}
+             className={`absolute right-2 md:right-8 z-50 p-3 rounded-full transition-all backdrop-blur-sm ${selectedImageIndex === allGalleryImages.length - 1 ? 'opacity-30 cursor-not-allowed bg-white/5 text-gray-500' : 'bg-white/10 hover:bg-white/20 text-white'}`}
+           >
+             <ChevronRight className="w-8 h-8" />
+           </button>
+
+           {/* Image Container */}
+           <div 
+             className="relative w-full h-full max-w-7xl max-h-screen p-4 md:p-10 flex items-center justify-center"
+             onClick={(e) => e.stopPropagation()} 
+           >
+              <div className="relative w-full h-full">
+                <Image 
+                    src={allGalleryImages[selectedImageIndex].src} 
+                    alt={allGalleryImages[selectedImageIndex].title} 
+                    fill 
+                    className="object-contain"
+                    priority
+                />
+              </div>
+           </div>
+        </div>
+      )}
+
+      {/* LIGHTBOX MODAL (VIDEO) */}
+      {selectedVideoId && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center animate-fadeIn p-4 md:p-10"
+          onClick={() => setSelectedVideoId(null)}
+        >
+           {/* Close Button */}
+           <button 
+                type="button"
+                onClick={() => setSelectedVideoId(null)}
+                className="absolute top-4 right-4 z-50 text-white/50 hover:text-white transition-colors p-2"
+           >
+              <X className="w-10 h-10" />
+           </button>
+           
+           <div className="w-full max-w-6xl aspect-video bg-black shadow-2xl relative border border-gray-800" onClick={(e) => e.stopPropagation()}>
+                <iframe 
+                    src={`https://www.youtube.com/embed/${selectedVideoId}?autoplay=1`} 
+                    title="Video Player"
+                    className="w-full h-full absolute inset-0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                ></iframe>
            </div>
         </div>
       )}
