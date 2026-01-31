@@ -66,15 +66,17 @@ export const ComplexLayout = () => {
     {
       id: 't2',
       categoryId: 'temples',
-      title: t('complex.t2_title'),
-      description: t('complex.t2_desc'),
-      previewImage: '/media/church-complex/temples/sviatodukhivskyi/sviatodukhivskyi_3.jpg',
+      title: t('complex.t4_title'),
+      description: t('complex.t4_desc'),
+      previewImage: '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.jpg',
       galleryImages: [
-        '/media/church-complex/temples/sviatodukhivskyi/sviatodukhivskyi_3.jpg',
-        '/media/church-complex/temples/sviatodukhivskyi/sviatodukhivskyi_2.jpg',
-        '/media/church-complex/temples/sviatodukhivskyi/sviatodukhivskyi_1.jpg'
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_1.jpg',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_2.jpg',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_3.jpg',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_4.jpg',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.jpg'
       ],
-      contacts: t('complex.t2_contacts')
+      contacts: t('complex.t4_contacts')
     },
     {
       id: 't3',
@@ -97,21 +99,6 @@ export const ComplexLayout = () => {
     },
     {
       id: 't4',
-      categoryId: 'temples',
-      title: t('complex.t4_title'),
-      description: t('complex.t4_desc'),
-      previewImage: '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.jpg',
-      galleryImages: [
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_1.jpg',
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_2.jpg',
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_3.jpg',
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_4.jpg',
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.jpg'
-      ],
-      contacts: t('complex.t4_contacts')
-    },
-    {
-      id: 't5',
       categoryId: 'temples',
       title: t('complex.t5_title'),
       description: t('complex.t5_desc'),
@@ -175,22 +162,6 @@ export const ComplexLayout = () => {
       ],
       contacts: t('complex.m4_contacts')
     },
-    {
-      id: 'm5',
-      categoryId: 'monuments',
-      title: t('complex.m5_title'),
-      description: t('complex.m5_desc'),
-      previewImage: '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_2.jpg',
-      galleryImages: [
-        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_1.jpg',
-        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_2.jpg',
-        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_3.jpg',
-        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_4.jpg',
-        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_5.jpg'
-      ],
-      contacts: t('complex.m5_contacts')
-    },
-
     // CATEGORY: PARKS
     {
       id: 'p1',
