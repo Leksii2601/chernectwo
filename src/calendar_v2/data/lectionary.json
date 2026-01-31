@@ -1,0 +1,1862 @@
+{
+  "10": {
+    "epistle": "Євр._11:33-12:2a",
+    "epistlePericope": "330",
+    "gospel": "Мф._10:32-33, 37-38, 19:27-30",
+    "gospelPericope": "38"
+  },
+  "11": {
+    "epistle": "Еф._5:8b-19",
+    "epistlePericope": "229",
+    "gospel": "Мф._18:10-20",
+    "gospelPericope": "75"
+  },
+  "12": {
+    "epistle": "Рим._1:1-7, 13-17",
+    "epistlePericope": "79",
+    "gospel": "Мф._4:25-5:13",
+    "gospelPericope": "10"
+  },
+  "13": {
+    "epistle": "Рим._1:18-27",
+    "epistlePericope": "80",
+    "gospel": "Мф._5:20-26",
+    "gospelPericope": "12"
+  },
+  "14": {
+    "epistle": "Рим._1:28-2:9",
+    "epistlePericope": "81",
+    "gospel": "Мф._5:27-32",
+    "gospelPericope": "13"
+  },
+  "15": {
+    "epistle": "Рим._2:14-29",
+    "epistlePericope": "82",
+    "gospel": "Мф._5:33-41",
+    "gospelPericope": "14"
+  },
+  "16": {
+    "epistle": "Рим._1:7b-12",
+    "epistlePericope": "79 (mid.)",
+    "gospel": "Мф._5:42-48",
+    "gospelPericope": "15"
+  },
+  "20": {
+    "epistle": "Рим._2:10-16",
+    "epistlePericope": "81 (mid.)",
+    "gospel": "Мф._4:18-23",
+    "gospelPericope": "9"
+  },
+  "21": {
+    "epistle": "Рим._2:28-3:18",
+    "epistlePericope": "83",
+    "gospel": "Мф._6:31-34, 7:9-11",
+    "gospelPericope": "19"
+  },
+  "22": {
+    "epistle": "Рим._4:4-12",
+    "epistlePericope": "86",
+    "gospel": "Мф._7:15-21",
+    "gospelPericope": "22"
+  },
+  "23": {
+    "epistle": "Рим._4:13-25",
+    "epistlePericope": "87",
+    "gospel": "Мф._7:21-23",
+    "gospelPericope": "23"
+  },
+  "24": {
+    "epistle": "Рим._5:10-16",
+    "epistlePericope": "89",
+    "gospel": "Мф._8:23-27",
+    "gospelPericope": "27"
+  },
+  "25": {
+    "epistle": "Рим._5:17-6:2",
+    "epistlePericope": "90",
+    "gospel": "Мф._9:14-17",
+    "gospelPericope": "31"
+  },
+  "26": {
+    "epistle": "Рим._3:19-26",
+    "epistlePericope": "84",
+    "gospel": "Мф._7:1-8",
+    "gospelPericope": "20"
+  },
+  "30": {
+    "epistle": "Рим._5:1-10",
+    "epistlePericope": "88",
+    "gospel": "Мф._6:22-33",
+    "gospelPericope": "18"
+  },
+  "31": {
+    "epistle": "Рим._9:18-33",
+    "epistlePericope": "102",
+    "gospel": "Мф._11:2-15",
+    "gospelPericope": "40"
+  },
+  "32": {
+    "epistle": "Рим._7:14-8:2",
+    "epistlePericope": "95",
+    "gospel": "Мф._10:9-15",
+    "gospelPericope": "35"
+  },
+  "33": {
+    "epistle": "Рим._8:2-13",
+    "epistlePericope": "96",
+    "gospel": "Мф._10:16-22",
+    "gospelPericope": "36"
+  },
+  "34": {
+    "epistle": "Рим._8:22-27",
+    "epistlePericope": "98",
+    "gospel": "Мф._10:23-31",
+    "gospelPericope": "37"
+  },
+  "35": {
+    "epistle": "Рим._9:6-19",
+    "epistlePericope": "101",
+    "gospel": "Мф._10:32-36, 11:1",
+    "gospelPericope": "38"
+  },
+  "36": {
+    "epistle": "Рим._3:28-4:3",
+    "epistlePericope": "85",
+    "gospel": "Мф._7:24-8:4",
+    "gospelPericope": "24"
+  },
+  "40": {
+    "epistle": "Рим._6:18-23",
+    "epistlePericope": "93",
+    "gospel": "Мф._8:5-13",
+    "gospelPericope": "25"
+  },
+  "41": {
+    "epistle": "Рим._12:4-5, 15-21",
+    "epistlePericope": "109",
+    "gospel": "Мф._12:9-13",
+    "gospelPericope": "45"
+  },
+  "42": {
+    "epistle": "Рим._14:9-18",
+    "epistlePericope": "114",
+    "gospel": "Мф._12:14-16,22-30",
+    "gospelPericope": "46"
+  },
+  "43": {
+    "epistle": "Рим._15:7-16",
+    "epistlePericope": "117",
+    "gospel": "Мф._12:38-45",
+    "gospelPericope": "48"
+  },
+  "44": {
+    "epistle": "Рим._11:13-24",
+    "epistlePericope": "106",
+    "gospel": "Мф._11:27-30",
+    "gospelPericope": "43"
+  },
+  "45": {
+    "epistle": "Рим._11:25-36",
+    "epistlePericope": "107",
+    "gospel": "Мф._12:1-8",
+    "gospelPericope": "44"
+  },
+  "46": {
+    "epistle": "Рим._6:11-17",
+    "epistlePericope": "92",
+    "gospel": "Мф._8:14-23",
+    "gospelPericope": "26"
+  },
+  "50": {
+    "epistle": "Рим._10:1-10",
+    "epistlePericope": "103",
+    "gospel": "Мф._8:28-9:1",
+    "gospelPericope": "28"
+  },
+  "54": {
+    "epistle": "Рим._15:17-29",
+    "epistlePericope": "118",
+    "gospel": "Мф._12:46-13:3a",
+    "gospelPericope": "49"
+  },
+  "55": {
+    "epistle": "Рим._16:1-16",
+    "epistlePericope": "120",
+    "gospel": "Мф._13:3b-9",
+    "gospelPericope": "50"
+  },
+  "56": {
+    "epistle": "Рим._8:14-21",
+    "epistlePericope": "97",
+    "gospel": "Мф._9:9-13",
+    "gospelPericope": "30"
+  },
+  "60": {
+    "epistle": "Рим._12:6-14",
+    "epistlePericope": "110",
+    "gospel": "Мф._9:1-8",
+    "gospelPericope": "29"
+  },
+  "61": {
+    "epistle": "Рим._16:17-24",
+    "epistlePericope": "121",
+    "gospel": "Мф._13:10-23",
+    "gospelPericope": "51"
+  },
+  "62": {
+    "epistle": "1 Кор._1:1-9",
+    "epistlePericope": "122",
+    "gospel": "Мф._13:24-30",
+    "gospelPericope": "52"
+  },
+  "63": {
+    "epistle": "1 Кор._2:9b-3:8",
+    "epistlePericope": "127",
+    "gospel": "Мф._13:31-36a",
+    "gospelPericope": "53"
+  },
+  "64": {
+    "epistle": "1 Кор._3:18-23",
+    "epistlePericope": "129",
+    "gospel": "Мф._13:36b-43",
+    "gospelPericope": "54"
+  },
+  "65": {
+    "epistle": "1 Кор._4:5-8",
+    "epistlePericope": "130 (mid.)",
+    "gospel": "Мф._13:44-54a",
+    "gospelPericope": "55"
+  },
+  "66": {
+    "epistle": "Рим._9:1-5",
+    "epistlePericope": "100",
+    "gospel": "Мф._9:18-26",
+    "gospelPericope": "32"
+  },
+  "70": {
+    "epistle": "Рим._15:1-7",
+    "epistlePericope": "116",
+    "gospel": "Мф._9:27-35",
+    "gospelPericope": "33"
+  },
+  "71": {
+    "epistle": "1 Кор._5:9-6:11",
+    "epistlePericope": "134",
+    "gospel": "Мф._13:54-58",
+    "gospelPericope": "56"
+  },
+  "72": {
+    "epistle": "1 Кор._6:20b-7:12",
+    "epistlePericope": "136",
+    "gospel": "Мф._14:1-13",
+    "gospelPericope": "57"
+  },
+  "73": {
+    "epistle": "1 Кор._7:12b-24",
+    "epistlePericope": "137",
+    "gospel": "Мф._14:35-15:11",
+    "gospelPericope": "60"
+  },
+  "74": {
+    "epistle": "1 Кор._7:24-35",
+    "epistlePericope": "138",
+    "gospel": "Мф._15:12-21",
+    "gospelPericope": "61"
+  },
+  "75": {
+    "epistle": "1 Кор._7:35-8:7",
+    "epistlePericope": "139",
+    "gospel": "Мф._15:29-31",
+    "gospelPericope": "63"
+  },
+  "76": {
+    "epistle": "Рим._12:1-3",
+    "epistlePericope": "108",
+    "gospel": "Мф._10:37-11:1",
+    "gospelPericope": "39"
+  },
+  "80": {
+    "epistle": "1 Кор._1:10-18",
+    "epistlePericope": "124",
+    "gospel": "Мф._14:14-22",
+    "gospelPericope": "58"
+  },
+  "81": {
+    "epistle": "1 Кор._9:13-18",
+    "epistlePericope": "142",
+    "gospel": "Мф._16:1-6",
+    "gospelPericope": "65"
+  },
+  "82": {
+    "epistle": "1 Кор._10:5-12",
+    "epistlePericope": "144",
+    "gospel": "Мф._16:6-12",
+    "gospelPericope": "66"
+  },
+  "83": {
+    "epistle": "1 Кор._10:12-22",
+    "epistlePericope": "145",
+    "gospel": "Мф._16:20-24",
+    "gospelPericope": "68"
+  },
+  "84": {
+    "epistle": "1 Кор._10:28-11:7",
+    "epistlePericope": "147",
+    "gospel": "Мф._16:24-28",
+    "gospelPericope": "69"
+  },
+  "85": {
+    "epistle": "1 Кор._11:8-22",
+    "epistlePericope": "148",
+    "gospel": "Мф._17:10-18",
+    "gospelPericope": "71"
+  },
+  "86": {
+    "epistle": "Рим._13:1-10",
+    "epistlePericope": "111",
+    "gospel": "Мф._12:30-37",
+    "gospelPericope": "47"
+  },
+  "90": {
+    "epistle": "1 Кор._3:9-17",
+    "epistlePericope": "128",
+    "gospel": "Мф._14:22-34",
+    "gospelPericope": "59"
+  },
+  "91": {
+    "epistle": "1 Кор._11:31-12:6",
+    "epistlePericope": "150",
+    "gospel": "Мф._18:1-11",
+    "gospelPericope": "74"
+  },
+  "92": {
+    "epistle": "1 Кор._12:12-26",
+    "epistlePericope": "152",
+    "gospel": "Мф._18:18-22, 19:1-2, 13-15",
+    "gospelPericope": "76"
+  },
+  "93": {
+    "epistle": "1 Кор._13:4-14:5",
+    "epistlePericope": "154",
+    "gospel": "Мф._20:1-16",
+    "gospelPericope": "80"
+  },
+  "94": {
+    "epistle": "1 Кор._14:6-19",
+    "epistlePericope": "155",
+    "gospel": "Мф._20:17-28",
+    "gospelPericope": "81"
+  },
+  "95": {
+    "epistle": "1 Кор._14:26-40",
+    "epistlePericope": "157",
+    "gospel": "Мф._21:12-14, 17-20",
+    "gospelPericope": "83 (mid.)"
+  },
+  "96": {
+    "epistle": "Рим._14:6-9",
+    "epistlePericope": "113",
+    "gospel": "Мф._15:32-39",
+    "gospelPericope": "64"
+  },
+  "100": {
+    "epistle": "1 Кор._4:9-16",
+    "epistlePericope": "131",
+    "gospel": "Мф._17:14-23a",
+    "gospelPericope": "72"
+  },
+  "101": {
+    "epistle": "1 Кор._15:12-19",
+    "epistlePericope": "159",
+    "gospel": "Мф._21:18-22",
+    "gospelPericope": "84"
+  },
+  "102": {
+    "epistle": "1 Кор._15:29-38",
+    "epistlePericope": "161",
+    "gospel": "Мф._21:23-27",
+    "gospelPericope": "85"
+  },
+  "103": {
+    "epistle": "1 Кор._16:4-12",
+    "epistlePericope": "165",
+    "gospel": "Мф._21:28-32",
+    "gospelPericope": "86"
+  },
+  "104": {
+    "epistle": "2 Кор._1:1-7",
+    "epistlePericope": "167",
+    "gospel": "Мф._21:43-46",
+    "gospelPericope": "88"
+  },
+  "105": {
+    "epistle": "2 Кор._1:12-20",
+    "epistlePericope": "169",
+    "gospel": "Мф._22:23-33",
+    "gospelPericope": "91"
+  },
+  "106": {
+    "epistle": "Рим._15:30-33",
+    "epistlePericope": "119",
+    "gospel": "Мф._17:24-18:4",
+    "gospelPericope": "73"
+  },
+  "110": {
+    "epistle": "1 Кор._9:2b-12",
+    "epistlePericope": "141",
+    "gospel": "Мф._18:23-35",
+    "gospelPericope": "77"
+  },
+  "111": {
+    "epistle": "2 Кор._2:3b-15a",
+    "epistlePericope": "171",
+    "gospel": "Мф._23:13-22",
+    "gospelPericope": "94"
+  },
+  "112": {
+    "epistle": "2 Кор._2:14-3:3",
+    "epistlePericope": "172",
+    "gospel": "Мф._23:23-28",
+    "gospelPericope": "95"
+  },
+  "113": {
+    "epistle": "2 Кор._3:4-11",
+    "epistlePericope": "173",
+    "gospel": "Мф._23:29-39",
+    "gospelPericope": "96"
+  },
+  "114": {
+    "epistle": "2 Кор._4:1-6",
+    "epistlePericope": "175",
+    "gospel": "Мф._24:13-28",
+    "gospelPericope": "99"
+  },
+  "115": {
+    "epistle": "2 Кор._4:13-18",
+    "epistlePericope": "177",
+    "gospel": "Мф._24:27-33, 42-51",
+    "gospelPericope": "100"
+  },
+  "116": {
+    "epistle": "1 Кор._1:3-9",
+    "epistlePericope": "123",
+    "gospel": "Мф._19:3-12",
+    "gospelPericope": "78"
+  },
+  "120": {
+    "epistle": "1 Кор._15:1-11",
+    "epistlePericope": "158",
+    "gospel": "Мф._19:16-26",
+    "gospelPericope": "79"
+  },
+  "121": {
+    "epistle": "2 Кор._5:10-15",
+    "epistlePericope": "179",
+    "gospel": "Мк._1:9-15",
+    "gospelPericope": "2"
+  },
+  "122": {
+    "epistle": "2 Кор._5:15-21",
+    "epistlePericope": "180",
+    "gospel": "Мк._1:16-22",
+    "gospelPericope": "3"
+  },
+  "123": {
+    "epistle": "2 Кор._6:11-16a",
+    "epistlePericope": "182",
+    "gospel": "Мк._1:23-28",
+    "gospelPericope": "4"
+  },
+  "124": {
+    "epistle": "2 Кор._7:1b-10a",
+    "epistlePericope": "183",
+    "gospel": "Мк._1:29-35",
+    "gospelPericope": "5"
+  },
+  "125": {
+    "epistle": "2 Кор._7:10-16",
+    "epistlePericope": "184",
+    "gospel": "Мк._2:18-22",
+    "gospelPericope": "9"
+  },
+  "126": {
+    "epistle": "1 Кор._1:26-29",
+    "epistlePericope": "125 (mid.)",
+    "gospel": "Мф._20:29-34",
+    "gospelPericope": "82"
+  },
+  "130": {
+    "epistle": "1 Кор._16:13-24",
+    "epistlePericope": "166",
+    "gospel": "Мф._21:33-42",
+    "gospelPericope": "87"
+  },
+  "131": {
+    "epistle": "2 Кор._8:7-15",
+    "epistlePericope": "186",
+    "gospel": "Мк._3:6-12",
+    "gospelPericope": "11"
+  },
+  "132": {
+    "epistle": "2 Кор._8:16-9:5",
+    "epistlePericope": "187",
+    "gospel": "Мк._3:13-19a",
+    "gospelPericope": "12"
+  },
+  "133": {
+    "epistle": "2 Кор._9:12-10:7",
+    "epistlePericope": "189",
+    "gospel": "Мк._3:19b-27",
+    "gospelPericope": "13"
+  },
+  "134": {
+    "epistle": "2 Кор._10:7b-18",
+    "epistlePericope": "190",
+    "gospel": "Мк._3:28-35",
+    "gospelPericope": "14"
+  },
+  "135": {
+    "epistle": "2 Кор._11:5-21a",
+    "epistlePericope": "192",
+    "gospel": "Мк._4:1-9",
+    "gospelPericope": "15"
+  },
+  "136": {
+    "epistle": "1 Кор._2:6-9",
+    "epistlePericope": "126",
+    "gospel": "Мф._22:15-22",
+    "gospelPericope": "90"
+  },
+  "140": {
+    "epistle": "2 Кор._1:21-2:4",
+    "epistlePericope": "170",
+    "gospel": "Мф._22:2-14",
+    "gospelPericope": "89"
+  },
+  "141": {
+    "epistle": "2 Кор._12:10-19",
+    "epistlePericope": "195",
+    "gospel": "Мк._4:10-23",
+    "gospelPericope": "16"
+  },
+  "142": {
+    "epistle": "2 Кор._12:20-13:2",
+    "epistlePericope": "196",
+    "gospel": "Мк._4:24-34",
+    "gospelPericope": "17"
+  },
+  "143": {
+    "epistle": "2 Кор._13:3-14",
+    "epistlePericope": "197",
+    "gospel": "Мк._4:35-41",
+    "gospelPericope": "18"
+  },
+  "144": {
+    "epistle": "Гал._1:1-10, 20-2:5",
+    "epistlePericope": "198",
+    "gospel": "Мк._5:1-20",
+    "gospelPericope": "19"
+  },
+  "145": {
+    "epistle": "Гал._2:6-10",
+    "epistlePericope": "201",
+    "gospel": "Мк._5:22-24, 35-6:1",
+    "gospelPericope": "20"
+  },
+  "146": {
+    "epistle": "1 Кор._4:1-5",
+    "epistlePericope": "130",
+    "gospel": "Мф._23:1-12",
+    "gospelPericope": "93"
+  },
+  "150": {
+    "epistle": "2 Кор._4:6-15",
+    "epistlePericope": "176",
+    "gospel": "Мф._22:35-46",
+    "gospelPericope": "92"
+  },
+  "151": {
+    "epistle": "Гал._2:11-16",
+    "epistlePericope": "202",
+    "gospel": "Мк._5:24b-34",
+    "gospelPericope": "21"
+  },
+  "152": {
+    "epistle": "Гал._2:21-3:7",
+    "epistlePericope": "204",
+    "gospel": "Мк._6:1-7",
+    "gospelPericope": "22"
+  },
+  "153": {
+    "epistle": "Гал._3:15-22",
+    "epistlePericope": "207",
+    "gospel": "Мк._6:7-13",
+    "gospelPericope": "23"
+  },
+  "154": {
+    "epistle": "Гал._3:23-4:5",
+    "epistlePericope": "208",
+    "gospel": "Мк._6:30-45",
+    "gospelPericope": "25"
+  },
+  "155": {
+    "epistle": "Гал._4:8-21",
+    "epistlePericope": "210",
+    "gospel": "Мк._6:45-53",
+    "gospelPericope": "26"
+  },
+  "156": {
+    "epistle": "1 Кор._4:17-5:5",
+    "epistlePericope": "132",
+    "gospel": "Мф._24:1-13",
+    "gospelPericope": "97"
+  },
+  "160": {
+    "epistle": "2 Кор._6:1-10",
+    "epistlePericope": "181",
+    "gospel": "Мф._25:14-30",
+    "gospelPericope": "105"
+  },
+  "161": {
+    "epistle": "Гал._4:28-5:10",
+    "epistlePericope": "211",
+    "gospel": "Мк._6:54-7:8a",
+    "gospelPericope": "27"
+  },
+  "162": {
+    "epistle": "Гал._5:11-21",
+    "epistlePericope": "212",
+    "gospel": "Мк._7:5-16",
+    "gospelPericope": "28"
+  },
+  "163": {
+    "epistle": "Гал._6:2-10",
+    "epistlePericope": "214",
+    "gospel": "Мк._7:14-24a",
+    "gospelPericope": "29"
+  },
+  "164": {
+    "epistle": "Еф._1:1-9a",
+    "epistlePericope": "216",
+    "gospel": "Мк._7:24-30",
+    "gospelPericope": "30"
+  },
+  "165": {
+    "epistle": "Еф._1:7-17",
+    "epistlePericope": "217",
+    "gospel": "Мк._8:1-10",
+    "gospelPericope": "32"
+  },
+  "166": {
+    "epistle": "1 Кор._10:23-28",
+    "epistlePericope": "146",
+    "gospel": "Мф._24:34-44",
+    "gospelPericope": "101"
+  },
+  "170": {
+    "epistle": "2 Кор._6:16-7:1",
+    "epistlePericope": "182 (mid.)",
+    "gospel": "Мф._15:21-28",
+    "gospelPericope": "62"
+  },
+  "171": {
+    "epistle": "Еф._1:22-2:3",
+    "epistlePericope": "219",
+    "gospel": "Мк._10:46-52",
+    "gospelPericope": "48"
+  },
+  "172": {
+    "epistle": "Еф._2:19-3:7",
+    "epistlePericope": "222",
+    "gospel": "Мк._11:11-23",
+    "gospelPericope": "50"
+  },
+  "173": {
+    "epistle": "Еф._3:8-21",
+    "epistlePericope": "223",
+    "gospel": "Мк._11:22b-26",
+    "gospelPericope": "51"
+  },
+  "174": {
+    "epistle": "Еф._4:14-19",
+    "epistlePericope": "225",
+    "gospel": "Мк._11:27-33",
+    "gospelPericope": "52"
+  },
+  "175": {
+    "epistle": "Еф._4:17-25a",
+    "epistlePericope": "226",
+    "gospel": "Мк._12:1-12",
+    "gospelPericope": "53"
+  },
+  "176": {
+    "epistle": "1 Кор._14:20-25",
+    "epistlePericope": "156",
+    "gospel": "Мф._25:1-13",
+    "gospelPericope": "104"
+  },
+  "180": {
+    "epistle": "2 Кор._9:6-11",
+    "epistlePericope": "188",
+    "gospel": "Лк._5:1b-11",
+    "gospelPericope": "17"
+  },
+  "181": {
+    "epistle": "Еф._4:25-32",
+    "epistlePericope": "227",
+    "gospel": "Лк._3:19-22",
+    "gospelPericope": "10"
+  },
+  "182": {
+    "epistle": "Еф._5:20-26",
+    "epistlePericope": "230",
+    "gospel": "Лк._3:23-4:1",
+    "gospelPericope": "11"
+  },
+  "183": {
+    "epistle": "Еф._5:25-33a",
+    "epistlePericope": "231",
+    "gospel": "Лк._4:1-15",
+    "gospelPericope": "12"
+  },
+  "184": {
+    "epistle": "Еф._5:33-6:9",
+    "epistlePericope": "232",
+    "gospel": "Лк._4:16-22a",
+    "gospelPericope": "13"
+  },
+  "185": {
+    "epistle": "Еф._6:18-24",
+    "epistlePericope": "234",
+    "gospel": "Лк._4:22b-30",
+    "gospelPericope": "14"
+  },
+  "186": {
+    "epistle": "1 Кор._15:39-45",
+    "epistlePericope": "162",
+    "gospel": "Лк._4:31-36",
+    "gospelPericope": "15"
+  },
+  "190": {
+    "epistle": "2 Кор._11:31-12:9",
+    "epistlePericope": "194",
+    "gospel": "Лк._6:31-36",
+    "gospelPericope": "26"
+  },
+  "191": {
+    "epistle": "Флп._1:1-7",
+    "epistlePericope": "235",
+    "gospel": "Лк._4:37-44",
+    "gospelPericope": "16"
+  },
+  "192": {
+    "epistle": "Флп._1:8-14",
+    "epistlePericope": "236",
+    "gospel": "Лк._5:12-16",
+    "gospelPericope": "18"
+  },
+  "193": {
+    "epistle": "Флп._1:12-20a",
+    "epistlePericope": "237",
+    "gospel": "Лк._5:33-39",
+    "gospelPericope": "21"
+  },
+  "194": {
+    "epistle": "Флп._1:20b-27a",
+    "epistlePericope": "238",
+    "gospel": "Лк._6:12-19",
+    "gospelPericope": "23"
+  },
+  "195": {
+    "epistle": "Флп._1:27-2:4",
+    "epistlePericope": "239",
+    "gospel": "Лк._6:17-23a",
+    "gospelPericope": "24"
+  },
+  "196": {
+    "epistle": "1 Кор._15:58-16:3",
+    "epistlePericope": "164",
+    "gospel": "Лк._5:17-26",
+    "gospelPericope": "19"
+  },
+  "200": {
+    "epistle": "Гал._1:11-19",
+    "epistlePericope": "200",
+    "gospel": "Лк._7:11-16",
+    "gospelPericope": "30"
+  },
+  "201": {
+    "epistle": "Флп._2:12-16a",
+    "epistlePericope": "241",
+    "gospel": "Лк._6:24-30",
+    "gospelPericope": "25"
+  },
+  "202": {
+    "epistle": "Флп._2:16b-23",
+    "epistlePericope": "242",
+    "gospel": "Лк._6:37-45",
+    "gospelPericope": "27"
+  },
+  "203": {
+    "epistle": "Флп._2:24-30",
+    "epistlePericope": "243",
+    "gospel": "Лк._6:46-7:1",
+    "gospelPericope": "28"
+  },
+  "204": {
+    "epistle": "Флп._3:1-8",
+    "epistlePericope": "244",
+    "gospel": "Лк._7:17-30",
+    "gospelPericope": "31"
+  },
+  "205": {
+    "epistle": "Флп._3:8b-19",
+    "epistlePericope": "245",
+    "gospel": "Лк._7:31-35",
+    "gospelPericope": "32"
+  },
+  "206": {
+    "epistle": "2 Кор._1:8-11",
+    "epistlePericope": "168",
+    "gospel": "Лк._5:27-32",
+    "gospelPericope": "20"
+  },
+  "210": {
+    "epistle": "Гал._2:16-20",
+    "epistlePericope": "203",
+    "gospel": "Лк._8:5-15",
+    "gospelPericope": "35"
+  },
+  "211": {
+    "epistle": "Флп._4:10-23",
+    "epistlePericope": "248",
+    "gospel": "Лк._7:36-50",
+    "gospelPericope": "33"
+  },
+  "212": {
+    "epistle": "Кол._1:1-2a, 7-11",
+    "epistlePericope": "249",
+    "gospel": "Лк._8:1-3",
+    "gospelPericope": "34"
+  },
+  "213": {
+    "epistle": "Кол._1:18-23",
+    "epistlePericope": "251",
+    "gospel": "Лк._8:22-25",
+    "gospelPericope": "37"
+  },
+  "214": {
+    "epistle": "Кол._1:24-29",
+    "epistlePericope": "252",
+    "gospel": "Лк._9:7-11",
+    "gospelPericope": "41"
+  },
+  "215": {
+    "epistle": "Кол._2:1-7",
+    "epistlePericope": "253",
+    "gospel": "Лк._9:12b-18a",
+    "gospelPericope": "42"
+  },
+  "216": {
+    "epistle": "2 Кор._3:12-18",
+    "epistlePericope": "174",
+    "gospel": "Лк._6:1-10",
+    "gospelPericope": "22"
+  },
+  "220": {
+    "epistle": "Гал._6:11-18",
+    "epistlePericope": "215",
+    "gospel": "Лк._16:19-31",
+    "gospelPericope": "83"
+  },
+  "221": {
+    "epistle": "Кол._2:13-20",
+    "epistlePericope": "255",
+    "gospel": "Лк._9:18-22",
+    "gospelPericope": "43"
+  },
+  "222": {
+    "epistle": "Кол._2:20-3:3",
+    "epistlePericope": "256",
+    "gospel": "Лк._9:23-27",
+    "gospelPericope": "44"
+  },
+  "223": {
+    "epistle": "Кол._3:17-4:1",
+    "epistlePericope": "259",
+    "gospel": "Лк._9:44-50",
+    "gospelPericope": "47"
+  },
+  "224": {
+    "epistle": "Кол._4:2-9",
+    "epistlePericope": "260",
+    "gospel": "Лк._9:49-56",
+    "gospelPericope": "48"
+  },
+  "225": {
+    "epistle": "Кол._4:10-18",
+    "epistlePericope": "261",
+    "gospel": "Лк._10:1-15",
+    "gospelPericope": "50"
+  },
+  "226": {
+    "epistle": "2 Кор._5:1-10a",
+    "epistlePericope": "178",
+    "gospel": "Лк._7:1b-10",
+    "gospelPericope": "29"
+  },
+  "230": {
+    "epistle": "Еф._2:4-10",
+    "epistlePericope": "220",
+    "gospel": "Лк._8:26-39",
+    "gospelPericope": "38"
+  },
+  "231": {
+    "epistle": "1 Сол._1:1-5",
+    "epistlePericope": "262",
+    "gospel": "Лк._10:22-24",
+    "gospelPericope": "52"
+  },
+  "232": {
+    "epistle": "1 Сол._1:6-10",
+    "epistlePericope": "263",
+    "gospel": "Лк._11:1-10",
+    "gospelPericope": "55"
+  },
+  "233": {
+    "epistle": "1 Сол._2:1-8",
+    "epistlePericope": "264",
+    "gospel": "Лк._11:9-13",
+    "gospelPericope": "56"
+  },
+  "234": {
+    "epistle": "1 Сол._2:9-14a",
+    "epistlePericope": "265",
+    "gospel": "Лк._11:14-23",
+    "gospelPericope": "57"
+  },
+  "235": {
+    "epistle": "1 Сол._2:14-19",
+    "epistlePericope": "266",
+    "gospel": "Лк._11:23-26",
+    "gospelPericope": "58"
+  },
+  "236": {
+    "epistle": "2 Кор._8:1-5",
+    "epistlePericope": "185",
+    "gospel": "Лк._8:16-21",
+    "gospelPericope": "36"
+  },
+  "240": {
+    "epistle": "Еф._2:14-22",
+    "epistlePericope": "221",
+    "gospel": "Лк._8:41-56",
+    "gospelPericope": "39"
+  },
+  "241": {
+    "epistle": "1 Сол._2:20-3:8",
+    "epistlePericope": "267",
+    "gospel": "Лк._11:29-33",
+    "gospelPericope": "59"
+  },
+  "242": {
+    "epistle": "1 Сол._3:9-13",
+    "epistlePericope": "268",
+    "gospel": "Лк._11:34-41",
+    "gospelPericope": "60"
+  },
+  "243": {
+    "epistle": "1 Сол._4:1-12",
+    "epistlePericope": "269",
+    "gospel": "Лк._11:42-46",
+    "gospelPericope": "61"
+  },
+  "244": {
+    "epistle": "1 Сол._5:1-8",
+    "epistlePericope": "271",
+    "gospel": "Лк._11:47-12:1",
+    "gospelPericope": "62"
+  },
+  "245": {
+    "epistle": "1 Сол._5:9-13, 24-28",
+    "epistlePericope": "272",
+    "gospel": "Лк._12:2-12",
+    "gospelPericope": "63"
+  },
+  "246": {
+    "epistle": "2 Кор._11:1-6",
+    "epistlePericope": "191",
+    "gospel": "Лк._9:1-6",
+    "gospelPericope": "40"
+  },
+  "250": {
+    "epistle": "Еф._4:1-6",
+    "epistlePericope": "224",
+    "gospel": "Лк._10:25-37",
+    "gospelPericope": "53"
+  },
+  "251": {
+    "epistle": "2 Сол._1:1-10",
+    "epistlePericope": "274",
+    "gospel": "Лк._12:13-15, 22b-31",
+    "gospelPericope": "65"
+  },
+  "252": {
+    "epistle": "2 Сол._1:10b-2:2",
+    "epistlePericope": "274 (mid.)",
+    "gospel": "Лк._12:42-48",
+    "gospelPericope": "68"
+  },
+  "253": {
+    "epistle": "2 Сол._2:1-12",
+    "epistlePericope": "275",
+    "gospel": "Лк._12:48b-59",
+    "gospelPericope": "69"
+  },
+  "254": {
+    "epistle": "2 Сол._2:13-3:5",
+    "epistlePericope": "276",
+    "gospel": "Лк._13:1-9",
+    "gospelPericope": "70"
+  },
+  "255": {
+    "epistle": "2 Сол._3:6-18",
+    "epistlePericope": "277",
+    "gospel": "Лк._13:31-35",
+    "gospelPericope": "73"
+  },
+  "256": {
+    "epistle": "Гал._1:3-10",
+    "epistlePericope": "199",
+    "gospel": "Лк._9:37-43a",
+    "gospelPericope": "46"
+  },
+  "260": {
+    "epistle": "Еф._5:8b-19",
+    "epistlePericope": "229",
+    "gospel": "Лк._12:16-21",
+    "gospelPericope": "66"
+  },
+  "261": {
+    "epistle": "1 Тим._1:1-7",
+    "epistlePericope": "278",
+    "gospel": "Лк._14:12-15",
+    "gospelPericope": "75"
+  },
+  "262": {
+    "epistle": "1 Тим._1:8-14",
+    "epistlePericope": "279",
+    "gospel": "Лк._14:25-35",
+    "gospelPericope": "77"
+  },
+  "263": {
+    "epistle": "1 Тим._1:18-20, 2:8-15",
+    "epistlePericope": "281",
+    "gospel": "Лк._15:1-10",
+    "gospelPericope": "78"
+  },
+  "264": {
+    "epistle": "1 Тим._3:1-13",
+    "epistlePericope": "283",
+    "gospel": "Лк._16:1-9",
+    "gospelPericope": "80"
+  },
+  "265": {
+    "epistle": "1 Тим._4:4-8, 16",
+    "epistlePericope": "285",
+    "gospel": "Лк._16:15-18, 17:1-4",
+    "gospelPericope": "82"
+  },
+  "266": {
+    "epistle": "Гал._3:8-12",
+    "epistlePericope": "205",
+    "gospel": "Лк._9:57-62",
+    "gospelPericope": "49"
+  },
+  "270": {
+    "epistle": "Еф._6:10-17",
+    "epistlePericope": "233",
+    "gospel": "Лк._13:10-17",
+    "gospelPericope": "71"
+  },
+  "271": {
+    "epistle": "1 Тим._5:1-10",
+    "epistlePericope": "285 (mid. 2)",
+    "gospel": "Лк._17:20-25",
+    "gospelPericope": "86"
+  },
+  "272": {
+    "epistle": "1 Тим._5:11-21",
+    "epistlePericope": "286",
+    "gospel": "Лк._17:26-37",
+    "gospelPericope": "87"
+  },
+  "273": {
+    "epistle": "1 Тим._5:22-6:11a",
+    "epistlePericope": "287",
+    "gospel": "Лк._18:15-17, 26-30",
+    "gospelPericope": "90"
+  },
+  "274": {
+    "epistle": "1 Тим._6:17-21",
+    "epistlePericope": "289",
+    "gospel": "Лк._18:31-34",
+    "gospelPericope": "92"
+  },
+  "275": {
+    "epistle": "2 Тим._1:1-2, 8-18",
+    "epistlePericope": "290",
+    "gospel": "Лк._19:12-28",
+    "gospelPericope": "95"
+  },
+  "276": {
+    "epistle": "Гал._5:22-6:2",
+    "epistlePericope": "213",
+    "gospel": "Лк._10:19-21",
+    "gospelPericope": "51 (mid.)"
+  },
+  "280": {
+    "epistle": "Кол._1:12-18",
+    "epistlePericope": "250",
+    "gospel": "Лк._14:16-24",
+    "gospelPericope": "76"
+  },
+  "281": {
+    "epistle": "2 Тим._2:20-26",
+    "epistlePericope": "294",
+    "gospel": "Лк._19:37-44",
+    "gospelPericope": "97"
+  },
+  "282": {
+    "epistle": "2 Тим._3:16-4:4",
+    "epistlePericope": "297",
+    "gospel": "Лк._19:45-48",
+    "gospelPericope": "98"
+  },
+  "283": {
+    "epistle": "2 Тим._4:9-22",
+    "epistlePericope": "299",
+    "gospel": "Лк._20:1-8",
+    "gospelPericope": "99"
+  },
+  "284": {
+    "epistle": "Тит._1:5-2:1",
+    "epistlePericope": "300 (mid.)",
+    "gospel": "Лк._20:9-18",
+    "gospelPericope": "100"
+  },
+  "285": {
+    "epistle": "Тит._1:15-2:10",
+    "epistlePericope": "301",
+    "gospel": "Лк._20:19-26",
+    "gospelPericope": "101"
+  },
+  "286": {
+    "epistle": "Еф._1:16-23",
+    "epistlePericope": "218",
+    "gospel": "Лк._12:32-40",
+    "gospelPericope": "67"
+  },
+  "290": {
+    "epistle": "Кол._3:4-11",
+    "epistlePericope": "257",
+    "gospel": "Лк._17:12-19",
+    "gospelPericope": "85"
+  },
+  "291": {
+    "epistle": "Євр._3:5-11, 17-19",
+    "epistlePericope": "308",
+    "gospel": "Лк._20:27-44",
+    "gospelPericope": "102"
+  },
+  "292": {
+    "epistle": "Євр._4:1-13",
+    "epistlePericope": "310",
+    "gospel": "Лк._21:12-19",
+    "gospelPericope": "106"
+  },
+  "293": {
+    "epistle": "Євр._5:11-6:8",
+    "epistlePericope": "312",
+    "gospel": "Лк._21:5-7, 10-11, 20-24",
+    "gospelPericope": "104"
+  },
+  "294": {
+    "epistle": "Євр._7:1-6",
+    "epistlePericope": "315",
+    "gospel": "Лк._21:28-33",
+    "gospelPericope": "107"
+  },
+  "295": {
+    "epistle": "Євр._7:18-25",
+    "epistlePericope": "317",
+    "gospel": "Лк._21:37-22:8",
+    "gospelPericope": "108"
+  },
+  "296": {
+    "epistle": "Еф._2:11-13",
+    "epistlePericope": "220 (mid.)",
+    "gospel": "Лк._13:18-29",
+    "gospelPericope": "72"
+  },
+  "300": {
+    "epistle": "Кол._3:12-16",
+    "epistlePericope": "258",
+    "gospel": "Лк._18:18-27",
+    "gospelPericope": "91"
+  },
+  "301": {
+    "epistle": "Євр._8:7-13",
+    "epistlePericope": "319",
+    "gospel": "Мк._8:11-21",
+    "gospelPericope": "33"
+  },
+  "302": {
+    "epistle": "Євр._9:8-10, 15-23",
+    "epistlePericope": "321",
+    "gospel": "Мк._8:22-26",
+    "gospelPericope": "34"
+  },
+  "303": {
+    "epistle": "Євр._10:1-18",
+    "epistlePericope": "323",
+    "gospel": "Мк._8:30-34",
+    "gospelPericope": "36"
+  },
+  "304": {
+    "epistle": "Євр._10:35-11:7",
+    "epistlePericope": "326",
+    "gospel": "Мк._9:10-16",
+    "gospelPericope": "39"
+  },
+  "305": {
+    "epistle": "Євр._11:8, 11-16",
+    "epistlePericope": "327",
+    "gospel": "Мк._9:33-41",
+    "gospelPericope": "41"
+  },
+  "306": {
+    "epistle": "Еф._5:1-8a",
+    "epistlePericope": "228",
+    "gospel": "Лк._14:1-11",
+    "gospelPericope": "74"
+  },
+  "310": {
+    "epistle": "1 Тим._1:15-17",
+    "epistlePericope": "280 (mid.)",
+    "gospel": "Лк._18:35-43",
+    "gospelPericope": "93"
+  },
+  "311": {
+    "epistle": "Євр._11:17-23, 27-31",
+    "epistlePericope": "329",
+    "gospel": "Мк._9:42-10:1",
+    "gospelPericope": "42"
+  },
+  "312": {
+    "epistle": "Євр._12:25-26, 13:22-25",
+    "epistlePericope": "333",
+    "gospel": "Мк._10:2-12",
+    "gospelPericope": "43"
+  },
+  "313": {
+    "epistle": "Як._1:1-18",
+    "epistlePericope": "50",
+    "gospel": "Мк._10:11-16",
+    "gospelPericope": "44"
+  },
+  "314": {
+    "epistle": "Як._1:19-27",
+    "epistlePericope": "51",
+    "gospel": "Мк._10:17-27",
+    "gospelPericope": "45"
+  },
+  "315": {
+    "epistle": "Як._2:1-13",
+    "epistlePericope": "52",
+    "gospel": "Мк._10:23b-32a",
+    "gospelPericope": "46"
+  },
+  "316": {
+    "epistle": "Кол._1:3-6",
+    "epistlePericope": "249 (mid.)",
+    "gospel": "Лк._16:10-15",
+    "gospelPericope": "81"
+  },
+  "320": {
+    "epistle": "1 Тим._4:9-15",
+    "epistlePericope": "285 (mid. 1)",
+    "gospel": "Лк._19:1-10",
+    "gospelPericope": "94"
+  },
+  "321": {
+    "epistle": "Як._2:14-26",
+    "epistlePericope": "53",
+    "gospel": "Мк._10:46-52",
+    "gospelPericope": "48"
+  },
+  "322": {
+    "epistle": "Як._3:1-10",
+    "epistlePericope": "54",
+    "gospel": "Мк._11:11-23",
+    "gospelPericope": "50"
+  },
+  "323": {
+    "epistle": "Як._3:11-4:6",
+    "epistlePericope": "55",
+    "gospel": "Мк._11:22b-26",
+    "gospelPericope": "51"
+  },
+  "324": {
+    "epistle": "Як._4:7-5:9",
+    "epistlePericope": "56",
+    "gospel": "Мк._11:27-33",
+    "gospelPericope": "52"
+  },
+  "325": {
+    "epistle": "1 Пет._1:1-2, 10-12, 2:6-10",
+    "epistlePericope": "58",
+    "gospel": "Мк._12:1-12",
+    "gospelPericope": "53"
+  },
+  "326": {
+    "epistle": "1 Сол._5:14-23",
+    "epistlePericope": "273",
+    "gospel": "Лк._17:3-10",
+    "gospelPericope": "84"
+  },
+  "330": {
+    "epistle": "2 Тим._3:10-15",
+    "epistlePericope": "296",
+    "gospel": "Лк._18:10-14",
+    "gospelPericope": "89"
+  },
+  "331": {
+    "epistle": "1 Пет._2:21b-3:9",
+    "epistlePericope": "59",
+    "gospel": "Мк._12:13-17",
+    "gospelPericope": "54"
+  },
+  "332": {
+    "epistle": "1 Пет._3:10-22",
+    "epistlePericope": "60",
+    "gospel": "Мк._12:18-27",
+    "gospelPericope": "55"
+  },
+  "333": {
+    "epistle": "1 Пет._4:1-11",
+    "epistlePericope": "61",
+    "gospel": "Мк._12:28-37",
+    "gospelPericope": "56"
+  },
+  "334": {
+    "epistle": "1 Пет._4:12-5:5",
+    "epistlePericope": "62",
+    "gospel": "Мк._12:38-44",
+    "gospelPericope": "57"
+  },
+  "335": {
+    "epistle": "2 Пет._1:1-10a",
+    "epistlePericope": "64",
+    "gospel": "Мк._13:1-8",
+    "gospelPericope": "58"
+  },
+  "336": {
+    "epistle": "2 Тим._2:11-19",
+    "epistlePericope": "293",
+    "gospel": "Лк._18:2-8a",
+    "gospelPericope": "88"
+  },
+  "340": {
+    "epistle": "1 Кор._6:12-20",
+    "epistlePericope": "135",
+    "gospel": "Лк._15:11-32",
+    "gospelPericope": "79"
+  },
+  "341": {
+    "epistle": "2 Пет._1:20-2:9",
+    "epistlePericope": "66",
+    "gospel": "Мк._13:9-13",
+    "gospelPericope": "59"
+  },
+  "342": {
+    "epistle": "2 Пет._2:9-22",
+    "epistlePericope": "67",
+    "gospel": "Мк._13:14-23",
+    "gospelPericope": "60"
+  },
+  "343": {
+    "epistle": "2 Пет._3:1-18",
+    "epistlePericope": "68",
+    "gospel": "Мк._13:24-31",
+    "gospelPericope": "61"
+  },
+  "344": {
+    "epistle": "1 Ін._1:8-2:6",
+    "epistlePericope": "69",
+    "gospel": "Мк._13:31-14:2",
+    "gospelPericope": "62"
+  },
+  "345": {
+    "epistle": "1 Ін._2:7-17",
+    "epistlePericope": "70",
+    "gospel": "Мк._14:3-9",
+    "gospelPericope": "63"
+  },
+  "346": {
+    "epistle": "2 Тим._3:1-9",
+    "epistlePericope": "295",
+    "gospel": "Лк._20:45-21:4",
+    "gospelPericope": "103"
+  },
+  "350": {
+    "epistle": "1 Кор._8:8-9:2",
+    "epistlePericope": "140",
+    "gospel": "Мф._25:31-46",
+    "gospelPericope": "106"
+  },
+  "351": {
+    "epistle": "1 Ін._2:18-3:10a",
+    "epistlePericope": "71",
+    "gospel": "Мк._11:1-11",
+    "gospelPericope": "49"
+  },
+  "352": {
+    "epistle": "1 Ін._3:10b-20",
+    "epistlePericope": "72",
+    "gospel": "Мк._14:10-42",
+    "gospelPericope": "64"
+  },
+  "353": {
+    "epistle": "1 Ін._3:21-4:6",
+    "epistlePericope": "73",
+    "gospel": "Мк._14:43-15:1",
+    "gospelPericope": "65"
+  },
+  "354": {
+    "epistle": "1 Ін._4:20-5:21",
+    "epistlePericope": "74",
+    "gospel": "Мк._15:1-15",
+    "gospelPericope": "66"
+  },
+  "355": {
+    "epistle": "2 Ін._1:1-13",
+    "epistlePericope": "75",
+    "gospel": "Мк._15:22, 25, 33-41",
+    "gospelPericope": "68"
+  },
+  "356": {
+    "epistle": "1 Кор._10:23-28",
+    "epistlePericope": "146",
+    "gospel": "Лк._21:8-9, 25-27, 33-36",
+    "gospelPericope": "105"
+  },
+  "360": {
+    "epistle": "Рим._13:11b-14:4",
+    "epistlePericope": "112",
+    "gospel": "Мф._6:14-21",
+    "gospelPericope": "17"
+  },
+  "361": {
+    "epistle": "3 Ін._1:1-15",
+    "epistlePericope": "76",
+    "gospel": "Лк._19:29-40, 22:7-39",
+    "gospelPericope": "96"
+  },
+  "362": {
+    "epistle": "Юди_1:1-10",
+    "epistlePericope": "77",
+    "gospel": "Лк._22:39-42, 22:45b-23:1",
+    "gospelPericope": "109"
+  },
+  "364": {
+    "epistle": "Юди_1:11-25",
+    "epistlePericope": "78",
+    "gospel": "Лк._23:1b-34a, 44-56",
+    "gospelPericope": "110"
+  },
+  "366": {
+    "epistle": "Рим._14:19-26",
+    "epistlePericope": "115",
+    "gospel": "Мф._6:1-13",
+    "gospelPericope": "16"
+  },
+  "370": {
+    "epistle": "Євр._11:24-26, 11:32-12:2a",
+    "epistlePericope": "329 (mid.)",
+    "gospel": "Ін._1:43-51",
+    "gospelPericope": "5"
+  },
+  "376": {
+    "epistle": "Євр._1:1-12",
+    "epistlePericope": "303",
+    "gospel": "Мк._2:23-3:5",
+    "gospelPericope": "10"
+  },
+  "380": {
+    "epistle": "Євр._1:10-2:3",
+    "epistlePericope": "304",
+    "gospel": "Мк._2:1-12",
+    "gospelPericope": "7"
+  },
+  "386": {
+    "epistle": "Євр._3:12-16",
+    "epistlePericope": "309",
+    "gospel": "Мк._1:35-44",
+    "gospelPericope": "6"
+  },
+  "390": {
+    "epistle": "Євр._4:14-5:6",
+    "epistlePericope": "311",
+    "gospel": "Мк._8:34b-9:1",
+    "gospelPericope": "37"
+  },
+  "396": {
+    "epistle": "Євр._10:32-38a",
+    "epistlePericope": "325",
+    "gospel": "Мк._2:14-17",
+    "gospelPericope": "8"
+  },
+  "400": {
+    "epistle": "Євр._6:13-20",
+    "epistlePericope": "314",
+    "gospel": "Мк._9:17-31",
+    "gospelPericope": "40"
+  },
+  "406": {
+    "epistle": "Євр._6:9-12",
+    "epistlePericope": "313",
+    "gospel": "Мк._7:31-37",
+    "gospelPericope": "31"
+  },
+  "410": {
+    "epistle": "Євр._9:11-14",
+    "epistlePericope": "321 (mid.)",
+    "gospel": "Мк._10:32b-45",
+    "gospelPericope": "47"
+  },
+  "416": {
+    "epistle": "Євр._9:24-28",
+    "epistlePericope": "322",
+    "gospel": "Мк._8:27-31",
+    "gospelPericope": "35"
+  },
+  "420": {
+    "epistle": "Флп._4:4-9",
+    "epistlePericope": "247",
+    "gospel": "Ін._12:1-18",
+    "gospelPericope": "41"
+  },
+  "426": {
+    "epistle": "Євр._12:28-13:8",
+    "epistlePericope": "333 (mid.)",
+    "gospel": "Ін._11:1-45",
+    "gospelPericope": "39"
+  },
+  "436": {
+    "epistle": "Рим._6:3-11",
+    "epistlePericope": "91",
+    "gospel": "Мф._28:1-20",
+    "gospelPericope": "115"
+  },
+  "-70": {
+    "epistle": "Діян._1:1-8",
+    "epistlePericope": "1",
+    "gospel": "Ін._1:1-17",
+    "gospelPericope": "1"
+  },
+  "-61": {
+    "epistle": "Діян._1:12-17, 21-26",
+    "epistlePericope": "2",
+    "gospel": "Ін._1:18-28",
+    "gospelPericope": "2"
+  },
+  "-62": {
+    "epistle": "Діян._2:14-21",
+    "epistlePericope": "4",
+    "gospel": "Лк._24:12-35",
+    "gospelPericope": "113"
+  },
+  "-63": {
+    "epistle": "Діян._2:22-36",
+    "epistlePericope": "5",
+    "gospel": "Ін._1:35-51",
+    "gospelPericope": "4"
+  },
+  "-64": {
+    "epistle": "Діян._2:38-43",
+    "epistlePericope": "6",
+    "gospel": "Ін._3:1-15",
+    "gospelPericope": "8"
+  },
+  "-65": {
+    "epistle": "Діян._3:1-8",
+    "epistlePericope": "7",
+    "gospel": "Ін._2:12-22",
+    "gospelPericope": "7"
+  },
+  "-66": {
+    "epistle": "Діян._3:11-16",
+    "epistlePericope": "8",
+    "gospel": "Ін._3:22-33",
+    "gospelPericope": "11"
+  },
+  "-60": {
+    "epistle": "Діян._5:12-20",
+    "epistlePericope": "14",
+    "gospel": "Ін._20:19-31",
+    "gospelPericope": "65"
+  },
+  "-51": {
+    "epistle": "Діян._3:19-26",
+    "epistlePericope": "9",
+    "gospel": "Ін._2:1-11",
+    "gospelPericope": "6"
+  },
+  "-52": {
+    "epistle": "Діян._4:1-10",
+    "epistlePericope": "10",
+    "gospel": "Ін._3:16-21",
+    "gospelPericope": "10"
+  },
+  "-53": {
+    "epistle": "Діян._4:13-22",
+    "epistlePericope": "11",
+    "gospel": "Ін._5:17b-24",
+    "gospelPericope": "15"
+  },
+  "-54": {
+    "epistle": "Діян._4:23-31",
+    "epistlePericope": "12",
+    "gospel": "Ін._5:24-30",
+    "gospelPericope": "16"
+  },
+  "-55": {
+    "epistle": "Діян._5:1-11",
+    "epistlePericope": "13",
+    "gospel": "Ін._5:30b-6:2",
+    "gospelPericope": "17"
+  },
+  "-56": {
+    "epistle": "Діян._5:21-33",
+    "epistlePericope": "15",
+    "gospel": "Ін._6:14-27",
+    "gospelPericope": "19"
+  },
+  "-50": {
+    "epistle": "Діян._6:1-7",
+    "epistlePericope": "16",
+    "gospel": "Мк._15:43-16:8",
+    "gospelPericope": "69"
+  },
+  "-41": {
+    "epistle": "Діян._6:8-7:5a, 7:47-60",
+    "epistlePericope": "17",
+    "gospel": "Ін._4:46b-54",
+    "gospelPericope": "13"
+  },
+  "-42": {
+    "epistle": "Діян._8:5-17",
+    "epistlePericope": "18",
+    "gospel": "Ін._6:27-33",
+    "gospelPericope": "20"
+  },
+  "-43": {
+    "epistle": "Діян._8:18-25",
+    "epistlePericope": "19",
+    "gospel": "Ін._6:35-39",
+    "gospelPericope": "21"
+  },
+  "-44": {
+    "epistle": "Діян._8:26-39",
+    "epistlePericope": "20",
+    "gospel": "Ін._6:40-44",
+    "gospelPericope": "22"
+  },
+  "-45": {
+    "epistle": "Діян._8:40-9:19a",
+    "epistlePericope": "21",
+    "gospel": "Ін._6:48-54",
+    "gospelPericope": "23"
+  },
+  "-46": {
+    "epistle": "Діян._9:19b-31",
+    "epistlePericope": "22",
+    "gospel": "Ін._15:17-16:2",
+    "gospelPericope": "52"
+  },
+  "-40": {
+    "epistle": "Діян._9:32-42",
+    "epistlePericope": "23",
+    "gospel": "Ін._5:1-15",
+    "gospelPericope": "14"
+  },
+  "-31": {
+    "epistle": "Діян._10:1-16",
+    "epistlePericope": "24",
+    "gospel": "Ін._6:56-69",
+    "gospelPericope": "24"
+  },
+  "-32": {
+    "epistle": "Діян._10:21-33",
+    "epistlePericope": "25",
+    "gospel": "Ін._7:1-13",
+    "gospelPericope": "25"
+  },
+  "-33": {
+    "epistle": "Діян._14:6b-18",
+    "epistlePericope": "34",
+    "gospel": "Ін._7:14-30",
+    "gospelPericope": "26"
+  },
+  "-34": {
+    "epistle": "Діян._10:34-43",
+    "epistlePericope": "26",
+    "gospel": "Ін._8:12-20",
+    "gospelPericope": "29"
+  },
+  "-35": {
+    "epistle": "Діян._10:44-11:10",
+    "epistlePericope": "27",
+    "gospel": "Ін._8:21-30",
+    "gospelPericope": "30"
+  },
+  "-36": {
+    "epistle": "Діян._12:1-11",
+    "epistlePericope": "29",
+    "gospel": "Ін._8:31-42a",
+    "gospelPericope": "31"
+  },
+  "-30": {
+    "epistle": "Діян._11:19-26, 29-30",
+    "epistlePericope": "28",
+    "gospel": "Ін._4:5-42",
+    "gospelPericope": "12"
+  },
+  "-21": {
+    "epistle": "Діян._12:12-17",
+    "epistlePericope": "30",
+    "gospel": "Ін._8:42-51",
+    "gospelPericope": "32"
+  },
+  "-22": {
+    "epistle": "Діян._12:25-13:12",
+    "epistlePericope": "31",
+    "gospel": "Ін._8:51-59",
+    "gospelPericope": "33"
+  },
+  "-23": {
+    "epistle": "Діян._13:13-24",
+    "epistlePericope": "32",
+    "gospel": "Ін._6:5-14",
+    "gospelPericope": "18"
+  },
+  "-24": {
+    "epistle": "Діян._14:20b-27",
+    "epistlePericope": "35",
+    "gospel": "Ін._9:39-10:9",
+    "gospelPericope": "35"
+  },
+  "-25": {
+    "epistle": "Діян._15:5-34",
+    "epistlePericope": "36",
+    "gospel": "Ін._10:17-28a",
+    "gospelPericope": "37"
+  },
+  "-26": {
+    "epistle": "Діян._15:35-41",
+    "epistlePericope": "37",
+    "gospel": "Ін._10:27-38",
+    "gospelPericope": "38"
+  },
+  "-20": {
+    "epistle": "Діян._16:16-34",
+    "epistlePericope": "38",
+    "gospel": "Ін._9:1-38",
+    "gospelPericope": "34"
+  },
+  "-11": {
+    "epistle": "Діян._17:1-15",
+    "epistlePericope": "39",
+    "gospel": "Ін._11:47-57",
+    "gospelPericope": "40"
+  },
+  "-12": {
+    "epistle": "Діян._17:19-28a",
+    "epistlePericope": "40 (mid.)",
+    "gospel": "Ін._12:19-36a",
+    "gospelPericope": "42"
+  },
+  "-13": {
+    "epistle": "Діян._18:22-28",
+    "epistlePericope": "41",
+    "gospel": "Ін._12:36-47",
+    "gospelPericope": "43"
+  },
+  "-14": {
+    "epistle": "Діян._1:1-12",
+    "epistlePericope": "1",
+    "gospel": "Лк._24:36-53",
+    "gospelPericope": "114"
+  },
+  "-15": {
+    "epistle": "Діян._19:1-8",
+    "epistlePericope": "42",
+    "gospel": "Ін._14:1-11a",
+    "gospelPericope": "47"
+  },
+  "-16": {
+    "epistle": "Діян._20:7-12",
+    "epistlePericope": "43",
+    "gospel": "Ін._14:10b-21",
+    "gospelPericope": "48"
+  },
+  "-10": {
+    "epistle": "Діян._20:16-18a, 20:28-36",
+    "epistlePericope": "44",
+    "gospel": "Ін._17:1-13",
+    "gospelPericope": "56"
+  },
+  "01": {
+    "epistle": "Діян._21:8-14",
+    "epistlePericope": "45",
+    "gospel": "Ін._14:27b-15:7",
+    "gospelPericope": "49"
+  },
+  "02": {
+    "epistle": "Діян._21:26-32",
+    "epistlePericope": "46",
+    "gospel": "Ін._16:2b-13a",
+    "gospelPericope": "53"
+  },
+  "03": {
+    "epistle": "Діян._23:1-11",
+    "epistlePericope": "47",
+    "gospel": "Ін._16:15-23",
+    "gospelPericope": "54"
+  },
+  "04": {
+    "epistle": "Діян._25:13-19",
+    "epistlePericope": "48",
+    "gospel": "Ін._16:23b-33a",
+    "gospelPericope": "55"
+  },
+  "05": {
+    "epistle": "Діян._27:1-44",
+    "epistlePericope": "50",
+    "gospel": "Ін._17:18-26",
+    "gospelPericope": "57"
+  },
+  "06": {
+    "epistle": "Діян._28:1-31",
+    "epistlePericope": "51",
+    "gospel": "Ін._21:15-25",
+    "gospelPericope": "67"
+  },
+  "00": {
+    "epistle": "Діян._2:1-11",
+    "epistlePericope": "3",
+    "gospel": "Ін._7:37-52, 8:12",
+    "gospelPericope": "27"
+  }
+}

@@ -1,0 +1,3990 @@
+[
+  {
+    "name": "20 000 мучеників, спалених у Нікомидії",
+    "dates": [
+      "12-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "33-х мучеників у Мелитині",
+    "dates": [
+      "11-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "40 мучеників Севастійських",
+    "dates": [
+      "03-09"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "40 мучеників, що в Севастійському озері мучилися",
+    "dates": [
+      "03-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "42-х мучеників в Аммореї",
+    "dates": [
+      "03-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "45-ти мучеників у Нікополі",
+    "dates": [
+      "07-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Авксентія",
+    "dates": [
+      "02-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Аврамія затворника",
+    "dates": [
+      "10-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Автонома",
+    "dates": [
+      "09-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Агапіта Печерського",
+    "dates": [
+      "06-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Агапія і з ним семи мучеників",
+    "dates": [
+      "03-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Агатоніка",
+    "dates": [
+      "08-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Агафангела",
+    "dates": [
+      "01-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Акакія",
+    "dates": [
+      "04-17",
+      "05-07",
+      "07-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Аліпія стовпника",
+    "dates": [
+      "11-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Аліпія, іконописця Печерського",
+    "dates": [
+      "08-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Амвросія, єп. Медіоланського",
+    "dates": [
+      "12-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Анатолія, патр. Константинопольського",
+    "dates": [
+      "07-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Андрія",
+    "dates": [
+      "10-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Андрія Первозванного",
+    "dates": [
+      "11-30"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Андрія Стратилата",
+    "dates": [
+      "08-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Андрія, архієп. Критського",
+    "dates": [
+      "07-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Андроніка та інших з ним",
+    "dates": [
+      "05-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Антипи, єп. Пергама Асійського",
+    "dates": [
+      "04-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Антонія Великого",
+    "dates": [
+      "01-17"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Антонія Печерського, начальника всіх руських ченців",
+    "dates": [
+      "07-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Анфима, єп. Нікомидійського",
+    "dates": [
+      "09-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола Андрія Первозванного",
+    "dates": [
+      "11-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола від 70-ти Кодрата",
+    "dates": [
+      "09-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола від 70-ти Тадея",
+    "dates": [
+      "08-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола від 70-ти Филипа",
+    "dates": [
+      "10-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола і євангеліста Іоана Богослова",
+    "dates": [
+      "05-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола і євангеліста Луки",
+    "dates": [
+      "10-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола і євангеліста Марка",
+    "dates": [
+      "04-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола і євангеліста Матфея",
+    "dates": [
+      "11-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола Матфія",
+    "dates": [
+      "08-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола первомученика і архідиякона Стефана",
+    "dates": [
+      "12-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола Пилипа",
+    "dates": [
+      "11-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола Симона Зилота",
+    "dates": [
+      "05-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола Фоми",
+    "dates": [
+      "10-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола Юди, брата Господнього по плоті",
+    "dates": [
+      "06-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола Якова Алфеєва",
+    "dates": [
+      "10-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола Якова, брата Господнього",
+    "dates": [
+      "10-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостола Якова, брата св. Іоана Богослова",
+    "dates": [
+      "04-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апостолів Варфоломія і Варнави",
+    "dates": [
+      "06-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апп. від 70-ти: Аристарха, Пуда і Трохима",
+    "dates": [
+      "04-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апп. від 70-ти: Ераста, Олімпа, Родіона та ін.",
+    "dates": [
+      "11-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апп. від 70-ти: Іродіона, Агава, Асинкрита та ін.",
+    "dates": [
+      "04-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апп. від 70-ти: Прохора, Никанора, Тимона і Пармена",
+    "dates": [
+      "07-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апп. від 70-ти: Сили, Силуана, Крискента та ін.",
+    "dates": [
+      "07-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апп. від 70-ти: Стахія, Амплія та ін.",
+    "dates": [
+      "10-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Апп. від 70-ти: Ясона і Сосипатра",
+    "dates": [
+      "04-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Арефи і з ним 4299 мучеників",
+    "dates": [
+      "10-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Арсенія (Мацієвича)",
+    "dates": [
+      "02-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Арсенія Великого",
+    "dates": [
+      "05-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Арсенія, єп. Тверського",
+    "dates": [
+      "03-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Артемія",
+    "dates": [
+      "03-24",
+      "10-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Артемона",
+    "dates": [
+      "04-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "архідиякона Євпла",
+    "dates": [
+      "08-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Афанасія",
+    "dates": [
+      "08-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Афанасія Афонського",
+    "dates": [
+      "07-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Афанасія Великого, архієп. Олександрійського",
+    "dates": [
+      "05-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Афіногена і десяти учнів його",
+    "dates": [
+      "07-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Безсрр. і чудотворців Косми і Даміана",
+    "dates": [
+      "11-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Безсрр. Косми і Даміана, що в Римі постраждали",
+    "dates": [
+      "07-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Безсрр. мчч. Кіра та Іоана",
+    "dates": [
+      "01-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Благовіщення Пресвятої Богородиці",
+    "dates": [
+      "03-25"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "БЛАГОВІЩЕННЯ ПРЕСВЯТОЇ БОГОРОДИЦІ",
+    "dates": [
+      "03-25"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Блгв. кн. Ігоря Чернігівського",
+    "dates": [
+      "09-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Блгв. кн. Ярослава Мудрого",
+    "dates": [
+      "02-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Блгвв. кнн. Бориса і Гліба",
+    "dates": [
+      "05-02",
+      "07-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Блж. Анастасії, княгині Київської",
+    "dates": [
+      "04-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Блж. Ігоря, кн. Чернігівського",
+    "dates": [
+      "06-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Богоявлення. Хрещення Господнє",
+    "dates": [
+      "01-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "БОГОЯВЛЕННЯ. Хрещення Господнє",
+    "dates": [
+      "01-06",
+      "01-06"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Вавили",
+    "dates": [
+      "01-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вавили, єп. Великої Антіохії",
+    "dates": [
+      "09-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Варлаама",
+    "dates": [
+      "11-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Варсонофія Великого",
+    "dates": [
+      "02-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Василіска",
+    "dates": [
+      "05-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Василія Великого",
+    "dates": [
+      "01-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Василія сповідника",
+    "dates": [
+      "02-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Василія, єп. Амасійського",
+    "dates": [
+      "04-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Василія, пресвітера Анкірського",
+    "dates": [
+      "03-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Василія, сповідника, єп. Парійського",
+    "dates": [
+      "04-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Введення в храм Пресвятої Богородиці",
+    "dates": [
+      "11-21"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Введення в храм Пресвятої Владичиці нашої Богородиці і Приснодіви Марії",
+    "dates": [
+      "11-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Венедикта Нурсійського",
+    "dates": [
+      "03-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Винесення чесних древ Животворчого Хреста Господнього",
+    "dates": [
+      "08-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вишгородської (Володимирської) ікони Божої Матері",
+    "dates": [
+      "06-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "від 70-ти Акили",
+    "dates": [
+      "07-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "від 70-ти Ананії",
+    "dates": [
+      "10-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "від 70-ти Архіппа",
+    "dates": [
+      "02-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "від 70-ти Єрма",
+    "dates": [
+      "05-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "від 70-ти Карпа",
+    "dates": [
+      "05-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "від 70-ти Онисима",
+    "dates": [
+      "02-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "від 70-ти Тита",
+    "dates": [
+      "08-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "від 70-ти Филимона і тих, що з ним",
+    "dates": [
+      "11-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віддання Богоявлення. Рівноап. Ніни",
+    "dates": [
+      "01-14"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Віддання свята Богоявлення",
+    "dates": [
+      "01-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віддання свята Воздвиження",
+    "dates": [
+      "09-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віддання свята Преображення",
+    "dates": [
+      "08-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віддання свята Різдва Богородиці",
+    "dates": [
+      "09-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віддання свята Стрітення",
+    "dates": [
+      "02-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віддання свята Успіння",
+    "dates": [
+      "08-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віднайдення мощей мчч., що в Євгенії",
+    "dates": [
+      "02-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віднайдення мощей свт. Олексія, митр. Київського",
+    "dates": [
+      "05-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віднайдення мощей свтт. Гурія і Варсонофія",
+    "dates": [
+      "10-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віктора",
+    "dates": [
+      "11-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Віссаріона, чудотворця",
+    "dates": [
+      "06-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Власія Севастійського",
+    "dates": [
+      "02-11"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Власія, єп. Севастійського",
+    "dates": [
+      "02-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вмц. Анастасії Узорішительки",
+    "dates": [
+      "12-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вмц. Варвари",
+    "dates": [
+      "12-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вмц. Євфимії всехвальної",
+    "dates": [
+      "07-11",
+      "09-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вмц. Ірини",
+    "dates": [
+      "05-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вмц. Катерини",
+    "dates": [
+      "11-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вмц. Марини",
+    "dates": [
+      "07-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вмц. Параскеви-П'ятниці",
+    "dates": [
+      "10-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Воздвиження Чесного і Животворчого Хреста Господнього",
+    "dates": [
+      "09-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Воздвиження Чесного Хреста Господнього",
+    "dates": [
+      "09-14"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Воніфатія",
+    "dates": [
+      "12-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Вукола",
+    "dates": [
+      "02-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Георгія Нового",
+    "dates": [
+      "05-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Георгія Хозевіта",
+    "dates": [
+      "01-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Георгія, сповідника, митр. Митиленського",
+    "dates": [
+      "04-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Георгія, що в Малеї",
+    "dates": [
+      "04-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Георгія.  Домніки",
+    "dates": [
+      "01-08"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Герасима, що на Йордані",
+    "dates": [
+      "03-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Геронтія, канонарха Печерського",
+    "dates": [
+      "04-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Гордія",
+    "dates": [
+      "01-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Григорія Богослова",
+    "dates": [
+      "01-25"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Григорія Двоєслова",
+    "dates": [
+      "03-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Григорія Декаполіта",
+    "dates": [
+      "11-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Григорія Ниського",
+    "dates": [
+      "01-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Григорія Ніського",
+    "dates": [
+      "01-10"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Григорія чудотворця, єп. Неокесарійського",
+    "dates": [
+      "11-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Григорія, єп. Вірменського",
+    "dates": [
+      "09-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Григорія, іконописця Печерського",
+    "dates": [
+      "08-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Давида Солунського",
+    "dates": [
+      "06-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Даниїла Стовпника",
+    "dates": [
+      "12-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Дев'яти мучеників у Кизиці",
+    "dates": [
+      "04-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Десяти мучеників, що в Криті",
+    "dates": [
+      "12-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Димитрія Солунського (Мироточця)",
+    "dates": [
+      "10-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Димитрія, митр. Ростовського",
+    "dates": [
+      "10-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Діомида",
+    "dates": [
+      "08-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Діонісія Ареопагіта",
+    "dates": [
+      "10-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Дія",
+    "dates": [
+      "07-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Дометія",
+    "dates": [
+      "08-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Домніки",
+    "dates": [
+      "01-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Дорофея, єп. Тирського",
+    "dates": [
+      "06-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Еміліана",
+    "dates": [
+      "07-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Еміліана сповідника",
+    "dates": [
+      "08-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євменія, єп. Гортинського",
+    "dates": [
+      "09-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євпсихія",
+    "dates": [
+      "04-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євсевія, єп. Самосатського",
+    "dates": [
+      "06-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євсигнія",
+    "dates": [
+      "08-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євстафія",
+    "dates": [
+      "02-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євстафія Плакиди",
+    "dates": [
+      "09-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євтимія Великого",
+    "dates": [
+      "01-20"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Євтихія",
+    "dates": [
+      "05-28",
+      "08-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євтихія, архієп. Константинопольського",
+    "dates": [
+      "04-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євфимія Великого",
+    "dates": [
+      "01-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Євфимія Нового",
+    "dates": [
+      "10-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Єлевферія",
+    "dates": [
+      "12-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Єрмія",
+    "dates": [
+      "05-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Єрофея, єп. Афінського",
+    "dates": [
+      "10-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Єфрема Сиріна",
+    "dates": [
+      "01-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Єфросинії",
+    "dates": [
+      "09-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Єфросинії Полоцької",
+    "dates": [
+      "05-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Заговини на Різдвяний піст",
+    "dates": [
+      "11-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Захарії",
+    "dates": [
+      "03-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Зачаття праведною Анною Пресвятої Богородиці",
+    "dates": [
+      "12-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Зачаття чесного, славного Пророка, Предтечі і Хрестителя Господнього Іоана",
+    "dates": [
+      "09-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Згадування явлення на небі Хреста Господнього в Єрусалимі",
+    "dates": [
+      "05-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Зиновія, єп. Егейського, і сестри його Зиновії",
+    "dates": [
+      "10-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Знайдення Чесного Хреста",
+    "dates": [
+      "03-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Зотика",
+    "dates": [
+      "12-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "і євангеліста Іоана Богослова",
+    "dates": [
+      "05-08"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "і євангеліста Марка",
+    "dates": [
+      "04-25"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "і сщмч. Симеона, родича Господнього",
+    "dates": [
+      "04-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "і цілителя Пантелеймона",
+    "dates": [
+      "07-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іверської ікони Божої Матері",
+    "dates": [
+      "10-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ігнатія Богоносця",
+    "dates": [
+      "12-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ігнатія, архім. Печерського",
+    "dates": [
+      "12-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ікони Божої Матері «Вогневидна»",
+    "dates": [
+      "02-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ікони Божої Матері «Всіх скорботних Радість»",
+    "dates": [
+      "10-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ікони Божої Матері «Достойно є»",
+    "dates": [
+      "06-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ікони Божої Матері «Несподівана Радість»",
+    "dates": [
+      "12-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ікони Божої Матері «Утамуй мої печалі»",
+    "dates": [
+      "01-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іларіона Великого",
+    "dates": [
+      "10-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іларіона Нового",
+    "dates": [
+      "03-28",
+      "06-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іларіона, схимника Печерського",
+    "dates": [
+      "10-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іллі Муромця, Печерського",
+    "dates": [
+      "12-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Багатостраждального, Печерського",
+    "dates": [
+      "07-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Воїна",
+    "dates": [
+      "07-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Дамаскина",
+    "dates": [
+      "12-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Золотоустого, архієп. Константинопольського",
+    "dates": [
+      "11-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Кущника",
+    "dates": [
+      "01-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Ліствичника",
+    "dates": [
+      "03-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Милостивого, патр. Олександрійського",
+    "dates": [
+      "11-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана мовчазника",
+    "dates": [
+      "12-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Рильського",
+    "dates": [
+      "10-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Руського, сповідника",
+    "dates": [
+      "05-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана Старопечерника",
+    "dates": [
+      "04-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоана, учня прп. Григорія Декаполіта",
+    "dates": [
+      "04-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іоаникія Великого",
+    "dates": [
+      "11-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іова, ігумена Почаївського",
+    "dates": [
+      "10-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іони, митр. Київського",
+    "dates": [
+      "06-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іпатія, єп. Гангрського",
+    "dates": [
+      "03-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іпатія, цілителя Печерського",
+    "dates": [
+      "03-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іринарха",
+    "dates": [
+      "11-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Іринея Ліонського",
+    "dates": [
+      "08-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ісаакія сповідника",
+    "dates": [
+      "05-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ісаї, єп. Ростовського, чудотворця",
+    "dates": [
+      "05-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ісидора",
+    "dates": [
+      "05-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ісидора Пелусіота",
+    "dates": [
+      "02-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Йосифа Піснoписця",
+    "dates": [
+      "04-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Калістрата і дружини його",
+    "dates": [
+      "09-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Калліника",
+    "dates": [
+      "07-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Касіяна (у високосний рік)",
+    "dates": [
+      "02-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Кипріана і мц. Юстини",
+    "dates": [
+      "10-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Кирила, архієп. Єрусалимського",
+    "dates": [
+      "03-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Кирила, архієп. Олександрійського",
+    "dates": [
+      "06-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Киріака відлюдника",
+    "dates": [
+      "09-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Климента Анкірського",
+    "dates": [
+      "01-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Конона Ісаврійського",
+    "dates": [
+      "03-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Корнилія сотника",
+    "dates": [
+      "09-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ксенії",
+    "dates": [
+      "01-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ксенофонта, дружини його Марії та синів їхніх",
+    "dates": [
+      "01-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Кукші та Пимена Печерських",
+    "dates": [
+      "08-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Лаврентія, архідиякона",
+    "dates": [
+      "08-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Лазаря чудотворця",
+    "dates": [
+      "11-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Лева, єп. Катанського",
+    "dates": [
+      "02-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Лева, папи Римського",
+    "dates": [
+      "02-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Леонтія",
+    "dates": [
+      "06-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Лонгина сотника, що при Хресті Господньому",
+    "dates": [
+      "10-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Луки Елладського",
+    "dates": [
+      "02-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Лукіліана",
+    "dates": [
+      "06-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Луппа",
+    "dates": [
+      "08-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Макарія Великого",
+    "dates": [
+      "01-19"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Макарія Печерського",
+    "dates": [
+      "01-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Макарія, митр. Київського",
+    "dates": [
+      "05-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Макрини, сестри свт. Василія Великого",
+    "dates": [
+      "07-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Максима Сповідника",
+    "dates": [
+      "01-21",
+      "08-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Маманта",
+    "dates": [
+      "09-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Марії Єгипетської",
+    "dates": [
+      "04-01"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Марка, єп. Арефусійського",
+    "dates": [
+      "03-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Маркелла",
+    "dates": [
+      "12-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Маркіана",
+    "dates": [
+      "01-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мартина сповідника, папи Римського",
+    "dates": [
+      "04-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мартиніана",
+    "dates": [
+      "02-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Марфи",
+    "dates": [
+      "07-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Матрони",
+    "dates": [
+      "11-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Меланії Римлянки",
+    "dates": [
+      "12-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мелетія",
+    "dates": [
+      "02-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мелетія Антіохійського",
+    "dates": [
+      "02-12"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Мемнона чудотворця",
+    "dates": [
+      "04-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Меркурія",
+    "dates": [
+      "11-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Меркурія Печерського",
+    "dates": [
+      "11-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мефодія, єп. Патарського",
+    "dates": [
+      "06-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мефодія, патр. Константинопольського",
+    "dates": [
+      "06-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Микити",
+    "dates": [
+      "09-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Микити сповідника",
+    "dates": [
+      "04-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Микити сповідника, єп. Халкидонського",
+    "dates": [
+      "05-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Микити, стовпника Переяславського",
+    "dates": [
+      "05-24"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Миколи Святоші",
+    "dates": [
+      "07-27",
+      "10-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Миколи Сповідника",
+    "dates": [
+      "02-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мирона",
+    "dates": [
+      "08-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Митрофана, патр. Константинопольського",
+    "dates": [
+      "06-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Михаїла Малеїна",
+    "dates": [
+      "07-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Михаїла сповідника, єп. Синадського",
+    "dates": [
+      "05-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Михаїла, першого митрополита Київського",
+    "dates": [
+      "09-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мойсея Мурина",
+    "dates": [
+      "08-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мойсея Угрина, Печерського",
+    "dates": [
+      "07-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мокія",
+    "dates": [
+      "05-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мучеників 14 000 немовлят, від Ірода у Вифлеємі вбитих",
+    "dates": [
+      "12-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Агафії",
+    "dates": [
+      "02-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Агрипини",
+    "dates": [
+      "06-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Акилини",
+    "dates": [
+      "06-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Анісії",
+    "dates": [
+      "12-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Васси",
+    "dates": [
+      "08-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Гликерії",
+    "dates": [
+      "05-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Матрони Солунської",
+    "dates": [
+      "03-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Пелагеї",
+    "dates": [
+      "05-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Серафими",
+    "dates": [
+      "07-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Тетяни",
+    "dates": [
+      "01-12"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Мц. Феодосії діви",
+    "dates": [
+      "05-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Харитини",
+    "dates": [
+      "10-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Христини",
+    "dates": [
+      "07-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мц. Юліанії",
+    "dates": [
+      "12-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мцц. Агапії, Ірини та Хіонії",
+    "dates": [
+      "04-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мцц. Віри, Надії, Любові та матері їхньої Софії",
+    "dates": [
+      "09-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мцц. Минодори, Митродори і Німфодори",
+    "dates": [
+      "09-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Адріана і Наталії",
+    "dates": [
+      "08-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Акепсими єпископа, Йосифа пресвітера і Аїфала диякона",
+    "dates": [
+      "11-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Акиндіна, Пигасія, Афтонія та ін.",
+    "dates": [
+      "11-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Галактіона і Єпістимії",
+    "dates": [
+      "11-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Гурія, Самона і Авіва",
+    "dates": [
+      "11-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Євлампія і Євлампії",
+    "dates": [
+      "10-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Євстратія, Авксентія, Євгенія, Мардарія та Ореста",
+    "dates": [
+      "12-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Євтропія, Клеоніка і Василіска",
+    "dates": [
+      "03-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Єрмила і Стратоніка",
+    "dates": [
+      "01-13"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Мчч. Карпа, Папіли, Агафодора і Агафоніки",
+    "dates": [
+      "10-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Кирила і Юлити",
+    "dates": [
+      "07-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Клавдія, Іпатія та ін.",
+    "dates": [
+      "06-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Кодрата, Кипріана, Діонісія та ін.",
+    "dates": [
+      "03-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Мануїла, Савела та Ісмаїла",
+    "dates": [
+      "06-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Маркіана і Мартирія",
+    "dates": [
+      "10-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Мини, Єрмогена і Євграфа",
+    "dates": [
+      "12-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Михаїла і Феодора, чернігівських чудотворців",
+    "dates": [
+      "09-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Назарія, Гервасія та ін.",
+    "dates": [
+      "10-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Онисифора і Порфирія",
+    "dates": [
+      "11-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Памфила, Порфирія та ін.",
+    "dates": [
+      "02-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Петра, Діонісія та ін.",
+    "dates": [
+      "05-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Платона і Романа",
+    "dates": [
+      "11-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Прова, Тараха і Андроніка",
+    "dates": [
+      "10-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Прокла та Іларія",
+    "dates": [
+      "07-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Сергія і Вакха",
+    "dates": [
+      "10-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Терентія, Помпія, Максима, Зенона та ін.",
+    "dates": [
+      "04-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Тимофія і Маври",
+    "dates": [
+      "05-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Трохима, Саватія і Доримедонта",
+    "dates": [
+      "09-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Трохима, Феофіла і з ними 13-ти мучеників",
+    "dates": [
+      "07-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Феодула і Агафопода",
+    "dates": [
+      "04-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Фирса, Левкія і Калліника",
+    "dates": [
+      "12-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Флора і Лавра",
+    "dates": [
+      "08-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Фотія та Аникити",
+    "dates": [
+      "08-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Мчч. Хрисанфа і Дарії",
+    "dates": [
+      "03-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Навечір'я Богоявлення (Хрещенський святвечір)",
+    "dates": [
+      "01-05",
+      "01-05"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Надвечір'я Богоявлення (Хрещенський святвечір)",
+    "dates": [
+      "01-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Надвечір'я Різдва Христового (Різдвяний святвечір)",
+    "dates": [
+      "12-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Нафанаїла",
+    "dates": [
+      "04-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Неофіта",
+    "dates": [
+      "01-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Нестора Літописця",
+    "dates": [
+      "10-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Нестора Солунського",
+    "dates": [
+      "10-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Никифора",
+    "dates": [
+      "02-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Никифора сповідника, патр. Константинопольського",
+    "dates": [
+      "06-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Обрізання Господнє",
+    "dates": [
+      "01-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Обрізання Господнє.  Василія Великого",
+    "dates": [
+      "01-01",
+      "01-01"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Олександра",
+    "dates": [
+      "02-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Олександра, папи Римського",
+    "dates": [
+      "03-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Олексія, митр. Київського і всієї Русі",
+    "dates": [
+      "02-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Олексія, чоловіка Божого",
+    "dates": [
+      "03-17"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Онисима чудотворця",
+    "dates": [
+      "07-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Онуфрія Великого",
+    "dates": [
+      "06-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Освячення церкви вмч. Георгія в Києві",
+    "dates": [
+      "11-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Павла Латрського",
+    "dates": [
+      "12-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Павла Фівейського",
+    "dates": [
+      "01-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Павла, патр. Константинопольського сповідника",
+    "dates": [
+      "11-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Паїсія Великого",
+    "dates": [
+      "06-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Паїсія Величковського",
+    "dates": [
+      "11-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Палладія",
+    "dates": [
+      "01-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Панкратія, єп. Тавроменійського",
+    "dates": [
+      "07-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Парамона і з ним 370 мучеників",
+    "dates": [
+      "11-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Параскеви Сербської",
+    "dates": [
+      "10-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Партенія",
+    "dates": [
+      "02-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Патапія",
+    "dates": [
+      "12-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Патрикія, єп. Пруського",
+    "dates": [
+      "05-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Пафнутія",
+    "dates": [
+      "02-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Пахомія Великого",
+    "dates": [
+      "05-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Пелагеї",
+    "dates": [
+      "10-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Первомучениці рівноап. Фекли",
+    "dates": [
+      "09-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Передсвято Благовіщення",
+    "dates": [
+      "03-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Передсвято Богоявлення.  Сильвестра, папи Римського",
+    "dates": [
+      "01-02"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Передсвято Введення",
+    "dates": [
+      "11-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Передсвято винесення Чесних Древ Хреста Господнього",
+    "dates": [
+      "07-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Передсвято Воздвиження",
+    "dates": [
+      "09-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Передсвято Преображення Господнього",
+    "dates": [
+      "08-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Передсвято Різдва Пресвятої Богородиці",
+    "dates": [
+      "09-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Передсвято Стрітення Господнього",
+    "dates": [
+      "02-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Передсвято Стрітення Господнього.  Трифона",
+    "dates": [
+      "02-01"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Передсвято Успіння Пресвятої Богородиці",
+    "dates": [
+      "08-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Перенесення мощей безсрр. Кіра та Іоана",
+    "dates": [
+      "06-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Перенесення мощей першомученика Стефана",
+    "dates": [
+      "08-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Перенесення мощей свт. Іоана Золотоустого",
+    "dates": [
+      "01-27"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Перенесення мощей свт. Миколая Чудотворця",
+    "dates": [
+      "05-09"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Перенесення мощей свт. Никифора, патр. Константинопольського",
+    "dates": [
+      "03-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Перенесення мощей сщмч. Ігнатія Богоносця",
+    "dates": [
+      "01-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Перенесення Нерукотворного Образа Господа Ісуса Христа",
+    "dates": [
+      "08-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Перше і друге знайдення глави Іоана Предтечі",
+    "dates": [
+      "02-24"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Петра Афонського",
+    "dates": [
+      "06-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Петра, митр. Київського і всієї Русі",
+    "dates": [
+      "12-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Пилипа",
+    "dates": [
+      "01-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Пимена Багатохворобливого, Печерського",
+    "dates": [
+      "08-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Пимена Великого",
+    "dates": [
+      "08-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Післясвято Стрітення. Симеона Богоприїмця і Анни Пророчиці",
+    "dates": [
+      "02-03"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Повернення мощей ап. Варфоломія",
+    "dates": [
+      "08-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Покладення чесного пояса Пресвятої Богородиці",
+    "dates": [
+      "08-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Покладення чесної ризи Пресвятої Богородиці у Влахерні",
+    "dates": [
+      "07-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Поклоніння чесним веригам ап. Петра",
+    "dates": [
+      "01-16"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Покрова Пресвятої Богородиці",
+    "dates": [
+      "10-01"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Покрова Пресвятої Владичиці нашої Богородиці і Приснодіви Марії",
+    "dates": [
+      "10-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Полієвкта",
+    "dates": [
+      "01-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Полікарпа Смирнського",
+    "dates": [
+      "02-23"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Порфирія",
+    "dates": [
+      "02-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Почаївської ікони Божої Матері",
+    "dates": [
+      "07-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Початок індикту – церковне новоліття",
+    "dates": [
+      "09-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Початок Різдвяного посту",
+    "dates": [
+      "11-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прав. Євдокима Каппадокіянина",
+    "dates": [
+      "07-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прав. Іова Багатостраждального",
+    "dates": [
+      "05-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прав. Йосифа Обручника, Давида царя і Якова, брата Господнього",
+    "dates": [
+      "12-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прав. Симеона Богоприїмця і Анни пророчиці",
+    "dates": [
+      "02-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прав. Філарета Милостивого",
+    "dates": [
+      "12-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Правв. Богоотців Іоакима й Анни",
+    "dates": [
+      "09-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Преображення Господнє",
+    "dates": [
+      "08-06"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Прмц. Анастасії Римлянині",
+    "dates": [
+      "10-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прмц. Євгенії",
+    "dates": [
+      "12-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прмч. Андрія Критського",
+    "dates": [
+      "10-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прмч. Стефана Нового",
+    "dates": [
+      "11-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прокопія",
+    "dates": [
+      "07-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прокопія Декаполіта",
+    "dates": [
+      "02-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Авакума",
+    "dates": [
+      "12-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Авдія",
+    "dates": [
+      "11-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Аггея",
+    "dates": [
+      "12-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Амоса",
+    "dates": [
+      "06-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Даниїла і трьох отроків: Ананії, Азарії і Мисаїла",
+    "dates": [
+      "12-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Єзекіїля",
+    "dates": [
+      "07-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Єлисея",
+    "dates": [
+      "06-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Єремії",
+    "dates": [
+      "05-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Захарії",
+    "dates": [
+      "02-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Захарії і прав. Єлисавети, батьків Іоана Предтечі",
+    "dates": [
+      "09-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Іоїля",
+    "dates": [
+      "10-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Іони",
+    "dates": [
+      "09-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Ісаї",
+    "dates": [
+      "05-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Малахії",
+    "dates": [
+      "01-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Малахії.  Гордія",
+    "dates": [
+      "01-03"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Прор. Міхея",
+    "dates": [
+      "08-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Мойсея Боговидця",
+    "dates": [
+      "09-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Наума",
+    "dates": [
+      "12-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Осії",
+    "dates": [
+      "10-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Самуїла",
+    "dates": [
+      "08-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прор. Софонії",
+    "dates": [
+      "12-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпмц. Євдокії",
+    "dates": [
+      "03-01",
+      "08-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпмц. Февронії",
+    "dates": [
+      "06-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпмч. Анастасія Перського",
+    "dates": [
+      "01-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпмч. Лукіана, пресвітера Антиохійського",
+    "dates": [
+      "10-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпмч. Никона і 199 учеників його",
+    "dates": [
+      "03-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпп. Антонія і Феодосія Печерських",
+    "dates": [
+      "09-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпп. Афанасія і Іоана Печерських",
+    "dates": [
+      "12-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпп. Даміана, Єремії і Матфея Печерських",
+    "dates": [
+      "10-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпп. Ісаакія, Далмата і Фавста",
+    "dates": [
+      "08-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпп. отців, в обителі св. Савви убієнних",
+    "dates": [
+      "03-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпп. отців, у Синаї та Раїфі вбитих",
+    "dates": [
+      "01-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпп. Симеона й Іоана",
+    "dates": [
+      "07-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Прпп. Спиридона і Никодима Печерських",
+    "dates": [
+      "10-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Рівноап. Аверкія, єп. Єрапольського",
+    "dates": [
+      "10-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Рівноап. великого князя Володимира (у хрещенні Василія)",
+    "dates": [
+      "07-15"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Рівноап. Кирила, учителя слов'янського",
+    "dates": [
+      "02-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Рівноап. Марії Магдалини",
+    "dates": [
+      "07-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Рівноап. Мефодія, учителя слов'янського",
+    "dates": [
+      "04-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Рівноап. Ольги, великої княгині Київської",
+    "dates": [
+      "07-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Рівноапп. Кирила і Мефодія",
+    "dates": [
+      "05-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Рівноапп. Кирила і Мефодія, вчителів слов’янських",
+    "dates": [
+      "05-11"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Рівноапп. Костянтина і Олени",
+    "dates": [
+      "05-21"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Рівноапп. царя Костянтина і матері його цариці Олени",
+    "dates": [
+      "05-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Різдво Господа Бога і Спасителя нашого Ісуса Христа",
+    "dates": [
+      "12-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Різдво Іоана Предтечі",
+    "dates": [
+      "06-24"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Різдво Пресвятої Богородиці",
+    "dates": [
+      "09-08"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Різдво Пресвятої Владичиці нашої Богородиці і Приснодіви Марії",
+    "dates": [
+      "09-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Різдво Христове",
+    "dates": [
+      "12-25"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Різдво чесного славного Пророка, Предтечі і Хрестителя Господнього Іоана",
+    "dates": [
+      "06-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Романа Солодкоспівця",
+    "dates": [
+      "10-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сави Освяченого",
+    "dates": [
+      "12-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сави Печерського",
+    "dates": [
+      "04-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сави Стратилата",
+    "dates": [
+      "04-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Савина",
+    "dates": [
+      "03-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Самсона странноприїмця",
+    "dates": [
+      "06-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Свтт. Амфілохія, єп. Іконійського та Григорія, єп. Акрагантійського",
+    "dates": [
+      "11-23"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Свтт. Афанасія і Кирила, архієпп. Олександрійських",
+    "dates": [
+      "01-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Свтт. Єпіфанія, єп. Кіпрського і Германа, патр. Константинопольського",
+    "dates": [
+      "05-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Свтт. Олександра, Іоана і Павла Нового, патріархів Константинопольських",
+    "dates": [
+      "08-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Святителя Миколая, архієпископа Мир Лікійських, чудотворця",
+    "dates": [
+      "12-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Севастіана",
+    "dates": [
+      "02-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Севастіана і дружини його",
+    "dates": [
+      "12-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Семи отроків у Ефесі",
+    "dates": [
+      "10-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Серафима Саровського",
+    "dates": [
+      "01-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сергія Радонезького",
+    "dates": [
+      "07-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сильвестра, папи Римського",
+    "dates": [
+      "01-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Симеона Стовпника",
+    "dates": [
+      "09-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Симеона Стовпника на Дивній горі",
+    "dates": [
+      "05-24"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Симеона, єп. Володимирського і Суздальського, в Києві, у Ближніх печерах",
+    "dates": [
+      "05-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Симеона, єп. Персидського",
+    "dates": [
+      "04-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сисоя Великого",
+    "dates": [
+      "07-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сім мучеників Маккавеїв",
+    "dates": [
+      "08-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Славних і всехвальних первоверховних апостолів Петра і Павла",
+    "dates": [
+      "06-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Славного пророка Іллі (Ілії)",
+    "dates": [
+      "07-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сми мучеників, що в Ефесі",
+    "dates": [
+      "08-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Собор 12-ти апостолів",
+    "dates": [
+      "06-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Собор 70-ти апостолів",
+    "dates": [
+      "01-04"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Собор архангела Гавриїла",
+    "dates": [
+      "03-26"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Собор Архангела Гавриїла",
+    "dates": [
+      "03-26",
+      "07-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Собор Архістратига Михаїла",
+    "dates": [
+      "11-08"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Собор Архістратига Михаїла та інших Небесних Сил безплотних",
+    "dates": [
+      "11-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Собор Волинських святих",
+    "dates": [
+      "10-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Собор Іоана Предтечі",
+    "dates": [
+      "01-07"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Собор Предтечі і Хрестителя Господнього Іоана",
+    "dates": [
+      "01-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Собор преподобних отців Києво-Печерських, що в Ближніх печерах",
+    "dates": [
+      "09-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Собор преподобних отців Києво-Печерських, що в Дальніх печерах",
+    "dates": [
+      "08-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Собор Пресвятої Богородиці",
+    "dates": [
+      "12-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Собор трьох святителів: Василія В., Григорія Б. та Іоана З.",
+    "dates": [
+      "01-30"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Собор трьох святителів: Василія Великого, Григорія Богослова та Іоана Золотоустого",
+    "dates": [
+      "01-30"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Созонта",
+    "dates": [
+      "09-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Софронія, патріарха Єрусалимського",
+    "dates": [
+      "03-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Спиридона Тримифунтського, чудотворця",
+    "dates": [
+      "12-12"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Спогад чуда Архістратига Михаїла в Хонах (Михайлове чудо)",
+    "dates": [
+      "09-06"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Стефана Саваїта",
+    "dates": [
+      "07-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Стефана чудотворця",
+    "dates": [
+      "03-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Стефана, ігумена Печерського",
+    "dates": [
+      "04-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Стрітення Господнє",
+    "dates": [
+      "02-02"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "СТРІТЕННЯ ГОСПОДНЄ",
+    "dates": [
+      "02-02"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Сщмчч. Єрмолая та інших",
+    "dates": [
+      "07-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сщмчч. Климента, папи Римського, та Петра, архієп. Олександрійського",
+    "dates": [
+      "11-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сщмчч. Никандра і Єрмея",
+    "dates": [
+      "11-04"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Сщмчч., що в Херсонесі єпископів: Василія, Єфрема, Капітона та ін.",
+    "dates": [
+      "03-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Тарасія",
+    "dates": [
+      "02-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Теодора Сікеота",
+    "dates": [
+      "04-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Теодора Трихіни",
+    "dates": [
+      "04-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Тимофія",
+    "dates": [
+      "01-22",
+      "02-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Тимофія, єп. Пруського",
+    "dates": [
+      "06-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Тита чудотворця",
+    "dates": [
+      "04-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Тита, пресвітера Печерського",
+    "dates": [
+      "02-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Тихона, єп. Амафунтського",
+    "dates": [
+      "06-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Третє знайдення глави Пророка, Предтечі і Хрестителя Господнього Іоана",
+    "dates": [
+      "05-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Трифилія",
+    "dates": [
+      "06-13"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Трифона",
+    "dates": [
+      "02-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Уара",
+    "dates": [
+      "10-19"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Упокоєння апостола і євангеліста Іоана Богослова",
+    "dates": [
+      "09-26"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Усікновення глави Іоана Предтечі",
+    "dates": [
+      "08-29"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Усікновення глави Пророка, Предтечі і Хрестителя Господнього Іоана",
+    "dates": [
+      "08-29"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Успіння праведної Анни, матері Пресвятої Богородиці",
+    "dates": [
+      "07-25"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Успіння Пресвятої Богородиці",
+    "dates": [
+      "08-15"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Фалалея",
+    "dates": [
+      "05-20"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодора і Василія Печерських",
+    "dates": [
+      "08-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодора мовчазного, Печерського",
+    "dates": [
+      "02-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодора Освяченого",
+    "dates": [
+      "05-16"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодора Стратилата",
+    "dates": [
+      "02-08",
+      "06-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодора Студита, сповідника",
+    "dates": [
+      "11-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодора Тирона",
+    "dates": [
+      "02-17"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодори Олександрійської",
+    "dates": [
+      "09-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодосія Великого",
+    "dates": [
+      "01-11"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Феодосія Печерського",
+    "dates": [
+      "08-14"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодосія, архієп. Чернігівського",
+    "dates": [
+      "02-05",
+      "09-09"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодосія, ігумена Києво-Печерського",
+    "dates": [
+      "05-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодота Анкірського",
+    "dates": [
+      "05-18"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодота, єп. Анкірського",
+    "dates": [
+      "06-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феодота, єп. Киринейського",
+    "dates": [
+      "03-02"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феоктиста",
+    "dates": [
+      "01-04",
+      "09-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феопемпта і мч. Феони",
+    "dates": [
+      "01-05"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феофана сповідника",
+    "dates": [
+      "03-12",
+      "10-11"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Феофілакта сповідника, єп. Нікомидійського",
+    "dates": [
+      "03-08"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Ферапонта",
+    "dates": [
+      "05-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Фоки",
+    "dates": [
+      "07-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Фоки, єп. Синопського",
+    "dates": [
+      "09-22"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Фоми, що в Малеї",
+    "dates": [
+      "07-07"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Харалампія",
+    "dates": [
+      "02-10"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Харитона Сповідника",
+    "dates": [
+      "09-28"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Харлампія",
+    "dates": [
+      "02-10"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Чудотворної Володимирської ікони Божої Матері",
+    "dates": [
+      "05-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Щедрий вечір",
+    "dates": [
+      "12-31"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Юліана Тарсійського",
+    "dates": [
+      "06-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Юрія Переможця (Георгія)",
+    "dates": [
+      "04-23"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Юстина філософа",
+    "dates": [
+      "06-01"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Якинта",
+    "dates": [
+      "07-03"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Якова Зеведеєвого",
+    "dates": [
+      "04-30"
+    ],
+    "source": "fixed"
+  },
+  {
+    "name": "Якова Персіянина",
+    "dates": [
+      "11-27"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Якова, єп. Катанського (Горохівського)",
+    "dates": [
+      "03-21"
+    ],
+    "source": "saintsData"
+  },
+  {
+    "name": "Януарія та з ним мучеників",
+    "dates": [
+      "04-21"
+    ],
+    "source": "saintsData"
+  }
+]

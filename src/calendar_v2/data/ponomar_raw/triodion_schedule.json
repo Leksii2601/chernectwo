@@ -1,0 +1,746 @@
+[
+  {
+    "day": "01",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9801",
+        "Tone": "-1"
+      }
+    ]
+  },
+  {
+    "day": "02",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9802",
+        "Tone": "-1"
+      }
+    ]
+  },
+  {
+    "day": "03",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9803",
+        "Tone": "-1"
+      }
+    ]
+  },
+  {
+    "day": "04",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9804",
+        "Tone": "-1"
+      }
+    ]
+  },
+  {
+    "day": "05",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9805",
+        "Tone": "-1"
+      }
+    ]
+  },
+  {
+    "day": "06",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9806",
+        "Tone": "-1"
+      }
+    ]
+  },
+  {
+    "day": "07",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9807",
+        "Tone": "-1"
+      }
+    ]
+  },
+  {
+    "day": "08",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9808",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "09",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9809",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "10",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9810",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "11",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9811",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "12",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9812",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "13",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9813",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "14",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9814",
+        "Tone": "((ndayP - 49 - dow) / 7 + 7) % 8"
+      },
+      {
+        "SId": "2593",
+        "CId": "2593"
+      }
+    ]
+  },
+  {
+    "day": "15",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9815",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      },
+      {
+        "SId": "1",
+        "CId": "981501"
+      }
+    ]
+  },
+  {
+    "day": "16",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9816",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "17",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9817",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "18",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9818",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "19",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9819",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "20",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9820",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "21",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9821",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      },
+      {
+        "SId": "986",
+        "CId": "986"
+      }
+    ]
+  },
+  {
+    "day": "22",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9822",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      },
+      {
+        "SId": "0",
+        "CId": "9913"
+      }
+    ]
+  },
+  {
+    "day": "23",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9823",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "24",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9824",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "25",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9825",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "26",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9826",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "27",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9827",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "28",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9828",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "29",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9829",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      },
+      {
+        "SId": "0",
+        "CId": "9913"
+      }
+    ]
+  },
+  {
+    "day": "30",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9830",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "31",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9831",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "32",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9832",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "33",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9833",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "34",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9834",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "35",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9835",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      },
+      {
+        "SId": "543",
+        "CId": "543"
+      }
+    ]
+  },
+  {
+    "day": "36",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9836",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      },
+      {
+        "SId": "0",
+        "CId": "9913"
+      }
+    ]
+  },
+  {
+    "day": "37",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9837",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "38",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9838",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "39",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9839",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "40",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9840",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "41",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9841",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "42",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9842",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "43",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9843",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      },
+      {
+        "SId": "2203",
+        "CId": "2203"
+      }
+    ]
+  },
+  {
+    "day": "44",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9844",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "45",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9845",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "46",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9846",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "47",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9847",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "48",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9848",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "49",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9849",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "50",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9850",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      },
+      {
+        "SId": "0",
+        "CId": "991301"
+      }
+    ]
+  },
+  {
+    "day": "51",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9851",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "52",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9852",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "53",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9853",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "54",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9854",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "55",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9855",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "56",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9856",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "57",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9857",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      },
+      {
+        "SId": "0",
+        "CId": "9913"
+      }
+    ]
+  },
+  {
+    "day": "58",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9858",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "59",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9859",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "60",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9860",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "61",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9861",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "62",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9862",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "63",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9863",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "64",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9864",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "65",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9865",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "66",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9866",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "67",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9867",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "68",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9868",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "69",
+    "saints": [
+      {
+        "SId": "0",
+        "CId": "9869",
+        "Tone": "((ndayP - dow) / 7) % 8"
+      }
+    ]
+  },
+  {
+    "day": "70",
+    "saints": [
+      {
+        "CId": "9900",
+        "Cmd": "doy &gt;= 6 &amp;&amp; doy &lt;= 12"
+      },
+      {
+        "SId": "0",
+        "CId": "9870",
+        "Tone": "(ndayP / 7) % 8"
+      }
+    ]
+  }
+]
