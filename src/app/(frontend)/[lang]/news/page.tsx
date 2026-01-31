@@ -7,16 +7,16 @@ import { newsData } from '@/data/newsData';
 import { PageHeader } from '@/components/PageHeader';
 
 
-import { translations } from '@/context/LanguageContext';
+import { translations } from '@/data/translations';
 
 export default async function NewsPage(props: {
   params: Promise<{ lang: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const searchParams = await props.searchParams;
-  const params = await props.params;
-  const lang = (params.lang.toUpperCase() as 'UA' | 'EN') || 'UA';
-  const t = (key: string) => translations[lang][key] || key;
+  const langParam = (await props.params).lang.toUpperCase();
+  const langKey = (langParam === 'EN' || langParam === 'UA' ? langParam : 'UA') as 'UA' | 'EN';
+  const t = (key: string) => (translations[langKey] && translations[langKey][key]) || key;
 
   const search = typeof searchParams.search === 'string' ? searchParams.search : undefined;
 

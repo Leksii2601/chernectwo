@@ -4,12 +4,12 @@ import { Footer } from '@/components/landing/Footer';
 import { FloatingButton } from '@/components/landing/FloatingButton';
 import { PilgrimInfo } from '@/components/pilgrims/PilgrimInfo';
 import { PilgrimServices } from '@/components/pilgrims/PilgrimServices';
-import { translations } from '@/context/LanguageContext';
+import { translations } from '@/data/translations';
 
 export default async function PilgrimsPage({ params }: { params: Promise<{ lang: string }> }) {
-  const { lang } = await params;
-  const currentLang = (lang.toUpperCase() as 'UA' | 'EN') || 'UA';
-  const t = (key: string) => translations[currentLang][key] || key;
+  const langParam = (await params).lang.toUpperCase();
+  const currentLang = (langParam === 'EN' || langParam === 'UA' ? langParam : 'UA') as 'UA' | 'EN';
+  const t = (key: string) => (translations[currentLang] && translations[currentLang][key]) || key;
 
   return (
     <main className="min-h-screen bg-white">

@@ -5,6 +5,7 @@ import { FloatingButton } from '@/components/landing/FloatingButton';
 import { SocialProjectsFeed } from '@/components/social/SocialProjectsFeed';
 import { getProjectsData } from '@/data/projectsData';
 import { PageHeader } from '@/components/PageHeader';
+import { translations } from '@/data/translations';
 
 export const metadata = {
   title: 'Місіонерські Проєкти - Жидичинський Монастир',
@@ -15,15 +16,12 @@ export default async function SocialProjectsPage({ params }: { params: Promise<{
   const { lang } = await params;
   const projectsData = getProjectsData(lang);
 
-  const titles: Record<string, string> = {
-    ua: 'СОЦІАЛЬНІ ПРОЄКТИ',
-    en: 'SOCIAL PROJECTS'
-  };
-  const title = titles[lang.toLowerCase()] || titles['ua'];
+  const langKey = (lang.toUpperCase() === 'EN' ? 'EN' : 'UA') as 'UA' | 'EN';
+  const t = (key: string) => translations[langKey][key] || key;
 
   return (
     <main className="min-h-screen bg-white">
-      <PageHeader backgroundImage="/media/social-initiatives.jpg" title={title} />
+      <PageHeader backgroundImage="/media/social-initiatives.jpg" title={t('social.page_title')} />
 
       <SocialProjectsFeed initiatives={projectsData} />
 
