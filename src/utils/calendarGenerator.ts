@@ -185,7 +185,10 @@ export interface CalendarDay {
 function formatReadingsToString(readings: Reading[]): string {
   return readings.map(r => {
     const lbl = r.label ? `${r.label}: ` : "";
-    return `${lbl}Ап. ${r.apostle}; Єв. ${r.gospel}`;
+    const ap = r.apostle ? `Ап. ${r.apostle}` : "";
+    const ev = r.gospel ? `Єв. ${r.gospel}` : "";
+    const content = [ap, ev].filter(Boolean).join("; ");
+    return `${lbl}${content}`;
   }).join("\n");
 }
 

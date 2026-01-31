@@ -5,6 +5,7 @@ import ponomarLivesRaw from './data/ponomar_raw/ponomar_lives_ua.json';
 import calendarCidsRaw from './data/calendar_cids.json';
 import gapMapRaw from './data/gap_map.json';
 import { PaschalionReader } from './PaschalionReader';
+import { OCU_2026_RULES, TypikonRule } from './TypikonRules';
 
 // --- Types ---
 
@@ -33,11 +34,7 @@ export interface LiturgyReadings {
 }
 
 export interface HoursReadings {
-    prime?: DetailedReading[];
-    terce?: DetailedReading[];
-    sexte?: DetailedReading[];
-    none?: DetailedReading[];
-    royal?: DetailedReading[];
+    [key: string]: DetailedReading[] | undefined;
 }
 
 export interface GranularReadings {
@@ -321,21 +318,23 @@ const COMPOSITE_READINGS: Record<string, string> = {
 
 function expandComposite(reading: string): string {
     if (COMPOSITE_READINGS[reading]) return COMPOSITE_READINGS[reading];
-    // Check internal Ponomar composite structure if available?
-    // Simplest is explicit map.
     return reading;
 }
 
-// --- Helpers ---
-
+// UPDATE: Fix "(mid.)" and safe suffix removal
 function normalizeBookNames(text: string): string {
     return text
-        .replace(/Ів\./g, "Ін.") // John: Iv -> In
-        .replace(/Мт\./g, "Мф.") // Matthew: Mt -> Mf
-        .replace(/Дії\./g, "Діян.") // Acts variants?
-        .replace(/Об\./g, "Об'яв.") // Revelation
-        .replace(/\(mid\.\)/g, "(з середини)")
-        .replace(/\(from half\)/g, "(з середини)");
+        .replace(/Ів\./g, "Ін.")
+        .replace(/Мт\./g, "Мф.")
+        .replace(/Дії\./g, "Діян.")
+        .replace(/Об\./g, "Об'яв.")
+        .replace(/Юди/g, "Іуди")
+        .replace(/Йоіл/g, "Іоїл")
+        .replace(/(\d)[a-zA-ZвВ]/g, "$1") // Remove technical suffixes (e.g. 10a -> 10)
+        .replace(/[a-zA-Z]/g, "") // Clear remaining latin
+        .replace(/\(mid\.\)/gi, "(з середини)")
+        .replace(/\(from half\)/gi, "(з середини)")
+        .replace(/\(\.\)/g, "(від половини)"); // New requirement
 }
 
 // --- Extraction ---
@@ -428,16 +427,7 @@ export function calculateDynamicReadings(date: Date): DayReadings {
     //     console.log(`Original Key: ${key}, nday: ${nday}`);
     // }
 
-    // --- URGENT CALIBRATION: Lucan Jump Override (Feb 7 2026) ---
-    // Force Week 34 Key for Saturday -64 (Feb 7)
-    // Saturday of Publican (-64) usually Week 33 (Luka 33).
-    // User requests Week 34 (Luka 34) -> Key 346.
-    let forceUseLectionary = false;
-    if (nday === -64) {
-        key = "346";
-        forceUseLectionary = true; // CRITICAL: Skip Ponomar, use Lectionary directly
-        // console.log(`[OVERRIDE] Forced key to 346 for nday -64, using LECTIONARY`);
-    }
+    // Hardcoded logic for Feb 7 and Feb 2 moved to OCU_2026_RULES
 
     const result: DayReadings = {
         date: `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`,
@@ -492,24 +482,50 @@ export function calculateDynamicReadings(date: Date): DayReadings {
 
     if (isSunday && !isPascha) suppressOrdinary = false;
 
+    // Feb 2 Override moved to Rules
+    // if (mmdd === "02-02") suppressOrdinary = true;
+
     // Triodion Sunday Rule
     const isTriodionSunday = (nday === -70 || nday === -63 || nday === -56 || nday === -49);
-    let suppressSaints = false;
-    if (isTriodionSunday) {
-        // Only allow if major feast (Rank >= 7)
-        // EXCEPTION: Prodigal Son (Feb 8 2026, nday -63). Allow Rank 4+ (Polyeleos/St Theodore)
-        if (nday === -63) {
-            if (maxRank < 4) suppressSaints = true;
-        } else {
-            if (maxRank < 7) suppressSaints = true;
+    // --- TYPIKON RULE ENGINE (Antigravity v2) ---
+    const activeRules: TypikonRule[] = [];
+
+    // 1. Evaluate Triggers
+    OCU_2026_RULES.forEach(rule => {
+        let active = false;
+        if (rule.triggers.mmdd && rule.triggers.mmdd.includes(mmdd)) active = true;
+        if (rule.triggers.nday && rule.triggers.nday.includes(nday)) active = true;
+
+        if (active) {
+            console.log(`[TypikonRule] Applying: ${rule.id}`);
+            activeRules.push(rule);
         }
+    });
+
+    // 2. Apply Suppression Flags
+    // suppressOrdinary is managed above
+    let suppressSaints = false;
+    let suppressPonomar = false;
+
+    if (activeRules.some((r: TypikonRule) => r.action === 'SUPPRESS_SAINTS')) suppressSaints = true;
+    if (activeRules.some((r: TypikonRule) => r.action === 'SUPPRESS_ORDINARY')) suppressOrdinary = true;
+    if (activeRules.some((r: TypikonRule) => r.action === 'SUPPRESS_PONOMAR')) suppressPonomar = true;
+    if (activeRules.some((r: TypikonRule) => r.action === 'SET_ALITURGICAL')) {
+        suppressOrdinary = true;
+        suppressSaints = true;
+    }
+
+    // Legacy Triodion Logic (Renamed to avoid conflict)
+    const isTriodionPeriodRules = (nday >= -70 && nday < 0);
+    if (isTriodionPeriodRules && dow === 0) {
+        if (maxRank < 7) suppressSaints = true;
     }
 
     // 1. Ordinary (First)
     if (!suppressOrdinary) {
         const ord = PONOMAR_LIVES[key];
         // Skip Ponomar if we're forcing Lectionary use (calibration override)
-        if (ord && !forceUseLectionary) {
+        if (ord) {
             // if (mmdd === "02-07" || mmdd === "02-08") console.log(`Using PONOMAR_LIVES for key ${key}`);
             extractPonomarReadings(ord, result, "Ряд.");
         }
@@ -551,33 +567,61 @@ export function calculateDynamicReadings(date: Date): DayReadings {
         }
     }
 
-    // 2. Saints
-    // DEBUG: if (mmdd === "02-08") console.log(`[SUPPRESS CHECK] ${result.date}: suppressSaints=${suppressSaints}`);
+    // 2. Saints (OCU Filter Logic)
+    // Refined for OCU 2026: Suppress Minor Saints in Triodion
+    const isTriodionPeriod = (nday >= -70 && nday < 0);
 
     if (!suppressSaints) {
-        // DEBUG: if (mmdd === "02-08") console.log(`[SAINTS] ${result.date}: maxRank=${maxRank}`);
+        let validCids: string[] = [];
 
-        let ponomarContributed = false;
+        // Filter Saints
         activeKeys.forEach(cid => {
             const src = PONOMAR_LIVES[cid];
-            // DEBUG: if (mmdd === "02-08") console.log(`CID ${cid}: ${!!src}`);
+            if (!src) return;
+            const rank = src.serviceType || 0;
 
+            // OCU Suppression Rule (Triodion)
+            if (isTriodionPeriod) {
+                // Rule: Suppress if Rank < 4 (Polyeleos)
+                if (rank < 4) return;
+            }
+            validCids.push(cid);
+        });
+
+        // Rule-based Ponomar Suppression
+        if (suppressPonomar) validCids = [];
+
+        let ponomarContributed = false;
+
+        validCids.forEach(cid => {
+            const src = PONOMAR_LIVES[cid];
             if (src) {
                 extractPonomarReadings(src, result, getLabelForServiceType(src.serviceType));
                 if (src.liturgy && src.liturgy.length > 0) ponomarContributed = true;
+
+                // Feb 12 Matins Gospel Check
+                // Ensure Matins Gospel is extracted if Rank >= 4
+                if (mmdd === "02-12" && src.serviceType && src.serviceType >= 4) {
+                    const hasMatinsGospel = result.matins?.readings.some(r => r.type === 'gospel' || r.label?.toLowerCase().includes('євангеліє'));
+
+                    if (!hasMatinsGospel) {
+                        if (!result.matins) result.matins = { title: "Рання", readings: [] };
+                        // Force specific passage for St. Alexis if missing
+                        result.matins.readings.push({
+                            reading: "Лк. 4 зач.; 1:39-49, 56",
+                            type: "gospel",
+                            label: "Раннє Євангеліє (Свт. Олексія)"
+                        });
+                    }
+                }
             }
         });
 
-        // 3. Fallback to Fixed
-        // Use Fixed readings if Ponomar did not contribute any LITURGY readings for the Saints
+        // 3. Fallback to Fixed (only if no Liturgy readings from Saints)
         if (!ponomarContributed && fixed) {
-            // DEBUG: if (mmdd === "02-08") console.log(`[FIXED FALLBACK] ${fixed.title}`);
-
             const label = "(Св.)";
-            // Ponomar didn't give Liturgy, ensure Fixed does.
             if (fixed.morning) {
                 if (!result.matins) result.matins = { title: "Рання", readings: [] };
-                // Only add if not duplicate
                 if (!result.matins.readings.find(r => r.reading === fixed.morning)) {
                     result.matins.readings.push({ reading: normalizeBookNames(fixed.morning!), type: 'gospel', label: "Раннє Євангеліє (Св.)" });
                 }
@@ -589,13 +633,16 @@ export function calculateDynamicReadings(date: Date): DayReadings {
                     if (r.gospel) result.liturgy.gospel.push({ reading: normalizeBookNames(r.gospel), label: l });
                 });
             } else if (fixed.apostle) {
-                // DEBUG: if (mmdd === "02-08") console.log(`Adding fixed apostle/gospel`);
                 result.liturgy.apostle.push({ reading: normalizeBookNames(fixed.apostle!), label });
                 result.liturgy.gospel.push({ reading: normalizeBookNames(fixed.gospel!), label });
-
             }
         }
     }
+
+    // --- Specific Pericope Overrides (Refined for OCU 2026) ---
+    // (Overrides migrated to OCU_2026_RULES)
+
+
 
     // 4. Royal Hours Checks (Remove Hours if failed)
     if (isRoyalHoursDay(nday, mmdd, dow)) {
@@ -605,39 +652,115 @@ export function calculateDynamicReadings(date: Date): DayReadings {
     }
 
     // --- CUSTOM FIXES (Lent/Triodion) ---
+    // (Values migrated to OCU_2026_RULES)
 
-    // Meatfare Soul Saturday (-57)
-    if (nday === -57) {
-        result.liturgy.apostle.push({ reading: "1 Сол. 4:13-17", label: "За упокій" });
-        result.liturgy.gospel.push({ reading: "Ін. 5:24-30", label: "За упокій" });
-        if (result.metadata && result.metadata.description) result.metadata.description += " (Заупокійна)";
+    // --- 4. Apply Rules Output (Overrides/Appends) ---
+    if (mmdd === '03-09') {
+        console.log("--- DEBUG MAR 09 ---");
+        console.log("Active Rules:", activeRules.map(r => r.id));
+        console.log("Liturgy BEFORE Rules:", JSON.stringify(result.liturgy));
     }
 
-    // Aliturgical Days: Cheesefare Wednesday (-53) and Friday (-51)
-    if (nday === -53 || nday === -51) {
-        result.liturgy = { title: "Літургія не звершується", apostle: [], gospel: [] };
-        if (!result.vespers) result.vespers = { title: "Вечірня", readings: [] };
-        if (!result.hours) result.hours = { sexte: [], none: [] };
+    activeRules.forEach(rule => {
+        if (rule.data) {
+            // Liturgy
+            if (rule.action === 'APPEND_LITURGY' || rule.action === 'REPLACE_LITURGY') {
+                if (rule.action === 'REPLACE_LITURGY') {
+                    result.liturgy.apostle = [];
+                    result.liturgy.gospel = [];
+                }
+                if (rule.data.liturgy) {
+                    rule.data.liturgy.apostle?.forEach(r => {
+                        result.liturgy.apostle.push({ reading: r.reading, label: r.label, type: r.type });
+                    });
+                    rule.data.liturgy.gospel?.forEach(r => {
+                        result.liturgy.gospel.push({ reading: r.reading, label: r.label, type: r.type });
+                    });
+                }
+            }
 
-        if (nday === -53) {
-            result.hours!.sexte!.push({ reading: "Йоіл. 2:12-26", label: "Паремія" });
-            result.vespers.readings.push({ reading: "Йоіл. 3:9-21", label: "Паремія" });
+            // Metadata
+            if (rule.data.metadata) {
+                if (result.metadata && result.metadata.description) result.metadata.description += rule.data.metadata;
+            }
+
+            // Matins
+            if (rule.data.matins) {
+                if (!result.matins) result.matins = { title: "Рання", readings: [] };
+                rule.data.matins.forEach(r => {
+                    result.matins!.readings.push({ reading: r.reading, label: r.label, type: r.type });
+                });
+            }
+
+            // Hours
+            if ((rule.action === 'ADD_HOURS' || rule.action === 'REPLACE_HOURS') && rule.data.hours) {
+                if (!result.hours) result.hours = {};
+
+                if (rule.action === 'REPLACE_HOURS') {
+                    result.hours = {}; // Clear existing hours
+                }
+
+                Object.entries(rule.data.hours).forEach(([key, readings]) => {
+                    const mappedReadings = readings.map(r => ({ reading: r.reading, label: r.label, type: r.type }));
+                    result.hours![key as keyof HoursReadings] = mappedReadings;
+                });
+            }
+
+            // Vespers
+            if (rule.data.vespers && (rule.action === 'ADD_VESPERS' || rule.action === 'REPLACE_VESPERS')) {
+                if (!result.vespers) result.vespers = { title: "Вечірня", readings: [] };
+
+                if (rule.action === 'REPLACE_VESPERS') {
+                    result.vespers.readings = [];
+                }
+
+                rule.data.vespers.forEach(r => result.vespers!.readings.push({ reading: r.reading, label: r.label, type: r.type }));
+            }
         }
-        if (nday === -51) {
-            result.hours!.sexte!.push({ reading: "Зах. 8:7-17", label: "Паремія" });
-            result.vespers.readings.push({ reading: "Зах. 8:19-23", label: "Паремія" });
-        }
-    }
 
-    // Lenten Soul Saturdays (2nd, 3rd, 4th)
-    if (nday === -35 || nday === -28 || nday === -21) {
-        result.liturgy.apostle.push({ reading: "1 Сол. 4:13-17", label: "За упокій" });
-        result.liturgy.gospel.push({ reading: "Ін. 5:24-30", label: "За упокій" });
-        if (result.metadata && result.metadata.description) result.metadata.description += " (Заупокійна)";
-    }
+        // Special Actions
+        if (rule.action === 'SET_ALITURGICAL') {
+            result.liturgy = { title: "Літургія не звершується", apostle: [], gospel: [] };
+            if (!result.vespers) result.vespers = { title: "Вечірня", readings: [] };
+            result.hours = {};
+        }
+    });
+
+    // --- 5. Sanitization & Final Polish ---
+    const sanitizeText = (t: string) => {
+        if (!t) return "";
+        return t.replace(/Об\./g, "Об'яв.")
+            .replace(/Юди/g, "Іуди")
+            .replace(/Йоіл/g, "Іоїл")
+            .replace(/[a-zA-Z]/g, "") // Remove ALL Latin chars (e.g. 'b', 'c', 'a')
+            .replace(/(\d)[вВ]/g, "$1") // Remove Cyrillic 'v' ONLY if it follows a digit (suffix)
+            .replace(/\(mid\.\)/gi, "(з середини)")
+            .replace(/\(from half\)/gi, "(з середини)")
+            .trim();
+    };
+
+    const cleanList = (list: any[]) => {
+        list.forEach((r: any) => {
+            if (r.reading) r.reading = sanitizeText(r.reading);
+            if (r.label) {
+                if (r.label.toLowerCase() === 'sexte') r.label = "6-й час";
+                if (r.label.toLowerCase() === 'matins') r.label = "Рання";
+                if (r.label.toLowerCase() === 'vespers') r.label = "Вечірня";
+            }
+        });
+    };
+
+    cleanList(result.liturgy.apostle);
+    cleanList(result.liturgy.gospel);
+    if (result.matins) cleanList(result.matins.readings);
+    if (result.vespers) cleanList(result.vespers.readings);
+    if (result.hours) Object.values(result.hours).forEach((arr: any) => cleanList(arr));
 
     // Lenten Weekdays (Great Lent)
-    if (nday >= -48 && nday <= -9) {
+    const hasLiturgyContent = result.liturgy.apostle.length > 0 || result.liturgy.gospel.length > 0;
+
+    // Only apply Aliturgical/Presanctified defaults if Liturgy is EMPTY (not populated by Rules)
+    if (nday >= -48 && nday <= -9 && !hasLiturgyContent) {
         if (dow === 1 || dow === 2 || dow === 4) {
             result.liturgy = { title: "Літургія не звершується", apostle: [], gospel: [] };
             if (!result.vespers) result.vespers = { title: "Вечірня", readings: [] };
@@ -720,6 +843,32 @@ export function calculateDynamicReadings(date: Date): DayReadings {
                 flatReadings.push({ apostle: r.reading, gospel: "", label: r.label || "6-й час" });
             });
         }
+        if (result.hours?.none && result.hours.none.length > 0) {
+            result.hours.none.forEach(r => {
+                flatReadings.push({ apostle: r.reading, gospel: "", label: r.label || "9-й час" });
+            });
+        }
+    }
+
+    // Final Cleanup: Remove empty hours
+    if (result.hours) {
+        if (!result.hours.sexte || result.hours.sexte.length === 0) delete result.hours.sexte;
+        if (!result.hours.none || result.hours.none.length === 0) delete result.hours.none;
+
+        // Translate Keys for UI
+        const map: Record<string, string> = {
+            "sexte": "6-й час",
+            "none": "9-й час",
+            "prime": "1-й час",
+            "terce": "3-й час",
+            "royal": "Царські Години"
+        };
+        Object.keys(result.hours).forEach(k => {
+            if (map[k] && result.hours![k]) {
+                result.hours![map[k]] = result.hours![k];
+                delete result.hours![k];
+            }
+        });
     }
 
     result.readings = flatReadings;
