@@ -1,0 +1,25 @@
+{
+  "summary": {
+    "passed": 360,
+    "failed": 5,
+    "total": 365
+  },
+  "failed_dates": {
+    "2026-01-05": [
+      "Missing Royal Hours container on Jan 5"
+    ],
+    "2026-01-16": [
+      "Missing Royal Hours container on Jan 16"
+    ],
+    "2026-01-25": [
+      "Expected Luke 19:1-10 (Zacchaeus). Got: [{\"reading\":\"Лк., 106 зач., 21:12-19\",\"type\":\"gospel\",\"pericope\":\"106\",\"label\":\"Свята\"}]"
+    ],
+    "2026-01-31": [
+      "Expected 2 Tim 293 za. for Jan 31. Got: [{\"apostle\":\"2 Тим., 296 зач., 3:10-15\",\"gospel\":\"Лк., 89 зач., 18:10-14\",\"label\":\"Ряд.\"},{\"apostle\":\"Євр., 316 зач., 7:7-17\",\"gospel\":\"Лк., 7 зач., 2:22-40\",\"label\":\"\"},{\"apostle\":\"Євр., 316 зач., 7:7-17\",\"gospel\":\"Лк., 7 зач., 2:22 (від пол.)-40\",\"label\":\"\"},{\"apostle\":\"Рим., 99 зач., 8:28-39\",\"gospel\":\"Лк., 51 (mid.) зач., 10:19-21\",\"label\":\"Святого\"}]"
+    ],
+    "2026-02-01": [
+      "Expected nday -70, got -69",
+      "Expected Publican & Pharisee (Luke 18:10-14)."
+    ]
+  }
+}

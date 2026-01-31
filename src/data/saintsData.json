@@ -88,20 +88,25 @@
     "saints": ["Перенесення мощей сщмч. Ігнатія Богоносця"]
   },
   "01-30": {
-    "saints": ["Собор трьох святителів: Василія Великого, Григорія Богослова та Іоана Золотоустого"]
+    "saints": ["Собор трьох святителів: Василія Великого, Григорія Богослова та Іоана Золотоустого"],
+    "saints_en": ["Synaxis of the Three Hierarchs: Basil the Great, Gregory the Theologian and John Chrysostom"]
   },
   "01-31": {
-    "saints": ["Безсрр. мчч. Кіра та Іоана"]
+    "saints": ["Безсрр. мчч. Кіра та Іоана"],
+    "saints_en": ["Holy Wonderworkers and Unmercenaries Cyrus and John"]
   },
 
   "02-01": {
-    "saints": ["Передсвято Стрітення Господнього", "Мч. Трифона"]
+    "saints": ["Передсвято Стрітення Господнього", "Мч. Трифона"],
+    "saints_en": ["Forefeast of the Meeting of the Lord", "Martyr Tryphon"]
   },
   "02-02": {
-    "saints": ["Стрітення Господнє"]
+    "saints": ["Стрітення Господнє"],
+    "saints_en": ["Meeting of the Lord"]
   },
   "02-03": {
-    "saints": ["Прав. Симеона Богоприїмця і Анни пророчиці"]
+    "saints": ["Прав. Симеона Богоприїмця і Анни пророчиці"],
+    "saints_en": ["Righteous Simeon the God-Receiver and Anna the Prophetess"]
   },
   "02-04": {
     "saints": ["Прп. Ісидора Пелусіота", "Прп. Миколи Сповідника"]

@@ -1,0 +1,656 @@
+'use client';
+
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+
+type Language = 'UA' | 'EN';
+
+interface LanguageContextType {
+    language: Language;
+    setLanguage: (lang: Language) => void;
+    t: (key: string) => string;
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+// Simple dictionary for static strings
+const translations: Record<Language, Record<string, string>> = {
+    UA: {
+        'hero.title': 'Жидичинський \nСвято-Миколаївський \nМонастир',
+        'hero.description': '- один із найдавніших діючих монастирів Православної Церкви України, що бере свій початок з часів Київської Русі.',
+
+        'calendar.title': 'РОЗКЛАД БОГОСЛУЖІНЬ',
+        'calendar.no_services': 'Богослужінь немає',
+        'calendar.months': 'Січень,Лютий,Березень,Квітень,Травень,Червень,Липень,Серпень,Вересень,Жовтень,Листопад,Грудень',
+        'calendar.months_genitive': 'січня,лютого,березня,квітня,травня,червня,липня,серпня,вересня,жовтня,листопада,грудня',
+        'calendar.weekdays': 'Пн,Вт,Ср,Чт,Пт,Сб,Нд',
+
+        'news.title': 'НОВИНИ',
+        'news.read_more': 'Читати більше',
+        'news.all_news': 'Всі новини',
+
+        'social.title': 'СОЦІАЛЬНІ ІНІЦІАТИВИ',
+
+        'explore.title': 'ДІЗНАТИСЯ БІЛЬШЕ',
+
+        'faq.title': 'Часті питання',
+        'faq.subtitle': 'Жидичинський монастир',
+        'faq.intro_1': 'Жидичинський Свято-Миколаївський монастир — простір молитви, спокою та духовної сили, що має тисячолітню історію.',
+        'faq.intro_2': 'Обитель є одним із найдавніших центрів православ’я на Волині. Тут зберігаються святині, шануються традиції та звершується щоденна молитва за мир і благополуччя. Монастир відкритий для всіх, хто шукає Бога, потребує духовної поради чи просто хоче відпочити душею у тиші святих стін.',
+        'faq.intro_3': 'Ми прагнемо, щоб кожен паломник відчував себе тут як вдома. Саме тому ми підготували відповіді на найпоширеніші запитання, які допоможуть вам підготуватися до візиту.',
+        'faq.intro_4': 'Братія монастиря завжди рада вітати прочан та гостей обителі. Ви можете долучитися до богослужінь, поспілкуватися з духівниками та знайти відповіді на важливі життєві питання.',
+        'faq.collapse': 'Згорнути',
+        'faq.expand': 'Читати більше',
+        'faq.form_name': "Ваше ім'я",
+        'faq.form_email': 'Ваш email',
+        'faq.form_question': 'Ваше питання',
+        'faq.form_submit': 'Надіслати',
+        'faq.form_success': 'Дякуємо! Ваше питання отримано.',
+        'faq.form_error': 'Сталася помилка. Спробуйте пізніше.',
+        'faq.question_1': 'Як подати записку за здоров’я у монастирі?',
+        'faq.answer_1': 'Щоб подати записку у Жидичинському монастирі, Вам необхідно приїхати в обитель і в одному із храмів написати записку з іменами людей, за яких буде здійснюватися молитва.',
+        'faq.question_2': 'Коли відбувається богослужіння у монастирі?',
+        'faq.answer_2': 'Актуальний графік богослужінь представлено на сайті. Щоденно в будні дні відбувається Божественна літургія о 08.00 год. та вечірня о 18.00 год. У суботу Божественна літургія о 09.00 год. та вечірня о 18.00 год. У неділю Божественна літургія о 10.00 год. та акафіст до Богородиці о 18.00 год.',
+        'faq.question_3': 'Чи можна посповідатися і причаститися у монастирі?',
+        'faq.answer_3': 'Так, можна. Щоденно в будні дні о 08.00 год., у суботу о 09.00 год., а в неділю о 10.00 год. відбувається Божественна літургія з можливістю сповіді та причастя вірних.',
+        'faq.question_4': 'Яка вартість подачі записки чи інших треб у монастирі?',
+        'faq.answer_4': 'У нашому монастирі немає встановлених цін на треби чи подання записок. Ви самостійно визначаєте розмір внеску, виходячи з ваших можливостей і поклику серця.',
+        'faq.question_5': 'Чи можна охрестити дитину, повінчатися у монастирі?',
+        'faq.answer_5_text': 'Так, можна. Для цього необхідний попередній запис на здійснення таїнства. Приїдьте особисто в обитель або зателефонуйте за номером',
+        'faq.question_6': 'Чи можна освятити автомобіль, будинок, ікону у монастирі?',
+        'faq.answer_6': 'Так, можна. Для цього Вам необхідно приїхати в обитель на Божественну літургію і повідомити волонтерів або братію монастиря до початку богослужіння про ваші наміри.',
+        'faq.question_7': 'Чи можна подати записку на невсипущий псалтир у монастирі?',
+        'faq.answer_7': 'У монастирі не читається невсипущий псалтир. Це притаманно лише для монастирів з великою чисельністю братії. Ви можете просто подати записку за здоров’я Ваших рідних чи близьких.',
+        'faq.question_8': 'Як доїхати до монастиря?',
+        'faq.answer_8_text': 'Обитель має зручну транспортну доступність. Базові варіанти доїзду представлено за посиланням.',
+        'faq.question_9': 'Який графік руху монастирського автобуса?',
+        'faq.answer_9': 'У неділю та святкові дні монастир організовує доїзд вірян на богослужіння та у зворотному напрямку власним транспортом. Графік та маршрут руху: с. Прилуцьке о 8:40 / 40-й А квартал о 9:00 / пр. Соборності (магазин Троянда) о 9:07 / К-тр «Промінь» (зупинка вул. Стрілецька) о 9:20 / Вишків о 9:25',
+        'faq.question_10': 'Залишилися запитання?',
+
+        'footer.title': 'Жидичинський\nМонастир',
+        'footer.contacts': 'Контакти',
+        'footer.phone': 'Телефон',
+        'footer.address_label': 'Адреса',
+        'footer.address': 'вул. Ковельська,\nс. Жидичин, Луцький р-н,\nВолинська обл.',
+        'footer.info': 'Інформація',
+        'footer.socials': 'Ми в соцмережах',
+        'footer.copyright': '© Жидичинський Свято-Миколаївський монастир',
+        'news.no_results': 'Пошук не дав результатів.',
+
+        'social.description': 'Жидичинський монастир упродовж століть був не лише духовним осередком, а й простором служіння громаді. Сьогодні ця місія продовжується через соціальні проєкти, що поєднують волонтерство, освіту, культуру, молодіжні ініціативи, підтримку громади та збереження спадщини. Кожен з них об’єднує людей, ідеї та ініціативи, продовжуючи спільну місію — бути поруч, підтримувати, творити майбутнє на основі віри, пам’яті та відповідальності.',
+        'social.button': 'Дивитись',
+
+        'explore.history': 'ІСТОРІЯ',
+        'explore.life': 'ЖИТТЯ ОБИТЕЛІ',
+        'explore.schedule': 'РОЗКЛАД БОГОСЛУЖІНЬ',
+        'explore.media': 'МЕДІАТЕКА',
+        'explore.architecture': 'АРХІТЕКТУРА',
+        'explore.sketes': 'СКИТИ',
+        'explore.social': 'СОЦІАЛЬНІ ІНІЦІАТИВИ',
+        'explore.pilgrims': 'ПАЛОМНИКУ',
+        'explore.join': 'ДОЛУЧИТИСЯ',
+        'explore.support': 'ПІДТРИМАТИ',
+        'explore.contacts': 'КОНТАКТИ',
+        'nav.about': 'Про монастир',
+        'nav.history': 'Історія',
+        'nav.schedule': 'Розклад богослужінь',
+        'nav.complex': 'Храмовий комплекс',
+        'nav.sketes': 'Скити',
+        'nav.media': 'Медіатека',
+        'nav.news': 'Новини',
+        'nav.publications': 'Публікації',
+        'nav.announcements': 'Анонси',
+        'nav.official': 'Офіційно',
+        'nav.social': 'Соціальні проєкти',
+        'nav.pilgrims': 'Паломнику',
+        'nav.donate': 'Підтримати',
+        'nav.contacts': 'Контакти',
+        'nav.write_note': 'Написати записку',
+        'nav.make_donation': 'Зробити\nпожертву',
+        'search.placeholder': 'Пошук по сайту?',
+        'search.button': 'Шукати',
+
+        // History Timeline
+        'history.title': 'Хронологія подій',
+        'history.read_more': 'Читати далі', // Implicit in UI
+        'history.close': 'Закрити',
+        'history.event_label': 'Історична подія',
+        'footer.rebirth': 'Відродження триває...',
+        'footer.join': 'Долучайтесь до історії',
+        'history.subtitle': 'Шлях крізь століття',
+        'history.intro': 'Жидичинський монастир – це не просто будівлі, це тисячолітня історія святості, боротьби та відродження. Кожен камінь тут дихає молитвою поколінь ченців, які творили духовну твердиню Волині. Запрошуємо вас у подорож крізь час.',
+
+        'complex.map_title': "Карта Об'єктів",
+        'complex.map_description': "Інтерактивна карта території монастиря. Натисніть на об'єкт, щоб дізнатися більше.",
+        'complex.map_placeholder': '(Тут буде інтерактивна карта комплексу)',
+        'complex.empty': "Об'єкти відсутні",
+        'complex.details': 'Детальніше',
+        'complex.no_photos': 'Фотографії відсутні',
+        'complex.detailed_info': 'Детальна інформація',
+        'complex.contacts_info': 'Контакти та Інформація',
+        'complex.tab_overview': 'Огляд',
+        'complex.tab_gallery': 'Галерея',
+        'complex.cat_temples': 'Храми',
+        'complex.cat_monuments': "Пам'ятки",
+        'complex.cat_parks': 'Сквери',
+        'complex.cat_economy': 'Економія',
+        'complex.cat_service': 'Сервіс',
+
+        'complex.t1_title': 'Миколаївський храм',
+        'complex.t1_desc': 'Один з найдавніших храмів обителі, присвячений Святителю Миколаю Чудотворцю. Місце особливої молитви та духовного затишку для вірян.',
+        'complex.t1_contacts': 'Богослужіння: щодня 08:00 - 18:00',
+        'complex.t2_title': 'Свято-Духівський храм',
+        'complex.t2_desc': 'Храм, збудований на честь Святого Духа, вражає своєю архітектурною довершеністю та внутрішнім розписом. Символ відродження духовності.',
+        'complex.t2_contacts': 'Відкрито для відвідування.',
+        'complex.t3_title': 'Успенський храм',
+        'complex.t3_desc': 'Величний храм на честь Успіння Пресвятої Богородиці. Тут відбуваються урочисті святкові літургії та хресні ходи.',
+        'complex.t3_contacts': 'Розклад богослужінь на сайті.',
+        'complex.t4_title': 'Святошинський храм',
+        'complex.t4_desc': 'Невеликий, але затишний храм, де часто проводяться вінчання та хрещення. Улюблене місце молодих родин.',
+        'complex.t4_contacts': 'Запис на треби за телефоном.',
+        'complex.t5_title': 'Воскресенський собор',
+        'complex.t5_desc': 'Головна свядиня комплексу – Собор Воскресіння Христового. Монументальна споруда, що є серцем монастирського життя.',
+        'complex.t5_contacts': 'Центральний вхід.',
+
+        'complex.m1_title': 'Палац Митрополита',
+        'complex.m1_desc': 'Історична резиденція митрополитів, пам\'ятка архітектури національного значення. Зберігає дух минулих епох та велич церковної влади.',
+        'complex.m1_contacts': 'Екскурсії за попереднім записом.',
+        'complex.m2_title': 'Велика дзвіниця',
+        'complex.m2_desc': 'Найвища споруда комплексу, з якої відкривається панорама на мальовничі околиці. Її дзвони скликають вірян на молитву вже століттями.',
+        'complex.m2_contacts': 'Вхід на оглядовий майданчик.',
+        'complex.m3_title': 'Городище скудельничі',
+        'complex.m3_desc': 'Археологічна пам\'ятка, залишки давнього укріплення. Свідок багатовікової історії захисту рідної землі.',
+        'complex.m3_contacts': 'Вільний доступ.',
+        'complex.m4_title': 'Мала дзвіниця',
+        'complex.m4_desc': 'Старовинна дзвіниця, що зберегла свій автентичний вигляд. Вирізняється унікальною дерев\'яною архітектурою.',
+        'complex.m4_contacts': 'Розташована біля старого цвинтаря.',
+        'complex.m5_title': 'Меморіал "Спалене сумління"',
+        'complex.m5_desc': 'Меморіальний комплекс пам\'яті жертв трагічних подій. Місце скорботи та нагадування про цінність людського життя.',
+        'complex.m5_contacts': 'Місце тиші.',
+
+        'complex.p1_title': 'Сквер вільних людей',
+        'complex.p1_desc': 'Сучасний громадський простір для відпочинку та спілкування. Символ свободи та незламності духу громади.',
+        'complex.p1_contacts': 'Працює цілодобово.',
+        'complex.p2_title': 'Сквер Полікарпа Сікорського',
+        'complex.p2_desc': 'Затишна зелена зона, названа на честь видатного діяча. Ідеальне місце для прогулянок з дітьми.',
+        'complex.p2_contacts': 'Є дитячий майданчик.',
+        'complex.p3_title': 'Сквер Романи Скири',
+        'complex.p3_desc': 'Мальовничий куточок природи серед міської забудови. Тут можна насолодитися тишею та свіжим повітрям.',
+        'complex.p3_contacts': 'Лавочки та алеї.',
+        'complex.p4_title': 'Монастирські сади',
+        'complex.p4_desc': 'Розкішні фруктові сади, вирощені працею ченців. Навесні вражають цвітінням, а восени – щедрим врожаєм.',
+        'complex.p4_contacts': 'Відвідування в години роботи монастиря.',
+
+        'complex.e1_title': 'Парковка',
+        'complex.e1_desc': 'Зручний та просторий паркінг для автомобілів паломників та гостей комплексу. Охоронювана територія.',
+        'complex.e1_contacts': 'Безкоштовно.',
+        'complex.e2_title': 'ZhydychynCenter',
+        'complex.e2_desc': 'Сучасний паломницький центр. Інформаційна стійка, сувенірна крамниця та місце для зустрічей груп.',
+        'complex.e2_contacts': 'Інформація: +380...',
+        'complex.e3_title': 'Туалет',
+        'complex.e3_desc': 'Громадська вбиральня, обладнана всім необхідним для комфорту відвідувачів, включаючи зручності для людей з обмеженими можливостями.',
+        'complex.e3_contacts': 'Розташовано за собором.',
+
+        'complex.modal_extended_desc': 'Тут розміщується розширений опис об\'єкту. Цей текст може містити історичні факти, архітектурні особливості, розклад богослужінь або іншу корисну інформацію для відвідувачів.',
+
+        'media.subtitle': 'Фото, відео та прямі трансляції з життя обителі',
+        'media.tab_gallery': 'Фотогалерея',
+        'media.tab_video': 'Відеоархів',
+        'media.tab_live': 'Трансляції',
+        'media.load_more': 'Завантажити ще',
+        'media.live_offline_title': 'Наразі пряма трансляція відсутня',
+        'media.live_offline_desc': 'Богослужіння завершене або ще не розпочалося. Ви можете переглянути записи попередніх трансляцій зі списку архіву.',
+        'media.archive_record': 'Архівний запис',
+        'media.back_to_live': 'Повернутися до прямого ефіру',
+        'media.live_now': 'Наживо',
+        'media.offline': 'Офлайн',
+        'media.archive_title': 'Архів трансляцій',
+        'media.loading_archive': 'Завантаження архіву...',
+
+        'media.mock_history': 'Історичні пам’ятки',
+        'media.mock_life': 'Монастирське життя',
+        'media.mock_pilgrims': 'Паломництво',
+        'media.mock_donate': 'Благодійність',
+        'media.mock_arch': 'Архітектура',
+        'media.mock_social': 'Соціальне служіння',
+        'media.mock_service': 'Богослужіння',
+        'media.mock_archive': 'Архівні фото',
+        'media.video_1': 'Історія відродження монастиря',
+        'media.video_2': 'Вечірнє богослужіння',
+        'media.video_3': 'Проповідь настоятеля',
+
+        'skete.tab_overview': 'ОГЛЯД',
+        'skete.tab_gallery': 'ФОТОГАЛЕРЕЯ',
+        'skete.tab_contact': 'КОНТАКТИ',
+        'skete.details': 'Детальніше',
+        'skete.close': 'Закрити',
+        'skete.historical_note': 'Історична довідка',
+        'skete.address': 'Адреса',
+        'skete.phone': 'Телефон',
+        'skete.facebook': 'Ми у Facebook',
+        'skete.contacts_title': 'Контактні дані',
+        'skete.features': 'Особливості:',
+
+        'sketes.holy_spirit': 'Свято-Духівський чоловічий скит',
+        'sketes.holy_spirit_short_desc': 'Чоловічий скит на пагорбі над річкою Стир, осередок молитви, тиші та духовної праці.',
+        'sketes.holy_spirit_long_desc': 'Свято-Духівський скит — місце усамітнення, де братія монастиря зберігає давні традиції чернечого життя, молитви та праці.',
+        'sketes.holy_spirit_overview_1': 'Скит засновано 975 року. Тут зберігається дух місіонерства та давньоруської історії Волині.',
+        'sketes.holy_spirit_overview_2': 'Сучасний комплекс скита включає храм, келії та капличку. Щороку тут відбувається престольне свято — День Святого Духа.',
+
+        'sketes.life_source': 'Скит Живоносне джерело',
+        'sketes.life_source_short_desc': 'Осередок молитовного життя та просвітництва, заснований на місці подвигу віри в часи випробувань.',
+        'sketes.life_source_long_desc': 'Присвячений святителю-хірургу, цей скит має особливу місію — служіння хворим та нужденним, поєднуючи молитву з ділами милосердя.',
+        'sketes.life_source_overview_1': 'Скит на честь святителя Луки Кримського став центром медичного та соціального служіння монастиря. Тут діє невелика амбулаторія, де надається перша допомога, а також проводиться духовна опіка хворих.',
+        'sketes.life_source_overview_2': 'Храм скита завжди відчинений для тих, хто просить зцілення для себе та своїх близьких. У храмі зберігається частка мощей святителя Луки.',
+
+        'sketes.petro_pavlo': 'Петро-Павлівський жіночий скит',
+        'sketes.petro_pavlo_short_desc': 'Жіночий скит у селі Липляни, місце молитви, служіння та духовного відродження.',
+        'sketes.petro_pavlo_long_desc': 'Петро-Павлівський скит — жіноча обитель, що поєднує молитву, соціальне служіння та просвітництво.',
+        'sketes.petro_pavlo_overview_1': 'Скит у Липлянах — це місце, де відроджується жіноче чернецтво, а духовна традиція поєднується з сучасністю.',
+        'sketes.petro_pavlo_overview_2': 'Головна святиня — дерев’яний храм Петра і Павла. Скит відомий своєю гостинністю, соціальними ініціативами та затишною атмосферою.',
+
+        'generic.close': 'Закрити',
+        'generic.under_construction': 'Сторінка знаходиться в розробці',
+
+        // Social Projects
+        'social.page_title': 'СОЦІАЛЬНІ ПРОЄКТИ',
+        'social.go_back': 'НАЗАД',
+        'social.join_initiative': 'Долучитися до ініціативи',
+        'social.form_name': "Ім'я",
+        'social.form_phone': 'Телефон',
+        'social.form_email': 'Email',
+        'social.form_message': 'Повідомлення',
+        'social.form_submit': 'Відправити',
+        'social.form_sending': 'Відправка...',
+        'social.form_success': 'Дякуємо! Ваша заявка прийнята.',
+        'social.form_error': 'Сталася помилка. Спробуйте пізніше.',
+        'social.form_placeholder_name': "Ваше ім'я",
+        'social.form_placeholder_phone': '+380...',
+        'social.form_placeholder_email': 'example@mail.com',
+        'social.form_placeholder_message': 'Я хочу долучитися до...',
+        'social.fill_form': "Заповніть форму нижче, і ми зв'яжемося з вами найближчим часом.",
+        'social.cta_write_us': 'Хочете долучитися? \n Напишіть нам',
+        'social.about_us': 'Про нас',
+        'social.directions': 'Напрямки роботи',
+        'social.goal': 'Мета',
+        'social.goal_clarification': 'Мета проєкту уточнюється...',
+
+        // Donate
+        'donate.title': 'ПІДТРИМАТИ',
+        'donate.hero_text': 'Ваша пожертва допомагає нам розвивати соціальні ініціативи, підтримувати історичну спадщину та дбати про нужденних. Нехай Господь благословить!',
+        'donate.quick_help': 'Швидка допомога',
+        'donate.privatbank_card': 'Картка ПриватБанку',
+        'donate.click_to_copy': 'Натисніть, щоб скопіювати',
+        'donate.international': 'Міжнародні платежі',
+        'donate.paypal_soon': "Скоро з'явиться можливість\nдонату через PayPal та Stripe",
+        'donate.bank_details': 'Банківські реквізити',
+        'donate.uah': 'Гривня (UAH)',
+        'donate.usd': 'Долар (USD)',
+        'donate.eur': 'Євро (EUR)',
+        'donate.recipient': 'Отримувач',
+        'donate.edrpou': 'ЄДРПОУ',
+        'donate.iban': 'IBAN',
+        'donate.mfo': 'МФО',
+        'donate.bank': 'Банк',
+        'donate.swift': 'SWIFT',
+        'donate.payment_purpose': 'Призначення платежу',
+        'donate.payment_purpose_val': 'Благодійна пожертва',
+        'donate.payment_purpose_desc': 'Усі пожертви йдуть на підтримку монастиря та соціальних ініціатив',
+        'donate.correspondent_banks': 'Банки-кореспонденти:',
+        'donate.copied': 'Реквізити скопійовано',
+
+        // Contacts
+        'contacts.title': 'КОНТАКТИ',
+        'contacts.address_label': 'Адреса',
+        'contacts.phone_label': 'Телефон',
+        'contacts.email_label': 'Електронна пошта',
+        'contacts.address_val': '45240 Волинська область,\nКіверцівський р-н, с. Жидичин,\nвул. Ковельська, 1',
+
+        'status.realized': 'реалізовано',
+        'status.active': 'діючий',
+        'status.in_process': 'в процесі',
+    },
+    EN: {
+        'hero.title': 'Zhydychyn \nSt. Nicholas \nMonastery',
+        'hero.description': '- one of the oldest active monasteries of the Orthodox Church of Ukraine, dating back to the times of Kyivan Rus.',
+
+        'calendar.title': 'SERVICE SCHEDULE',
+        'calendar.no_services': 'No services scheduled',
+        'calendar.months': 'January,February,March,April,May,June,July,August,September,October,November,December',
+        'calendar.months_genitive': 'January,February,March,April,May,June,July,August,September,October,November,December',
+        'calendar.weekdays': 'Mon,Tue,Wed,Thu,Fri,Sat,Sun',
+
+        'news.title': 'NEWS',
+        'news.read_more': 'Read more',
+        'news.all_news': 'All news',
+
+        'social.title': 'SOCIAL INITIATIVES',
+
+        'explore.title': 'EXPLORE MORE',
+
+        'faq.title': 'FAQ',
+        'faq.subtitle': 'Zhydychyn Monastery',
+        'faq.intro_1': 'Zhydychyn St. Nicholas Monastery is a space of prayer, peace, and spiritual strength with a thousand-year history.',
+        'faq.intro_2': 'The monastery is one of the oldest centers of Orthodoxy in Volyn. Shrines are kept here, traditions are honored, and daily prayers for peace and prosperity are offered. The monastery is open to everyone who seeks God, needs spiritual advice, or simply wants to rest their soul in the silence of the holy walls.',
+        'faq.intro_3': 'We strive to make every pilgrim feel at home here. That is why we have prepared answers to the most frequently asked questions to help you prepare for your visit.',
+        'faq.intro_4': 'The brethren of the monastery are always happy to welcome pilgrims and guests. You can join the services, talk with confessors, and find answers to important life questions.',
+        'faq.collapse': 'Collapse',
+        'faq.expand': 'Read more',
+        'faq.form_name': "Your Name",
+        'faq.form_email': 'Your Email',
+        'faq.form_question': 'Your Question',
+        'faq.form_submit': 'Submit',
+        'faq.form_success': 'Thank you! Your question has been received.',
+        'faq.form_error': 'An error occurred. Please try again later.',
+        'faq.question_1': 'How to submit a prayer note for health in the monastery?',
+        'faq.answer_1': 'To submit a note in the Zhydychyn Monastery, you need to come to the monastery and write a note in one of the churches with the names of the people for whom prayers will be offered.',
+        'faq.question_2': 'When are the services held in the monastery?',
+        'faq.answer_2': 'The current schedule of services is presented on the website. Daily on weekdays, the Divine Liturgy takes place at 08:00 and Vespers at 18:00. On Saturday, Divine Liturgy is at 09:00 and Vespers at 18:00. On Sunday, Divine Liturgy is at 10:00 and the Akathist to the Theotokos at 18:00.',
+        'faq.question_3': 'Can I confess and receive communion in the monastery?',
+        'faq.answer_3': 'Yes, you can. Daily on weekdays at 08:00, on Saturday at 09:00, and on Sunday at 10:00, the Divine Liturgy takes place with the possibility of confession and communion for the faithful.',
+        'faq.question_4': 'What is the cost of submitting a note or other services in the monastery?',
+        'faq.answer_4': 'In our monastery, there are no set prices for services or submitting notes. You determine the amount of the donation yourself, based on your capabilities and the call of your heart.',
+        'faq.question_5': 'Can I baptize a child or get married in the monastery?',
+        'faq.answer_5_text': 'Yes, you can. This requires prior registration for the sacrament. Come personally to the monastery or call the number',
+        'faq.question_6': 'Can I bless a car, house, or icon in the monastery?',
+        'faq.answer_6': 'Yes, you can. To do this, you need to come to the monastery for the Divine Liturgy and inform the volunteers or the brethren of the monastery about your intentions before the service begins.',
+        'faq.question_7': 'Can I submit a note for the Unsleeping Psalter in the monastery?',
+        'faq.answer_7': 'The Unsleeping Psalter is not read in the monastery. This is typical only for monasteries with a large number of brethren. You can simply submit a note for the health of your relatives or loved ones.',
+        'faq.question_8': 'How to get to the monastery?',
+        'faq.answer_8_text': 'The monastery has convenient transport accessibility. Basic travel options are presented at the link.',
+        'faq.question_9': 'What is the schedule of the monastery bus?',
+        'faq.answer_9': 'On Sundays and holidays, the monastery organizes transportation for believers to services and back with its own transport. Schedule and route: Pryluсke village at 8:40 / 40th A quarter at 9:00 / Sobornosti Ave. (Troianda store) at 9:07 / Promin Cinema (Striletska St. stop) at 9:20 / Vyshkv at 9:25',
+        'faq.question_10': 'Have questions left?',
+
+        'footer.title': 'Zhydychyn\nMonastery',
+        'footer.contacts': 'Contacts',
+        'footer.phone': 'Phone',
+        'footer.address_label': 'Address',
+        'footer.address': 'Kovelska St,\nZhydychyn, Lutsk district,\nVolyn region',
+        'footer.info': 'Information',
+        'footer.socials': 'We in social media',
+        'footer.copyright': '© Zhydychyn St. Nicholas Monastery',
+        'news.no_results': 'Search yielded no results.',
+
+        'social.description': 'Zhydychyn Monastery has for centuries been not only a spiritual center but also a space for serving the community. Today, this mission continues through social projects that combine volunteering, education, culture, youth initiatives, community support, and heritage preservation. Each of them unites people, ideas, and initiatives, continuing the common mission — to be near, to support, to create the future based on faith, memory, and responsibility.',
+        'social.button': 'View',
+
+        'explore.history': 'HISTORY',
+        'explore.life': 'MONASTERY LIFE',
+        'explore.schedule': 'SERVICE SCHEDULE',
+        'explore.media': 'MEDIA LIBRARY',
+        'explore.architecture': 'ARCHITECTURE',
+        'explore.sketes': 'SKETES',
+        'explore.social': 'SOCIAL INITIATIVES',
+        'explore.pilgrims': 'PILGRIMS',
+        'explore.join': 'JOIN',
+        'explore.support': 'SUPPORT',
+        'explore.contacts': 'CONTACTS',
+        'nav.about': 'About Monastery',
+        'nav.history': 'History',
+        'nav.schedule': 'Service Schedule',
+        'nav.complex': 'Temple Complex',
+        'nav.sketes': 'Sketes',
+        'nav.media': 'Media Library',
+        'nav.news': 'News',
+        'nav.publications': 'Publications',
+        'nav.announcements': 'Announcements',
+        'nav.official': 'Official',
+        'nav.social': 'Social Projects',
+        'nav.pilgrims': 'For Pilgrims',
+        'nav.donate': 'Donate',
+        'nav.contacts': 'Contacts',
+        'nav.write_note': 'Write a Note',
+        'nav.make_donation': 'Make a\nDonation',
+        'search.placeholder': 'Search site...',
+        'search.button': 'Search',
+
+        // History Timeline
+        'history.title': 'Chronology of Events',
+        'history.read_more': 'Read more',
+        'history.close': 'Close',
+        'history.event_label': 'Historical Event',
+        'footer.rebirth': 'Rebirth Continues...',
+        'footer.join': 'Join the History',
+        'history.subtitle': 'Journey Through Centuries',
+        'history.intro': 'Zhydychyn Monastery is not just buildings, it is a thousand-year history of holiness, struggle, and rebirth. Every stone here breathes the prayer of generations of monks who created the spiritual stronghold of Volyn. We invite you on a journey through time.',
+
+        'complex.map_title': "Map of Objects",
+        'complex.map_description': "Interactive map of the monastery territory. Click on an object to learn more.",
+        'complex.map_placeholder': '(Interactive map of the complex will be here)',
+        'complex.empty': "No objects found",
+        'complex.details': 'Read more',
+        'complex.no_photos': 'No photos available',
+        'complex.detailed_info': 'Detailed Information',
+        'complex.contacts_info': 'Contacts & Info',
+        'complex.tab_overview': 'Overview',
+        'complex.tab_gallery': 'Gallery',
+        'complex.cat_temples': 'Temples',
+        'complex.cat_monuments': 'Monuments',
+        'complex.cat_parks': 'Parks',
+        'complex.cat_economy': 'Economy',
+        'complex.cat_service': 'Service',
+
+        'complex.t1_title': 'St. Nicholas Church',
+        'complex.t1_desc': 'One of the oldest churches of the monastery, dedicated to St. Nicholas the Wonderworker. A place of special prayer and spiritual comfort for believers.',
+        'complex.t1_contacts': 'Services: daily 08:00 - 18:00',
+        'complex.t2_title': 'Holy Spirit Church',
+        'complex.t2_desc': 'The church, built in honor of the Holy Spirit, impresses with its architectural perfection and internal painting. A symbol of the rebirth of spirituality.',
+        'complex.t2_contacts': 'Open for visits.',
+        'complex.t3_title': 'Assumption Church',
+        'complex.t3_desc': 'Majestic church in honor of the Assumption of the Blessed Virgin Mary. Solemn festive liturgies and religious processions take place here.',
+        'complex.t3_contacts': 'Service schedule on the website.',
+        'complex.t4_title': 'Svyatoshyn Church',
+        'complex.t4_desc': 'Small but cozy church, where weddings and baptisms are often held. A favorite place for young families.',
+        'complex.t4_contacts': 'Appointment for sacraments by phone.',
+        'complex.t5_title': 'Resurrection Cathedral',
+        'complex.t5_desc': 'The main shrine of the complex is the Cathedral of the Resurrection of Christ. A monumental structure that is the heart of monastic life.',
+        'complex.t5_contacts': 'Central entrance.',
+
+        'complex.m1_title': 'Metropolitan Palace',
+        'complex.m1_desc': 'Historical residence of metropolitans, an architectural monument of national importance. Retains the spirit of past eras and the grandeur of church power.',
+        'complex.m1_contacts': 'Tours by prior arrangement.',
+        'complex.m2_title': 'Great Bell Tower',
+        'complex.m2_desc': 'The highest structure of the complex, offering a panorama of the picturesque surroundings. Its bells have been calling believers to prayer for centuries.',
+        'complex.m2_contacts': 'Entrance to the observation deck.',
+        'complex.m3_title': 'Skudelnychy Hillfort',
+        'complex.m3_desc': 'Archaeological monument, remains of an ancient fortification. Witness to centuries-old history of defending the native land.',
+        'complex.m3_contacts': 'Free access.',
+        'complex.m4_title': 'Small Bell Tower',
+        'complex.m4_desc': 'Ancient bell tower that has preserved its authentic appearance. Distinguished by unique wooden architecture.',
+        'complex.m4_contacts': 'Located near the old cemetery.',
+        'complex.m5_title': 'Memorial "Burnt Conscience"',
+        'complex.m5_desc': 'Memorial complex in memory of the victims of tragic events. A place of sorrow and a reminder of the value of human life.',
+        'complex.m5_contacts': 'Place of silence.',
+
+        'complex.p1_title': 'Square of Free People',
+        'complex.p1_desc': 'Modern public space for rest and communication. A symbol of freedom and the indomitable spirit of the community.',
+        'complex.p1_contacts': 'Open 24/7.',
+        'complex.p2_title': 'Polycarp Sikorsky Square',
+        'complex.p2_desc': 'Cozy green zone named in honor of a prominent figure. Ideal place for walks with children.',
+        'complex.p2_contacts': 'There is a playground.',
+        'complex.p3_title': 'Romana Skyra Square',
+        'complex.p3_desc': 'Picturesque corner of nature amidst urban development. Here you can enjoy silence and fresh air.',
+        'complex.p3_contacts': 'Benches and alleys.',
+        'complex.p4_title': 'Monastery Gardens',
+        'complex.p4_desc': 'Luxurious fruit gardens grown by the labor of monks. In spring they impress with blossoming, and in autumn - with a generous harvest.',
+        'complex.p4_contacts': 'Visits during monastery opening hours.',
+
+        'complex.e1_title': 'Parking',
+        'complex.e1_desc': 'Convenient and spacious parking for cars of pilgrims and guests of the complex. Guarded territory.',
+        'complex.e1_contacts': 'Free.',
+        'complex.e2_title': 'Zhydychyn Center',
+        'complex.e2_desc': 'Modern pilgrimage center. Information desk, souvenir shop and meeting place for groups.',
+        'complex.e2_contacts': 'Information: +380...',
+        'complex.e3_title': 'Toilet',
+        'complex.e3_desc': 'Public restroom equipped with everything necessary for the comfort of visitors, including facilities for people with disabilities.',
+        'complex.e3_contacts': 'Located behind the cathedral.',
+
+        'complex.modal_extended_desc': 'Extended description of the object is located here. This text may contain historical facts, architectural features, service schedules, or other useful information for visitors.',
+
+        'media.subtitle': 'Photos, videos and live streams from monastery life',
+        'media.tab_gallery': 'Photo Gallery',
+        'media.tab_video': 'Video Archive',
+        'media.tab_live': 'Live Streams',
+        'media.load_more': 'Load More',
+        'media.live_offline_title': 'Live stream is currently offline',
+        'media.live_offline_desc': 'The service has ended or has not started yet. You can watch recordings of previous broadcasts from the archive list.',
+        'media.archive_record': 'Archive Record',
+        'media.back_to_live': 'Return to Live',
+        'media.live_now': 'Live',
+        'media.offline': 'Offline',
+        'media.archive_title': 'Stream Archive',
+        'media.loading_archive': 'Loading archive...',
+
+        'media.mock_history': 'Historical Monuments',
+        'media.mock_life': 'Monastic Life',
+        'media.mock_pilgrims': 'Piligrimage',
+        'media.mock_donate': 'Charity',
+        'media.mock_arch': 'Architecture',
+        'media.mock_social': 'Social Service',
+        'media.mock_service': 'Divine Service',
+        'media.mock_archive': 'Archive Photos',
+        'media.video_1': 'History of Monastery Rebirth',
+        'media.video_2': 'Evening Service',
+        'media.video_3': 'Sermon of the Abbot',
+
+        'skete.tab_overview': 'OVERVIEW',
+        'skete.tab_gallery': 'GALLERY',
+        'skete.tab_contact': 'CONTACTS',
+        'skete.details': 'Details',
+        'skete.close': 'Close',
+        'skete.historical_note': 'Historical Note',
+        'skete.address': 'Address',
+        'skete.phone': 'Phone',
+        'skete.facebook': 'Facebook',
+        'skete.contacts_title': 'Contacts',
+        'skete.features': 'Features:',
+
+        'sketes.holy_spirit': 'Holy Spirit Men’s Skete',
+        'sketes.holy_spirit_short_desc': 'A men’s skete on a hill above the Styr River, a center of prayer, silence, and spiritual work.',
+        'sketes.holy_spirit_long_desc': 'The Holy Spirit Skete is a place of solitude where the brethren preserve ancient monastic traditions of prayer and labor.',
+        'sketes.holy_spirit_overview_1': 'The skete was founded in 975. It preserves the spirit of mission and the ancient history of Volyn.',
+        'sketes.holy_spirit_overview_2': 'The modern skete complex includes a church, cells, and a chapel. Every year, the patronal feast — the Day of the Holy Spirit — is celebrated here.',
+
+        'sketes.life_source': 'Life-Giving Spring Skete',
+        'sketes.life_source_short_desc': 'A medical center and a temple where spiritual and physical help is provided to everyone who needs it.',
+        'sketes.life_source_long_desc': 'Dedicated to the saint-surgeon, this skete has a special mission - serving the sick and needy, combining prayer with works of mercy.',
+        'sketes.life_source_overview_1': 'The Skete in honor of St. Luke of Crimea became the center of medical and social service of the monastery. There is a small outpatient clinic where first aid is provided, as well as spiritual care for the sick.',
+        'sketes.life_source_overview_2': 'The church of the skete is always open to those who ask for healing for themselves and their loved ones. A part of the relics of St. Luke is kept in the temple.',
+
+        'sketes.petro_pavlo': 'Peter and Paul Women’s Skete',
+        'sketes.petro_pavlo_short_desc': 'A women’s skete in the village of Lypliany, a place of prayer, service, and spiritual renewal.',
+        'sketes.petro_pavlo_long_desc': 'Peter and Paul Skete is a women’s community that combines prayer, social service, and enlightenment.',
+        'sketes.petro_pavlo_overview_1': 'The skete in Lypliany is a place where women’s monasticism is revived and spiritual tradition meets modernity.',
+        'sketes.petro_pavlo_overview_2': 'The main shrine is the wooden church of Peter and Paul. The skete is known for its hospitality, social initiatives, and cozy atmosphere.',
+
+        'generic.close': 'Close',
+        'generic.under_construction': 'Page is under development',
+
+        'social.page_title': 'SOCIAL PROJECTS',
+        'social.go_back': 'BACK',
+        'social.join_initiative': 'Join the Initiative',
+        'social.form_name': "Name",
+        'social.form_phone': 'Phone',
+        'social.form_email': 'Email',
+        'social.form_message': 'Message',
+        'social.form_submit': 'Submit',
+        'social.form_sending': 'Sending...',
+        'social.form_success': 'Thank you! Your application has been accepted.',
+        'social.form_error': 'An error occurred. Please try again later.',
+        'social.form_placeholder_name': "Your name",
+        'social.form_placeholder_phone': '+380...',
+        'social.form_placeholder_email': 'example@mail.com',
+        'social.form_placeholder_message': 'I want to join...',
+        'social.fill_form': "Fill out the form below, and we will contact you shortly.",
+        'social.cta_write_us': 'Want to join? \n Write to us',
+        'social.about_us': 'About Us',
+        'social.directions': 'Directions of work',
+        'social.goal': 'Goal',
+        'social.goal_clarification': 'Project goal is to be clarified...',
+
+        'donate.title': 'SUPPORT',
+        'donate.hero_text': 'Your donation helps us develop social initiatives, maintain historical heritage, and care for the needy. May the Lord bless you!',
+        'donate.quick_help': 'Quick Help',
+        'donate.privatbank_card': 'PrivatBank Card',
+        'donate.click_to_copy': 'Click to copy',
+        'donate.international': 'International Payments',
+        'donate.paypal_soon': "Donations via PayPal and Stripe\ncoming soon",
+        'donate.bank_details': 'Bank Details',
+        'donate.uah': 'Hryvnia (UAH)',
+        'donate.usd': 'Dollar (USD)',
+        'donate.eur': 'Euro (EUR)',
+        'donate.recipient': 'Recipient',
+        'donate.edrpou': 'EDRPOU',
+        'donate.iban': 'IBAN',
+        'donate.mfo': 'MFO',
+        'donate.bank': 'Bank',
+        'donate.swift': 'SWIFT',
+        'donate.payment_purpose': 'Payment Purpose',
+        'donate.payment_purpose_val': 'Charitable Donation',
+        'donate.payment_purpose_desc': 'All donations go to support the monastery and social initiatives',
+        'donate.correspondent_banks': 'Correspondent Banks:',
+        'donate.copied': 'Details copied',
+
+        'contacts.title': 'CONTACTS',
+        'contacts.address_label': 'Address',
+        'contacts.phone_label': 'Phone',
+        'contacts.email_label': 'Email',
+        'contacts.address_val': '1 Kovelska St,\nZhydychyn, Lutsk district,\nVolyn region',
+
+        'status.realized': 'realized',
+        'status.active': 'active',
+        'status.in_process': 'in process',
+    }
+};
+
+export function LanguageProvider({ children, initialLocale }: { children: React.ReactNode, initialLocale?: string }) {
+    const [language, setLanguageState] = useState<Language>((initialLocale?.toUpperCase() as Language) || 'UA');
+    const router = useRouter();
+    const pathname = usePathname();
+
+    useEffect(() => {
+        if (initialLocale) {
+            setLanguageState(initialLocale.toUpperCase() as Language);
+        }
+    }, [initialLocale]);
+
+    const handleSetLanguage = (lang: Language) => {
+        const newLang = lang.toLowerCase();
+        const currentPath = pathname;
+
+        let newPath = currentPath;
+        // Check if path starts with a locale (en or ua)
+        const segments = currentPath.split('/');
+        // segments[0] is empty, segments[1] is locale or 'about' etc.
+        if (segments[1] === 'ua' || segments[1] === 'en') {
+            segments[1] = newLang;
+            newPath = segments.join('/');
+        } else {
+            // If no locale in path, prepend it (though middleware should handle this)
+            newPath = `/${newLang}${currentPath}`;
+        }
+
+        setLanguageState(lang);
+        localStorage.setItem('language', lang);
+        router.push(newPath);
+    };
+
+    const t = (key: string): string => {
+        return translations[language][key] || key;
+    };
+
+    return (
+        <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
+            {children}
+        </LanguageContext.Provider>
+    );
+}
+
+export function useLanguage() {
+    const context = useContext(LanguageContext);
+    if (context === undefined) {
+        throw new Error('useLanguage must be used within a LanguageProvider');
+    }
+    return context;
+}

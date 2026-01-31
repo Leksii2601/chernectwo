@@ -1,0 +1,645 @@
+import saintsDataRaw from '../data/saintsData.json';
+import tableARaw from '../data/tableA.json';
+import tableBRaw from '../data/tableB.json';
+import fixedReadingsRaw from '../data/fixed_readings.json';
+
+// Define the shape of the JSON data
+interface SaintDayData {
+    saints?: string[];
+    saints_en?: string[];
+    isFast?: boolean;
+    readings?: string;
+}
+
+const saintsData: Record<string, SaintDayData> = saintsDataRaw as any;
+const tableA: any = tableARaw;
+const tableB: any = tableBRaw;
+const fixedReadingsList: any[] = (fixedReadingsRaw as any).fixed_holidays || [];
+
+const FIXED_READINGS_MAP = new Map<string, any>();
+fixedReadingsList.forEach((item) => {
+    FIXED_READINGS_MAP.set(item.date_month_day, item);
+});
+
+/**
+ * --- КОНФІГУРАЦІЯ ЧАСУ БОГОСЛУЖІНЬ ---
+ */
+const SCHEDULES_UA = {
+    weekday: [
+        { time: "07:40", name: "Часи 3-й і 6-й", location: "Миколаївський храм" },
+        { time: "08:00", name: "Божественна Літургія", location: "Миколаївський храм" },
+        { time: "18:00", name: "Вечірня", location: "Миколаївський храм" },
+        { time: "23:00", name: "Полуношниця", location: "Святошинський храм" }
+    ],
+    saturday: [
+        { time: "08:40", name: "Часи 3-й і 6-й", location: "Миколаївський храм" },
+        { time: "09:00", name: "Божественна Літургія", location: "Миколаївський храм" },
+        { time: "18:00", name: "Вечірня", location: "Миколаївський храм" }
+    ],
+    sunday: [
+        { time: "09:40", name: "Часи 3-й і 6-й", location: "Миколаївський храм" },
+        { time: "10:00", name: "Божественна Літургія", location: "Миколаївський храм" },
+        { time: "18:00", name: "Акафіст перед образом «Всецариця»", location: "Миколаївський храм" }
+    ],
+    holiday: [
+        { time: "08:40", name: "Часи 3-й і 6-й", location: "Миколаївський храм" },
+        { time: "09:00", name: "Святкова Божественна Літургія", location: "Миколаївський храм" },
+        { time: "18:00", name: "Вечірня", location: "Миколаївський храм" }
+    ]
+};
+
+const SCHEDULES_EN = {
+    weekday: [
+        { time: "07:40", name: "3rd and 6th Hours", location: "St. Nicholas Church" },
+        { time: "08:00", name: "Divine Liturgy", location: "St. Nicholas Church" },
+        { time: "18:00", name: "Vespers", location: "St. Nicholas Church" },
+        { time: "23:00", name: "Midnight Office", location: "Svyatoshyn Church" }
+    ],
+    saturday: [
+        { time: "08:40", name: "3rd and 6th Hours", location: "St. Nicholas Church" },
+        { time: "09:00", name: "Divine Liturgy", location: "St. Nicholas Church" },
+        { time: "18:00", name: "Vespers", location: "St. Nicholas Church" }
+    ],
+    sunday: [
+        { time: "09:40", name: "3rd and 6th Hours", location: "St. Nicholas Church" },
+        { time: "10:00", name: "Divine Liturgy", location: "St. Nicholas Church" },
+        { time: "18:00", name: "Akathist before 'Pantanassa'", location: "St. Nicholas Church" }
+    ],
+    holiday: [
+        { time: "08:40", name: "3rd and 6th Hours", location: "St. Nicholas Church" },
+        { time: "09:00", name: "Festive Divine Liturgy", location: "St. Nicholas Church" },
+        { time: "18:00", name: "Vespers", location: "St. Nicholas Church" }
+    ]
+};
+
+/**
+ * --- ФІКСОВАНІ СВЯТА ---
+ */
+const FIXED_HOLIDAYS_UA: Record<string, string> = {
+    "01-01": "Обрізання Господнє. Свт. Василія Великого",
+    "01-06": "Богоявлення. Хрещення Господнє",
+    "01-30": "Собор трьох святителів",
+    "02-02": "Стрітення Господнє",
+    "03-25": "Благовіщення Пресвятої Богородиці",
+    "04-23": "Вмч. Юрія Переможця",
+    "06-24": "Різдво Іоана Предтечі",
+    "06-29": "Святих апп. Петра і Павла",
+    "08-06": "Преображення Господнє",
+    "08-15": "Успіння Пресвятої Богородиці",
+    "08-29": "Усікновення глави Іоана Предтечі",
+    "09-08": "Різдво Пресвятої Богородиці",
+    "09-14": "Воздвиження Хреста Господнього",
+    "10-01": "Покрова Пресвятої Богородиці",
+    "11-08": "Собор Архістратига Михаїла",
+    "11-21": "Введення в храм Пресвятої Богородиці",
+    "11-30": "Ап. Андрія Первозванного",
+    "12-06": "Свт. Миколая Чудотворця",
+    "12-25": "Різдво Христове"
+};
+
+const FIXED_HOLIDAYS_EN: Record<string, string> = {
+    "01-01": "Circumcision of the Lord. St. Basil the Great",
+    "01-06": "Theophany. Baptism of the Lord",
+    "01-30": "Synaxis of the Three Hierarchs",
+    "02-02": "Meeting of the Lord",
+    "03-25": "Annunciation of the Theotokos",
+    "04-23": "Great Martyr George the Victory-Bearer",
+    "06-24": "Nativity of John the Baptist",
+    "06-29": "Holy Apostles Peter and Paul",
+    "08-06": "Transfiguration of the Lord",
+    "08-15": "Dormition of the Theotokos",
+    "08-29": "Beheading of John the Baptist",
+    "09-08": "Nativity of the Theotokos",
+    "09-14": "Exaltation of the Holy Cross",
+    "10-01": "Protection of the Theotokos (Pokrova)",
+    "11-08": "Synaxis of Archangel Michael",
+    "11-21": "Entry of the Theotokos into the Temple",
+    "11-30": "Ap. Andrew the First-Called",
+    "12-06": "St. Nicholas the Wonderworker",
+    "12-25": "Nativity of Christ"
+};
+
+/**
+ * --- ДОПОМІЖНІ ФУНКЦІЇ ---
+ */
+function formatMonthDay(date: Date): string {
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${m}-${d}`;
+}
+
+function addDays(date: Date, days: number): Date {
+    const result = new Date(date.getTime());
+    result.setDate(result.getDate() + days);
+    return result;
+}
+
+/**
+ * Алгоритм Мейуса для обчислення дати Великодня (Григоріанський/Новоюліанський календар)
+ */
+function getNewStyleEaster(year: number): Date {
+    const a = year % 19;
+    const b = Math.floor(year / 100);
+    const c = year % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const month = Math.floor((h + l - 7 * m + 114) / 31);
+    const day = ((h + l - 7 * m + 114) % 31) + 1;
+
+    return new Date(year, month - 1, day, 12, 0, 0);
+}
+
+interface LiturgicalPosition {
+    cycle: 'TRIODION' | 'PENTECOST' | 'LENT' | 'HOLY_WEEK' | 'PENTECOSTARION';
+    weekIndex: number;
+    dayName: string;
+    key?: string;
+}
+
+function getLiturgicalPosition(date: Date, easter: Date): LiturgicalPosition {
+    const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0);
+    const e = new Date(easter.getFullYear(), easter.getMonth(), easter.getDate(), 12, 0, 0);
+
+    const diffTime = d.getTime() - e.getTime();
+    const diffDays = Math.round(diffTime / (24 * 60 * 60 * 1000));
+
+    const dayNames = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    const dayName = dayNames[d.getDay()];
+
+    // Special case: Saturday before Publican and Pharisee (-71 days from Easter)
+    if (diffDays === -71 && dayName === 'saturday') {
+        return { cycle: 'TRIODION', weekIndex: 0, dayName, key: 'saturday_before_publican' };
+    }
+
+    if (diffDays >= -70 && diffDays < -48) {
+        if (diffDays >= -70 && diffDays < -63) return { cycle: 'TRIODION', weekIndex: 1, dayName, key: 'publican_and_pharisee' };
+        if (diffDays >= -63 && diffDays < -56) return { cycle: 'TRIODION', weekIndex: 2, dayName, key: 'prodigal_son' };
+        if (diffDays >= -56 && diffDays < -49) return { cycle: 'TRIODION', weekIndex: 3, dayName, key: 'meatfare_sunday' };
+        return { cycle: 'TRIODION', weekIndex: 4, dayName, key: 'cheesefare_sunday' };
+    }
+
+    if (diffDays >= -48 && diffDays < -7) {
+        const weekNum = Math.floor((diffDays + 48) / 7) + 1;
+        return { cycle: 'LENT', weekIndex: weekNum, dayName, key: `week_${weekNum}` };
+    }
+
+    if (diffDays >= -7 && diffDays < 0) {
+        if (diffDays === -7) return { cycle: 'HOLY_WEEK', weekIndex: 0, dayName, key: 'palms_sunday' };
+        return { cycle: 'HOLY_WEEK', weekIndex: 1, dayName };
+    }
+
+    if (diffDays >= 0 && diffDays <= 50) {
+        if (diffDays === 0) return { cycle: 'PENTECOSTARION', weekIndex: 1, dayName, key: 'holy_pascha' };
+        const weekNum = Math.floor(diffDays / 7) + 1;
+        return { cycle: 'PENTECOSTARION', weekIndex: weekNum, dayName };
+    }
+
+    return { cycle: 'PENTECOST', weekIndex: 0, dayName };
+}
+
+/**
+ * Визначає номер тижня після П'ятидесятниці для заданої дати.
+ * Враховує "Лукіну переступку" - коли тижнів більше 32, алгоритм 
+ * повертається до читань 14-го тижня Луки (приблизно тижні 17-18).
+ */
+function getPentecostWeek(date: Date): number {
+    const d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 12, 0, 0);
+    const curYear = d.getFullYear();
+
+    // Знаходимо Великдень поточного року
+    let easter = getNewStyleEaster(curYear);
+    let pentecost = addDays(easter, 50);
+
+    // Якщо поточна дата раніше за П'ятидесятницю цього року,
+    // використовуємо П'ятидесятницю минулого року
+    if (d < pentecost) {
+        easter = getNewStyleEaster(curYear - 1);
+        pentecost = addDays(easter, 50);
+    }
+
+    // Рахуємо кількість днів від П'ятидесятниці
+    const diffDays = Math.round((d.getTime() - pentecost.getTime()) / (24 * 60 * 60 * 1000));
+
+    // Номер тижня = кількість повних тижнів + 1
+    let weekNum = Math.floor(diffDays / 7) + 1;
+
+    // Лукіна переступка: тижні 33-34 вже мають дані з Марком
+    // Якщо більше 34, циклічно повторюємо 33-34
+    if (weekNum > 34) {
+        const overflow = weekNum - 34;
+        weekNum = 33 + ((overflow - 1) % 2);
+    }
+
+    return Math.max(1, weekNum);
+}
+
+/**
+ * Перевіряє чи наступний день є великим святом (з fixed_readings.json)
+ */
+function isNextDayMajorFeast(date: Date): boolean {
+    const nextDay = addDays(date, 1);
+    const nextDayKey = formatMonthDay(nextDay);
+    return FIXED_READINGS_MAP.has(nextDayKey);
+}
+
+/**
+ * Витягує скорочену мітку для святого з назви
+ */
+function getSaintLabel(title: string): string | undefined {
+    if (title.includes("Сщмч.")) return "Сщмч.";
+    if (title.includes("Свт.")) return "Свт.";
+    if (title.includes("Прп.")) return "Прп.";
+    if (title.includes("Вмч.")) return "Вмч.";
+    if (title.includes("Мч.")) return "Мч.";
+    if (title.includes("Ап.")) return "Ап.";
+    if (title.includes("Прор.")) return "Прор.";
+    if (title.includes("Безсрібн.")) return "Безсрібн.";
+    return undefined;
+}
+
+/**
+ * Отримує структуровані читання для конкретного дня
+ */
+function getStructuredReadings(date: Date, easter: Date, lang: string): DayReadings {
+    const monthDay = formatMonthDay(date);
+    const pos = getLiturgicalPosition(date, easter);
+    const dayKey = pos.dayName;
+
+    const liturgyReadings: Reading[] = [];
+
+    // 1. Рядові читання дня (Ordinary readings)
+    let ordinaryAp = "";
+    let ordinaryEv = "";
+
+    if (pos.cycle !== 'PENTECOST') {
+        // Table B logic (Triodion, Lent, etc.)
+        try {
+            if (pos.cycle === 'TRIODION' && tableB.triodion_preparation && pos.key) {
+                const dayData = tableB.triodion_preparation[pos.key];
+                if (dayData) {
+                    const reading = dayData[dayKey];
+                    if (reading) {
+                        ordinaryAp = reading.ref || reading.ap || "";
+                        ordinaryEv = reading.ev || reading.ref_ev || "";
+                    }
+                }
+            } else if (pos.cycle === 'LENT' && tableB.great_lent_weeks && dayKey === 'sunday' && pos.key) {
+                const d = tableB.great_lent_weeks[pos.key]?.sunday;
+                if (d) {
+                    ordinaryAp = d.ref || d.ap || "";
+                    ordinaryEv = d.ev || d.ref_ev || "";
+                }
+            }
+        } catch (e) { }
+    }
+
+    if (!ordinaryAp || !ordinaryEv) {
+        // Table A logic (Pentecost cycle)
+        const pentWeek = getPentecostWeek(date);
+        const wKey = `week_${pentWeek}`;
+        let weekData = tableA[wKey];
+        if (!weekData && tableA.readings_cycle_a) {
+            weekData = tableA.readings_cycle_a[wKey];
+        }
+
+        if (weekData && weekData[dayKey]) {
+            const d = weekData[dayKey];
+            ordinaryAp = d.ref_ap || d.ap || "";
+            ordinaryEv = d.ref_ev || d.ev || "";
+        }
+    }
+
+    if (ordinaryAp && ordinaryEv) {
+        liturgyReadings.push({
+            label: "Ряд.",
+            apostle: ordinaryAp,
+            gospel: ordinaryEv
+        });
+    }
+
+    // 2. Перенесені читання (Transferred readings)
+    if (isNextDayMajorFeast(date) && dayKey !== 'sunday' && dayKey !== 'saturday') {
+        const nextDayKey = dayKey === 'thursday' ? 'friday' : null;
+        if (nextDayKey) {
+            const pentWeek = getPentecostWeek(date);
+            const wKey = `week_${pentWeek}`;
+            let weekData = tableA[wKey];
+            if (!weekData && tableA.readings_cycle_a) {
+                weekData = tableA.readings_cycle_a[wKey];
+            }
+
+            if (weekData && weekData[nextDayKey]) {
+                const d = weekData[nextDayKey];
+                const transferredAp = d.ref_ap || d.ap || "";
+                const transferredEv = d.ref_ev || d.ev || "";
+
+                if (transferredAp && transferredEv) {
+                    liturgyReadings.push({
+                        label: "за п'ятницю",
+                        apostle: transferredAp,
+                        gospel: transferredEv
+                    });
+                }
+            }
+        }
+    }
+
+    // 3. Читання святому (Saint's readings)
+    const saintEntry = FIXED_READINGS_MAP.get(monthDay);
+    if (saintEntry && saintEntry.apostle && saintEntry.gospel) {
+        // Якщо це вже структурований запис з мітками (наприклад, передсвято)
+        // просто додаємо як є, інакше додаємо з міткою
+        if (saintEntry.apostle.includes("Передсв.:") || saintEntry.apostle.includes("Безсрібн.:")) {
+            // Складний запис - повертаємо весь рядок як одне читання без мітки
+            liturgyReadings.push({
+                apostle: saintEntry.apostle,
+                gospel: saintEntry.gospel
+            });
+        } else {
+            // Простий запис - додаємо з міткою
+            const label = saintEntry.title ? getSaintLabel(saintEntry.title) : undefined;
+            liturgyReadings.push({
+                label,
+                apostle: saintEntry.apostle,
+                gospel: saintEntry.gospel
+            });
+        }
+    }
+
+    return {
+        liturgy: liturgyReadings
+    };
+}
+
+/**
+ * Отримує читання для конкретного дня з усіма можливими комбінаціями
+ */
+function getReadingForDay(date: Date, easter: Date, lang: string): string {
+    const monthDay = formatMonthDay(date);
+    const pos = getLiturgicalPosition(date, easter);
+    const dayKey = pos.dayName;
+
+    const readings: string[] = [];
+
+    // 1. Рядові читання дня (Ordinary readings for the day)
+    let ordinaryAp = "";
+    let ordinaryEv = "";
+
+    if (pos.cycle !== 'PENTECOST') {
+        // Table B logic (Triodion, Lent, etc.)
+        try {
+            if (pos.cycle === 'TRIODION' && tableB.triodion_preparation && pos.key) {
+                // Handle both Sunday and Saturday readings
+                const dayData = tableB.triodion_preparation[pos.key];
+                if (dayData) {
+                    const reading = dayData[dayKey];
+                    if (reading) {
+                        ordinaryAp = reading.ref || reading.ap || "";
+                        ordinaryEv = reading.ev || reading.ref_ev || "";
+                    }
+                }
+            } else if (pos.cycle === 'LENT' && tableB.great_lent_weeks && dayKey === 'sunday' && pos.key) {
+                const d = tableB.great_lent_weeks[pos.key]?.sunday;
+                if (d) {
+                    ordinaryAp = d.ref || d.ap || "";
+                    ordinaryEv = d.ev || d.ref_ev || "";
+                }
+            }
+        } catch (e) { }
+    }
+
+    if (!ordinaryAp || !ordinaryEv) {
+        // Table A logic (Pentecost cycle)
+        const pentWeek = getPentecostWeek(date);
+        const wKey = `week_${pentWeek}`;
+        let weekData = tableA[wKey];
+        if (!weekData && tableA.readings_cycle_a) {
+            weekData = tableA.readings_cycle_a[wKey];
+        }
+
+        if (weekData && weekData[dayKey]) {
+            const d = weekData[dayKey];
+            ordinaryAp = d.ref_ap || d.ap || "";
+            ordinaryEv = d.ref_ev || d.ev || "";
+        }
+    }
+
+    // 2. Перенесені читання (Transferred readings from next day if it's a major feast)
+    let transferredAp = "";
+    let transferredEv = "";
+
+    if (isNextDayMajorFeast(date) && dayKey !== 'sunday' && dayKey !== 'saturday') {
+        // Get Friday's readings if today is Thursday
+        const nextDayKey = dayKey === 'thursday' ? 'friday' : null;
+        if (nextDayKey) {
+            const pentWeek = getPentecostWeek(date);
+            const wKey = `week_${pentWeek}`;
+            let weekData = tableA[wKey];
+            if (!weekData && tableA.readings_cycle_a) {
+                weekData = tableA.readings_cycle_a[wKey];
+            }
+
+            if (weekData && weekData[nextDayKey]) {
+                const d = weekData[nextDayKey];
+                transferredAp = d.ref_ap || d.ap || "";
+                transferredEv = d.ref_ev || d.ev || "";
+            }
+        }
+    }
+
+    // 3. Читання святому (Saint's readings)
+    const saintEntry = FIXED_READINGS_MAP.get(monthDay);
+    let saintAp = "";
+    let saintEv = "";
+
+    if (saintEntry) {
+        saintAp = saintEntry.apostle || "";
+        saintEv = saintEntry.gospel || "";
+    }
+
+    // Combine all readings
+    const apostles: string[] = [];
+    const gospels: string[] = [];
+
+    if (ordinaryAp) apostles.push(ordinaryAp);
+    if (transferredAp) apostles.push(transferredAp);
+    if (saintAp) apostles.push(saintAp);
+
+    if (ordinaryEv) gospels.push(ordinaryEv);
+    if (transferredEv) gospels.push(transferredEv);
+    if (saintEv) gospels.push(saintEv);
+
+    if (apostles.length === 0 && gospels.length === 0) return "";
+
+    const apStr = apostles.length > 0 ? `Ап.: ${apostles.join('; ')}` : "";
+    const evStr = gospels.length > 0 ? `Єв.: ${gospels.join('; ')}` : "";
+
+    return [apStr, evStr].filter(s => s).join('. ');
+}
+
+/**
+ * Генерує масив рухомих свят на основі дати Пасхи
+ */
+function getMovableHolidaysMap(year: number, lang: 'UA' | 'EN'): Record<string, string> {
+    const easter = getNewStyleEaster(year);
+    const holidays: Record<string, string> = {};
+
+    const names = lang === 'EN' ? {
+        palmSunday: "Entry of the Lord into Jerusalem (Palm Sunday)",
+        easter: "Resurrection of Christ. EASTER",
+        ascension: "Ascension of the Lord",
+        trinity: "Holy Trinity Day (Pentecost)"
+    } : {
+        palmSunday: "Вхід Господній в Єрусалим (Вербна неділя)",
+        easter: "Світле Христове Воскресіння. ВЕЛИКДЕНЬ",
+        ascension: "Вознесіння Господнє",
+        trinity: "День Святої Трійці (П'ятдесятниця)"
+    };
+
+    holidays[formatMonthDay(addDays(easter, -7))] = names.palmSunday;
+    holidays[formatMonthDay(easter)] = names.easter;
+    holidays[formatMonthDay(addDays(easter, 39))] = names.ascension;
+    holidays[formatMonthDay(addDays(easter, 49))] = names.trinity;
+
+    return holidays;
+}
+
+export interface CalendarEvent {
+    time: string;
+    name: string;
+    location?: string;
+}
+
+/**
+ * Структура окремого читання
+ */
+export interface Reading {
+    label?: string; // "Ряд.", "Сщмч.", "за п'ятницю", тощо
+    apostle: string;
+    gospel: string;
+}
+
+/**
+ * Структура всіх читань дня
+ */
+export interface DayReadings {
+    morning?: string; // Ранкові читання (якщо є)
+    liturgy: Reading[]; // Масив читань на Літургії
+}
+
+export interface CalendarDay {
+    date: string;
+    dayNumber: string;
+    dayOfWeek: string;
+    month: string;
+    year: number;
+    title: string;
+    saints: string[];
+    readings: string; // Старий формат для зворотної сумісності
+    readingsStructured?: DayReadings; // Новий структурований формат
+    isHoliday: boolean;
+    isFast: boolean;
+    events: CalendarEvent[];
+}
+
+/**
+ * Форматує структуровані читання для відображення
+ */
+export function formatReadingsForDisplay(readings: DayReadings): string {
+    let output = "";
+
+    if (readings.morning) {
+        output += `Ран. – ${readings.morning}\n\n`;
+    }
+
+    if (readings.liturgy && readings.liturgy.length > 0) {
+        output += "Літ. – ";
+        readings.liturgy.forEach((item, index) => {
+            const prefix = item.label ? `${item.label}: ` : "";
+            output += `${prefix}Ап. ${item.apostle}. Єв. ${item.gospel}.`;
+            if (index < readings.liturgy.length - 1) {
+                output += " ";
+            }
+        });
+    }
+
+    return output;
+}
+
+/**
+ * --- ГОЛОВНА ФУНКЦІЯ ГЕНЕРАЦІЇ ---
+ */
+export function generateCalendar(year: number, lang: string = 'UA'): CalendarDay[] {
+    const dataset: CalendarDay[] = [];
+    const startYear = new Date(year, 0, 1, 12, 0, 0);
+    const endYear = new Date(year, 11, 31, 12, 0, 0);
+
+    const normLang = lang.toUpperCase() === 'EN' ? 'EN' : 'UA';
+    const movableHolidays = getMovableHolidaysMap(year, normLang);
+    const fixedHolidays = normLang === 'EN' ? FIXED_HOLIDAYS_EN : FIXED_HOLIDAYS_UA;
+    const schedules = normLang === 'EN' ? SCHEDULES_EN : SCHEDULES_UA;
+    const locale = normLang === 'EN' ? 'en-US' : 'uk-UA';
+
+    for (let current = new Date(startYear.getTime()); current <= endYear; current.setDate(current.getDate() + 1)) {
+        const d = new Date(current.getTime());
+        const yr = d.getFullYear();
+        const monthStr = String(d.getMonth() + 1).padStart(2, '0');
+        const dayStr = String(d.getDate()).padStart(2, '0');
+        const isoDate = `${yr}-${monthStr}-${dayStr}`;
+
+        const monthDay = formatMonthDay(d);
+        const dayOfWeek = d.getDay();
+
+        const movableName = movableHolidays[monthDay];
+        const fixedName = fixedHolidays[monthDay];
+        const extraData = saintsData[monthDay] || { saints: [], saints_en: [], isFast: false, readings: "" };
+
+        let displayedSaints = extraData.saints || [];
+        if (normLang === 'EN' && extraData.saints_en && extraData.saints_en.length > 0) {
+            displayedSaints = extraData.saints_en;
+        } else if (normLang === 'EN' && (!extraData.saints_en || extraData.saints_en.length === 0)) {
+            displayedSaints = extraData.saints || [];
+        }
+
+        const title = movableName || fixedName || (displayedSaints.length > 0 ? displayedSaints[0] : "");
+        const isHoliday = !!(movableName || fixedName);
+
+        let events: CalendarEvent[] = [];
+        if (dayOfWeek === 0) {
+            events = [...schedules.sunday];
+        } else if (isHoliday) {
+            events = [...schedules.holiday];
+        } else if (dayOfWeek === 6) {
+            events = [...schedules.saturday];
+        } else {
+            events = [...schedules.weekday];
+        }
+
+        const readingsStr = getReadingForDay(d, getNewStyleEaster(yr), normLang) || extraData.readings || "";
+        const readingsStructured = getStructuredReadings(d, getNewStyleEaster(yr), normLang);
+
+        dataset.push({
+            date: isoDate,
+            dayNumber: dayStr,
+            dayOfWeek: d.toLocaleString(locale, { weekday: 'long' }),
+            month: d.toLocaleString(locale, { month: 'long' }),
+            year: yr,
+            title: title,
+            saints: displayedSaints,
+            readings: readingsStr,
+            readingsStructured: readingsStructured,
+            isHoliday: isHoliday,
+            isFast: extraData.isFast || false,
+            events: events
+        });
+    }
+
+    return dataset;
+}

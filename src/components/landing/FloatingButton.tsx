@@ -6,12 +6,20 @@ import { clsx } from 'clsx'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
+import { useLanguage } from '@/context/LanguageContext';
+
 export function FloatingButton() {
+  const { t, language } = useLanguage();
   const [isDark, setIsDark] = useState(false)
   const [isOverFooter, setIsOverFooter] = useState(false)
   const [isOverSocialSection, setIsOverSocialSection] = useState(false)
   const pathname = usePathname()
-  const isHomePage = pathname === '/'
+
+  // Home page is now /[lang] or just / (before rewrite)
+  // Check if pathname ends with the language code or is just /
+  const isHomePage = pathname === '/' || pathname === `/${language.toLowerCase()}` || pathname === `/${language.toLowerCase()}/`;
+
+  const langPrefix = `/${language.toLowerCase()}`;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,10 +28,10 @@ export function FloatingButton() {
 
       const socialSection = document.getElementById('social-initiatives')
       const footerSection = document.getElementById('footer')
-      
+
       let isSocial = false
       let isFooter = false
-      
+
       const buttonBottom = window.innerHeight - 32 // bottom-8
       const buttonTop = buttonBottom - 56          // height
 
@@ -59,30 +67,36 @@ export function FloatingButton() {
     // White if at top (not isDark), OR if over social section, OR if over footer
     // Black if scrolled (isDark) AND not over dark sections
     if (!isDark || isOverSocialSection || isOverFooter) {
-        useWhiteStyle = true;
+      useWhiteStyle = true;
     }
   } else {
     // Other Pages Logic:
     // Always Black, UNLESS over footer
     if (isOverFooter) {
-        useWhiteStyle = true;
+      useWhiteStyle = true;
     }
   }
 
   return (
     <div className="fixed bottom-8 right-8 z-50 hidden md:flex">
       <Link
-        href="/donate"
+        href={`${langPrefix}/donate`}
         className={clsx(
           "flex items-center gap-3 border-2 px-6 py-3 transition-all duration-500 ease-in-out group backdrop-blur-sm",
-           useWhiteStyle
-             ? "border-white text-white hover:bg-white hover:text-black"
-             : "border-black text-black hover:bg-black hover:text-white"
+          useWhiteStyle
+            ? "border-white text-white hover:bg-white hover:text-black"
+            : "border-black text-black hover:bg-black hover:text-white"
         )}
       >
         <div className="flex flex-col items-start leading-none">
-           <span className="font-bold uppercase tracking-widest text-sm">Скласти</span>
-           <span className="font-bold uppercase tracking-widest text-sm">Пожертву</span>
+          <span className="font-bold uppercase tracking-widest text-sm text-center">
+            {t('nav.make_donation').split('\n').map((line, i) => (
+              <React.Fragment key={i}>
+                {line}
+                {i < t('nav.make_donation').split('\n').length - 1 && <br />}
+              </React.Fragment>
+            ))}
+          </span>
         </div>
         <HeartHandshake className="w-6 h-6 group-hover:scale-110 transition-all duration-300" />
       </Link>

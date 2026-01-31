@@ -31,6 +31,10 @@ const config: Config = {
           '0%': { opacity: '0', transform: 'scale(0.95)' },
           '100%': { opacity: '1', transform: 'scale(1)' },
         },
+        flowDown: {
+          '0%': { transform: 'scaleY(0)', opacity: '0.5' },
+          '100%': { transform: 'scaleY(1)', opacity: '1' },
+        },
       }
     },
   },

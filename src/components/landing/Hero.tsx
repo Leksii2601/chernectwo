@@ -13,7 +13,10 @@ const slides = [
 
 ]
 
+import { useLanguage } from '@/context/LanguageContext';
+
 export function Hero() {
+  const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {
@@ -42,7 +45,7 @@ export function Hero() {
             priority={index === 0}
           />
           {/* Gradient Overlay requested by user */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/90 mix-blend-multiply" /> 
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/90 mix-blend-multiply" />
           <div className="absolute inset-0 bg-black/40" /> {/* General dimming */}
         </div>
       ))}
@@ -50,14 +53,12 @@ export function Hero() {
       {/* Content */}
       <div className="absolute inset-0 flex items-center justify-center p-4">
         <div className="mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-center w-full max-w-[95%] 2xl:max-w-[1800px]">
-          
+
           {/* Left: Title */}
           <div className="text-center lg:text-right">
-             <h1 className="font-montserrat font-bold text-2xl md:text-4xl lg:text-5xl leading-tight uppercase tracking-widest drop-shadow-lg">
-               Жидичинський <br />
-               Свято-Миколаївський <br />
-               Монастир
-             </h1>
+            <h1 className="font-montserrat font-bold text-2xl md:text-4xl lg:text-5xl leading-tight uppercase tracking-widest drop-shadow-lg whitespace-pre-line">
+              {t('hero.title')}
+            </h1>
           </div>
 
           {/* Divider: Vertical Line */}
@@ -66,25 +67,25 @@ export function Hero() {
           {/* Right: Description + Button */}
           <div className="text-center lg:text-left max-w-md mx-auto lg:mx-0">
             <p className="text-2xl md:text-xl font-light mb-8 opacity-90 leading-relaxed">
-             - один із найдавніших діючих монастирів Православної Церкви України, що бере свій початок з часів Київської Русі.
+              {t('hero.description')}
             </p>
           </div>
 
         </div>
       </div>
-      
+
       {/* Scroll Indicator (Optional but good for UX) */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2">
-         {slides.map((_, idx) => (
-           <button
-             key={idx}
-             onClick={() => setCurrentSlide(idx)}
-             className={clsx(
-               "w-2 h-2 rounded-full transition-all",
-               currentSlide === idx ? "bg-white w-6" : "bg-white/50"
-             )}
-           />
-         ))}
+        {slides.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentSlide(idx)}
+            className={clsx(
+              "w-2 h-2 rounded-full transition-all",
+              currentSlide === idx ? "bg-white w-6" : "bg-white/50"
+            )}
+          />
+        ))}
       </div>
     </div>
   )
