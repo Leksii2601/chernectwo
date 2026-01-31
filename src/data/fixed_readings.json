@@ -1,0 +1,460 @@
+{
+  "fixed_holidays": [
+    {
+      "date_month_day": "01-01",
+      "title": "Обрізання Господнє. Свт. Василія Великого",
+      "morning": "Ін. 35 зач.; 10:1-9",
+      "liturgy": [
+        { "label": "Обрізання", "apostle": "Кол. 254 зач.; 2:8-12", "gospel": "Лк. 6 зач.; 2:20-21, 40-52" },
+        { "label": "Свт.", "apostle": "Євр. 318 зач.; 7:26 – 8:2", "gospel": "Ін. 36 зач.; 10:9-16" }
+      ],
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-05",
+      "title": "Навечір'я Богоявлення (Хрещенський святвечір)",
+      "hours": [
+        { "label": "1-й час", "apostle": "Діян. 33 зач.; 13:25-33", "gospel": "Мф. 5 зач.; 3:1-11" },
+        { "label": "3-й час", "apostle": "Діян. 42 зач.; 19:1-8", "gospel": "Мк. 1 зач.; 1:1-8" },
+        { "label": "6-й час", "apostle": "Рим. 91 зач.; 6:3-11", "gospel": "Мк. 2 зач.; 1:9-15" },
+        { "label": "9-й час", "apostle": "Тит. 302 зач.; 2:11-14; 3:4-7", "gospel": "Мф. 6 зач.; 3:13-17" }
+      ],
+      "apostle": "1 Кор. 143 зач.; 9:19-27",
+      "gospel": "Лк. 7 зач.; 3:1-18",
+      "waterBlessing": { "apostle": "1 Кор. 143 зач. (від пол.); 10:1-4", "gospel": "Мк. 2 зач.; 1:9-11" },
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-06",
+      "title": "БОГОЯВЛЕННЯ. Хрещення Господнє",
+      "morning": "Мк. 2 зач.; 1:9-11",
+      "apostle": "Тит. 302 зач.; 2:11-14; 3:4-7",
+      "gospel": "Мф. 6 зач.; 3:13-17",
+      "waterBlessing": { "apostle": "1 Кор. 143 зач.; 10:1-4", "gospel": "Мк. 2 зач.; 1:9-11" },
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "02-02",
+      "title": "Стрітення Господнє",
+      "morning": "Лк. 8 зач.; 2:25-32",
+      "apostle": "Євр. 316 зач.; 7:7-17",
+      "gospel": "Лк. 7 зач.; 2:22-40",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "02-08",
+      "title": "Вмч. Феодора Стратилата",
+      "apostle": "2 Тим. 293 зач.; 2:1-10",
+      "gospel": "Ін. 52 зач.; 15:17 – 16:2"
+    },
+    {
+      "date_month_day": "03-25",
+      "title": "Благовіщення Пресвятої Богородиці",
+      "morning": "Лк. 4 зач.; 1:39-49, 56",
+      "apostle": "Євр. 306 зач.; 2:11-18",
+      "gospel": "Лк. 3 зач.; 1:26-38",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "06-24",
+      "title": "Різдво Іоана Предтечі",
+      "morning": "Лк. 3 зач.; 1:24-25, 57-68, 76, 80",
+      "apostle": "Рим. 112 зач.; 13:11 – 14:4",
+      "gospel": "Лк. 1 зач.; 1:5-25, 57-68, 76, 80",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "08-06",
+      "title": "Преображення Господнє",
+      "morning": "Лк. 45 зач.; 9:28-36",
+      "apostle": "2 Пет. 65 зач.; 1:10-19",
+      "gospel": "Мф. 70 зач.; 17:1-9",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "09-14",
+      "title": "Воздвиження Чесного Хреста Господнього",
+      "morning": "Ін. 42 зач. (від пол.); 12:28-36",
+      "apostle": "1 Кор. 125 зач.; 1:18-24",
+      "gospel": "Ін. 60 зач.; 19:6-11, 13-20, 25-28, 30-35",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "12-25",
+      "title": "Різдво Христове",
+      "morning": "Мф. 2 зач.; 1:18-25",
+      "apostle": "Гал. 209 зач.; 4:4-7",
+      "gospel": "Мф. 3 зач.; 2:1-12",
+      "suppressOrdinary": true
+    }
+    ,
+    {
+    "date_month_day": "08-15",
+      "title": "Успіння Пресвятої Богородиці",
+      "morning": "Лк. 4 зач.; 1:39-49, 56",
+      "apostle": "Флп. 240 зач.; 2:5-11",
+      "gospel": "Лк. 54 зач.; 10:38-42; 11:27-28",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "08-29",
+      "title": "Усікновення глави Іоана Предтечі",
+      "morning": "Мт. 57 зач.; 14:1-13",
+      "apostle": "Діян. 33 зач.; 13:25-33",
+      "gospel": "Мк. 24 зач.; 6:14-30",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "09-08",
+      "title": "Різдво Пресвятої Богородиці",
+      "morning": "Лк. 4 зач.; 1:39-49, 56",
+      "apostle": "Флп. 240 зач.; 2:5-11",
+      "gospel": "Лк. 54 зач.; 10:38-42; 11:27-28",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "10-01",
+      "title": "Покрова Пресвятої Богородиці",
+      "morning": "Лк. 4 зач.; 1:39-49, 56",
+      "apostle": "Євр. 320 зач.; 9:1-7",
+      "gospel": "Лк. 54 зач.; 10:38-42; 11:27-28",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "11-08",
+      "title": "Собор Архістратига Михаїла",
+      "morning": "Мф. 52 зач.; 13:24-30, 36-43",
+      "apostle": "Євр. 305 зач.; 2:2-10",
+      "gospel": "Лк. 51 зач.; 10:16-21",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "11-21",
+      "title": "Введення в храм Пресвятої Богородиці",
+      "morning": "Лк. 4 зач.; 1:39-49, 56",
+      "apostle": "Євр. 320 зач.; 9:1-7",
+      "gospel": "Лк. 54 зач.; 10:38-42; 11:27-28",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "11-30",
+      "title": "Ап. Андрія Первозванного",
+      "morning": "Мф. 9 зач.; 4:18-23",
+      "apostle": "1 Кор. 131 зач.; 4:9-16",
+      "gospel": "Ін. 4 зач.; 1:35-51",
+      "suppressOrdinary": false
+    }
+    ,
+    {
+      "date_month_day": "01-01",
+      "title": "Обрізання Господнє. Свт. Василія Великого",
+      "morning": "Ін. 35 зач.; 10:1-9",
+      "liturgy": [
+        { "label": "Обрізання", "apostle": "Кол. 254 зач.; 2:8-12", "gospel": "Лк. 6 зач.; 2:20-21, 40-52" },
+        { "label": "Свт.", "apostle": "Євр. 318 зач.; 7:26 – 8:2", "gospel": "Ін. 36 зач.; 10:9-16" }
+      ],
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-02",
+      "title": "Передсвято Богоявлення. Свт. Сильвестра, папи Римського",
+      "apostle": "Свт.: Євр. 318 зач.; 7:26 – 8:2",
+      "gospel": "Свт.: Ін. 8 зач.; 3:1-15",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "01-03",
+      "title": "Прор. Малахії. Мч. Гордія",
+      "apostle": "Мч.: 2 Тим. 292 зач.; 2:1-10",
+      "gospel": "Мч.: Мф. 36 зач.; 10:16-22",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "01-04",
+      "title": "Собор 70-ти апостолів",
+      "apostle": "Рим. 96 зач.; 8:3-9",
+      "gospel": "Лк. 50 зач.; 10:1-15",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "01-05",
+      "title": "Навечір'я Богоявлення (Хрещенський святвечір)",
+      "apostle": "1 Кор. 143 зач.; 9:19-27",
+      "gospel": "Лк. 7 зач.; 3:1-18",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-06",
+      "title": "БОГОЯВЛЕННЯ. Хрещення Господнє",
+      "morning": "Мк. 2 зач.; 1:9-11",
+      "apostle": "Тит. 302 зач.; 2:11-14; 3:4-7",
+      "gospel": "Мф. 6 зач.; 3:13-17",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-07",
+      "title": "Собор Іоана Предтечі",
+      "apostle": "Діян. 42 зач.; 19:1-8",
+      "gospel": "Ін. 3 зач.; 1:29-34",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-08",
+      "title": "Прп. Георгія. Прп. Домніки",
+      "apostle": "Гал. 213 зач.; 5:22 – 6:2",
+      "gospel": "Мф. 10 зач.; 4:25 – 5:12",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-10",
+      "title": "Свт. Григорія Ніського",
+      "apostle": "1 Кор. 151 зач.; 12:7-11",
+      "gospel": "Мф. 34 зач.; 9:35 – 10:1, 7-8",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-11",
+      "title": "Прп. Феодосія Великого",
+      "apostle": "2 Кор. 176 зач.; 4:6-15",
+      "gospel": "Мф. 43 зач.; 11:27-30",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-12",
+      "title": "Мц. Тетяни",
+      "apostle": "Рим. 96 зач.; 8:28-39",
+      "gospel": "Лк. 50 зач.; 10:1-15",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-13",
+      "title": "Мчч. Єрмила і Стратоніка",
+      "apostle": "Рим. 99 зач.; 8:28-39",
+      "gospel": "Лк. 24 зач.; 6:17-23",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-14",
+      "title": "Віддання Богоявлення. Рівноап. Ніни",
+      "liturgy": [
+        { "label": "Віддання", "apostle": "Тит. 302 зач.; 2:11-14; 3:4-7", "gospel": "Мф. 6 зач.; 3:13-17" },
+        { "label": "Рівноап.", "apostle": "1 Кор. 131 зач.; 4:9-16", "gospel": "Мф. 104 зач.; 25:1-13" }
+      ],
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "01-16",
+      "title": "Поклоніння чесним веригам ап. Петра",
+      "apostle": "Діян. 29 зач.; 12:1-11",
+      "gospel": "Ін. 67 зач.; 21:15-25",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "01-17",
+      "title": "Прп. Антонія Великого",
+      "apostle": "Євр. 335 зач.; 13:17-21",
+      "gospel": "Лк. 24 зач.; 6:17-23",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "01-19",
+      "title": "Прп. Макарія Великого",
+      "apostle": "Гал. 213 зач.; 5:22 – 6:2",
+      "gospel": "Мф. 43 зач.; 11:27-30",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "01-20",
+      "title": "Прп. Євтимія Великого",
+      "apostle": "Євр. 335 зач.; 13:17-21",
+      "gospel": "Лк. 24 зач.; 6:17-23",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "01-25",
+      "title": "Свт. Григорія Богослова",
+      "apostle": "1 Кор. 151 зач.; 12:7-11",
+      "gospel": "Ін. 36 зач.; 10:9-16",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "01-27",
+      "title": "Перенесення мощей свт. Іоана Золотоустого",
+      "apostle": "Євр. 318 зач.; 7:26 – 8:2",
+      "gospel": "Ін. 36 зач.; 10:9-16",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "01-30",
+      "title": "Собор трьох святителів: Василія В., Григорія Б. та Іоана З.",
+      "morning": "Ін. 35 зач.; 10:1-9",
+      "apostle": "Євр. 334 зач.; 13:7-16",
+      "gospel": "Мф. 11 зач.; 5:14-19",
+      "suppressOrdinary": true
+    }
+    ,
+    {
+      "date_month_day": "02-01",
+      "title": "Передсвято Стрітення Господнього. Мч. Трифона",
+      "apostle": "Мч.: Рим. 96 зач.; 8:28-39",
+      "gospel": "Мч.: Лк. 52 зач.; 10:19-21",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "02-02",
+      "title": "СТРІТЕННЯ ГОСПОДНЄ",
+      "morning": "Лк. 8 зач.; 2:25-32",
+      "apostle": "Євр. 316 зач.; 7:7-17",
+      "gospel": "Лк. 7 зач.; 2:22-40",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "02-03",
+      "title": "Післясвято Стрітення. Симеона Богоприїмця і Анни Пророчиці",
+      "apostle": "Євр. 320 зач.; 9:1-7",
+      "gospel": "Лк. 8 зач.; 2:25-32",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "02-10",
+      "title": "Сщмч. Харалампія",
+      "apostle": "2 Тим. 292 зач.; 2:1-10",
+      "gospel": "Ін. 52 зач.; 15:17 – 16:2",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "02-11",
+      "title": "Сщмч. Власія Севастійського",
+      "apostle": "Євр. 335 зач.; 13:17-21",
+      "gospel": "Ін. 36 зач.; 10:9-16",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "02-12",
+      "title": "Свт. Мелетія Антіохійського",
+      "apostle": "Євр. 318 зач.; 7:26 – 8:2",
+      "gospel": "Ін. 36 зач.; 10:9-16",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "02-23",
+      "title": "Сщмч. Полікарпа Смирнського",
+      "apostle": "Євр. 335 зач.; 13:17-21",
+      "gospel": "Ін. 35 зач. (від пол.); 10:1-9",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "02-24",
+      "title": "Перше і друге знайдення глави Іоана Предтечі",
+      "morning": "Мф. 40 зач.; 11:2-15",
+      "apostle": "2 Кор. 176 зач.; 4:6-15",
+      "gospel": "Мф. 40 зач.; 11:2-15",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "03-09",
+      "title": "40 мучеників Севастійських",
+      "morning": "Мф. 80 зач.; 20:1-16",
+      "apostle": "Євр. 322 зач.; 12:1-10",
+      "gospel": "Мф. 80 зач.; 20:1-16",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "03-17",
+      "title": "Прп. Олексія, чоловіка Божого",
+      "apostle": "Євр. 335 зач.; 13:17-21",
+      "gospel": "Лк. 24 зач.; 6:17-23",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "03-25",
+      "title": "БЛАГОВІЩЕННЯ ПРЕСВЯТОЇ БОГОРОДИЦІ",
+      "morning": "Лк. 4 зач.; 1:39-49, 56",
+      "apostle": "Євр. 306 зач.; 2:11-18",
+      "gospel": "Лк. 3 зач.; 1:26-38",
+      "suppressOrdinary": true
+    },
+    {
+      "date_month_day": "03-26",
+      "title": "Собор архангела Гавриїла",
+      "apostle": "Євр. 305 зач.; 2:2-10",
+      "gospel": "Лк. 51 зач.; 10:16-21",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "04-01",
+      "title": "Прп. Марії Єгипетської",
+      "apostle": "Гал. 208 зач.; 3:23-29",
+      "gospel": "Лк. 33 зач.; 7:36-50",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "04-23",
+      "title": "Вмч. Юрія Переможця (Георгія)",
+      "morning": "Ін. 67 зач.; 21:15-25",
+      "apostle": "Діян. 29 зач.; 12:1-11",
+      "gospel": "Ін. 52 зач.; 15:17 – 16:2",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "04-25",
+      "title": "Ап. і євангеліста Марка",
+      "morning": "Лк. 50 зач.; 10:1-15",
+      "apostle": "1 Пет. 63 зач.; 5:6-14",
+      "gospel": "Мк. 23 зач.; 6:7-13",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "04-30",
+      "title": "Ап. Якова Зеведеєвого",
+      "apostle": "Діян. 29 зач.; 12:1-11",
+      "gospel": "Лк. 40 зач.; 9:1-6",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "05-08",
+      "title": "Ап. і євангеліста Іоана Богослова",
+      "morning": "Ін. 67 зач.; 21:15-25",
+      "apostle": "1 Ін. 73 зач.; 4:12-19",
+      "gospel": "Ін. 61 зач.; 19:25-27; 21:24-25",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "05-09",
+      "title": "Перенесення мощей свт. Миколая Чудотворця",
+      "morning": "Ін. 35 зач. (від пол.); 10:1-9",
+      "apostle": "Євр. 335 зач.; 13:17-21",
+      "gospel": "Лк. 24 зач.; 6:17-23",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "05-11",
+      "title": "Рівноапп. Кирила і Мефодія, вчителів слов’янських",
+      "apostle": "Євр. 318 зач.; 7:26 – 8:2",
+      "gospel": "Мф. 11 зач.; 5:14-19",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "05-21",
+      "title": "Рівноапп. Костянтина і Олени",
+      "apostle": "Діян. 49 зач.; 26:1-5, 12-20",
+      "gospel": "Ін. 35 зач. (від пол.); 10:1-9",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "05-24",
+      "title": "Прп. Микити, стовпника Переяславського",
+      "apostle": "Гал. 213 зач.; 5:22 – 6:2",
+      "gospel": "Мф. 43 зач.; 11:27-30",
+      "suppressOrdinary": false
+    },
+    {
+      "date_month_day": "02-08",
+      "title": "Вмч. Феодора Стратилата",
+      "apostle": "2 Тим. 293 зач.; 2:1-10",
+      "gospel": "Ін. 52 зач.; 15:17 – 16:2",
+      "serviceType": 5,
+      "suppressOrdinary": false
+    }
+  ]
+}
