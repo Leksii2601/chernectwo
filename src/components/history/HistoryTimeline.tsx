@@ -441,12 +441,12 @@ export const HistoryTimeline = () => {
             const elementHeight = rect.height;
 
             // "Eye Level" = 60% from top of viewport
-            const startOffset = windowHeight * 0.6;
+            const startOffset = windowHeight * 0.3;
             const currentPos = startOffset - rect.top;
 
             // Raw percentage 0 to 100
             // Accelerated progress: Reach 100% when at 85% of physical scroll height
-            const effectiveHeight = elementHeight * 0.85;
+            const effectiveHeight = elementHeight * 0.8;
             let targetPercentage = Math.min(100, Math.max(0, (currentPos / effectiveHeight) * 100));
 
             // "Magnetic" Snap Logic

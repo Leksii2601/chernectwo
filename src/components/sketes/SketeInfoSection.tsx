@@ -119,7 +119,7 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                 containerRef.current = node;
             }}
             className={clsx(
-                "flex flex-col lg:flex-row min-h-[90vh] bg-white text-black mb-12 last:mb-0 pt-24 transition-all duration-1000 ease-in-out",
+                "flex flex-col lg:flex-row min-h-[70vh] bg-white text-black mb-0 last:mb-0 pt-12 lg:pt-24 transition-all duration-1000 ease-in-out",
                 // Animated Entrance: Fade In + Slide Up
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-24"
             )}
@@ -131,8 +131,10 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                 /* -------------------------------------------------------------------------- */
             }
             <div className={clsx(
-                "px-8 md:px-16 lg:px-20 py-8 flex flex-col justify-center relative transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] order-2 lg:order-1",
-                activeTab === 'overview' ? "w-full lg:w-1/2" : "w-full lg:w-full"
+                "px-8 md:px-16 lg:px-20 py-8 flex flex-col justify-center relative transition-all duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] order-2 lg:order-1",
+                activeTab === 'overview' ? "w-full lg:w-1/2" : "w-full lg:w-full",
+                // Staggered reveal for desktop text
+                isVisible ? "lg:opacity-100 lg:translate-x-0" : "lg:opacity-0 lg:-translate-x-12"
             )}>
 
                 {/* Fixed Container for Tabs - Ensures stability */}
@@ -168,7 +170,7 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
 
 
                 {/* CONTENT CONTAINER */}
-                <div className="w-full relative min-h-[400px]">
+                <div className="w-full relative min-h-[300px] lg:min-h-[400px]">
 
                     {/* --- OVERVIEW TAB (Includes Title) --- */}
                     <div className={clsx(
@@ -203,7 +205,7 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                     )}>
                         {/* Back Button Removed for mobile/UX */}
 
-                        <div className="w-[65vw] max-w-full aspect-[16/9] relative bg-black overflow-hidden group mx-auto">
+                        <div className="w-full lg:w-[65vw] max-w-full aspect-[3/2] relative bg-black overflow-hidden group mx-auto">
                             <Image
                                 src={skete.galleryImages[galleryIndex]}
                                 alt="Gallery"
@@ -307,22 +309,22 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                 /* -------------------------------------------------------------------------- */
             }
             <div className={clsx(
-                "transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] order-1 lg:order-2 relative bg-white overflow-hidden",
+                "transition-all duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] order-1 lg:order-2 relative bg-white overflow-hidden flex items-center justify-center",
                 activeTab === 'overview'
-                    ? "h-[50vh] lg:h-auto w-full lg:w-1/2 opacity-100 mb-8 lg:mb-0 lg:translate-x-0"
-                    : "h-0 lg:h-auto w-full lg:w-0 opacity-0 pointer-events-none mb-0 lg:mb-0 lg:translate-x-20"
+                    ? "h-auto w-full lg:w-1/2 opacity-100 mb-8 lg:mb-0 lg:translate-x-0"
+                    : "h-0 lg:h-auto w-full lg:w-0 opacity-0 pointer-events-none mb-0 lg:mb-0 lg:translate-x-20",
+                // Staggered reveal for desktop image
+                isVisible ? "lg:opacity-100 lg:translate-x-0" : "lg:opacity-0 lg:translate-x-12"
             )}>
-                <div className="h-full min-h-[500px] w-full p-4 lg:p-12 relative">
-                    <div className="w-full h-full relative overflow-hidden shadow-2xl rounded-sm">
-                        <div ref={imageRef} className="absolute inset-0 w-full aspect-[16/9]">
-                            <Image
-                                src={skete.image}
-                                alt={skete.label}
-                                fill
-                                sizes="(max-width: 1024px) 100vw, 50vw"
-                                className="object-cover"
-                            />
-                        </div>
+                <div className="w-full p-4 lg:p-12 relative flex items-center justify-center">
+                    <div className="w-full relative shadow-2xl rounded-sm overflow-hidden aspect-[3/2]">
+                        <Image
+                            src={skete.image}
+                            alt={skete.label}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            className="object-cover"
+                        />
                     </div>
                 </div>
             </div>
@@ -363,7 +365,7 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                                 <Info className="w-5 h-5" />
                                 <span className="text-xs font-bold uppercase tracking-widest">{t('skete.historical_note')}</span>
                             </div>
-                            <h3 className="text-3xl font-serif font-bold text-gray-900 mb-8">{skete.label}</h3>
+                            <h3 className="text-3xl font-montserrat font-bold text-gray-900 mb-8">{skete.label}</h3>
                             <div className="prose prose-sm text-gray-600 mb-10 font-serif leading-relaxed">
                                 {skete.overviewContent}
                             </div>
@@ -388,12 +390,12 @@ export const SketeInfoSection = () => {
             id: 'holy-spirit',
             label: t('sketes.holy_spirit'),
             description: t('sketes.holy_spirit_long_desc'),
-            image: '/media/sketes/photoSviatoDukhivskyiSkyt-_7_.webp',
+            image: '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_3.avif',
             galleryImages: [
-                '/media/sketes/photoSviatoDukhivskyiHram (5).webp',
-                '/media/sketes/photoSviatoDukhivskyiSkyt (2) (1).webp',
-                '/media/sketes/photoSviatoDukhivskyiSkyt (3) (1).webp',
-                '/media/sketes/sketes.webp'
+                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_1.avif',
+                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_2.avif',
+                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_3.avif',
+                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_4.avif'
             ],
             overviewContent: (
                 <div className="space-y-4 font-sans leading-relaxed text-gray-700">
@@ -408,29 +410,18 @@ export const SketeInfoSection = () => {
             }
         },
         {
-            id: 'life-bearing',
-            label: t('sketes.life_source'),
-            description: t('sketes.life_source_long_desc'),
-            image: '/media/hero-2.png',
-            galleryImages: ['/media/hero-2.png', '/media/hero-3.jpg', '/media/hero-1.jpg'],
-            overviewContent: (
-                <div className="space-y-4 font-sans leading-relaxed text-gray-700">
-                    <p>{t('sketes.life_source_overview_1')}</p>
-                    <p>{t('sketes.life_source_overview_2')}</p>
-                </div>
-            ),
-            contactInfo: {
-                address: 'с. Жидичин',
-                mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2521.860856011235!2d25.309044393436352!3d50.7966872226544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTDCsDQ3JzQ4LjQiTiAyNcKwMTgnMzIuNCJF!5e0!3m2!1suk!2sua!4v1741781413138!5m2!1suk!2sua',
-            }
-        },
-        {
             id: 'petro-pavlivsky',
             label: t('sketes.petro_pavlo'),
             description: t('sketes.petro_pavlo_long_desc'),
-            image: '/media/hero-3.jpg',
+            image: '/media/sketes/petropavlivskyiskut/petropavlivskyi_1.avif',
             facebook: 'https://www.facebook.com/profile.php?id=100075686154395',
-            galleryImages: ['/media/hero-3.jpg', '/media/hero-4.jpg', '/media/hero-1.jpg'],
+            galleryImages: [
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_2.avif',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_3.avif',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_4.avif',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_5.avif',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_6.avif'
+            ],
             overviewContent: (
                 <div className="space-y-4 font-sans leading-relaxed text-gray-700">
                     <p>{t('sketes.petro_pavlo_overview_1')}</p>
@@ -441,11 +432,34 @@ export const SketeInfoSection = () => {
                 address: 'Липляни, Волинська область, 45240',
                 mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2522.267335012639!2d25.296588!3d50.789154!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472597bd80d601b7%3A0xde0f9b72812828b9!2z0KHQutC40YIg0J_QtdGC0YDQsCDRliDQn9Cw0LLQu9Cw!5e0!3m2!1suk!2sua!4v1769424998899!5m2!1suk!2sua',
             }
+        },
+        {
+            id: 'life-bearing',
+            label: t('sketes.life_source'),
+            description: t('sketes.life_source_long_desc'),
+            image: '/media/sketes/skytzhyvonosnedzherelo/zhyvonosne_2.avif',
+            galleryImages: [
+                '/media/sketes/skytzhyvonosnedzherelo/zhyvonosne_1.avif',
+                '/media/sketes/skytzhyvonosnedzherelo/zhyvonosne_2.avif',
+                '/media/sketes/skytzhyvonosnedzherelo/zhyvonosne_3.avif',
+                '/media/sketes/skytzhyvonosnedzherelo/zhyvonosne_4.avif',
+                '/media/sketes/skytzhyvonosnedzherelo/zhyvonosne_5.avif'
+            ],
+            overviewContent: (
+                <div className="space-y-4 font-sans leading-relaxed text-gray-700">
+                    <p>{t('sketes.life_source_overview_1')}</p>
+                    <p>{t('sketes.life_source_overview_2')}</p>
+                </div>
+            ),
+            contactInfo: {
+                address: 'с. Жидичин',
+                mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2521.860856011235!2d25.309044393436352!3d50.7966872226544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNTDCsDQ3JzQ4LjQiTiAyNcKwMTgnMzIuNCJF!5e0!3m2!1suk!2sua!4v1741781413138!5m2!1suk!2sua',
+            }
         }
     ];
 
     return (
-        <section className="relative w-full bg-white pb-24">
+        <section className="relative w-full bg-white pb-12">
             <div className="flex flex-col gap-0">
                 {sketes.map((skete, index) => (
                     <SketeSectionBlock key={skete.id} skete={skete} index={index} />

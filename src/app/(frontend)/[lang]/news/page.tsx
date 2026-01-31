@@ -7,10 +7,17 @@ import { newsData } from '@/data/newsData';
 import { PageHeader } from '@/components/PageHeader';
 
 
+import { translations } from '@/context/LanguageContext';
+
 export default async function NewsPage(props: {
+  params: Promise<{ lang: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const searchParams = await props.searchParams;
+  const params = await props.params;
+  const lang = (params.lang.toUpperCase() as 'UA' | 'EN') || 'UA';
+  const t = (key: string) => translations[lang][key] || key;
+
   const search = typeof searchParams.search === 'string' ? searchParams.search : undefined;
 
   // Filter for Categories
@@ -21,24 +28,24 @@ export default async function NewsPage(props: {
   // Search Logic
   let filteredResults: typeof newsData = [];
   if (search) {
-      filteredResults = newsData.filter(n => n.title.toLowerCase().includes(search.toLowerCase()));
+    filteredResults = newsData.filter(n => n.title.toLowerCase().includes(search.toLowerCase()));
   }
 
   return (
     <main className="min-h-screen bg-white">
-      <PageHeader title="Новини" backgroundImage="/media/news.jpg" />
-      
+      <PageHeader title={t('nav.news')} backgroundImage="/media/news.jpg" />
+
       {/* 
          Top Section: NewsSection.
          If searching:
            - The Left "Hero" is replaced by Grid of Search Results.
            - The Right Sidebar stays (with Search Bar).
       */}
-      <NewsSection 
-          news={newsData} 
-          showSearch={true} 
-          searchResults={filteredResults}
-          isSearching={!!search}
+      <NewsSection
+        news={newsData}
+        showSearch={true}
+        searchResults={filteredResults}
+        isSearching={!!search}
       />
 
       {/* 
@@ -48,12 +55,12 @@ export default async function NewsPage(props: {
       */}
       <div className="max-w-[1920px] mx-auto px-4 md:px-6 lg:px-[80px] mt-8 mb-16">
         {!search && (
-            <div className="flex flex-col gap-16">
-                {/* Categories */}
-                <NewsCategorySection id="official" title="Офіційно" items={official} />
-                <NewsCategorySection id="announcements" title="Анонси" items={announcements} />
-                <NewsCategorySection id="publications" title="Публікації" items={publications} />
-            </div>
+          <div className="flex flex-col gap-16">
+            {/* Categories */}
+            <NewsCategorySection id="official" title={t('news.cat_official')} items={official} />
+            <NewsCategorySection id="announcements" title={t('news.cat_announcements')} items={announcements} />
+            <NewsCategorySection id="publications" title={t('news.cat_publications')} items={publications} />
+          </div>
         )}
       </div>
 

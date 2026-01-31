@@ -33,7 +33,7 @@ export function Header() {
       href: '/about',
       dropdown: [
         { label: t('nav.history'), href: '/about/history' },
-        { label: t('nav.schedule'), href: '/about/schedule' }, // Fixed link to page
+        { label: t('nav.schedule'), href: '/#calendar' }, // Link to main page section
         { label: t('nav.complex'), href: '/about/complex' },
         { label: t('nav.sketes'), href: '/about/sketes' },
         { label: t('nav.media'), href: '/about/media' },
@@ -311,7 +311,7 @@ export function Header() {
             className="flex items-center justify-center gap-2 border border-white/30 text-white px-8 py-4 font-bold uppercase tracking-wider rounded-sm hover:bg-white hover:text-black transition-colors w-full max-w-xs text-center text-lg"
           >
             <MessageSquarePlus className="w-5 h-5" />
-            Написати записку
+            {t('nav.write_note_mobile')}
           </Link>
 
           <Link
@@ -319,7 +319,7 @@ export function Header() {
             onClick={() => setMobileMenuOpen(false)}
             className="bg-white text-black px-8 py-4 font-bold uppercase tracking-wider rounded-sm hover:bg-amber-400 transition-colors w-full max-w-xs text-center text-lg"
           >
-            Скласти Пожертву
+            {t('nav.make_donation_mobile')}
           </Link>
 
           <div className="flex justify-center gap-4 text-white/50 text-lg font-medium">
@@ -365,7 +365,7 @@ export function Header() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Пошук по сайту?"
+              placeholder={t('search.placeholder')}
               className="w-full bg-transparent border-b-2 border-white/20 text-white text-3xl md:text-5xl font-light py-4 px-2 focus:outline-none focus:border-amber-400 placeholder:text-white/20 text-center transition-colors"
             />
           </div>
@@ -374,7 +374,7 @@ export function Header() {
             type="submit"
             className="bg-white text-black px-12 py-4 text-lg font-bold tracking-widest hover:bg-amber-400 transition-colors uppercase"
           >
-            Шукати
+            {t('search.button')}
           </button>
         </form>
       </div>

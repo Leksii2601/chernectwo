@@ -24,7 +24,7 @@ export function ExploreMore() {
     },
     {
       label: t('explore.schedule'),
-      href: `${langPrefix}/about/schedule`,
+      href: '#calendar',
       image: '/media/hero-4.jpg',
     },
     {

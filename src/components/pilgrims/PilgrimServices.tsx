@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { X, ArrowRight, ArrowLeft } from 'lucide-react';
+import { X, ArrowRight, ArrowLeft, Info } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export interface ServiceItem {
   id: string;
@@ -113,6 +114,7 @@ const excursionServices: ServiceItem[] = [
 ];
 
 export function PilgrimServices() {
+  const { t } = useLanguage();
   const [selectedItem, setSelectedItem] = useState<ServiceItem | null>(null);
   const [isClosing, setIsClosing] = useState(false);
   const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
@@ -203,11 +205,11 @@ export function PilgrimServices() {
     <section className="bg-white pb-24">
 
       {/* Transport Section */}
-      <ParallaxHeader title="Як дістатися до монастиря" image="/media/piligrims.jpg" />
+      <ParallaxHeader title={t('pilgrims.transport_title')} image="/media/piligrims.jpg" />
 
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[80px] my-16 md:my-24">
         <div className="text-center mb-10 md:mb-16">
-          <span className="font-montserrat text-gray-500 uppercase tracking-[0.2em] text-sm md:text-base">Варіанти доїзду</span>
+          <span className="font-montserrat text-gray-500 uppercase tracking-[0.2em] text-sm md:text-base">{t('pilgrims.transport_options')}</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {transportServices.map(item => (
@@ -217,11 +219,11 @@ export function PilgrimServices() {
       </div>
 
       {/* Excursion Section */}
-      <ParallaxHeader title="Замовлення екскурсій" image="/media/history.jpg" />
+      <ParallaxHeader title={t('pilgrims.excursions_title')} image="/media/history.jpg" />
 
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[80px] my-16 md:my-24">
         <div className="text-center mb-10 md:mb-16">
-          <span className="font-montserrat text-gray-500 uppercase tracking-[0.2em] text-sm md:text-base">Варіанти екскурсій</span>
+          <span className="font-montserrat text-gray-500 uppercase tracking-[0.2em] text-sm md:text-base">{t('pilgrims.excursion_options')}</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {excursionServices.map(item => (
@@ -288,7 +290,7 @@ export function PilgrimServices() {
                 <div className="space-y-8">
                   <div>
                     <h3 className="font-montserrat text-2xl mb-4 font-bold border-b pb-2 inline-block border-amber-500">
-                      Опис
+                      {t('pilgrims.description_label')}
                     </h3>
                     <p className="text-gray-700 leading-relaxed font-sans text-lg whitespace-pre-line">
                       {selectedItem.description}
@@ -298,7 +300,7 @@ export function PilgrimServices() {
                   {selectedItem.details && selectedItem.details.length > 0 && (
                     <div>
                       <h3 className="font-montserrat text-xl mb-4 font-bold">
-                        Деталі:
+                        {t('pilgrims.details')}:
                       </h3>
                       <ul className="space-y-3">
                         {selectedItem.details.map((detail, idx) => (
@@ -318,7 +320,7 @@ export function PilgrimServices() {
                         href="/contacts"
                         className="bg-black text-white px-8 py-3 rounded-full hover:bg-amber-600 transition-colors font-bold tracking-wider uppercase"
                       >
-                        Замовити
+                        {t('pilgrims.book_button')}
                       </Link>
                     </div>
                   )}

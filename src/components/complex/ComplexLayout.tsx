@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, X, Info } from 'lucide-react';
 import { createPortal } from 'react-dom';
+import Image from 'next/image';
+import clsx from 'clsx';
 import { useLanguage } from '@/context/LanguageContext';
 
 type CategoryId = 'temples' | 'monuments' | 'parks' | 'economy' | 'service';
@@ -17,6 +19,7 @@ interface ComplexObject {
   categoryId: CategoryId;
   title: string;
   description: string;
+  previewImage?: string;
   galleryImages: string[];
   contacts: string;
 }
@@ -48,7 +51,16 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t1_title'),
       description: t('complex.t1_desc'),
-      galleryImages: ['/media/church-complex.jpg', '/media/church-complex.jpg'],
+      previewImage: '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_1.jpg',
+      galleryImages: [
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_1.jpg',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_2.jpg',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_3.jpg',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_4.jpg',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_5.jpg',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_6.jpg',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_7.jpg'
+      ],
       contacts: t('complex.t1_contacts')
     },
     {
@@ -56,7 +68,12 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t2_title'),
       description: t('complex.t2_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      previewImage: '/media/church-complex/temples/sviatodukhivskyi/sviatodukhivskyi_3.jpg',
+      galleryImages: [
+        '/media/church-complex/temples/sviatodukhivskyi/sviatodukhivskyi_3.jpg',
+        '/media/church-complex/temples/sviatodukhivskyi/sviatodukhivskyi_2.jpg',
+        '/media/church-complex/temples/sviatodukhivskyi/sviatodukhivskyi_1.jpg'
+      ],
       contacts: t('complex.t2_contacts')
     },
     {
@@ -64,7 +81,18 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t3_title'),
       description: t('complex.t3_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      previewImage: '/media/church-complex/temples/uspenskyi/uspenskyi_2.jpg',
+      galleryImages: [
+        '/media/church-complex/temples/uspenskyi/uspenskyi_1.jpg',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_2.jpg',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_3.jpg',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_4.jpg',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_5.jpg',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_6.jpg',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_7.jpg',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_8.jpg',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_9.jpg'
+      ],
       contacts: t('complex.t3_contacts')
     },
     {
@@ -72,7 +100,14 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t4_title'),
       description: t('complex.t4_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      previewImage: '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.jpg',
+      galleryImages: [
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_1.jpg',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_2.jpg',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_3.jpg',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_4.jpg',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.jpg'
+      ],
       contacts: t('complex.t4_contacts')
     },
     {
@@ -80,7 +115,16 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t5_title'),
       description: t('complex.t5_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      previewImage: '/media/church-complex/temples/voskresenskyi/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_1.jpg',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_2.jpg',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_3.jpg',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_4.jpg',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_5.jpg',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_6.jpg',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_7.jpg'
+      ],
       contacts: t('complex.t5_contacts')
     },
 
@@ -90,7 +134,16 @@ export const ComplexLayout = () => {
       categoryId: 'monuments',
       title: t('complex.m1_title'),
       description: t('complex.m1_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      previewImage: '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_1.jpg',
+      galleryImages: [
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_1.jpg',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_2.jpg',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_3.jpg',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_4.jpg',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_5.jpg',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_6.jpg',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_7.jpg'
+      ],
       contacts: t('complex.m1_contacts')
     },
     {
@@ -98,23 +151,28 @@ export const ComplexLayout = () => {
       categoryId: 'monuments',
       title: t('complex.m2_title'),
       description: t('complex.m2_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      galleryImages: [
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_1.jpg',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_2.jpg',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_3.jpg',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_4.jpg',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_5.jpg',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_6.jpg',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_7.jpg'
+      ],
       contacts: t('complex.m2_contacts')
-    },
-    {
-      id: 'm3',
-      categoryId: 'monuments',
-      title: t('complex.m3_title'),
-      description: t('complex.m3_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.m3_contacts')
     },
     {
       id: 'm4',
       categoryId: 'monuments',
       title: t('complex.m4_title'),
       description: t('complex.m4_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      galleryImages: [
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_1.jpg',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_2.jpg',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_3.jpg',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_4.jpg'
+      ],
       contacts: t('complex.m4_contacts')
     },
     {
@@ -122,7 +180,14 @@ export const ComplexLayout = () => {
       categoryId: 'monuments',
       title: t('complex.m5_title'),
       description: t('complex.m5_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      previewImage: '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_2.jpg',
+      galleryImages: [
+        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_1.jpg',
+        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_2.jpg',
+        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_3.jpg',
+        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_4.jpg',
+        '/media/church-complex/monuments/memorial-burnt-conscience/memorial-burnt-conscience_5.jpg'
+      ],
       contacts: t('complex.m5_contacts')
     },
 
@@ -132,7 +197,13 @@ export const ComplexLayout = () => {
       categoryId: 'parks',
       title: t('complex.p1_title'),
       description: t('complex.p1_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      galleryImages: [
+        '/media/church-complex/parks/free-people-square/free-people-square_1.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_2.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_3.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_4.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_5.jpg'
+      ],
       contacts: t('complex.p1_contacts')
     },
     {
@@ -187,10 +258,25 @@ export const ComplexLayout = () => {
     },
   ];
 
-  const filteredObjects = MOCK_OBJECTS.filter(obj => obj.categoryId === activeCategory);
+  const economyObject: ComplexObject = {
+    id: 'economy-main',
+    categoryId: 'economy',
+    title: t('complex.economy_title'),
+    description: t('complex.economy_desc'),
+    previewImage: '/media/church-complex/economy/economy_1.jpg',
+    galleryImages: [
+      '/media/church-complex/economy/economy_1.jpg',
+      '/media/church-complex/economy/economy_2.jpg'
+    ],
+    contacts: ''
+  };
+
+  const filteredObjects = activeCategory === 'economy'
+    ? [economyObject]
+    : MOCK_OBJECTS.filter(obj => obj.categoryId === activeCategory);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-12 font-montserrat">
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 font-montserrat">
       {/* Sidebar - Minimal Left Edge */}
       <div className="w-full lg:w-72 flex-shrink-0">
         <div className="sticky top-24">
@@ -235,7 +321,7 @@ export const ComplexLayout = () => {
       {/* Content Area */}
       <div className="flex-grow min-h-[600px] w-full">
         <div className="mb-10 lg:pl-10">
-          <h2 className="text-4xl font-serif text-gray-900 mb-4 uppercase">
+          <h2 className="text-4xl font-montserrat text-gray-900 mb-4 uppercase">
             {CATEGORIES.find(c => c.id === activeCategory)?.label}
           </h2>
           <div className="h-1 w-16 bg-orange-600"></div>
@@ -270,8 +356,8 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
   const [isClosingModal, setIsClosingModal] = useState(false);
   const parallaxRef = useRef<HTMLDivElement>(null);
 
-  // Use the first image as the cover, or a placeholder if none exists
-  const coverImage = object.galleryImages.length > 0 ? object.galleryImages[0] : '/media/church-complex.jpg';
+  // Use the previewImage if provided, otherwise the first gallery image or placeholder
+  const coverImage = object.previewImage || (object.galleryImages.length > 0 ? object.galleryImages[0] : '/media/church-complex.jpg');
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % object.galleryImages.length);
@@ -311,24 +397,30 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
         <div className="flex flex-col lg:flex-row h-full relative">
 
           {/* Left Content Section */}
-          <div className={`
-            p-6 lg:p-10 flex flex-col transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]
-            ${activeTab === 'overview' ? 'w-full lg:w-[60%]' : 'w-full'}
-        `}>
+          <div className={clsx(
+            "flex flex-col transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
+            activeTab === 'overview' ? "w-full lg:w-[60%] p-6 lg:p-10" : "w-full p-4 lg:p-10"
+          )}>
             <div className={`mb-2 w-full ${activeTab === 'overview' ? 'lg:max-w-2xl' : ''}`}>
-              {/* Tabs - Swapped position, now Top */}
-              <div className={`flex gap-8 border-b border-gray-100 mb-6 transition-all duration-500 ${activeTab === 'gallery' ? 'justify-center' : ''}`}>
+              {/* Tabs - Centering when in gallery mode */}
+              <div className={clsx(
+                "flex gap-8 border-b border-gray-100 mb-6 transition-all duration-500",
+                activeTab !== 'overview' && "justify-center"
+              )}>
                 {TABS.map(tab => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`
-                            py-4 text-xs font-bold uppercase tracking-widest transition-all relative
-                            ${activeTab === tab.id ? 'text-orange-600' : 'text-gray-400 hover:text-gray-600'}
-                        `}
+                    className={clsx(
+                      "py-4 text-xs font-bold uppercase tracking-widest transition-all relative",
+                      activeTab === tab.id ? "text-orange-600" : "text-gray-400 hover:text-gray-600"
+                    )}
                   >
                     {tab.label}
-                    <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-orange-600 transform transition-transform duration-300 ${activeTab === tab.id ? 'scale-x-100' : 'scale-x-0'}`}></span>
+                    <span className={clsx(
+                      "absolute bottom-0 left-0 w-full h-0.5 bg-orange-600 transform transition-transform duration-300",
+                      activeTab === tab.id ? "scale-x-100" : "scale-x-0"
+                    )}></span>
                   </button>
                 ))}
               </div>
@@ -348,7 +440,7 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
                         `}
                 >
                   {/* Title - Moved here for smoother transition */}
-                  <h3 className="text-3xl font-serif font-bold text-gray-900 mb-4 uppercase">
+                  <h3 className="text-3xl font-montserrat text-gray-900 mb-4 uppercase">
                     {object.title}
                   </h3>
 
@@ -368,33 +460,39 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
 
                 {/* GALLERY CONTENT */}
                 <div
-                  className={`
-                            col-start-1 row-start-1 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] w-full
-                            ${activeTab === 'gallery'
-                      ? 'opacity-100 translate-y-0 relative z-10 delay-100'
-                      : 'opacity-0 translate-y-12 pointer-events-none absolute inset-x-0 top-0'}
-                        `}
+                  className={clsx(
+                    "col-start-1 row-start-1 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] w-full",
+                    activeTab === 'gallery'
+                      ? "opacity-100 translate-y-0 relative z-10 delay-100"
+                      : "opacity-0 translate-y-20 absolute inset-x-0 top-0 pointer-events-none z-0 scale-95"
+                  )}
                 >
-                  {/* Gallery Slider */}
-                  <div className="relative w-full h-[400px] bg-gray-100 group/gallery">
+                  {/* Gallery Slider - Adjusted aspect ratio and width for mobile */}
+                  <div className="w-full lg:w-[65%] aspect-[4/3] md:aspect-[3/2] relative bg-black overflow-hidden group/gallery mx-auto shadow-md">
                     {object.galleryImages.length > 0 ? (
                       <>
-                        <div
-                          className="w-full h-full bg-cover bg-center transition-all duration-500"
-                          style={{ backgroundImage: `url(${object.galleryImages[currentImageIndex]})` }}
+                        <Image
+                          src={object.galleryImages[currentImageIndex]}
+                          alt="Gallery"
+                          fill
+                          sizes="(max-width: 768px) 100vw, 80vw"
+                          className="object-cover animate-in fade-in duration-500"
+                          priority={false}
+                          key={currentImageIndex} // Re-animate on change
                         />
+
                         {/* Navigation Arrows */}
                         <button
                           onClick={prevImage}
-                          className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-white transition-all transform hover:scale-110 z-10"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white text-black shadow-lg rounded-full transition-all hover:scale-110 z-20"
                         >
-                          <ChevronLeft className="w-6 h-6 text-gray-800" />
+                          <ChevronLeft className="w-6 h-6" />
                         </button>
                         <button
                           onClick={nextImage}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-white transition-all transform hover:scale-110 z-10"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white text-black shadow-lg rounded-full transition-all hover:scale-110 z-20"
                         >
-                          <ChevronRight className="w-6 h-6 text-gray-800" />
+                          <ChevronRight className="w-6 h-6" />
                         </button>
                       </>
                     ) : (
@@ -457,7 +555,7 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
                 <span className="text-sm font-bold uppercase tracking-widest text-gray-500">{t('complex.detailed_info')}</span>
               </div>
 
-              <h3 className="text-3xl font-bold font-serif text-gray-900 mb-6 uppercase">{object.title}</h3>
+              <h3 className="text-3xl font-bold font-montserrat text-gray-900 mb-6 uppercase">{object.title}</h3>
 
               <div className="prose prose-orange text-gray-600 leading-relaxed mb-8">
                 <p className="text-lg">{object.description}</p>

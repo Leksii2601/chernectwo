@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useLanguage } from '@/context/LanguageContext';
 
 export function NewsSearch() {
   const router = useRouter();
@@ -38,12 +39,14 @@ export function NewsSearch() {
     };
   }, [searchTerm, router, searchParams]);
 
+  const { t } = useLanguage();
+
   return (
     <div className="flex items-center gap-4 w-full">
       <div className="relative flex-grow">
         <input
           type="text"
-          placeholder="Search"
+          placeholder={t('search.placeholder')}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full border border-gray-300 rounded-sm px-4 py-2 text-gray-700 focus:outline-none focus:border-black font-montserrat"
