@@ -617,7 +617,7 @@ export function LanguageProvider({ children, initialLocale }: { children: React.
 
     const handleSetLanguage = (lang: Language) => {
         const newLang = lang.toLowerCase();
-        const currentPath = pathname;
+        const currentPath = pathname || '/';
 
         let newPath = currentPath;
         // Check if path starts with a locale (en or ua)
