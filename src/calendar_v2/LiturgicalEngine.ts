@@ -135,7 +135,7 @@ export function getOrthodoxPascha(year: number): Date {
 function getJulianDay(date: Date): number {
     let Y = date.getFullYear();
     let M = date.getMonth() + 1;
-    let D = date.getDate();
+    const D = date.getDate();
     if (M <= 2) { Y -= 1; M += 12; }
     const A = Math.floor(Y / 100);
     const B = 2 - A + Math.floor(A / 4);
@@ -378,7 +378,7 @@ function extractPonomarReadings(source: any, target: GranularReadings, labelPref
     }
     if (source.liturgy) {
         source.liturgy.forEach((r: any) => {
-            let list = (r.Type === 'apostol') ? target.liturgy.apostle : target.liturgy.gospel;
+            const list = (r.Type === 'apostol') ? target.liturgy.apostle : target.liturgy.gospel;
             if (list) process(r, list);
         });
     }
@@ -412,7 +412,8 @@ function getEothinonIndex(date: Date, paschaPrev: Date): number {
 
 export function calculateDynamicReadings(date: Date): DayReadings {
     const mmdd = formatMonthDay(date);
-    let { key, description, effWeek, nday } = getLectionaryKeyInfo(date);
+    let { key } = getLectionaryKeyInfo(date);
+    const { description, effWeek, nday } = getLectionaryKeyInfo(date);
 
     // DEBUG: Print nday as requested
     // console.log(`[DEBUG] Date: ${mmdd}, nday: ${nday}, Key: ${key}`);
