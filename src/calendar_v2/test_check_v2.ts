@@ -7,13 +7,13 @@ const entries = cal.filter(d => ["02-03", "02-12", "02-22", "02-25", "02-28"].in
 entries.forEach(d => {
     console.log(`\n=== ${d.date} ===`);
     console.log("Liturgy:");
-    d.readings.forEach(r => {
+    d.readings.split('\n').forEach(r => {
         if (!r.includes("Вечірня") && !r.includes("час")) console.log("  " + r);
     });
 
     // Check Vespers specifically for Feb 25
     if (d.date.includes("02-25")) {
         console.log("Vespers:");
-        d.readings.filter(r => r.includes("Вечірня")).forEach(r => console.log("  " + r));
+        d.readings.split('\n').filter(r => r.includes("Вечірня")).forEach(r => console.log("  " + r));
     }
 });
