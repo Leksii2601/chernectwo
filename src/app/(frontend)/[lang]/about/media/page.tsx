@@ -31,13 +31,11 @@ interface LiveConfig {
     sundayEndTime?: string;
 }
 
-interface MediaPageClientProps {
-    dynamicReports?: SimpleImage[];
-    liveConfig?: LiveConfig;
-    isLiveNow?: boolean;
-}
+export default function MediaPageClient() {
+    const dynamicReports = [] as SimpleImage[];
+    const liveConfig = undefined as LiveConfig | undefined;
+    const isLiveNow = false;
 
-export default function MediaPageClient({ dynamicReports = [], liveConfig, isLiveNow = false }: MediaPageClientProps) {
     const { t } = useLanguage();
     const searchParams = useSearchParams();
     const initialTab = (searchParams?.get('tab') as 'gallery' | 'video' | 'live') || 'gallery';
