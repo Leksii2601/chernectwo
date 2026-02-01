@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
 import Image from 'next/image';
@@ -31,7 +31,7 @@ interface LiveConfig {
     sundayEndTime?: string;
 }
 
-export default function MediaPageClient() {
+function MediaPageContent() {
     const dynamicReports = [] as SimpleImage[];
     const liveConfig = undefined as LiveConfig | undefined;
     const isLiveNow = false;
@@ -521,3 +521,14 @@ export default function MediaPageClient() {
         </main>
     );
 }
+
+export default function MediaPageClient() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-stone-50 flex items-center justify-center">
+            <div className="animate-pulse text-stone-400 font-church tracking-widest uppercase">Завантаження...</div>
+        </div>}>
+            <MediaPageContent />
+        </Suspense>
+    );
+}
+
