@@ -1,6 +1,6 @@
 import React from 'react';
 import { Footer } from '@/components/landing/Footer';
-import { FloatingButton } from '@/components/landing/FloatingButton';
+
 import { NewsSection } from '@/components/landing/NewsSection';
 import { NewsCategorySection } from '@/components/news/NewsCategorySection';
 import { newsData } from '@/data/newsData';
@@ -33,7 +33,7 @@ export default async function NewsPage(props: {
 
   return (
     <main className="min-h-screen bg-white">
-      <PageHeader title={t('nav.news')} backgroundImage="/media/news.jpg" />
+      <PageHeader title={t('nav.news')} subtitle={t('page.news_subtitle')} backgroundImage="/media/news.jpg" />
 
       {/* 
          Top Section: NewsSection.
@@ -65,7 +65,7 @@ export default async function NewsPage(props: {
       </div>
 
       <Footer />
-      <FloatingButton />
+
     </main>
   );
 }

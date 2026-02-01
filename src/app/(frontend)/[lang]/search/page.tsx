@@ -4,7 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Header } from '@/components/landing/Header';
 import { Footer } from '@/components/landing/Footer';
-import { FloatingButton } from '@/components/landing/FloatingButton';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, ChevronRight } from 'lucide-react';
@@ -119,7 +119,7 @@ export default function SearchPage() {
             </Suspense>
 
             <Footer />
-            <FloatingButton />
+
         </main>
     );
 }

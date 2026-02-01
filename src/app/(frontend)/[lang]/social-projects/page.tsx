@@ -1,6 +1,6 @@
 import React from 'react';
 import { Footer } from '@/components/landing/Footer';
-import { FloatingButton } from '@/components/landing/FloatingButton';
+
 
 import { SocialProjectsFeed } from '@/components/social/SocialProjectsFeed';
 import { getProjectsData } from '@/data/projectsData';
@@ -21,12 +21,12 @@ export default async function SocialProjectsPage({ params }: { params: Promise<{
 
   return (
     <main className="min-h-screen bg-white">
-      <PageHeader backgroundImage="/media/social-initiatives.jpg" title={t('social.page_title')} />
+      <PageHeader backgroundImage="/media/social-initiatives.jpg" title={t('social.page_title')} subtitle={t('page.social_subtitle')} />
 
       <SocialProjectsFeed initiatives={projectsData} />
 
       <Footer />
-      <FloatingButton />
+
     </main>
   );
 }

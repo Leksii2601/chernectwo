@@ -35,7 +35,8 @@ export function LanguageProvider({ children, initialLocale }: { children: React.
     };
 
     const t = (key: string) => {
-        return translations[language][key] || key;
+        const langData = translations[language] || translations['UA'];
+        return langData?.[key] || key;
     };
 
     return (

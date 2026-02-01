@@ -9,14 +9,14 @@ export const LiveStream: GlobalConfig = {
   },
   fields: [
     {
-        name: 'youtubeSync',
-        type: 'ui',
-        admin: {
-            position: 'sidebar',
-            components: {
-                Field: '@/components/admin/RefreshYouTubeButton#RefreshYouTubeButton',
-            }
+      name: 'youtubeSync',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: '@/components/admin/RefreshYouTubeButton#RefreshYouTubeButton',
         }
+      }
     },
     {
       type: 'row',
@@ -31,47 +31,47 @@ export const LiveStream: GlobalConfig = {
           },
         },
         {
-            name: 'enableSundaySchedule',
-            label: '📅 Автоматичний розклад (Неділя)',
-            type: 'checkbox',
-            defaultValue: true,
+          name: 'enableSundaySchedule',
+          label: '📅 Автоматичний розклад (Неділя)',
+          type: 'checkbox',
+          defaultValue: true,
         },
       ],
     },
     {
-        name: 'plannedEvent',
-        type: 'group',
-        label: 'Зміна в розкладі / Запланована трансляція',
-        admin: {
-            description: 'Вкажіть дату та час для разової трансляції. Це спрацює автоматично у вказаний період.',
-        },
-        fields: [
-             {
-                type: 'row',
-                fields: [
-                    {
-                        name: 'startTime',
-                        label: 'Дата та час початку',
-                        type: 'date',
-                        admin: {
-                            date: {
-                                pickerAppearance: 'dayAndTime',
-                            },
-                        },
-                    },
-                    {
-                        name: 'endTime',
-                        label: 'Дата та час завершення',
-                        type: 'date',
-                        admin: {
-                            date: {
-                                pickerAppearance: 'dayAndTime',
-                            },
-                        },
-                    },
-                ]
-             }
-        ]
+      name: 'plannedEvent',
+      type: 'group',
+      label: 'Зміна в розкладі / Запланована трансляція',
+      admin: {
+        description: 'Вкажіть дату та час для разової трансляції. Це спрацює автоматично у вказаний період.',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'startTime',
+              label: 'Дата та час початку',
+              type: 'date',
+              admin: {
+                date: {
+                  pickerAppearance: 'dayAndTime',
+                },
+              },
+            },
+            {
+              name: 'endTime',
+              label: 'Дата та час завершення',
+              type: 'date',
+              admin: {
+                date: {
+                  pickerAppearance: 'dayAndTime',
+                },
+              },
+            },
+          ]
+        }
+      ]
     },
     {
       type: 'row',
@@ -115,51 +115,56 @@ export const LiveStream: GlobalConfig = {
       required: true,
       defaultValue: 'UC...',
       admin: {
-          description: 'Обов\'язково для відображення відео на сайті. Має починатися з "UC". (Наприклад: UCn_sI5a6yX0n5s8d6X7yX8A). Щоб дізнатися ID, відкрийте код сторінки каналу і знайдіть "channelId".',
+        description: 'Обов\'язково для відображення відео на сайті. Має починатися з "UC". (Наприклад: UCn_sI5a6yX0n5s8d6X7yX8A). Щоб дізнатися ID, відкрийте код сторінки каналу і знайдіть "channelId".',
       }
     },
     {
-        name: 'message',
-        label: 'Повідомлення для користувача',
-        type: 'text',
-        defaultValue: 'Зараз триває пряма трансляція богослужіння',
+      name: 'message',
+      label: 'Повідомлення для користувача',
+      type: 'text',
+      defaultValue: 'Зараз триває пряма трансляція богослужіння',
     },
     {
-        name: 'syncStats',
-        type: 'group',
-        label: 'Статистика використання YouTube API',
-        admin: {
-            position: 'sidebar',
-            readOnly: true,
-            description: 'Інформація про останній запит до YouTube',
-        },
-        fields: [
-            { name: 'lastSyncedAt', type: 'date', label: 'Час останнього оновлення', admin: { date: { pickerAppearance: 'dayAndTime' } } },
-            { name: 'itemsFetched', type: 'number', label: 'Отримано відео (шт)' },
-        ]
+      name: 'syncStats',
+      type: 'group',
+      label: 'Статистика використання YouTube API',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Інформація про останній запит до YouTube',
+      },
+      fields: [
+        { name: 'lastSyncedAt', type: 'date', label: 'Час останнього оновлення', admin: { date: { pickerAppearance: 'dayAndTime' } } },
+        { name: 'itemsFetched', type: 'number', label: 'Отримано відео (шт)' },
+      ]
     },
     {
-        name: 'cachedData',
-        type: 'group',
-        label: 'Кешовані дані YouTube',
-        admin: {
-            readOnly: true,
-            description: 'Ці поля оновлюються автоматично кнопкою "Оновити відео зараз"',
+      name: 'cachedData',
+      type: 'group',
+      label: 'Кешовані дані YouTube',
+      admin: {
+        readOnly: true,
+        description: 'Ці поля оновлюються автоматично кнопкою "Оновити відео зараз"',
+      },
+      fields: [
+        {
+          name: 'videos',
+          type: 'json',
         },
-        fields: [
-            {
-                name: 'videos',
-                type: 'json',
-            },
-            {
-                name: 'streams',
-                type: 'json',
-            },
-            {
-                name: 'lastUpdated',
-                type: 'date',
-            }
-        ]
+        {
+          name: 'streams',
+          type: 'json',
+        },
+        {
+          name: 'latestLiveStatus',
+          label: 'Статус ефіру (YouTube)',
+          type: 'checkbox',
+        },
+        {
+          name: 'lastUpdated',
+          type: 'date',
+        }
+      ]
     }
   ],
 };

@@ -7,7 +7,7 @@ import { SocialInitiatives } from '@/components/landing/SocialInitiatives'
 import { ExploreMore } from '@/components/landing/ExploreMore'
 import { FAQ } from '@/components/landing/FAQ'
 import { Footer } from '@/components/landing/Footer'
-import { FloatingButton } from '@/components/landing/FloatingButton'
+
 import { newsData } from '@/data/newsData'
 
 
@@ -30,7 +30,6 @@ export default function HomePage() {
       <ExploreMore />
       <FAQ />
       <Footer />
-      <FloatingButton />
     </main>
   )
 }

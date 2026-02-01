@@ -3,7 +3,7 @@
 import React from 'react';
 import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
-import { FloatingButton } from '@/components/landing/FloatingButton';
+
 import { ComplexLayout } from '@/components/complex/ComplexLayout';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -15,6 +15,7 @@ export default function ComplexPage() {
       {/* 1. Header with Title */}
       <PageHeader
         title={t('explore.architecture')}
+        subtitle={t('page.complex_subtitle')}
         backgroundImage="/media/church-complex.jpg"
       />
 
@@ -53,7 +54,7 @@ export default function ComplexPage() {
       </div>
 
       <Footer />
-      <FloatingButton />
+
     </main>
   );
 }

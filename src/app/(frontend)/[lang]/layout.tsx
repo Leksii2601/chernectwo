@@ -6,8 +6,6 @@ import '@fontsource/open-sans/700.css';
 import '@fontsource/montserrat/400.css';
 import '@fontsource/montserrat/600.css';
 import '@fontsource/montserrat/700.css';
-import { LiveStreamWidget } from '@/components/LiveStreamWidget';
-import { Preloader } from '@/components/Preloader';
 
 export const metadata = {
   description: 'Zhydychyn Monastery',
@@ -27,9 +25,7 @@ export default async function RootLayout({ children, params }: { children: React
     <html lang={lang}>
       <body className="font-sans antialiased overflow-x-hidden">
         <LanguageProvider initialLocale={lang}>
-          <Preloader />
           <div className="min-h-screen w-full relative">
-            <LiveStreamWidget />
             {children}
           </div>
         </LanguageProvider>

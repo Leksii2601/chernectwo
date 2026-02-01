@@ -725,6 +725,7 @@ export interface LiveStream {
       | number
       | boolean
       | null;
+    latestLiveStatus?: boolean | null;
     lastUpdated?: string | null;
   };
   updatedAt?: string | null;
@@ -759,6 +760,7 @@ export interface LiveStreamSelect<T extends boolean = true> {
     | {
         videos?: T;
         streams?: T;
+        latestLiveStatus?: T;
         lastUpdated?: T;
       };
   updatedAt?: T;

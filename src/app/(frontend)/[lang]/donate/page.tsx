@@ -28,7 +28,7 @@ export default function DonatePage() {
 
   return (
     <main className="min-h-screen bg-white">
-      <PageHeader title={t('donate.title')} backgroundImage="/media/donate.jpg" />
+      <PageHeader title={t('donate.title')} subtitle={t('page.donate_subtitle')} backgroundImage="/media/donate.jpg" />
 
       {/* Hero Section */}
       <section className="pt-16 pb-16 px-4 bg-gray-50 text-center">

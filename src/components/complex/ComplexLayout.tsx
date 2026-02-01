@@ -186,14 +186,6 @@ export const ComplexLayout = () => {
       contacts: t('complex.p2_contacts')
     },
     {
-      id: 'p3',
-      categoryId: 'parks',
-      title: t('complex.p3_title'),
-      description: t('complex.p3_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.p3_contacts')
-    },
-    {
       id: 'p4',
       categoryId: 'parks',
       title: t('complex.p4_title'),
@@ -201,16 +193,24 @@ export const ComplexLayout = () => {
       galleryImages: ['/media/church-complex.jpg'],
       contacts: t('complex.p4_contacts')
     },
+    {
+      id: 'p5',
+      categoryId: 'parks',
+      title: t('complex.p5_title'),
+      description: t('complex.p5_desc'),
+      galleryImages: ['/media/church-complex.jpg'],
+      contacts: t('complex.p5_contacts')
+    },
+    {
+      id: 'p3',
+      categoryId: 'parks',
+      title: t('complex.p3_title'),
+      description: t('complex.p3_desc'),
+      galleryImages: ['/media/church-complex.jpg'],
+      contacts: t('complex.p3_contacts')
+    },
 
     // CATEGORY: SERVICE
-    {
-      id: 'e1',
-      categoryId: 'service',
-      title: t('complex.e1_title'),
-      description: t('complex.e1_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.e1_contacts')
-    },
     {
       id: 'e2',
       categoryId: 'service',
@@ -220,12 +220,44 @@ export const ComplexLayout = () => {
       contacts: t('complex.e2_contacts')
     },
     {
+      id: 'e5',
+      categoryId: 'service',
+      title: t('complex.e5_title'),
+      description: t('complex.e5_desc'),
+      galleryImages: ['/media/church-complex.jpg'],
+      contacts: t('complex.e5_contacts')
+    },
+    {
+      id: 'e4',
+      categoryId: 'service',
+      title: t('complex.e4_title'),
+      description: t('complex.e4_desc'),
+      galleryImages: ['/media/church-complex.jpg'],
+      contacts: t('complex.e4_contacts')
+    },
+    {
+      id: 'e6',
+      categoryId: 'service',
+      title: t('complex.e6_title'),
+      description: t('complex.e6_desc'),
+      galleryImages: ['/media/church-complex.jpg'],
+      contacts: t('complex.e6_contacts')
+    },
+    {
       id: 'e3',
       categoryId: 'service',
       title: t('complex.e3_title'),
       description: t('complex.e3_desc'),
       galleryImages: ['/media/church-complex.jpg'],
       contacts: t('complex.e3_contacts')
+    },
+    {
+      id: 'e1',
+      categoryId: 'service',
+      title: t('complex.e1_title'),
+      description: t('complex.e1_desc'),
+      galleryImages: ['/media/church-complex.jpg'],
+      contacts: t('complex.e1_contacts')
     },
   ];
 

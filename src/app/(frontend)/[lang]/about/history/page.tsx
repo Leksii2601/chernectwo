@@ -3,7 +3,7 @@
 import React from 'react';
 import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
-import { FloatingButton } from '@/components/landing/FloatingButton';
+
 import { HistoryTimeline } from '@/components/history/HistoryTimeline';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -30,7 +30,7 @@ export default function HistoryPage() {
       <HistoryTimeline />
 
       <Footer />
-      <FloatingButton />
+
     </main>
   );
 }

@@ -3,7 +3,7 @@
 import React from 'react';
 import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
-import { FloatingButton } from '@/components/landing/FloatingButton';
+
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -12,7 +12,7 @@ export default function ContactsPage() {
 
     return (
         <main className="min-h-screen bg-white">
-            <PageHeader title={t('contacts.title')} backgroundImage="/media/contacts.jpg" />
+            <PageHeader title={t('contacts.title')} subtitle={t('page.contacts_subtitle')} backgroundImage="/media/contacts.jpg" />
             <div className="max-w-[1200px] mx-auto px-4 py-12 lg:py-20">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
                     {/* Contact Info */}
@@ -67,7 +67,7 @@ export default function ContactsPage() {
                 </div>
             </div>
             <Footer />
-            <FloatingButton />
+
         </main>
     );
 }

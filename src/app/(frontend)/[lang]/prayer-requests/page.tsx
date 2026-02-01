@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
-import { FloatingButton } from '@/components/landing/FloatingButton';
-import { X, Plus, ChevronDown, Check, Info, Mail, Heart, Sparkles } from 'lucide-react';
+
+import { X, Plus, ChevronDown, Check } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import clsx from 'clsx';
 
 type ServiceType = {
     id: string;
@@ -22,7 +21,7 @@ const SERVICES: ServiceType[] = [
 ];
 
 export default function PrayerNotePage() {
-    const { t, language } = useLanguage();
+    const { t } = useLanguage();
     const [noteType, setNoteType] = useState<'health' | 'repose'>('health');
     const [names, setNames] = useState<string[]>([]);
     const [currentName, setCurrentName] = useState('');
@@ -70,7 +69,7 @@ export default function PrayerNotePage() {
 
         try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000);
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s timeout
 
             const res = await fetch('/api/submit-prayer', {
                 method: 'POST',
@@ -94,9 +93,9 @@ export default function PrayerNotePage() {
             } else {
                 alert('Error processing request.');
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error(error);
-            if (error.name === 'AbortError') {
+            if (typeof error === 'object' && error !== null && 'name' in error && (error as { name: string }).name === 'AbortError') {
                 alert('Request timed out. Please check your connection.');
             } else {
                 alert('Connection error.');
@@ -111,118 +110,82 @@ export default function PrayerNotePage() {
     };
 
     return (
-        <main className="min-h-screen bg-[#faf9f6] font-sans selection:bg-amber-200 selection:text-amber-900">
-            <PageHeader title={t('prayer.title')} backgroundImage="/media/church-complex.jpg" />
+        <main className="min-h-screen bg-gray-50 font-sans">
+            <PageHeader title={t('prayer.title')} subtitle={t('page.prayer_subtitle')} backgroundImage="/media/prayer-requests.jpg" />
 
-            {/* Decorative background element */}
-            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-                <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-amber-100/30 blur-[120px] rounded-full" />
-                <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-red-50/20 blur-[100px] rounded-full" />
-            </div>
+            <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[80px] py-12 lg:py-24">
 
-            <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[80px] py-12 lg:py-24 relative z-10">
+                <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start justify-center">
 
-                <div className="flex flex-col xl:flex-row gap-16 lg:gap-24 items-start justify-center">
-
-                    {/* LEFT COLUMN: The Note Visual - Premium Paper Effect */}
-                    <div className="w-full xl:w-[500px] flex-shrink-0 flex justify-center perspective-[2000px] group order-2 xl:order-1">
-                        <div className={clsx(
-                            "relative w-full max-w-[360px] min-h-[580px] transition-all duration-700 transform-gpu shadow-[0_20px_50px_rgba(0,0,0,0.1),0_5px_15px_rgba(0,0,0,0.05)]",
-                            "bg-[#fdfcf8] border-[12px] p-1",
-                            noteType === 'health' ? "border-red-50 border-double shadow-red-900/5 rotate-[-1deg] group-hover:rotate-0" : "border-gray-100 border-double shadow-gray-900/5 rotate-[1deg] group-hover:rotate-0"
-                        )}>
-                            {/* Paper Texture Overlay */}
-                            <div className="absolute inset-0 pointer-events-none opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/old-mathematics.png')]" />
-
-                            {/* Inner Border Art */}
-                            <div className={clsx(
-                                "absolute inset-2 border pointer-events-none",
-                                noteType === 'health' ? "border-red-100/50" : "border-gray-200/50"
-                            )} />
-
+                    {/* LEFT COLUMN: The Note Visual */}
+                    <div className="w-full lg:w-[450px] flex-shrink-0 flex justify-center perspective-1000 order-2 lg:order-1">
+                        <div className={`
+                relative w-full max-w-[300px] min-h-[480px] shadow-2xl transition-all duration-500 transform
+                bg-white border border-gray-200
+            `}
+                        >
                             {/* Note Content */}
-                            <div className="relative z-10 p-6 flex flex-col h-full">
+                            <div className="p-0"> {/* Remove padding to let images fit fully if needed */}
 
-                                {/* Header Ornament */}
-                                <div className="w-full flex justify-center py-4 mb-4">
-                                    <div className={clsx(
-                                        "w-24 h-1 rounded-full",
-                                        noteType === 'health' ? "bg-red-200" : "bg-gray-300"
-                                    )} />
+                                {/* Header Image/Ornament */}
+                                <div className="w-full h-auto mb-2 flex justify-center pt-6 px-5 relative h-[60px]">
+                                    <Image
+                                        src="/media/header.png"
+                                        alt="Ornament"
+                                        width={260}
+                                        height={60}
+                                        className={`w-full h-auto object-contain ${noteType === 'repose' ? 'grayscale opacity-80' : ''}`}
+                                    />
                                 </div>
 
-                                {/* Title Section */}
-                                <div className="text-center mb-8">
-                                    <h2 className={clsx(
-                                        "font-montserrat text-3xl font-black uppercase tracking-[0.2em] transition-colors duration-500",
-                                        noteType === 'health' ? "text-[#b21e1e]" : "text-gray-900"
-                                    )}>
+                                {/* Title */}
+                                <div className="text-center mb-4">
+                                    <h2 className={`font-serif text-2xl font-bold uppercase tracking-widest ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
                                         {noteType === 'health' ? t('prayer.health') : t('prayer.repose')}
                                     </h2>
-
-                                    <div className="flex items-center justify-center gap-2 mt-3">
-                                        <div className={clsx("h-[1px] w-8", noteType === 'health' ? "bg-red-100" : "bg-gray-200")} />
-                                        <span className={clsx(
-                                            "text-[10px] font-bold uppercase tracking-widest",
-                                            noteType === 'health' ? "text-red-400" : "text-gray-400"
-                                        )}>
-                                            {getServiceName(selectedService)}
-                                        </span>
-                                        <div className={clsx("h-[1px] w-8", noteType === 'health' ? "bg-red-100" : "bg-gray-200")} />
-                                    </div>
+                                    {/* Service Type Subtitle */}
+                                    {selectedService.id !== 'simple' && (
+                                        <p className={`font-serif text-[10px] font-bold uppercase tracking-wider mt-1 ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
+                                            ({getServiceName(selectedService)})
+                                        </p>
+                                    )}
                                 </div>
 
 
-                                {/* Names Grid - More elegant spacing */}
-                                <div className="flex-grow space-y-2 mb-8">
+                                {/* Names List */}
+                                <div className="px-5 space-y-[0.4rem] mb-8">
                                     {Array.from({ length: MAX_NAMES }).map((_, index) => (
-                                        <div
-                                            key={index}
-                                            className={clsx(
-                                                "h-10 flex items-center px-4 relative group transition-all duration-300",
-                                                "border-b border-dashed",
-                                                noteType === 'health' ? "border-red-100 hover:bg-red-50/30" : "border-gray-200 hover:bg-gray-100/30",
-                                                names[index] ? "opacity-100" : "opacity-30"
-                                            )}
-                                        >
-                                            <span className={clsx(
-                                                "text-xs font-serif italic mr-4",
-                                                noteType === 'health' ? "text-red-300" : "text-gray-400"
-                                            )}>
-                                                {index + 1}.
-                                            </span>
+                                        <div key={index} className={`h-7 flex items-end relative group border-b ${noteType === 'health' ? 'border-[#D22626]' : 'border-black'}`}>
                                             {names[index] ? (
-                                                <div className="w-full flex justify-between items-center">
-                                                    <span className={clsx(
-                                                        "font-serif italic text-lg tracking-wide",
-                                                        noteType === 'health' ? "text-red-900" : "text-gray-800"
-                                                    )}>
-                                                        {names[index]}
-                                                    </span>
+                                                <div className="w-full flex justify-center items-center text-lg relative">
+                                                    <span className="text-black font-serif italic text-base">{names[index]}</span>
                                                     <button
                                                         onClick={() => removeName(index)}
-                                                        className="text-red-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-600 scale-90 hover:scale-110"
+                                                        className="absolute right-0 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-600"
                                                     >
-                                                        <X className="w-4 h-4" />
+                                                        <X className="w-3 h-3" />
                                                     </button>
                                                 </div>
                                             ) : (
-                                                <div className="w-full h-4" />
+                                                <div className="w-full h-5" />
                                             )}
                                         </div>
                                     ))}
                                 </div>
 
-                                {/* Footer - Elegant Signature */}
-                                <div className="mt-auto border-t border-gray-100 pt-8 pb-4 text-center">
-                                    <p className={clsx(
-                                        "text-[9px] font-montserrat font-black uppercase tracking-[0.3em] mb-2",
-                                        noteType === 'health' ? "text-red-200" : "text-gray-300"
-                                    )}>
-                                        Zhydychyn Monastery
-                                    </p>
-                                    <div className="flex justify-center">
-                                        <Sparkles className={clsx("w-4 h-4", noteType === 'health' ? "text-red-100" : "text-gray-200")} />
+                                {/* Footer Image */}
+                                <div className="w-full flex justify-center px-4 pb-6">
+                                    <div className="text-center w-full flex flex-col items-center">
+                                        <Image
+                                            src="/media/footer.png"
+                                            alt="Monastery"
+                                            width={260}
+                                            height={80}
+                                            className={`w-full h-auto object-contain mb-2 ${noteType === 'repose' ? 'grayscale opacity-80' : ''}`}
+                                        />
+                                        <p className={`text-[10px] font-serif font-bold uppercase ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
+                                            Sacred St. Nicholas<br />Zhydychyn Monastery
+                                        </p>
                                     </div>
                                 </div>
 
@@ -231,176 +194,138 @@ export default function PrayerNotePage() {
                     </div>
 
 
-                    {/* RIGHT COLUMN: Modern Form Controls */}
-                    <div className="w-full xl:max-w-2xl space-y-8 order-1 xl:order-2">
+                    {/* RIGHT COLUMN: Controls Form */}
+                    <div className="w-full lg:max-w-xl space-y-8 order-1 lg:order-2">
 
-                        {/* 1. Header & Toggle */}
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-3">
-                                <Heart className="w-6 h-6 text-amber-600" />
-                                <h1 className="text-3xl font-montserrat font-black uppercase tracking-tight text-gray-900">
-                                    {t('nav.write_note')}
-                                </h1>
-                            </div>
-
-                            <div className="inline-flex p-1.5 bg-white rounded-2xl shadow-xl shadow-amber-900/5 border border-gray-100 w-full md:w-auto">
-                                <button
-                                    onClick={() => setNoteType('health')}
-                                    className={clsx(
-                                        "flex-1 md:px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-xs transition-all duration-500",
-                                        noteType === 'health'
-                                            ? "bg-red-600 text-white shadow-lg shadow-red-200 translate-y-[-2px]"
-                                            : "text-gray-400 hover:text-gray-600 hover:bg-gray-50"
-                                    )}
-                                >
-                                    {t('prayer.health')}
-                                </button>
-                                <button
-                                    onClick={() => setNoteType('repose')}
-                                    className={clsx(
-                                        "flex-1 md:px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-xs transition-all duration-500",
-                                        noteType === 'repose'
-                                            ? "bg-gray-900 text-white shadow-lg shadow-gray-300 translate-y-[-2px]"
-                                            : "text-gray-400 hover:text-gray-600 hover:bg-gray-50"
-                                    )}
-                                >
-                                    {t('prayer.repose')}
-                                </button>
-                            </div>
+                        {/* 1. Toggle Type */}
+                        <div className="bg-white p-2 rounded-lg shadow-sm w-full lg:w-fit flex gap-2 border border-gray-100">
+                            <button
+                                onClick={() => setNoteType('health')}
+                                className={`flex-1 lg:flex-none px-8 py-3 rounded-md font-medium transition-all duration-300 ${noteType === 'health'
+                                    ? 'bg-red-50 text-red-700 shadow-sm ring-1 ring-red-100'
+                                    : 'text-gray-500 hover:bg-gray-50'
+                                    }`}
+                            >
+                                {t('prayer.health')}
+                            </button>
+                            <button
+                                onClick={() => setNoteType('repose')}
+                                className={`flex-1 lg:flex-none px-8 py-3 rounded-md font-medium transition-all duration-300 ${noteType === 'repose'
+                                    ? 'bg-gray-800 text-white shadow-md'
+                                    : 'text-gray-500 hover:bg-gray-50'
+                                    }`}
+                            >
+                                {t('prayer.repose')}
+                            </button>
                         </div>
 
-                        {/* Glassmorphism Card Wrapper */}
-                        <div className="bg-white/70 backdrop-blur-xl rounded-[2.5rem] p-8 lg:p-12 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] border border-white/50 space-y-10">
+                        {/* 2. Service Dropdown */}
+                        <div className="relative">
+                            <label className="block text-sm font-medium text-gray-500 mb-2 uppercase tracking-wider">{t('prayer.service_type')}</label>
+                            <div
+                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                className="w-full bg-white border border-gray-300 rounded-xl p-4 cursor-pointer flex justify-between items-center hover:border-amber-500 transition-colors shadow-sm"
+                            >
+                                <div>
+                                    <span className="block font-bold text-gray-900 text-lg">{getServiceName(selectedService)}</span>
+                                    <span className="text-amber-600 font-medium">{selectedService.price} {t('prayer.uah_per_name')}</span>
+                                </div>
+                                <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                            </div>
 
-                            {/* 2. Service Selection */}
-                            <div className="space-y-4">
-                                <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
-                                    <Sparkles className="w-3 h-3" />
-                                    {t('prayer.service_type')}
-                                </label>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            {isDropdownOpen && (
+                                <div className="absolute top-full left-0 w-full mt-2 bg-white border border-gray-100 rounded-xl shadow-xl z-20 overflow-hidden animate-fadeIn">
                                     {SERVICES.map((service) => (
-                                        <button
+                                        <div
                                             key={service.id}
-                                            onClick={() => setSelectedService(service)}
-                                            className={clsx(
-                                                "p-4 rounded-2xl text-left transition-all duration-300 border-2 active:scale-95 group",
-                                                selectedService.id === service.id
-                                                    ? "bg-amber-600 border-amber-600 text-white shadow-lg shadow-amber-200"
-                                                    : "bg-white border-gray-100 text-gray-600 hover:border-amber-200"
-                                            )}
+                                            onClick={() => {
+                                                setSelectedService(service);
+                                                setIsDropdownOpen(false);
+                                            }}
+                                            className="p-4 hover:bg-amber-50 cursor-pointer flex justify-between items-center border-b border-gray-50 last:border-0"
                                         >
-                                            <span className="block font-bold text-sm mb-1">{getServiceName(service)}</span>
-                                            <span className={clsx(
-                                                "text-[10px] font-bold uppercase opacity-60 group-hover:opacity-100",
-                                                selectedService.id === service.id ? "text-amber-100" : "text-amber-600"
-                                            )}>
-                                                {service.price} {t('prayer.uah_per_name')}
-                                            </span>
-                                        </button>
+                                            <span className="text-gray-800 font-medium">{getServiceName(service)}</span>
+                                            {selectedService.id === service.id && <Check className="w-4 h-4 text-amber-600" />}
+                                            <span className="text-gray-500 text-sm ml-auto mr-2">{service.price} грн</span>
+                                        </div>
                                     ))}
                                 </div>
+                            )}
+                        </div>
+
+                        {/* 3. Input Section */}
+                        <div className={`transition-all duration-300 ${names.length >= MAX_NAMES ? 'opacity-50 pointer-events-none' : ''}`}>
+                            <label className="block text-sm font-medium text-gray-500 mb-2 uppercase tracking-wider">
+                                {t('prayer.names_label')} ({names.length}/{MAX_NAMES})
+                            </label>
+                            <div className="flex gap-4">
+                                <input
+                                    type="text"
+                                    value={currentName}
+                                    onChange={(e) => setCurrentName(e.target.value)}
+                                    onKeyDown={handleKeyDown}
+                                    placeholder={t('prayer.names_placeholder')}
+                                    className="flex-1 bg-white border border-gray-300 p-4 rounded-xl text-lg outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all shadow-sm placeholder:text-gray-300"
+                                    autoFocus
+                                />
+                                <button
+                                    onClick={addName}
+                                    disabled={!currentName.trim() || names.length >= MAX_NAMES}
+                                    className="bg-black text-white p-4 rounded-xl hover:bg-amber-600 disabled:bg-gray-200 disabled:cursor-not-allowed transition-colors shadow-lg active:scale-95"
+                                >
+                                    <Plus className="w-6 h-6" />
+                                </button>
                             </div>
+                            {names.length >= MAX_NAMES && (
+                                <p className="text-red-500 text-sm mt-2">
+                                    {t('prayer.note_full')}
+                                </p>
+                            )}
+                        </div>
 
-                            {/* 3. Names Input */}
-                            <div className="space-y-4">
-                                <label className="flex justify-between items-end text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
-                                    <span className="flex items-center gap-2 transition-all">
-                                        {t('prayer.names_label')}
-                                        <span className={clsx(
-                                            "px-2 py-0.5 rounded-full text-white",
-                                            names.length >= MAX_NAMES ? "bg-red-500" : "bg-amber-500"
-                                        )}>
-                                            {names.length} / {MAX_NAMES}
-                                        </span>
-                                    </span>
-                                </label>
+                        {/* Email Section */}
+                        <div className="mt-8 transition-all duration-300">
+                            <label className="block text-sm font-medium text-gray-500 mb-2 uppercase tracking-wider">
+                                {t('prayer.email_label')}
+                            </label>
+                            <input
+                                type="email"
+                                value={userEmail}
+                                onChange={(e) => setUserEmail(e.target.value)}
+                                placeholder="email@example.com"
+                                className="w-full bg-white border border-gray-300 p-4 rounded-xl text-lg outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all shadow-sm"
+                            />
+                        </div>
 
-                                <div className="relative group">
-                                    <input
-                                        type="text"
-                                        value={currentName}
-                                        onChange={(e) => setCurrentName(e.target.value)}
-                                        onKeyDown={handleKeyDown}
-                                        placeholder={t('prayer.names_placeholder')}
-                                        disabled={names.length >= MAX_NAMES}
-                                        className={clsx(
-                                            "w-full bg-gray-50/50 border-2 px-6 py-5 rounded-2xl text-xl outline-none transition-all duration-500",
-                                            "focus:bg-white focus:ring-8 focus:ring-amber-500/5",
-                                            names.length >= MAX_NAMES
-                                                ? "border-red-100 cursor-not-allowed opacity-50"
-                                                : "border-gray-100 focus:border-amber-600"
-                                        )}
-                                    />
-                                    <button
-                                        onClick={addName}
-                                        disabled={!currentName.trim() || names.length >= MAX_NAMES}
-                                        className="absolute right-3 top-3 bottom-3 aspect-square bg-gray-900 text-white rounded-xl flex items-center justify-center hover:bg-amber-600 disabled:bg-gray-200 transition-all duration-500 shadow-lg active:scale-90"
-                                    >
-                                        <Plus className="w-6 h-6" />
-                                    </button>
+                        {/* Total Block */}
+                        <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 mt-8">
+                            <div className="flex justify-between items-center mb-6 border-b border-gray-100 pb-6">
+                                <div>
+                                    <p className="text-gray-500 font-medium">{t('prayer.total_names')}</p>
+                                    <p className="text-2xl font-bold">{names.length}</p>
                                 </div>
-
-                                {names.length >= MAX_NAMES && (
-                                    <p className="inline-flex items-center gap-2 text-red-500 text-[10px] font-bold uppercase tracking-widest pt-2 animate-pulse">
-                                        <Info className="w-3 h-3" />
-                                        {t('prayer.note_full')}
-                                    </p>
-                                )}
-                            </div>
-
-                            {/* 4. Email & Submit */}
-                            <div className="pt-8 border-t border-gray-100/50 space-y-8">
-                                <div className="space-y-4">
-                                    <label className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
-                                        <Mail className="w-3 h-3" />
-                                        {t('prayer.email_label')}
-                                    </label>
-                                    <input
-                                        type="email"
-                                        value={userEmail}
-                                        onChange={(e) => setUserEmail(e.target.value)}
-                                        placeholder="your@email.com"
-                                        className="w-full bg-gray-50/50 border-2 border-gray-100 px-6 py-5 rounded-2xl text-xl outline-none transition-all duration-500 focus:bg-white focus:border-amber-600 focus:ring-8 focus:ring-amber-500/5"
-                                    />
-                                </div>
-
-                                <div className="flex flex-col md:flex-row gap-6 items-center pt-4">
-                                    <div className="flex-grow text-center md:text-left">
-                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-1">{t('prayer.total_amount')}</p>
-                                        <div className="flex items-center justify-center md:justify-start gap-2">
-                                            <span className="text-4xl font-montserrat font-black text-gray-900">{calculateTotal()}</span>
-                                            <span className="text-xl font-bold text-amber-600">грн</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex gap-4 w-full md:w-auto">
-                                        <button
-                                            onClick={() => setNames([])}
-                                            disabled={names.length === 0}
-                                            className="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-gray-400 hover:text-red-500 transition-colors disabled:opacity-0"
-                                        >
-                                            {t('prayer.clear')}
-                                        </button>
-                                        <button
-                                            onClick={handleSubmit}
-                                            disabled={names.length === 0 || isSubmitting}
-                                            className={clsx(
-                                                "flex-1 md:flex-none md:min-w-[240px] px-8 py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all duration-500 shadow-2xl relative overflow-hidden group/btn",
-                                                names.length === 0 || isSubmitting
-                                                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                                                    : "bg-gray-900 text-white hover:bg-amber-600 hover:shadow-amber-200 hover:translate-y-[-4px]"
-                                            )}
-                                        >
-                                            <span className="relative z-10">{isSubmitting ? t('prayer.processing') : t('prayer.submit')}</span>
-                                            {/* Subtle shine effect */}
-                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite] transition-all" />
-                                        </button>
-                                    </div>
+                                <div className="text-right">
+                                    <p className="text-gray-500 font-medium">{t('prayer.total_amount')}</p>
+                                    <p className="text-3xl font-bold text-amber-600">{calculateTotal()} грн</p>
                                 </div>
                             </div>
 
+                            <div className="flex gap-4 items-center">
+                                <button
+                                    onClick={() => setNames([])}
+                                    disabled={names.length === 0}
+                                    className="text-gray-400 hover:text-red-500 px-4 py-2 font-medium transition-colors disabled:opacity-0"
+                                >
+                                    {t('prayer.clear')}
+                                </button>
+                                <button
+                                    onClick={handleSubmit}
+                                    disabled={names.length === 0 || isSubmitting}
+                                    className="flex-1 bg-amber-600 text-white py-4 rounded-xl font-bold text-lg uppercase tracking-wider hover:bg-amber-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl hover:-translate-y-1"
+                                >
+                                    {isSubmitting ? t('prayer.processing') : t('prayer.submit')}
+                                </button>
+                            </div>
                         </div>
 
                     </div>
@@ -409,17 +334,7 @@ export default function PrayerNotePage() {
             </div>
 
             <Footer />
-            <FloatingButton />
 
-            <style jsx global>{`
-        @keyframes shimmer {
-          100% { transform: translateX(100%); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
         </main>
     );
 }

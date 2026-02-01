@@ -31,19 +31,11 @@ export async function GET() {
         if (globalData.isManuallyLive) {
             isLive = true;
         } else {
-             // const now = new Date();
-             
-             // Timezone adjustment if needed. 
-             // We assume the server time is roughly correct or we rely on UTC match.
-             // For Kyiv time, we should technically offset. 
-             // However, simplified local check for now:
-             
-             // Use proper timezone handling for Ukraine (GMT+2/GMT+3)
-             // We'll trust the server's local time implies the target timezone or convert current UTC to Kyiv.
-             const kyivTime = new Date().toLocaleString("en-US", { timeZone: "Europe/Kiev" });
-             const dateKyiv = new Date(kyivTime);
-             const day = dateKyiv.getDay();
-             const minutesOfDay = dateKyiv.getHours() * 60 + dateKyiv.getMinutes();
+            // Use proper timezone handling for Ukraine (GMT+2/GMT+3)
+            const kyivTime = new Date().toLocaleString("en-US", { timeZone: "Europe/Kiev" });
+            const dateKyiv = new Date(kyivTime);
+            const day = dateKyiv.getDay();
+            const minutesOfDay = dateKyiv.getHours() * 60 + dateKyiv.getMinutes();
 
             // 2. Sunday Monitor
             if (globalData.enableSundaySchedule) {
@@ -60,14 +52,13 @@ export async function GET() {
             }
 
             // 3. Planned Event
-            // Note: date string from payload usually "YYYY-MM-DDT..."
-            if (!isLive && globalData.plannedEvent?.date && globalData.plannedEvent.startTime && globalData.plannedEvent.endTime) {
+            if (!isLive && globalData.plannedEvent?.isEnabled && globalData.plannedEvent?.date && globalData.plannedEvent.startTime && globalData.plannedEvent.endTime) {
                 const eventDate = new Date(globalData.plannedEvent.date);
                 // Check if same day
-                if (eventDate.getDate() === dateKyiv.getDate() && 
-                    eventDate.getMonth() === dateKyiv.getMonth() && 
+                if (eventDate.getDate() === dateKyiv.getDate() &&
+                    eventDate.getMonth() === dateKyiv.getMonth() &&
                     eventDate.getFullYear() === dateKyiv.getFullYear()) {
-                        
+
                     const [pStartH, pStartM] = globalData.plannedEvent.startTime.split(':').map(Number);
                     const [pEndH, pEndM] = globalData.plannedEvent.endTime.split(':').map(Number);
                     const pStartMin = pStartH * 60 + pStartM;
@@ -81,18 +72,17 @@ export async function GET() {
         }
 
         // Determine Link
-        // Default to internal media page
         let link = '/about/media?tab=live';
-        
-        // If we don't have a valid Channel ID to embed, fall back to YouTube
-        if (!globalData.channelID || globalData.channelID === 'UC...') {
-            link = globalData.youtubeLink || 'https://youtube.com';
+
+        // If we don't have a valid Channel ID to embed, fall back to YouTube link if provided
+        if ((!globalData.channelID || globalData.channelID === 'UC...') && globalData.youtubeLink) {
+            link = globalData.youtubeLink;
         }
 
         return NextResponse.json({
             isLive,
             link,
-            message: globalData.message || 'Пряма трансляція богослужіння'
+            message: globalData.message || (isLive ? 'Зараз триває пряма трансляція богослужіння' : 'Пряма трансляція богослужіння')
         });
 
     } catch (error) {

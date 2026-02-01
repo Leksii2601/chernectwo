@@ -15,6 +15,7 @@ export default function SketesPage() {
         <main className="min-h-screen bg-black">
             <PageHeader
                 title={t('explore.sketes')}
+                subtitle={t('explore.sketes_subtitle')}
                 backgroundImage="/media/sketes.jpg"
                 className="!h-[100vh] !min-h-screen !justify-center !pb-0"
             />
