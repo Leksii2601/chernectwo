@@ -213,14 +213,11 @@ export function Header() {
       )}
 
       {/* Unified Super Top Bar */}
-      <div
-        className={clsx(
-          "fixed z-[510] transition-all duration-[2000ms] ease-[cubic-bezier(0.19,1,0.22,1)] px-4 md:px-0 -translate-x-1/2",
-          !showMenu ? "top-[-150px] opacity-0" : (liveStatus?.isLive ? "top-14 md:top-20" : "top-6 md:top-10"),
-          "opacity-100 hidden md:block" // Hidden on mobile, actions moved to dock or separate menu
-        )}
-        style={{ left: 'calc(50% - var(--scrollbar-width) / 2)' }}
-      >
+      <div className={clsx(
+        "fixed left-1/2 -translate-x-1/2 z-[510] transition-all duration-[2000ms] ease-[cubic-bezier(0.19,1,0.22,1)] px-4 md:px-0",
+        !showMenu ? "top-[-150px] opacity-0" : (liveStatus?.isLive ? "top-14 md:top-20" : "top-6 md:top-10"),
+        "opacity-100 hidden md:block" // Hidden on mobile, actions moved to dock or separate menu
+      )}>
         <div className="flex items-center bg-black border border-white/5 rounded-full p-1.5 pr-2.5 shadow-2xl backdrop-blur-md">
           {/* Language Section */}
           <div className="flex items-center gap-3 px-5 py-2.5 border-r border-white/10">
@@ -262,14 +259,13 @@ export function Header() {
       {/* Main Grand Dock Header */}
       <header
         className={clsx(
-          "fixed z-[500] transition-all duration-[2400ms] ease-[cubic-bezier(0.19,1,0.22,1)] -translate-x-1/2",
+          "fixed left-1/2 -translate-x-1/2 z-[500] transition-all duration-[2400ms] ease-[cubic-bezier(0.19,1,0.22,1)]",
           "bg-black border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.9)] w-max max-w-[95vw] rounded-full py-3 px-4 flex items-center overflow-visible",
           !showMenu
             ? "bottom-[-200px] opacity-0 translate-y-40 scale-90"
             : "bottom-12 opacity-100 translate-y-0 scale-100",
           "hidden xl:flex" // Desktop only dock
         )}
-        style={{ left: 'calc(50% - var(--scrollbar-width) / 2)' }}
       >
         <div className="flex items-center gap-1">
           {/* Logo */}
@@ -308,6 +304,7 @@ export function Header() {
                       <Link
                         key={child.label}
                         href={child.href}
+                        onClick={() => setMobileMenuOpen(false)}
                         className="px-8 py-4 rounded-2xl text-[11px] font-light uppercase tracking-[0.3em] text-white/40 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group/item hover-lamp"
                       >
                         {child.label}
@@ -338,7 +335,7 @@ export function Header() {
 
       {/* Top Logo when at Top (Mobile only) */}
       <div className={clsx(
-        "fixed left-6 z-[500] xl:hidden transition-opacity duration-500",
+        "fixed left-6 z-[500] md:hidden transition-opacity duration-500",
         liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
         scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
       )}>
@@ -348,14 +345,11 @@ export function Header() {
       </div>
 
       {/* Mobile Top Actions (Mini Pill) */}
-      <div
-        className={clsx(
-          "fixed z-[500] xl:hidden flex items-center gap-2 transition-all duration-500",
-          liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
-          scrolled ? "opacity-0 translate-x-10 pointer-events-none" : "opacity-100 translate-x-0"
-        )}
-        style={{ right: 'calc(1.5rem + var(--scrollbar-width))' }}
-      >
+      <div className={clsx(
+        "fixed right-6 z-[500] md:hidden flex items-center gap-2 transition-all duration-500",
+        liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
+        scrolled ? "opacity-0 translate-x-10 pointer-events-none" : "opacity-100 translate-x-0"
+      )}>
         <button onClick={() => setIsSearchOpen(true)} className="w-10 h-10 bg-black/40 rounded-full flex items-center justify-center text-white/50 border border-white/10 backdrop-blur-md">
           <Search size={16} />
         </button>
@@ -368,12 +362,11 @@ export function Header() {
       <button
         onClick={() => setIsForcedVisible(true)}
         className={clsx(
-          "fixed z-[500] group transition-all duration-1000 ease-out hidden xl:flex flex-col items-center -translate-x-1/2",
+          "fixed left-1/2 -translate-x-1/2 z-[500] group transition-all duration-1000 ease-out hidden md:flex flex-col items-center",
           showBall
             ? "bottom-8 opacity-100 translate-y-0 scale-100 blur-0"
             : "bottom-[-100px] opacity-0 translate-y-20 scale-50 blur-xl pointer-events-none"
         )}
-        style={{ left: 'calc(50% - var(--scrollbar-width) / 2)' }}
       >
         <div className="relative w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center shadow-[0_0_100px_rgba(245,158,11,0.5)] transition-all duration-700 hover:scale-125 hover:rotate-12 active:scale-95">
           <div className="relative w-full h-full flex items-center justify-center rotate-nav">
@@ -393,7 +386,7 @@ export function Header() {
 
       {/* Mobile Menu Overlay */}
       <div className={clsx(
-        "fixed inset-0 z-[600] bg-black transition-all duration-500 px-8 py-12 flex flex-col overflow-y-auto no-scrollbar",
+        "fixed inset-0 z-[600] bg-black transition-all duration-500 px-8 py-12 flex flex-col no-scrollbar",
         mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
       )}>
         <div className="flex justify-between items-center mb-16">
@@ -406,7 +399,7 @@ export function Header() {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-6 mb-12 overflow-y-auto pr-2 scrollbar-none">
+        <nav className="flex flex-col gap-6 mb-12 overflow-hidden pr-2 no-scrollbar">
           {mainNavItems.map(item => {
             const hasChildren = item.children && item.children.length > 0;
             const isExpanded = expandedItems.includes(item.label);

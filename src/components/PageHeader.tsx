@@ -15,7 +15,7 @@ export function PageHeader({ title, subtitle, backgroundImage, className, titleC
   return (
     <div
       className={clsx(
-        "relative min-h-screen shadow-lg bg-cover bg-center bg-no-repeat md:bg-fixed flex flex-col justify-center pb-10 md:pb-0",
+        "relative min-h-screen shadow-lg bg-cover bg-center bg-no-repeat bg-fixed flex flex-col justify-center pb-10 md:pb-0",
         className
       )}
       style={{

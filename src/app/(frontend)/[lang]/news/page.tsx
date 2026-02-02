@@ -21,9 +21,9 @@ export default async function NewsPage(props: {
   const search = typeof searchParams.search === 'string' ? searchParams.search : undefined;
 
   // Filter for Categories
-  const publications = newsData.filter(n => n.category === 'Публікації').slice(0, 3);
-  const announcements = newsData.filter(n => n.category === 'Анонси').slice(0, 3);
-  const official = newsData.filter(n => n.category === 'Офіційно').slice(0, 3);
+  const publications = newsData.filter(n => n.category === 'Публікації').slice(0, 10);
+  const announcements = newsData.filter(n => n.category === 'Анонси').slice(0, 10);
+  const official = newsData.filter(n => n.category === 'Офіційно').slice(0, 10);
 
   // Search Logic
   let filteredResults: typeof newsData = [];

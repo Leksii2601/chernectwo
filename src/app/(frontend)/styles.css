@@ -25,13 +25,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
+html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
-  width: 100%;
-  position: relative;
-  font-family: 'Montserrat', sans-serif;
 }
 
 :root {
@@ -40,15 +35,31 @@ body {
   --scrollbar-width: 0px;
 }
 
+@media (max-width: 380px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 320px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+body {
+  font-family: var(--font-montserrat);
+}
+
 html,
 body,
 #app {
   height: 100%;
 }
 
+/* Scrollbar Jump Prevention */
 body.lock-scroll {
   overflow: hidden !important;
-  padding-right: var(--scrollbar-width) !important;
 }
 
 /* Smooth Animations */
@@ -241,60 +252,11 @@ body.lock-scroll {
   animation: float 3s ease-in-out infinite;
 }
 
-@keyframes flicker {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  5% {
-    opacity: 0.8;
-  }
-
-  10% {
-    opacity: 0.95;
-  }
-
-  15% {
-    opacity: 0.85;
-  }
-
-  25% {
-    opacity: 1;
-  }
-
-  30% {
-    opacity: 0.9;
-  }
-
-  35% {
-    opacity: 0.98;
-  }
-
-  45% {
-    opacity: 0.85;
-  }
-}
-
-.hover-lamp:hover {
-  animation: flicker 4s infinite;
-}
-
 .animate-glow {
   animation: glow 3s ease-in-out infinite;
 }
 
 /* Custom Scrollbar for Webkit */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 .scrollbar-thin::-webkit-scrollbar {
   width: 6px;
 }
@@ -310,6 +272,15 @@ body.lock-scroll {
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background-color: #9ca3af;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 @font-face {
