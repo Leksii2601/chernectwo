@@ -25,18 +25,19 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+html,
+body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
 }
 
 :root {
   --font-mono: 'Roboto Mono', monospace;
   --font-montserrat: 'Montserrat', sans-serif;
   --scrollbar-width: 0px;
-}
-
-body {
-  font-family: var(--font-montserrat);
 }
 
 html,
@@ -285,6 +286,15 @@ body.lock-scroll {
 }
 
 /* Custom Scrollbar for Webkit */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .scrollbar-thin::-webkit-scrollbar {
   width: 6px;
 }

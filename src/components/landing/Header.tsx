@@ -393,7 +393,7 @@ export function Header() {
 
       {/* Mobile Menu Overlay */}
       <div className={clsx(
-        "fixed inset-0 z-[600] bg-black transition-all duration-500 px-8 py-12 flex flex-col",
+        "fixed inset-0 z-[600] bg-black transition-all duration-500 px-8 py-12 flex flex-col overflow-y-auto no-scrollbar",
         mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
       )}>
         <div className="flex justify-between items-center mb-16">
