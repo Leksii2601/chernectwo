@@ -52,7 +52,7 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
   const latestNews = news.slice(0, 4);
 
   return (
-    <section className="bg-gray-50 font-montserrat text-gray-900 pb-12">
+    <section id="news-section" className="bg-gray-50 font-montserrat text-gray-900 pb-12">
       <div className="max-w-[1920px] mx-auto p-4 md:p-6 lg:px-[80px]">
         <h2 className="font-montserrat font-bold text-3xl md:text-5xl uppercase tracking-widest text-center mb-10 text-gray-900">
           {title || t('news.title')}

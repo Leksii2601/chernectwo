@@ -13,13 +13,13 @@ export default function TestDesignPage() {
 
     useEffect(() => {
         setMounted(true);
-        // Stage 1: Reveal starts immediately
+        // Stage 1: Curtain starts moving + Background starts reveal
         const stage1 = setTimeout(() => setRevealStage(1), 50);
-        // Stage 2: Small photo starts
+        // Stage 2: Small front photo reveal starts
         const stage2 = setTimeout(() => setRevealStage(2), 600);
-        // Stage 3: Text reveal
+        // Stage 3: Text reveal starts
         const stage3 = setTimeout(() => setRevealStage(3), 1500);
-        // Stage 4: Header reveal + Unlock Scroll
+        // Stage 4: Header reveal + Full unlock
         const stage4 = setTimeout(() => setRevealStage(4), 2800);
 
         return () => {
@@ -37,10 +37,10 @@ export default function TestDesignPage() {
     return (
         <div className={`Outer-sc-17f28ux-0 min-h-screen bg-black text-white selection:bg-amber-500 selection:text-white font-sans relative overflow-x-hidden ${revealStage < 4 ? 'intro-mode' : ''}`}>
 
-            {/* 1. THE HEADER - Connected to its native logic */}
+            {/* 1. THE HEADER - native logic preserved, entrance handled by intro-mode class */}
             <Header />
 
-            {/* 2. THE MAIN WIPE (CURTAIN) */}
+            {/* 2. THE MAIN WIPE (CURTAIN) - White layer that reveals everything */}
             <aside
                 className="Wipe-sc-17f28ux-14 fixed inset-0 z-[1000] bg-white pointer-events-none"
                 style={{
@@ -55,13 +55,19 @@ export default function TestDesignPage() {
 
                     {/* HERO SECTION */}
                     <section className="relative w-full h-screen overflow-hidden flex-shrink-0 z-10">
-                        {/* BACKGROUND (Slit-Reveal) */}
+
+                        {/* 
+                            BACKGROUND (Slit-Reveal) 
+                            We use nested containers to create a "Slit" that doesn't 
+                            move the internal image, preventing jumping and black flashes.
+                        */}
                         <div
                             className="ImageBackContainer-sc-17f28ux-6 absolute inset-0 z-0 overflow-hidden"
                             style={{
                                 transition: `transform ${curtainDuration}ms ${easeRef}`,
                                 transform: revealStage >= 1 ? 'translate3d(0%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                                willChange: 'transform'
+                                willChange: 'transform',
+                                background: '#000' // Fail-safe black background
                             }}
                         >
                             <div
@@ -73,11 +79,16 @@ export default function TestDesignPage() {
                                 }}
                             >
                                 <div className="ImageBack-sc-17f28ux-7 relative w-full h-full scale-[1.02]">
+                                    {/* Using standard img for faster, hydration-free rendering */}
                                     <img
                                         src="/media/church-complex.jpg"
                                         alt=""
                                         className="absolute inset-0 w-full h-full object-cover"
-                                        style={{ display: 'block', backfaceVisibility: 'hidden' }}
+                                        style={{
+                                            display: 'block',
+                                            backfaceVisibility: 'hidden',
+                                            transform: 'translate3d(0,0,0)'
+                                        }}
                                     />
                                     <div className="absolute inset-0 bg-black/60" />
                                 </div>
@@ -103,10 +114,10 @@ export default function TestDesignPage() {
                                     }}
                                 >
                                     <div
-                                        className="ImageFront-sc-17f28ux-12 relative w-full h-full transform-gpu"
+                                        className="ImageFront-sc-17f28ux-12 relative w-full h-full"
                                         style={{
                                             transition: `transform 2200ms ${easeExpo}`,
-                                            transform: revealStage >= 2 ? 'scale(1)' : 'scale(1.2)',
+                                            transform: revealStage >= 2 ? 'scale(1) translate3d(0,0,0)' : 'scale(1.2) translate3d(0,0,0)',
                                             willChange: 'transform'
                                         }}
                                     >
@@ -190,7 +201,7 @@ export default function TestDesignPage() {
                             <div className="grid md:grid-cols-3 gap-8">
                                 {[
                                     { title: 'Богослужіння', desc: 'Приєднуйтесь до щоденної спільної молитви та літургії.', img: '/media/history.jpg' },
-                                    { title: 'Паломництво', desc: 'Відчуйте благодать святого місця под час духовних поїздок.', img: '/media/church-complex.jpg' },
+                                    { title: 'Паломництво', desc: 'Відчуйте благодать святого місця під час духовних поїздок.', img: '/media/church-complex.jpg' },
                                     { title: 'Допомога', desc: 'Ваша підтримка допомагає відновлювати святиню.', img: '/media/monastery-church.jpg' },
                                 ].map((item, i) => (
                                     <div key={i} className="group cursor-pointer">
@@ -212,26 +223,27 @@ export default function TestDesignPage() {
 
             <style jsx global>{`
                 /* 
-                   DYNAMIC HEADER LOGIC:
-                   Ми використовуємо клас 'intro-mode' ТІЛЬКИ під час початкової анімації.
-                   Ми ПРИБРАЛИ 'transition: none !important', щоб дозволити хедзеру 
-                   використовувати свої власні анімації при вході в робочий стан.
+                   DYNAMIC HEADER REVEAL LOGIC:
+                   We keep the header elements off-screen and static 
+                   until stage 4. Then we release them to their native 
+                   Header.tsx transitions.
                 */
 
+                .intro-mode div.z-\[511\],
                 .intro-mode div.z-\[510\],
                 .intro-mode header.z-\[500\],
+                .intro-mode div.z-\[500\],
                 .intro-mode button.z-\[520\] {
                     opacity: 0 !important;
                     pointer-events: none !important;
-                    /* Дозволяємо транзиціям працювати, коли клас буде видалено */
+                    transition: none !important; 
                 }
 
-                /* Початкові позиції для "вльоту" */
-                .intro-mode div.z-\[510\] { transform: translate(-50%, -150%) !important; }
-                .intro-mode header.z-\[500\] { transform: translate(-50%, 400px) !important; }
-                .intro-mode button.z-\[520\] { transform: translate(-50%, 400px) !important; }
+                /* Shift positions for entrance */
+                .intro-mode div.z-\[510\], .intro-mode div.z-\[511\] { transform: translate(-50%, -200px) !important; }
+                .intro-mode header.z-\[500\], .intro-mode div.z-\[500\], .intro-mode button.z-\[520\] { transform: translate(-50%, 200px) !important; }
 
-                /* Common settings */
+                /* Common Page Settings */
                 html {
                     overflow-y: scroll !important;
                     scrollbar-gutter: stable !important;

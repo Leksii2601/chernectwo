@@ -15,12 +15,7 @@ export function ExploreMore() {
     {
       label: t('explore.history'),
       href: `${langPrefix}/about/history`,
-      image: '/media/history.jpg',
-    },
-    {
-      label: t('explore.life'),
-      href: `${langPrefix}/about/life`,
-      image: '/media/life.jpg',
+      image: '/media/explore-more-history.jpg',
     },
     {
       label: t('explore.schedule'),
@@ -28,34 +23,35 @@ export function ExploreMore() {
       image: '/media/hero-4.jpg',
     },
     {
-      label: t('explore.media'),
-      href: `${langPrefix}/about/media`,
-      image: '/media/gallery.jpg',
-    },
-    {
       label: t('explore.architecture'),
       href: `${langPrefix}/about/complex`,
-      image: '/media/church-complex.jpg',
+      image: '/media/hero-1.jpg',
     },
     {
       label: t('explore.sketes'),
       href: `${langPrefix}/about/sketes`,
-      image: '/media/sketes.jpg',
+      image: '/media/explore-more-sketes.jpg',
+    },
+
+    {
+      label: t('explore.news'),
+      href: `${langPrefix}/news`,
+      image: '/media/explore-more-news.jpg',
+    },
+    {
+      label: t('explore.media'),
+      href: `${langPrefix}/about/media`,
+      image: '/media/explore-more-media.jpg',
     },
     {
       label: t('explore.social'),
       href: `${langPrefix}/social-projects`,
-      image: '/media/social-initiatives.jpg',
+      image: '/media/explore-more-social-initiatives.jpg',
     },
     {
       label: t('explore.pilgrims'),
       href: `${langPrefix}/pilgrims`,
-      image: '/media/piligrims.jpg',
-    },
-    {
-      label: t('explore.join'),
-      href: `${langPrefix}/join`,
-      image: '/media/hero-1.jpg',
+      image: '/media/explore-more-piligrim.jpg',
     },
     {
       label: t('explore.support'),
@@ -65,7 +61,7 @@ export function ExploreMore() {
     {
       label: t('explore.contacts'),
       href: `${langPrefix}/contacts`,
-      image: '/media/contacts.jpg',
+      image: '/media/explore-more-contacts.jpg',
     },
   ];
 
@@ -168,8 +164,9 @@ export function ExploreMore() {
                     src={item.image}
                     alt={item.label}
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 75vw, (max-width: 1200px) 40vw, 20vw"
+                    quality={90}
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    sizes="(max-width: 768px) 85vw, (max-width: 1200px) 50vw, 33vw"
                   />
 
                   {/* Gradient Overlay */}
@@ -177,7 +174,7 @@ export function ExploreMore() {
 
                   {/* Text */}
                   <div className="absolute bottom-0 left-0 p-4 lg:p-8 w-full">
-                    <span className="inline-block text-white font-montserrat font-bold text-xl lg:text-2xl tracking-wide transition-all duration-300">
+                    <span className="inline-block text-white font-montserrat text-xl lg:text-2xl tracking-wide transition-all duration-300">
                       {item.label}
                     </span>
                   </div>

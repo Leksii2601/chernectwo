@@ -23,6 +23,8 @@ export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [isOverFooter, setIsOverFooter] = useState(false);
   const lastScrollY = useRef(0);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -57,7 +59,7 @@ export function Header() {
   const mainNavItems: NavItem[] = [
     {
       label: t('nav.about'),
-      href: '/about',
+      href: '/about/history',
       children: [
         { label: t('nav.history'), href: '/about/history' },
         { label: t('nav.schedule'), href: '/#calendar' },
@@ -91,20 +93,32 @@ export function Header() {
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      router.push(`/${language.toLowerCase()}/news?search=${encodeURIComponent(searchQuery)}`);
+      router.push(`/${language.toLowerCase()}/news?search=${encodeURIComponent(searchQuery)}#news-section`);
       setIsSearchOpen(false);
       setSearchQuery('');
     }
   };
 
   useEffect(() => {
-    if (isSearchOpen) {
+    const isLocked = isSearchOpen || mobileMenuOpen;
+    if (isLocked) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = 'hidden';
-      setTimeout(() => searchInputRef.current?.focus(), 100);
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+      document.body.classList.add('lock-scroll');
     } else {
       document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+      document.documentElement.style.setProperty('--scrollbar-width', '0px');
+      document.body.classList.remove('lock-scroll');
     }
-  }, [isSearchOpen]);
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+      document.body.classList.remove('lock-scroll');
+    };
+  }, [isSearchOpen, mobileMenuOpen]);
 
   // Live Status Check
   const [liveStatus, setLiveStatus] = useState<{ isLive: boolean; message?: string; link?: string } | null>(null);
@@ -128,6 +142,21 @@ export function Header() {
     setLiveStatus(null);
     sessionStorage.setItem('liveBannerDismissed', 'true');
   };
+
+  useEffect(() => {
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsOverFooter(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -184,11 +213,14 @@ export function Header() {
       )}
 
       {/* Unified Super Top Bar */}
-      <div className={clsx(
-        "fixed left-1/2 -translate-x-1/2 z-[510] transition-all duration-[2000ms] ease-[cubic-bezier(0.19,1,0.22,1)] px-4 md:px-0",
-        !showMenu ? "top-[-150px] opacity-0" : (liveStatus?.isLive ? "top-14 md:top-20" : "top-6 md:top-10"),
-        "opacity-100 hidden md:block" // Hidden on mobile, actions moved to dock or separate menu
-      )}>
+      <div
+        className={clsx(
+          "fixed z-[510] transition-all duration-[2000ms] ease-[cubic-bezier(0.19,1,0.22,1)] px-4 md:px-0 -translate-x-1/2",
+          !showMenu ? "top-[-150px] opacity-0" : (liveStatus?.isLive ? "top-14 md:top-20" : "top-6 md:top-10"),
+          "opacity-100 hidden md:block" // Hidden on mobile, actions moved to dock or separate menu
+        )}
+        style={{ left: 'calc(50% - var(--scrollbar-width) / 2)' }}
+      >
         <div className="flex items-center bg-black border border-white/5 rounded-full p-1.5 pr-2.5 shadow-2xl backdrop-blur-md">
           {/* Language Section */}
           <div className="flex items-center gap-3 px-5 py-2.5 border-r border-white/10">
@@ -230,13 +262,14 @@ export function Header() {
       {/* Main Grand Dock Header */}
       <header
         className={clsx(
-          "fixed left-1/2 -translate-x-1/2 z-[500] transition-all duration-[2400ms] ease-[cubic-bezier(0.19,1,0.22,1)]",
+          "fixed z-[500] transition-all duration-[2400ms] ease-[cubic-bezier(0.19,1,0.22,1)] -translate-x-1/2",
           "bg-black border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.9)] w-max max-w-[95vw] rounded-full py-3 px-4 flex items-center overflow-visible",
           !showMenu
             ? "bottom-[-200px] opacity-0 translate-y-40 scale-90"
             : "bottom-12 opacity-100 translate-y-0 scale-100",
           "hidden xl:flex" // Desktop only dock
         )}
+        style={{ left: 'calc(50% - var(--scrollbar-width) / 2)' }}
       >
         <div className="flex items-center gap-1">
           {/* Logo */}
@@ -252,9 +285,13 @@ export function Header() {
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <Link
-                href={item.href}
+                href={item.label === t('nav.about') ? '#' : item.href}
+                onClick={(e) => {
+                  if (item.label === t('nav.about')) e.preventDefault();
+                }}
                 className={clsx(
-                  "flex items-center gap-3 px-8 py-6 rounded-full text-[14.5px] font-light uppercase tracking-[0.3em] text-white/50 hover:text-white hover:bg-white/5 transition-all duration-700 whitespace-nowrap active:scale-95"
+                  "flex items-center gap-3 px-8 py-6 rounded-full text-[14.5px] font-light uppercase tracking-[0.3em] text-white/50 hover:text-white hover:bg-white/5 transition-all duration-700 whitespace-nowrap active:scale-95 hover-lamp",
+                  item.label === t('nav.about') && "cursor-pointer"
                 )}
               >
                 <span>{item.label}</span>
@@ -271,7 +308,7 @@ export function Header() {
                       <Link
                         key={child.label}
                         href={child.href}
-                        className="px-8 py-4 rounded-2xl text-[11px] font-light uppercase tracking-[0.3em] text-white/40 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group/item"
+                        className="px-8 py-4 rounded-2xl text-[11px] font-light uppercase tracking-[0.3em] text-white/40 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group/item hover-lamp"
                       >
                         {child.label}
                         <div className="w-2 h-2 rounded-full bg-amber-500/60 scale-0 group-hover/item:scale-100 transition-all duration-500" />
@@ -311,11 +348,14 @@ export function Header() {
       </div>
 
       {/* Mobile Top Actions (Mini Pill) */}
-      <div className={clsx(
-        "fixed right-6 z-[500] xl:hidden flex items-center gap-2 transition-all duration-500",
-        liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
-        scrolled ? "opacity-0 translate-x-10 pointer-events-none" : "opacity-100 translate-x-0"
-      )}>
+      <div
+        className={clsx(
+          "fixed z-[500] xl:hidden flex items-center gap-2 transition-all duration-500",
+          liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
+          scrolled ? "opacity-0 translate-x-10 pointer-events-none" : "opacity-100 translate-x-0"
+        )}
+        style={{ right: 'calc(1.5rem + var(--scrollbar-width))' }}
+      >
         <button onClick={() => setIsSearchOpen(true)} className="w-10 h-10 bg-black/40 rounded-full flex items-center justify-center text-white/50 border border-white/10 backdrop-blur-md">
           <Search size={16} />
         </button>
@@ -328,11 +368,12 @@ export function Header() {
       <button
         onClick={() => setIsForcedVisible(true)}
         className={clsx(
-          "fixed left-1/2 -translate-x-1/2 z-[520] transition-all duration-[1500ms] ease-[cubic-bezier(0.19,1,0.22,1)] group outline-none",
+          "fixed z-[500] group transition-all duration-1000 ease-out hidden xl:flex flex-col items-center -translate-x-1/2",
           showBall
-            ? "bottom-12 opacity-100 translate-y-0 scale-100 blur-0"
+            ? "bottom-8 opacity-100 translate-y-0 scale-100 blur-0"
             : "bottom-[-100px] opacity-0 translate-y-20 scale-50 blur-xl pointer-events-none"
         )}
+        style={{ left: 'calc(50% - var(--scrollbar-width) / 2)' }}
       >
         <div className="relative w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center shadow-[0_0_100px_rgba(245,158,11,0.5)] transition-all duration-700 hover:scale-125 hover:rotate-12 active:scale-95">
           <div className="relative w-full h-full flex items-center justify-center rotate-nav">
@@ -340,6 +381,14 @@ export function Header() {
             <div className="absolute inset-0 border-2 border-black/10 rounded-full animate-ping opacity-20" />
           </div>
         </div>
+        <span className={clsx(
+          "absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold tracking-[0.2em] uppercase whitespace-nowrap border-b pb-0.5 transition-all",
+          isOverFooter
+            ? "text-white border-white/50 group-hover:border-white drop-shadow-[0_0_8px_black]"
+            : "text-black/70 border-black/30 group-hover:text-black group-hover:border-black drop-shadow-[0_0_8px_white]"
+        )}>
+          {language === 'UA' ? 'Меню' : 'Menu'}
+        </span>
       </button>
 
       {/* Mobile Menu Overlay */}
@@ -357,56 +406,91 @@ export function Header() {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-8 mb-12 overflow-y-auto">
-          {mainNavItems.map(item => (
-            <div key={item.label} className="flex flex-col gap-4">
-              <Link
-                href={item.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-3xl font-light uppercase tracking-[0.2em] text-white/40 hover:text-white transition-all"
-              >
-                {item.label}
-              </Link>
-              {item.children && (
-                <div className="flex flex-col gap-3 pl-4 border-l border-white/10">
-                  {item.children.map(child => (
-                    <Link
-                      key={child.label}
-                      href={child.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-sm font-light uppercase tracking-[0.3em] text-white/20 hover:text-amber-500 transition-all"
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
+        <nav className="flex flex-col gap-6 mb-12 overflow-y-auto pr-2 scrollbar-none">
+          {mainNavItems.map(item => {
+            const hasChildren = item.children && item.children.length > 0;
+            const isExpanded = expandedItems.includes(item.label);
 
-        <div className="mt-auto flex flex-col gap-4">
-          <Link
-            href={getLocalizedPath('/prayer-requests')}
-            onClick={() => setMobileMenuOpen(false)}
-            className="w-full py-6 rounded-full border border-white/10 text-center text-sm uppercase tracking-[0.3em] font-light hover:bg-white hover:text-black transition-all"
-          >
-            {t('nav.write_note')}
-          </Link>
-          <Link
-            href={getLocalizedPath('/donate')}
-            onClick={() => setMobileMenuOpen(false)}
-            className="w-full py-6 rounded-full bg-amber-500 text-black text-center text-sm uppercase tracking-[0.3em] font-bold hover:bg-white transition-all"
-          >
-            {t('nav.donate')}
-          </Link>
-        </div>
+            return (
+              <div key={item.label} className="flex flex-col gap-4 border-b border-white/5 pb-4">
+                <div
+                  className="flex justify-between items-center group cursor-pointer"
+                  onClick={() => {
+                    if (hasChildren) {
+                      setExpandedItems(prev =>
+                        prev.includes(item.label)
+                          ? prev.filter(i => i !== item.label)
+                          : [...prev, item.label]
+                      );
+                    } else {
+                      router.push(item.href);
+                      setMobileMenuOpen(false);
+                    }
+                  }}
+                >
+                  <span className="text-xl font-medium uppercase tracking-[0.1em] text-white/60 group-hover:text-white transition-all">
+                    {item.label}
+                  </span>
+                  {hasChildren && (
+                    <ChevronDown
+                      size={18}
+                      className={clsx(
+                        "text-white/20 transition-transform duration-300",
+                        isExpanded && "rotate-180 text-amber-500"
+                      )}
+                    />
+                  )}
+                </div>
+
+                <div
+                  className={clsx(
+                    "grid transition-all duration-300 ease-in-out",
+                    isExpanded ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"
+                  )}
+                >
+                  <div className="overflow-hidden">
+                    <div className="flex flex-col gap-3 pl-4 pb-2">
+                      {item.children?.map(child => (
+                        <Link
+                          key={child.label}
+                          href={child.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="text-xs font-medium uppercase tracking-[0.2em] text-white/30 hover:text-amber-500 transition-all py-1"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
+          {/* Action Buttons */}
+          <div className="flex flex-col gap-3 pt-4">
+            <Link
+              href={getLocalizedPath('/prayer-requests')}
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full py-5 rounded-xl border border-white/10 text-center text-lg font-medium uppercase tracking-[0.2em] text-white/90 hover:bg-white hover:text-black transition-all"
+            >
+              {language === 'UA' ? 'Написати записку' : 'Write a Note'}
+            </Link>
+            <Link
+              href={getLocalizedPath('/donate')}
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full py-5 rounded-xl bg-amber-600 text-black text-center text-lg font-medium uppercase tracking-[0.2em] hover:bg-white transition-all"
+            >
+              {t('nav.donate')}
+            </Link>
+          </div>
+        </nav>
       </div>
 
       {/* Search Modal */}
       <div className={clsx(
-        "fixed inset-0 z-[700] bg-black flex items-center justify-center transition-all duration-500 px-6",
-        isSearchOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        "fixed inset-0 z-[700] bg-black flex items-center justify-center px-6 transition-all",
+        isSearchOpen ? "opacity-100 visible duration-500" : "opacity-0 invisible duration-0 pointer-events-none"
       )}>
         <button
           onClick={() => setIsSearchOpen(false)}

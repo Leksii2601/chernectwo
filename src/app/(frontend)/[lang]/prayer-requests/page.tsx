@@ -266,7 +266,6 @@ export default function PrayerNotePage() {
                                     onKeyDown={handleKeyDown}
                                     placeholder={t('prayer.names_placeholder')}
                                     className="flex-1 bg-white border border-gray-300 p-4 rounded-xl text-lg outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 transition-all shadow-sm placeholder:text-gray-300"
-                                    autoFocus
                                 />
                                 <button
                                     onClick={addName}
