@@ -35,10 +35,13 @@ export default function TestDesignPage() {
     const easeExpo = "cubic-bezier(0.19, 1, 0.22, 1)";
 
     return (
-        <div className={`Outer-sc-17f28ux-0 min-h-screen bg-black text-white selection:bg-amber-500 selection:text-white font-sans relative overflow-x-hidden ${revealStage < 4 ? 'intro-mode' : ''}`}>
+        <div className={`Outer-sc-17f28ux-0 min-h-screen bg-black text-white selection:bg-amber-500 selection:text-white font-montserrat relative overflow-x-hidden ${revealStage < 4 ? 'intro-mode' : ''}`}>
 
             {/* 1. THE HEADER - native logic preserved, entrance handled by intro-mode class */}
             <Header />
+
+            {/* Preload hero image for maximum speed */}
+            <link rel="preload" href="/media/pic_1.jpg" as="image" fetchPriority="high" />
 
             {/* 2. THE MAIN WIPE (CURTAIN) - White layer that reveals everything */}
             <aside
@@ -79,10 +82,12 @@ export default function TestDesignPage() {
                                 }}
                             >
                                 <div className="ImageBack-sc-17f28ux-7 relative w-full h-full scale-[1.02]">
-                                    {/* Using standard img for faster, hydration-free rendering */}
+                                    {/* Using standard img for faster, hydration-free rendering and precision */}
                                     <img
-                                        src="/media/church-complex.jpg"
+                                        src="/media/pic_1.jpg"
                                         alt=""
+                                        fetchPriority="high"
+                                        loading="eager"
                                         className="absolute inset-0 w-full h-full object-cover"
                                         style={{
                                             display: 'block',
@@ -90,7 +95,7 @@ export default function TestDesignPage() {
                                             transform: 'translate3d(0,0,0)'
                                         }}
                                     />
-                                    <div className="absolute inset-0 bg-black/60" />
+                                    <div className="absolute inset-0 bg-black/80" />
                                 </div>
                             </div>
                         </div>
@@ -122,8 +127,10 @@ export default function TestDesignPage() {
                                         }}
                                     >
                                         <img
-                                            src="/media/history.jpg"
+                                            src="/media/pic_1.jpg"
                                             alt=""
+                                            fetchPriority="high"
+                                            loading="eager"
                                             className="absolute inset-0 w-full h-full object-cover"
                                         />
                                     </div>
@@ -132,8 +139,8 @@ export default function TestDesignPage() {
                         </div>
 
                         {/* TEXT CONTENT */}
-                        <div className="relative z-50 h-full flex items-center px-10 md:px-20 lg:px-32">
-                            <div className="max-w-4xl w-full">
+                        <div className="relative z-50 h-full flex items-center px-6 md:px-12 lg:px-20 pointer-events-none">
+                            <div className="w-full max-w-xl lg:max-w-[45%] pointer-events-auto">
                                 <div
                                     className="Heading-sc-17f28ux-3"
                                     style={{
@@ -143,8 +150,18 @@ export default function TestDesignPage() {
                                         willChange: 'transform, opacity'
                                     }}
                                 >
-                                    <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black uppercase tracking-tight leading-[0.95] text-white">
-                                        {t('hero.title')}
+                                    <h1 className="font-light uppercase tracking-[0.1em] leading-[0.95] text-white">
+                                        {t('hero.title').split('\n').map((line, i) => (
+                                            <span
+                                                key={i}
+                                                className={`block ${i === 0
+                                                    ? 'text-3xl md:text-6xl lg:text-7xl xl:text-7xl mb-4 font-normal'
+                                                    : 'text-sm md:text-xl lg:text-2xl xl:text-2xl opacity-40 font-extralight tracking-[0.2em]'
+                                                    }`}
+                                            >
+                                                {line}
+                                            </span>
+                                        ))}
                                     </h1>
                                     <div
                                         className="Line-sc-17f28ux-4 mt-8 h-[2px] bg-amber-500 origin-left"
@@ -177,11 +194,11 @@ export default function TestDesignPage() {
                         <section className="py-32 px-10 md:px-20 lg:px-32 bg-zinc-950">
                             <div className="grid md:grid-cols-2 gap-20 items-center">
                                 <div className="space-y-8">
-                                    <h2 className="text-4xl font-bold uppercase tracking-tight">Духовна скарбниця Волині</h2>
-                                    <p className="text-lg text-zinc-400 leading-relaxed max-w-xl">
+                                    <h2 className="text-2xl font-light uppercase tracking-widest">Духовна скарбниця Волині</h2>
+                                    <p className="text-sm font-extralight text-zinc-400 leading-relaxed max-w-xl">
                                         Жидичинський монастир — це місце з тисячолітньою історією, де кожен камінь дихає вічністю. Сьогодні монастир є одним із найважливіших духовних центрів України, поєднуючи давні традиції та сучасне молитовне життя.
                                     </p>
-                                    <button className="px-8 py-4 border border-zinc-800 hover:bg-white hover:text-black transition-all uppercase text-sm tracking-widest font-bold">
+                                    <button className="px-8 py-4 border border-zinc-800 hover:bg-white hover:text-black transition-all uppercase text-[10px] tracking-[0.3em] font-light">
                                         Дізнатися більше
                                     </button>
                                 </div>
@@ -209,8 +226,8 @@ export default function TestDesignPage() {
                                             <Image src={item.img} alt={item.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                                             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all" />
                                         </div>
-                                        <h3 className="text-xl font-bold uppercase mb-2 group-hover:text-amber-500 transition-colors">{item.title}</h3>
-                                        <p className="text-zinc-500 text-sm leading-relaxed">{item.desc}</p>
+                                        <h3 className="text-base font-light uppercase mb-2 group-hover:text-amber-500 transition-colors tracking-wider">{item.title}</h3>
+                                        <p className="text-zinc-500 text-[10px] font-extralight leading-relaxed">{item.desc}</p>
                                     </div>
                                 ))}
                             </div>
