@@ -14,7 +14,7 @@ export const metadata = {
 
 export default async function SocialProjectsPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
-  const projectsData = getProjectsData(lang);
+  const projectsData = getProjectsData();
 
   const langKey = (lang.toUpperCase() === 'EN' ? 'EN' : 'UA') as 'UA' | 'EN';
   const t = (key: string) => translations[langKey][key] || key;
