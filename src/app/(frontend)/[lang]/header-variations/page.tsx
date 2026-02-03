@@ -156,7 +156,7 @@ export default function HeaderVariationsPage() {
                                     activeDropdown === item.label ? "opacity-100 translate-y-0 visible scale-100" : "opacity-0 translate-y-6 invisible pointer-events-none scale-95"
                                 )}>
                                     <div className="bg-[#0a0a0a] border border-white/10 rounded-[2rem] p-3 shadow-[0_20px_40px_rgba(0,0,0,0.8)] min-w-[240px] flex flex-col gap-1">
-                                        {item.children.map((child, idx) => (
+                                        {item.children.map((child) => (
                                             <Link
                                                 key={child.label}
                                                 href={child.href}
@@ -204,7 +204,7 @@ export default function HeaderVariationsPage() {
                     <div className="inline-block px-8 py-3 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-500 text-[11px] font-light uppercase tracking-[0.6em] mb-14 animate-reveal">
                         Architectural Harmony
                     </div>
-                    <h1 className="text-7xl md:text-[9vw] font-serif italic leading-[0.8] tracking-tighter mb-16 drop-shadow-2xl opacity-0 animate-reveal">
+                    <h1 className="text-7xl md:text-[9vw] font-montserrat italic leading-[0.8] tracking-tighter mb-16 drop-shadow-2xl opacity-0 animate-reveal">
                         Unified <span className="text-amber-500">Grace</span>
                     </h1>
                 </div>

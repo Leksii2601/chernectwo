@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { Copy, Check, CreditCard, Building2, Globe, ChevronDown, Lock, Info, Heart, Layers } from 'lucide-react';
+import { Copy, Check, CreditCard, Building2, Globe, ChevronDown, Lock, Heart, Layers } from 'lucide-react';
 
 interface DonationTabsProps {
     className?: string;
@@ -498,7 +498,7 @@ const RequisiteItem: React.FC<{
     isPurpose?: boolean;
 }> = ({ label, value, onCopy, copied, highlight, copyLabel, noBorder, icon, isPurpose }) => (
     <div
-        className={`flex ${noBorder ? 'items-start -mx-4 px-4 py-3' : 'flex-col md:flex-row md:items-center p-4 rounded-xl border'} justify-between gap-4 transition-all group cursor-pointer ${!noBorder ? (highlight ? 'bg-amber-50 border-amber-200' : 'bg-white border-gray-100 hover:border-gray-300') : 'hover:bg-gray-50'
+        className={`flex ${noBorder ? 'items-start -mx-4 px-4 py-3' : 'flex-col md:flex-row md:items-center p-4 rounded-xl border'} justify-between gap-4 transition-all group cursor-pointer ${!noBorder ? (highlight ? 'bg-amber-50 border-amber-600' : 'bg-white border-gray-100 hover:border-gray-300') : 'hover:bg-gray-50'
             }`}
         onClick={onCopy}
     >

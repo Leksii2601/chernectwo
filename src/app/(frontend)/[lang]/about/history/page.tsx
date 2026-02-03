@@ -21,7 +21,7 @@ export default function HistoryPage() {
 
       {/* Intro Text Section */}
       <section className="py-16 md:py-24 max-w-[1000px] mx-auto px-4 text-center">
-        <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-serif max-w-4xl mx-auto">
+        <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-montserrat max-w-4xl mx-auto">
           {t('history.intro')}
         </p>
       </section>

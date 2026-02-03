@@ -4,9 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
 import { useLanguage } from '@/context/LanguageContext';
-import { Facebook, Youtube, Mail, Phone, Download, X, Send, Instagram } from 'lucide-react';
+import { Facebook, Youtube, Download, X, Send, Instagram } from 'lucide-react';
+
 import { clsx } from 'clsx';
 import Image from 'next/image';
+import { PhotoInfoModal } from '@/components/ui/PhotoInfoModal';
 
 type TabType = 'contacts' | 'map' | 'press';
 
@@ -56,72 +58,66 @@ const pressItems: PressItem[] = [
             'Brethren: Reverend Fathers and Brethren'
         ]
     },
-    {
-        id: 'commemoration',
-        title_ua: 'ПОМИНАННЯ',
-        title_en: 'COMMEMORATION',
-        subtitle_ua: 'МОЛИТОВНА ПІДТРИМКА',
-        subtitle_en: 'PRAYER SUPPORT',
-        image: '/media/gallery.jpg',
-        description_ua: 'Інформація про те, як правильно подавати записки для молитовного поминання та про види богослужінь.',
-        description_en: 'Information on how to correctly submit notes for prayer commemoration and about the types of services.',
-        details_ua: ['Записки за здоров’я', 'Записки за упокій', 'Сорокоуст та річне поминання'],
-        details_en: ['Notes for health', 'Notes for repose', 'Sorokoust and annual commemoration']
-    }
 ];
 
 export default function ContactsPage() {
     const { t, language } = useLanguage();
     const [activeTab, setActiveTab] = useState<TabType>('contacts');
-
-    // Fixed Modal State for Reliable Animation
     const [selectedPressItem, setSelectedPressItem] = useState<PressItem | null>(null);
-    const [isClosing, setIsClosing] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const [animatingIn, setAnimatingIn] = useState(false);
 
     const handleSelectPressItem = (item: PressItem) => {
         setSelectedPressItem(item);
         setShowModal(true);
-        // Start animation after a short delay to ensure the modal is in the DOM
-        setTimeout(() => {
-            setAnimatingIn(true);
-        }, 50);
     };
 
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedPressItem(null);
-        setAnimatingIn(false);
-        setIsClosing(false);
     };
 
-    useEffect(() => {
-        if (showModal) {
-            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-            document.body.style.overflow = 'hidden';
-            document.body.style.paddingRight = `${scrollbarWidth}px`;
-            document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
-            document.body.classList.add('lock-scroll');
-        } else {
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-            document.documentElement.style.setProperty('--scrollbar-width', '0px');
-            document.body.classList.remove('lock-scroll');
-        }
+    // Custom Icons not available in Lucide
+    const ViberIcon = ({ className }: { className?: string }) => (
+        <img src="/media/viber-logo.svg" alt="Viber" className={className} />
+    );
 
-        return () => {
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-            document.body.classList.remove('lock-scroll');
-        };
-    }, [showModal]);
+    const WhatsappIcon = ({ className }: { className?: string }) => (
+        <svg viewBox="0 0 448 512" fill="currentColor" className={className}>
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.5 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+        </svg>
+    );
 
     const socialLinks = [
-        { icon: <Facebook className="w-5 h-5" />, href: "https://www.facebook.com/chernectvo.volyni", name: "Facebook" },
-        { icon: <Youtube className="w-5 h-5" />, href: "https://www.youtube.com/@chernectvo_volyni", name: "YouTube" },
-        { icon: <Instagram className="w-5 h-5" />, href: "https://instagram.com", name: "Instagram" },
-        { icon: <Send className="w-5 h-5" />, href: "https://t.me/+380671042288", name: "Telegram" }
+        {
+            icon: <ViberIcon className="w-6 h-6 transition-all duration-300 group-hover:brightness-0 group-hover:invert" />,
+            href: "https://invite.viber.com/?g2=AQAB6djHxEo4k1YHgvbWNapcX0pRA%2B2o8tUn5LLB5Jv%2BX1BCZhctg2bkqIY%2BTmoM",
+            name: "Viber"
+        },
+        {
+            icon: <Instagram className="w-5 h-5" />,
+            href: "https://www.instagram.com/chernetstvovolyni",
+            name: "Instagram"
+        },
+        {
+            icon: <Send className="w-5 h-5" />,
+            href: "https://t.me/chernetstvo_volyni",
+            name: "Telegram"
+        },
+        {
+            icon: <WhatsappIcon className="w-5 h-5" />,
+            href: "https://whatsapp.com/channel/0029VbCZlG3GpLHWYKNea425",
+            name: "WhatsApp"
+        },
+        {
+            icon: <Facebook className="w-5 h-5" />,
+            href: "https://www.facebook.com/chernectvo.volyni",
+            name: "Facebook"
+        },
+        {
+            icon: <Youtube className="w-5 h-5" />,
+            href: "https://www.youtube.com/@chernectvo_volyni",
+            name: "YouTube"
+        }
     ];
 
     return (
@@ -158,8 +154,7 @@ export default function ContactsPage() {
             </div>
 
             <div className={clsx(
-                "mx-auto px-6 py-16 lg:py-24 transition-all duration-500",
-                activeTab === 'press' ? "max-w-[1600px]" : "max-w-[1100px]"
+                "mx-auto px-6 py-16 lg:py-24 transition-all duration-500 max-w-[1100px]"
             )}>
                 {activeTab === 'contacts' && (
                     <div className="grid lg:grid-cols-2 gap-20 animate-in fade-in duration-500">
@@ -193,7 +188,7 @@ export default function ContactsPage() {
                                             href={social.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="w-10 h-10 flex items-center justify-center border border-gray-200 text-gray-900 hover:bg-black hover:text-white hover:border-black transition-all rounded-full"
+                                            className="group w-10 h-10 flex items-center justify-center border border-gray-200 text-gray-900 hover:bg-black hover:text-white hover:border-black transition-all rounded-full"
                                             title={social.name}
                                         >
                                             {social.icon}
@@ -279,7 +274,7 @@ export default function ContactsPage() {
                             </span>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
                             {pressItems.map((item) => (
                                 <div
                                     key={item.id}
@@ -307,111 +302,51 @@ export default function ContactsPage() {
                             ))}
                         </div>
 
-                        {/* CTA Section */}
-                        <div className="pt-16 border-t border-gray-100 text-center space-y-8">
-                            <p className="text-gray-500 text-sm font-medium tracking-wide">
-                                {language === 'UA'
-                                    ? 'Якщо у вас виникли будь-які питання або вам потрібна додаткова інформація, ми завжди раді вам допомогти.'
-                                    : 'If you have any questions or need additional information, we are always happy to help.'}
-                            </p>
-                            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12">
-                                <a href="tel:+380671042288" className="flex items-center gap-3 text-gray-900 hover:text-amber-600 transition-colors group">
-                                    <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-amber-50 group-hover:border-amber-200">
-                                        <Phone className="w-4 h-4" />
-                                    </div>
-                                    <span className="font-bold tracking-tight">+38 (067) 104 22 88</span>
-                                </a>
-                                <a href="mailto:chernectwo@gmail.com" className="flex items-center gap-3 text-gray-900 hover:text-amber-600 transition-colors group">
-                                    <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-amber-50 group-hover:border-amber-200">
-                                        <Mail className="w-4 h-4" />
-                                    </div>
-                                    <span className="font-bold tracking-tight">chernectwo@gmail.com</span>
-                                </a>
-                            </div>
-                        </div>
+
                     </div>
                 )}
             </div>
 
             {/* Modal Layer */}
-            {showModal && selectedPressItem && (
-                <div
-                    className={clsx(
-                        "fixed inset-0 z-[1000] p-4 md:p-10 transition-all duration-700 overflow-y-auto block",
-                        !animatingIn ? "opacity-0 invisible" : "opacity-100 visible"
-                    )}
-                    onClick={handleCloseModal}
-                >
-                    <div className={clsx(
-                        "fixed inset-0 bg-black/95 backdrop-blur-3xl transition-opacity duration-700",
-                        !animatingIn ? "opacity-0" : "opacity-100"
-                    )} />
+            <PhotoInfoModal
+                isOpen={showModal && !!selectedPressItem}
+                onClose={handleCloseModal}
+                title={selectedPressItem ? (language === 'UA' ? selectedPressItem.title_ua : selectedPressItem.title_en) : ''}
+                image={selectedPressItem?.image}
+            >
+                {selectedPressItem && (
+                    <div className="space-y-12">
+                        <div className="space-y-6">
+                            <h4 className="text-xs font-bold text-amber-600 uppercase tracking-[0.3em] leading-none">
+                                {language === 'UA' ? 'Настанова' : 'Guideline'}
+                            </h4>
+                            <p className="text-gray-600 leading-relaxed text-lg md:text-xl font-medium">
+                                {language === 'UA' ? selectedPressItem.description_ua : selectedPressItem.description_en}
+                            </p>
+                        </div>
 
-                    <div
-                        className={clsx(
-                            "relative w-full max-w-5xl bg-white rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 mx-auto",
-                            !animatingIn ? "scale-90 opacity-0 translate-y-12 blur-lg" : "scale-100 opacity-100 translate-y-0 blur-0"
-                        )}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="relative h-[300px] md:h-[500px]">
-                            <Image
-                                src={selectedPressItem.image}
-                                alt={selectedPressItem.title_ua}
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
-                            <div className="absolute bottom-10 left-10 right-10 md:bottom-16 md:left-16">
-                                <h3 className={clsx(
-                                    "text-3xl md:text-6xl font-black text-white uppercase tracking-tighter transition-all duration-1000 delay-300",
-                                    !animatingIn ? "opacity-0 translate-y-8" : "opacity-100 translate-y-0"
-                                )}>
-                                    {language === 'UA' ? selectedPressItem.title_ua : selectedPressItem.title_en}
-                                </h3>
-                            </div>
-                            <button
-                                onClick={handleCloseModal}
-                                className="absolute top-8 right-8 w-12 h-12 bg-white rounded-full flex items-center justify-center text-black hover:bg-amber-600 hover:text-white transition-all shadow-xl z-20 group"
-                            >
-                                <X className="w-6 h-6 transition-transform group-hover:rotate-90" />
+                        <div className="space-y-8">
+                            <h4 className="text-xs font-bold text-amber-600 uppercase tracking-[0.3em] leading-none">
+                                {language === 'UA' ? 'ДЕТАЛІ ТА ВИМОГИ:' : 'DETAILS & REQUIREMENTS:'}
+                            </h4>
+                            <ul className="space-y-5">
+                                {(language === 'UA' ? selectedPressItem.details_ua : selectedPressItem.details_en).map((detail, idx) => (
+                                    <li key={idx} className="flex items-start gap-5 text-gray-800 font-bold text-base md:text-lg border-l-4 border-amber-600/20 pl-6 py-1 hover:border-amber-600 transition-colors">
+                                        <span>{detail}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {selectedPressItem.id === 'brandbook' && (
+                            <button className="mt-8 flex items-center gap-4 bg-black text-white px-10 py-6 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-amber-800 transition-all shadow-2xl hover:scale-105 active:scale-95 duration-300">
+                                <Download className="w-5 h-5" />
+                                {language === 'UA' ? 'ЗАВАНТАЖИТИ АРХІВ' : 'DOWNLOAD ARCHIVE'}
                             </button>
-                        </div>
-
-                        <div className="p-10 md:p-20 space-y-12">
-                            <div className="space-y-6">
-                                <h4 className="text-xs font-bold text-amber-600 uppercase tracking-[0.3em] leading-none">
-                                    {language === 'UA' ? 'Настанова' : 'Guideline'}
-                                </h4>
-                                <p className="text-gray-600 leading-relaxed text-lg md:text-xl font-medium">
-                                    {language === 'UA' ? selectedPressItem.description_ua : selectedPressItem.description_en}
-                                </p>
-                            </div>
-
-                            <div className="space-y-8">
-                                <h4 className="text-xs font-bold text-amber-600 uppercase tracking-[0.3em] leading-none">
-                                    {language === 'UA' ? 'ДЕТАЛІ ТА ВИМОГИ:' : 'DETAILS & REQUIREMENTS:'}
-                                </h4>
-                                <ul className="space-y-5">
-                                    {(language === 'UA' ? selectedPressItem.details_ua : selectedPressItem.details_en).map((detail, idx) => (
-                                        <li key={idx} className="flex items-start gap-5 text-gray-800 font-bold text-base md:text-lg border-l-4 border-amber-600/20 pl-6 py-1 hover:border-amber-600 transition-colors">
-                                            <span>{detail}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            {selectedPressItem.id === 'brandbook' && (
-                                <button className="mt-8 flex items-center gap-4 bg-black text-white px-10 py-6 rounded-2xl font-black uppercase text-xs tracking-widest hover:bg-amber-800 transition-all shadow-2xl hover:scale-105 active:scale-95 duration-300">
-                                    <Download className="w-5 h-5" />
-                                    {language === 'UA' ? 'ЗАВАНТАЖИТИ АРХІВ' : 'DOWNLOAD ARCHIVE'}
-                                </button>
-                            )}
-                        </div>
+                        )}
                     </div>
-                </div>
-            )}
+                )}
+            </PhotoInfoModal>
 
             <Footer />
         </main>

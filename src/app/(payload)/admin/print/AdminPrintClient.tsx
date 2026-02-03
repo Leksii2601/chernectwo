@@ -104,7 +104,7 @@ export const AdminPrintClient = ({ counts }: { counts: Counts }) => {
                 {/* Mass Actions */}
                 <div className="border-t pt-8">
                     <h3 className="text-lg font-bold text-amber-700 mb-4 text-center">Масовий друк (Всі доступні)</h3>
-                    <div className="bg-amber-50 p-6 rounded-lg border border-amber-200 text-center">
+                    <div className="bg-amber-50 p-6 rounded-lg border border-amber-600 text-center">
                         <p className="text-sm text-amber-800 mb-4">
                             Буде згенеровано PDF з усіма записками (ліміт 100 на один файл). <br />
                             Вони будуть позначені як <strong>роздруковані</strong>.

@@ -23,7 +23,7 @@ export default function ComplexPage() {
       <section className="bg-orange-50/30 py-12 border-b border-orange-100">
         <div className="max-w-[1200px] mx-auto px-4">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-serif text-gray-800 mb-2">{t('complex.map_title')}</h2>
+            <h2 className="text-2xl font-montserrat text-gray-800 mb-2">{t('complex.map_title')}</h2>
             <p className="text-gray-500 max-w-2xl mx-auto">
               {t('complex.map_description')}
             </p>

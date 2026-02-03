@@ -30,7 +30,7 @@ export function NewsCategorySection({ title, items, id }: NewsCategorySectionPro
   return (
     <div id={id} className="w-full scroll-mt-32">
       <div className="flex justify-between items-center bg-black text-white px-6 py-3 mb-8">
-        <h2 className="text-xl uppercase font-serif tracking-wider">{title}</h2>
+        <h2 className="text-xl uppercase font-montserrat tracking-wider">{title}</h2>
         {items.length > 3 && (
           <div className="flex gap-2">
             <button
@@ -69,10 +69,10 @@ export function NewsCategorySection({ title, items, id }: NewsCategorySectionPro
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <div className="border-b border-amber-200 pb-2 mb-3">
+            <div className="border-b border-amber-600 pb-2 mb-3">
               <p className="text-sm text-gray-500 font-montserrat">{item.date}</p>
             </div>
-            <h3 className="text-xl font-serif font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-2">
+            <h3 className="text-xl font-montserrat font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-2">
               {item.title}
             </h3>
           </Link>

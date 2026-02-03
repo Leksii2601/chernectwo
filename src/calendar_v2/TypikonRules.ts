@@ -43,8 +43,7 @@ export interface TypikonRule {
 
 const FUNERAL_AP = "1 Сол., 270 зач., 4:13-17";
 const FUNERAL_EV = "Ін., 16 зач., 5:24-30";
-const BLGV_AP = "Гал., 213 зач., 5:22-6:2";
-const BLGV_EV = "Мф., 10 зач., 4:25-5:12";
+// BLGV constants removed as they were unused
 
 export const OCU_2026_RULES: TypikonRule[] = [
     // --- JANUARY FIXES ---

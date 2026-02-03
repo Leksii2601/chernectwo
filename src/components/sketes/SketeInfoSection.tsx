@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
-import { createPortal } from 'react-dom';
 import { clsx } from 'clsx';
+import { TextModal } from '../ui/TextModal';
+import { CircleArrowButton } from '../ui/CircleArrowButton';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight, Info, X, MapPin, ChevronLeft, ChevronRight, Phone, Facebook } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
@@ -61,7 +62,6 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
 
     // UI State
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isClosingModal, setIsClosingModal] = useState(false);
 
     // Gallery
     const [galleryIndex, setGalleryIndex] = useState(0);
@@ -73,7 +73,6 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
         rootMargin: "-50px 0px"
     });
 
-    const imageRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
 
@@ -86,27 +85,7 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
         setGalleryIndex((prev) => (prev - 1 + skete.galleryImages.length) % skete.galleryImages.length);
     }, [skete]);
 
-    // Modal Control
-    const closeModal = () => {
-        setIsClosingModal(true);
-        setTimeout(() => {
-            setIsModalOpen(false);
-            setIsClosingModal(false);
-        }, 300);
-    };
 
-    // Body Scroll Lock
-    useEffect(() => {
-        if (isModalOpen) {
-            document.body.style.overflow = 'hidden';
-            const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') closeModal(); };
-            window.addEventListener('keydown', handleEsc);
-            return () => {
-                document.body.style.overflow = '';
-                window.removeEventListener('keydown', handleEsc);
-            };
-        }
-    }, [isModalOpen]);
 
     // Block ID for Anchor Links
     const sectionId = skete.id;
@@ -185,15 +164,11 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                         <p className="text-gray-600 font-sans text-lg leading-relaxed mb-10">
                             {skete.description}
                         </p>
-                        <button
+                        <CircleArrowButton
+                            text={t('skete.details')}
                             onClick={() => setIsModalOpen(true)}
-                            className="group flex items-center gap-4 text-sm font-bold uppercase tracking-widest hover:text-amber-700 transition-colors w-fit"
-                        >
-                            <div className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center transition-all duration-300 group-hover:border-amber-700 group-hover:bg-amber-700 group-hover:text-white">
-                                <ArrowRight className="w-4 h-4" />
-                            </div>
-                            {t('skete.details')}
-                        </button>
+                            variant="dark"
+                        />
                     </div>
 
                     {/* --- GALLERY TAB (Expanded) --- */}
@@ -333,50 +308,33 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                 /*                                   MODAL                                    */
                 /* -------------------------------------------------------------------------- */
             }
-            {isModalOpen && mounted && createPortal(
-                <div
-                    className={clsx(
-                        "fixed inset-0 z-[99999] flex items-center justify-center bg-black/90 backdrop-blur-sm transition-all duration-500",
-                        isClosingModal ? "opacity-0" : "opacity-100 animate-in fade-in"
-                    )}
-                    style={{
-                        margin: 0,
-                        top: 0,
-                        left: 0,
-                        width: '100vw',
-                        height: '100vh'
-                    }}
-                >
-                    <div
-                        className="absolute inset-0 w-full h-full"
-                        onClick={closeModal}
-                    />
-                    <div
-                        className={clsx(
-                            "bg-white w-full max-w-lg relative shadow-2xl rounded max-h-[90vh] flex flex-col transition-all duration-500 transform z-50",
-                            isClosingModal ? "scale-90 opacity-0 translate-y-8" : "scale-100 opacity-100 translate-y-0 animate-in slide-in-from-bottom-8 zoom-in-95"
-                        )}
-                    >
-                        <button onClick={closeModal} className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors z-20">
-                            <X size={20} className="text-gray-500" />
-                        </button>
-                        <div className="p-8 md:p-12 overflow-y-auto custom-scrollbar">
-                            <div className="flex items-center gap-2 mb-8 text-amber-600">
-                                <Info className="w-5 h-5" />
-                                <span className="text-xs font-bold uppercase tracking-widest">{t('skete.historical_note')}</span>
-                            </div>
-                            <h3 className="text-3xl font-montserrat font-bold text-gray-900 mb-8">{skete.label}</h3>
-                            <div className="prose prose-sm text-gray-600 mb-10 font-serif leading-relaxed">
-                                {skete.overviewContent}
-                            </div>
-                            <button onClick={closeModal} className="w-full py-3 bg-[#1a1c23] text-white text-xs font-bold uppercase tracking-widest hover:bg-black transition-colors rounded-sm">
-                                {t('generic.close')}
-                            </button>
-                        </div>
+            {/* -------------------------------------------------------------------------- */
+                /*                                   MODAL                                    */
+                /* -------------------------------------------------------------------------- */
+            }
+            <TextModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title={skete.label}
+            >
+                <div className="space-y-8">
+                    <div className="flex items-center gap-2 mb-2 text-amber-600">
+                        <Info className="w-5 h-5" />
+                        <span className="text-xs font-bold uppercase tracking-widest">{t('skete.historical_note')}</span>
                     </div>
-                </div>,
-                document.body
-            )}
+
+                    <div className="prose prose-sm max-w-none text-gray-600 mb-10 font-montserrat leading-relaxed text-lg">
+                        {skete.overviewContent}
+                    </div>
+
+                    <button
+                        onClick={() => setIsModalOpen(false)}
+                        className="w-full py-4 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-amber-600 transition-all rounded-3xl shadow-lg hover:shadow-xl"
+                    >
+                        {t('generic.close')}
+                    </button>
+                </div>
+            </TextModal>
 
         </div>
     );
@@ -459,7 +417,7 @@ export const SketeInfoSection = () => {
     ];
 
     return (
-        <section className="relative w-full bg-white pb-12">
+        <section className="relative w-full bg-white pb-12 overflow-hidden">
             <div className="flex flex-col gap-0">
                 {sketes.map((skete, index) => (
                     <SketeSectionBlock key={skete.id} skete={skete} index={index} />

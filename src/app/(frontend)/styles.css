@@ -33,6 +33,7 @@ html {
   --font-mono: 'Roboto Mono', monospace;
   --font-montserrat: 'Montserrat', sans-serif;
   --scrollbar-width: 0px;
+  --amber-600: #d2ae6d;
 }
 
 @media (max-width: 380px) {

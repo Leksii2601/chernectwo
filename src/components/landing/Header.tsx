@@ -24,7 +24,7 @@ export function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
-  const [isOverFooter, setIsOverFooter] = useState(false);
+  // const [isOverFooter, setIsOverFooter] = useState(false); // Unused
   const lastScrollY = useRef(0);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -143,13 +143,15 @@ export function Header() {
     sessionStorage.setItem('liveBannerDismissed', 'true');
   };
 
+  // Footer detection removed as isOverFooter was unused
+  /*
   useEffect(() => {
     const footer = document.querySelector('footer');
     if (!footer) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsOverFooter(entry.isIntersecting);
+        // setIsOverFooter(entry.isIntersecting);
       },
       { threshold: 0.1 }
     );
@@ -157,6 +159,7 @@ export function Header() {
     observer.observe(footer);
     return () => observer.disconnect();
   }, []);
+  */
 
   return (
     <>
@@ -323,13 +326,13 @@ export function Header() {
       <div className={clsx(
         "fixed left-0 right-0 z-[500] xl:hidden flex items-center justify-between px-6 py-4 transition-all duration-500",
         liveStatus?.isLive ? "top-11 md:top-14" : "top-0",
-        scrolled ? "bg-black/80 backdrop-blur-md translate-y-0" : "bg-transparent -translate-y-full"
+        scrolled ? "bg-black/80 backdrop-blur-md translate-y-0 shadow-lg" : "bg-transparent -translate-y-full"
       )}>
         <Link href={getLocalizedPath('/')} className="w-10 h-10 relative">
           <Image src="/media/logo.webp" alt="Logo" fill className="object-contain" />
         </Link>
         <button onClick={() => setMobileMenuOpen(true)} className="text-white p-2">
-          <Menu size={24} />
+          <Menu size={32} />
         </button>
       </div>
 
@@ -350,46 +353,38 @@ export function Header() {
         liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
         scrolled ? "opacity-0 translate-x-10 pointer-events-none" : "opacity-100 translate-x-0"
       )}>
-        <button onClick={() => setIsSearchOpen(true)} className="w-10 h-10 bg-black/40 rounded-full flex items-center justify-center text-white/50 border border-white/10 backdrop-blur-md">
-          <Search size={16} />
+        <button onClick={() => setIsSearchOpen(true)} className="w-12 h-12 bg-black/40 rounded-full flex items-center justify-center text-white/50 border border-white/10 backdrop-blur-md">
+          <Search size={20} />
         </button>
-        <button onClick={() => setMobileMenuOpen(true)} className="w-10 h-10 bg-black/40 rounded-full flex items-center justify-center text-white border border-white/10 backdrop-blur-md">
-          <Menu size={16} />
+        <button onClick={() => setMobileMenuOpen(true)} className="w-12 h-12 bg-black/40 rounded-full flex items-center justify-center text-white border border-white/10 backdrop-blur-md">
+          <Menu size={20} />
         </button>
       </div>
 
-      {/* Interactive Sentinel (Ball) */}
+      {/* Desktop Scrolled Burger Sentinel (Replaces Circular Ball) */}
       <button
         onClick={() => setIsForcedVisible(true)}
         className={clsx(
-          "fixed left-1/2 -translate-x-1/2 z-[500] group transition-all duration-1000 ease-out hidden md:flex flex-col items-center",
+          "fixed top-8 right-10 z-[500] group transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] hidden xl:flex flex-col items-center",
           showBall
-            ? "bottom-8 opacity-100 translate-y-0 scale-100 blur-0"
-            : "bottom-[-100px] opacity-0 translate-y-20 scale-50 blur-xl pointer-events-none"
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-20 opacity-0 pointer-events-none"
         )}
       >
-        <div className="relative w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center shadow-[0_0_100px_rgba(245,158,11,0.5)] transition-all duration-700 hover:scale-125 hover:rotate-12 active:scale-95">
-          <div className="relative w-full h-full flex items-center justify-center rotate-nav">
-            <div className="w-3.5 h-3.5 bg-black rounded-full shadow-[0_0_20px_rgba(0,0,0,0.5)]" />
-            <div className="absolute inset-0 border-2 border-black/10 rounded-full animate-ping opacity-20" />
-          </div>
+        <div className="relative w-20 h-20 bg-black border border-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-all duration-700 hover:scale-110 hover:bg-amber-600 active:scale-95 group">
+          <Menu size={28} className="text-white group-hover:text-black transition-colors" />
         </div>
-        <span className={clsx(
-          "absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold tracking-[0.2em] uppercase whitespace-nowrap border-b pb-0.5 transition-all",
-          isOverFooter
-            ? "text-white border-white/50 group-hover:border-white drop-shadow-[0_0_8px_black]"
-            : "text-black/70 border-black/30 group-hover:text-black group-hover:border-black drop-shadow-[0_0_8px_white]"
-        )}>
-          {language === 'UA' ? 'Меню' : 'Menu'}
+        <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-bold tracking-[0.4em] uppercase whitespace-nowrap text-white/40 group-hover:text-white transition-all opacity-0 group-hover:opacity-100">
+          {language === 'UA' ? 'МЕНЮ' : 'MENU'}
         </span>
       </button>
 
       {/* Mobile Menu Overlay */}
       <div className={clsx(
-        "fixed inset-0 z-[600] bg-black transition-all duration-500 px-8 py-12 flex flex-col no-scrollbar",
+        "fixed inset-0 z-[600] bg-black transition-all duration-500 px-8 pt-12 pb-8 flex flex-col",
         mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
       )}>
-        <div className="flex justify-between items-center mb-16">
+        <div className="flex justify-between items-center mb-10 shrink-0">
           <div className="flex gap-4">
             <button onClick={() => setLanguage('UA')} className={clsx("text-xs font-bold tracking-widest transition-all", language === 'UA' ? "text-amber-500" : "text-white/20")}>UA</button>
             <button onClick={() => setLanguage('EN')} className={clsx("text-xs font-bold tracking-widest transition-all", language === 'EN' ? "text-amber-500" : "text-white/20")}>EN</button>
@@ -399,7 +394,7 @@ export function Header() {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-6 mb-12 overflow-hidden pr-2 no-scrollbar">
+        <nav className="flex flex-col gap-6 overflow-y-auto pr-2 no-scrollbar flex-1 pb-4">
           {mainNavItems.map(item => {
             const hasChildren = item.children && item.children.length > 0;
             const isExpanded = expandedItems.includes(item.label);
@@ -442,13 +437,13 @@ export function Header() {
                   )}
                 >
                   <div className="overflow-hidden">
-                    <div className="flex flex-col gap-3 pl-4 pb-2">
+                    <div className="flex flex-col gap-3 pl-4 pb-2 border-l border-white/5 ml-1">
                       {item.children?.map(child => (
                         <Link
                           key={child.label}
                           href={child.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="text-xs font-medium uppercase tracking-[0.2em] text-white/30 hover:text-amber-500 transition-all py-1"
+                          className="text-sm font-medium uppercase tracking-[0.2em] text-white/30 hover:text-amber-500 transition-all py-2"
                         >
                           {child.label}
                         </Link>
@@ -459,25 +454,25 @@ export function Header() {
               </div>
             );
           })}
-
-          {/* Action Buttons */}
-          <div className="flex flex-col gap-3 pt-4">
-            <Link
-              href={getLocalizedPath('/prayer-requests')}
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full py-5 rounded-xl border border-white/10 text-center text-lg font-medium uppercase tracking-[0.2em] text-white/90 hover:bg-white hover:text-black transition-all"
-            >
-              {language === 'UA' ? 'Написати записку' : 'Write a Note'}
-            </Link>
-            <Link
-              href={getLocalizedPath('/donate')}
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full py-5 rounded-xl bg-amber-600 text-black text-center text-lg font-medium uppercase tracking-[0.2em] hover:bg-white transition-all"
-            >
-              {t('nav.donate')}
-            </Link>
-          </div>
         </nav>
+
+        {/* Action Buttons Pinned to Bottom */}
+        <div className="flex flex-col gap-4 pt-6 shrink-0 border-t border-white/5 mt-4">
+          <Link
+            href={getLocalizedPath('/prayer-requests')}
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-full py-5 rounded-xl border border-white/10 text-center text-lg font-medium uppercase tracking-[0.2em] text-white/90 hover:bg-white hover:text-black transition-all"
+          >
+            {language === 'UA' ? 'Написати записку' : 'Write a Note'}
+          </Link>
+          <Link
+            href={getLocalizedPath('/donate')}
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-full py-5 rounded-xl bg-amber-600 text-black text-center text-xl font-black uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_10px_30px_rgba(217,119,6,0.3)]"
+          >
+            {t('nav.donate')}
+          </Link>
+        </div>
       </div>
 
       {/* Search Modal */}

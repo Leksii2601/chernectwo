@@ -140,12 +140,12 @@ export default function PrayerNotePage() {
 
                                 {/* Title */}
                                 <div className="text-center mb-4">
-                                    <h2 className={`font-serif text-2xl font-bold uppercase tracking-widest ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
+                                    <h2 className={`font-montserrat text-2xl font-bold uppercase tracking-widest ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
                                         {noteType === 'health' ? t('prayer.health') : t('prayer.repose')}
                                     </h2>
                                     {/* Service Type Subtitle */}
                                     {selectedService.id !== 'simple' && (
-                                        <p className={`font-serif text-[10px] font-bold uppercase tracking-wider mt-1 ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
+                                        <p className={`font-montserrat text-[10px] font-bold uppercase tracking-wider mt-1 ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
                                             ({getServiceName(selectedService)})
                                         </p>
                                     )}
@@ -158,7 +158,7 @@ export default function PrayerNotePage() {
                                         <div key={index} className={`h-7 flex items-end relative group border-b ${noteType === 'health' ? 'border-[#D22626]' : 'border-black'}`}>
                                             {names[index] ? (
                                                 <div className="w-full flex justify-center items-center text-lg relative">
-                                                    <span className="text-black font-serif italic text-base">{names[index]}</span>
+                                                    <span className="text-black font-montserrat italic text-base">{names[index]}</span>
                                                     <button
                                                         onClick={() => removeName(index)}
                                                         className="absolute right-0 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-600"
@@ -183,7 +183,7 @@ export default function PrayerNotePage() {
                                             height={80}
                                             className={`w-full h-auto object-contain mb-2 ${noteType === 'repose' ? 'grayscale opacity-80' : ''}`}
                                         />
-                                        <p className={`text-[10px] font-serif font-bold uppercase ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
+                                        <p className={`text-[10px] font-montserrat font-bold uppercase ${noteType === 'health' ? 'text-[#D22626]' : 'text-black'}`}>
                                             Sacred St. Nicholas<br />Zhydychyn Monastery
                                         </p>
                                     </div>

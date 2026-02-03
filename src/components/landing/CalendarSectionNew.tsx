@@ -162,7 +162,7 @@ export function CalendarSectionNew() {
                                                     {/* Vespers */}
                                                     {selectedDayData.readingsStructured.vespers && selectedDayData.readingsStructured.vespers.readings.length > 0 && (
                                                         <div className="mb-3">
-                                                            <div className="font-bold text-amber-800 border-b border-amber-200 mb-1">Вечірня:</div>
+                                                            <div className="font-bold text-amber-800 border-b border-amber-600 mb-1">Вечірня:</div>
                                                             <ul className="ml-2 list-disc list-inside text-xs text-gray-700">
                                                                 {selectedDayData.readingsStructured.vespers.readings.map((r: any, i: number) => (
                                                                     <li key={i}>{r.reading}</li>
@@ -205,7 +205,7 @@ export function CalendarSectionNew() {
                                                     {/* Hours */}
                                                     {selectedDayData.readingsStructured.hours && Object.keys(selectedDayData.readingsStructured.hours).length > 0 && (
                                                         <div>
-                                                            <div className="font-bold text-amber-700 border-t border-amber-200 mt-2 pt-1">Часи:</div>
+                                                            <div className="font-bold text-amber-700 border-t border-amber-600 mt-2 pt-1">Часи:</div>
                                                             <div className="ml-2 text-xs grid grid-cols-2 gap-2 mt-1">
                                                                 {Object.entries(selectedDayData.readingsStructured.hours).map(([hName, readings]) => (
                                                                     <div key={hName} className="">

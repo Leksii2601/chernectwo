@@ -147,7 +147,7 @@ export function PilgrimInfo() {
             <div
               key={index}
               onClick={() => openModal(item)}
-              className="group bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-amber-200 transition-all duration-300 cursor-pointer flex items-center justify-between gap-4"
+              className="group bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-amber-600 transition-all duration-300 cursor-pointer flex items-center justify-between gap-4"
             >
               <div className="flex-1">
                 <h3 className="text-xl md:text-2xl font-bold font-montserrat text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
@@ -196,7 +196,7 @@ export function PilgrimInfo() {
                   />
                 )}
                 <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/80 to-transparent">
-                  <h2 className="font-montserrat text-3xl md:text-4xl text-white tracking-wide">
+                  <h2 className="font-montserrat text-2xl md:text-3xl text-white tracking-wide">
                     {selectedItem.fullTitle || selectedItem.title}
                   </h2>
                 </div>

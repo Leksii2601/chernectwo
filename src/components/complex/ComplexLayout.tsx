@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight, X, Info } from 'lucide-react';
-import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { useLanguage } from '@/context/LanguageContext';
+import { TextModal } from '../ui/TextModal';
+import { CircleArrowButton } from '../ui/CircleArrowButton';
 
 type CategoryId = 'temples' | 'monuments' | 'parks' | 'economy' | 'service';
 
@@ -19,9 +20,9 @@ interface ComplexObject {
   categoryId: CategoryId;
   title: string;
   description: string;
+  fullDescription: string;
   previewImage?: string;
   galleryImages: string[];
-  contacts: string;
 }
 
 // CATEGORIES moved inside ComplexLayout for translation
@@ -35,6 +36,18 @@ type TabId = 'overview' | 'gallery';
 export const ComplexLayout = () => {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('temples');
+  const titleRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (titleRef.current) {
+      const offset = 120; // Enough space for the fixed header
+      const elementPosition = titleRef.current.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+      });
+    }
+  }, [activeCategory]);
 
   const CATEGORIES: Category[] = [
     { id: 'temples', label: t('complex.cat_temples') },
@@ -51,7 +64,7 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t1_title'),
       description: t('complex.t1_desc'),
-      previewImage: '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_1.jpg',
+      previewImage: '/media/church-complex/temples/mykolaivskyi/hero.jpg',
       galleryImages: [
         '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_1.jpg',
         '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_2.jpg',
@@ -59,31 +72,35 @@ export const ComplexLayout = () => {
         '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_4.jpg',
         '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_5.jpg',
         '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_6.jpg',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_7.jpg'
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_7.jpg',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_8.jpg',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_9.png',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_10.jpg'
+
       ],
-      contacts: t('complex.t1_contacts')
+      fullDescription: t('complex.t1_full_desc')
     },
     {
       id: 't2',
       categoryId: 'temples',
       title: t('complex.t4_title'),
       description: t('complex.t4_desc'),
-      previewImage: '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.jpg',
+      previewImage: '/media/church-complex/temples/sviatoshynskyi/hero.jpg',
       galleryImages: [
         '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_1.jpg',
         '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_2.jpg',
         '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_3.jpg',
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_4.jpg',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_4.png',
         '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.jpg'
       ],
-      contacts: t('complex.t4_contacts')
+      fullDescription: t('complex.t4_full_desc')
     },
     {
       id: 't3',
       categoryId: 'temples',
       title: t('complex.t3_title'),
       description: t('complex.t3_desc'),
-      previewImage: '/media/church-complex/temples/uspenskyi/uspenskyi_2.jpg',
+      previewImage: '/media/church-complex/temples/uspenskyi/hero.jpg',
       galleryImages: [
         '/media/church-complex/temples/uspenskyi/uspenskyi_1.jpg',
         '/media/church-complex/temples/uspenskyi/uspenskyi_2.jpg',
@@ -93,9 +110,10 @@ export const ComplexLayout = () => {
         '/media/church-complex/temples/uspenskyi/uspenskyi_6.jpg',
         '/media/church-complex/temples/uspenskyi/uspenskyi_7.jpg',
         '/media/church-complex/temples/uspenskyi/uspenskyi_8.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_9.jpg'
+        '/media/church-complex/temples/uspenskyi/uspenskyi_9.jpg',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_10.jpg'
       ],
-      contacts: t('complex.t3_contacts')
+      fullDescription: t('complex.t3_full_desc')
     },
     {
       id: 't4',
@@ -112,7 +130,7 @@ export const ComplexLayout = () => {
         '/media/church-complex/temples/voskresenskyi/voskresenskyi_6.jpg',
         '/media/church-complex/temples/voskresenskyi/voskresenskyi_7.jpg'
       ],
-      contacts: t('complex.t5_contacts')
+      fullDescription: t('complex.t5_full_desc')
     },
 
     // CATEGORY: MONUMENTS
@@ -121,7 +139,7 @@ export const ComplexLayout = () => {
       categoryId: 'monuments',
       title: t('complex.m1_title'),
       description: t('complex.m1_desc'),
-      previewImage: '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_1.jpg',
+      previewImage: '/media/church-complex/monuments/metropolitan-palace/hero.jpg',
       galleryImages: [
         '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_1.jpg',
         '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_2.jpg',
@@ -131,13 +149,14 @@ export const ComplexLayout = () => {
         '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_6.jpg',
         '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_7.jpg'
       ],
-      contacts: t('complex.m1_contacts')
+      fullDescription: t('complex.m1_full_desc')
     },
     {
       id: 'm2',
       categoryId: 'monuments',
       title: t('complex.m2_title'),
       description: t('complex.m2_desc'),
+      previewImage: '/media/church-complex/monuments/great-bell-tower/hero.png',
       galleryImages: [
         '/media/church-complex/monuments/great-bell-tower/great-bell-tower_1.jpg',
         '/media/church-complex/monuments/great-bell-tower/great-bell-tower_2.jpg',
@@ -145,22 +164,26 @@ export const ComplexLayout = () => {
         '/media/church-complex/monuments/great-bell-tower/great-bell-tower_4.jpg',
         '/media/church-complex/monuments/great-bell-tower/great-bell-tower_5.jpg',
         '/media/church-complex/monuments/great-bell-tower/great-bell-tower_6.jpg',
-        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_7.jpg'
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_7.jpg',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_8.png'
       ],
-      contacts: t('complex.m2_contacts')
+      fullDescription: t('complex.m2_full_desc')
     },
     {
       id: 'm4',
       categoryId: 'monuments',
       title: t('complex.m4_title'),
       description: t('complex.m4_desc'),
+      previewImage: '/media/church-complex/monuments/small-bell-tower/hero.jpg',
       galleryImages: [
-        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_1.jpg',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_1.png',
         '/media/church-complex/monuments/small-bell-tower/small-bell-tower_2.jpg',
         '/media/church-complex/monuments/small-bell-tower/small-bell-tower_3.jpg',
-        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_4.jpg'
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_4.jpg',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_5.jpg',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_6.jpg'
       ],
-      contacts: t('complex.m4_contacts')
+      fullDescription: t('complex.m4_full_desc')
     },
     // CATEGORY: PARKS
     {
@@ -168,46 +191,72 @@ export const ComplexLayout = () => {
       categoryId: 'parks',
       title: t('complex.p1_title'),
       description: t('complex.p1_desc'),
+      previewImage: '/media/church-complex/parks/free-people-square/hero.jpg',
       galleryImages: [
         '/media/church-complex/parks/free-people-square/free-people-square_1.jpg',
-        '/media/church-complex/parks/free-people-square/free-people-square_2.jpg',
-        '/media/church-complex/parks/free-people-square/free-people-square_3.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_2.png',
+        '/media/church-complex/parks/free-people-square/free-people-square_3.png',
         '/media/church-complex/parks/free-people-square/free-people-square_4.jpg',
-        '/media/church-complex/parks/free-people-square/free-people-square_5.jpg'
+        '/media/church-complex/parks/free-people-square/free-people-square_5.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_6.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_7.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_8.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_9.jpg',
+
       ],
-      contacts: t('complex.p1_contacts')
+      fullDescription: t('complex.p1_full_desc')
     },
     {
       id: 'p2',
       categoryId: 'parks',
       title: t('complex.p2_title'),
       description: t('complex.p2_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.p2_contacts')
+      previewImage: '/media/church-complex/parks/polycarp-sikorsky-square/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_1.jpg',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_2.png',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_3.jpg',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_4.jpg',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_5.jpg'
+      ],
+      fullDescription: t('complex.p2_full_desc')
     },
     {
       id: 'p4',
       categoryId: 'parks',
       title: t('complex.p4_title'),
       description: t('complex.p4_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.p4_contacts')
+      previewImage: '/media/church-complex/parks/monastery-gardens/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/parks/monastery-gardens/monastery-gardens_1.png',
+        '/media/church-complex/parks/monastery-gardens/monastery-gardens_2.png'
+      ],
+      fullDescription: t('complex.p4_full_desc')
     },
     {
       id: 'p5',
       categoryId: 'parks',
       title: t('complex.p5_title'),
       description: t('complex.p5_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.p5_contacts')
+      previewImage: '/media/church-complex/parks/soborna-square/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/parks/soborna-square/soborna-square_1.jpg',
+        '/media/church-complex/parks/soborna-square/soborna-square_2.png',
+        '/media/church-complex/parks/soborna-square/soborna-square_3.jpg',
+        '/media/church-complex/parks/soborna-square/soborna-square_4.jpg'
+      ],
+      fullDescription: t('complex.p5_full_desc')
     },
     {
       id: 'p3',
       categoryId: 'parks',
       title: t('complex.p3_title'),
       description: t('complex.p3_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.p3_contacts')
+      previewImage: '/media/church-complex/parks/roman-skyra-square/roman-skyra-square_1.png',
+      galleryImages: [
+        '/media/church-complex/parks/roman-skyra-square/roman-skyra-square_1.png'
+      ],
+      fullDescription: t('complex.p3_full_desc')
     },
 
     // CATEGORY: SERVICE
@@ -216,24 +265,44 @@ export const ComplexLayout = () => {
       categoryId: 'service',
       title: t('complex.e2_title'),
       description: t('complex.e2_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.e2_contacts')
+      previewImage: '/media/church-complex/service/zhydychyn-center/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_1.png',
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_2.png',
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_3.jpg',
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_4.jpg',
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_5.jpg'
+      ],
+      fullDescription: t('complex.e2_full_desc')
     },
     {
       id: 'e5',
       categoryId: 'service',
       title: t('complex.e5_title'),
       description: t('complex.e5_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.e5_contacts')
+      previewImage: '/media/church-complex/service/resilience_centre/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/service/resilience_centre/resilience_centre_1.jpg',
+        '/media/church-complex/service/resilience_centre/resilience_centre_2.jpg',
+        '/media/church-complex/service/resilience_centre/resilience_centre_3.jpg'
+      ],
+      fullDescription: t('complex.e5_full_desc')
     },
     {
       id: 'e4',
       categoryId: 'service',
       title: t('complex.e4_title'),
       description: t('complex.e4_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.e4_contacts')
+      previewImage: '/media/church-complex/service/play_ground/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/service/play_ground/play_ground_1.jpg',
+        '/media/church-complex/service/play_ground/play_ground_2.jpg',
+        '/media/church-complex/service/play_ground/play_ground_3.jpg',
+        '/media/church-complex/service/play_ground/play_ground_4.jpg',
+        '/media/church-complex/service/play_ground/play_ground_5.jpg',
+        '/media/church-complex/service/play_ground/play_ground_6.jpg'
+      ],
+      fullDescription: t('complex.e4_full_desc')
     },
     {
       id: 'e6',
@@ -241,15 +310,20 @@ export const ComplexLayout = () => {
       title: t('complex.e6_title'),
       description: t('complex.e6_desc'),
       galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.e6_contacts')
+      fullDescription: t('complex.e6_full_desc')
     },
     {
       id: 'e3',
       categoryId: 'service',
       title: t('complex.e3_title'),
       description: t('complex.e3_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.e3_contacts')
+      previewImage: '/media/church-complex/service/toilet/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/service/toilet/toilet_1.jpg',
+        '/media/church-complex/service/toilet/toilet_2.jpg',
+        '/media/church-complex/service/toilet/toilet_3.jpg'
+      ],
+      fullDescription: t('complex.e3_full_desc')
     },
     {
       id: 'e1',
@@ -257,7 +331,7 @@ export const ComplexLayout = () => {
       title: t('complex.e1_title'),
       description: t('complex.e1_desc'),
       galleryImages: ['/media/church-complex.jpg'],
-      contacts: t('complex.e1_contacts')
+      fullDescription: t('complex.e1_full_desc')
     },
   ];
 
@@ -266,12 +340,14 @@ export const ComplexLayout = () => {
     categoryId: 'economy',
     title: t('complex.economy_title'),
     description: t('complex.economy_desc'),
-    previewImage: '/media/church-complex/economy/economy_1.jpg',
+    previewImage: '/media/church-complex/economy/hero.jpg',
     galleryImages: [
       '/media/church-complex/economy/economy_1.jpg',
-      '/media/church-complex/economy/economy_2.jpg'
+      '/media/church-complex/economy/economy_2.jpg',
+      '/media/church-complex/economy/economy_3.jpg',
+      '/media/church-complex/economy/economy_4.jpg'
     ],
-    contacts: ''
+    fullDescription: t('complex.economy_full_desc')
   };
 
   const filteredObjects = activeCategory === 'economy'
@@ -292,7 +368,7 @@ export const ComplexLayout = () => {
                 className={`
                     px-5 py-2.5 rounded-full whitespace-nowrap text-sm font-bold uppercase tracking-wide transition-all shadow-sm
                     ${activeCategory === category.id
-                    ? 'bg-orange-600 text-white shadow-md transform scale-105'
+                    ? 'bg-amber-600 text-white shadow-md transform scale-105'
                     : 'bg-transparent text-gray-500 border border-gray-200 hover:border-gray-400'}
                   `}
               >
@@ -310,7 +386,7 @@ export const ComplexLayout = () => {
                 className={`
                     text-left px-6 py-4 text-base uppercase tracking-wider transition-all duration-300 -ml-[2px] border-l-2
                     ${activeCategory === category.id
-                    ? 'border-orange-600 text-orange-700 font-bold pl-8'
+                    ? 'border-amber-600 text-amber-600 font-bold pl-8'
                     : 'border-transparent text-gray-500 hover:text-gray-800 hover:pl-8'}
                   `}
               >
@@ -323,11 +399,11 @@ export const ComplexLayout = () => {
 
       {/* Content Area */}
       <div className="flex-grow min-h-[600px] w-full">
-        <div className="mb-10 lg:pl-10">
+        <div className="mb-10 lg:pl-10" ref={titleRef}>
           <h2 className="text-4xl font-montserrat text-gray-900 mb-4 uppercase">
             {CATEGORIES.find(c => c.id === activeCategory)?.label}
           </h2>
-          <div className="h-1 w-16 bg-orange-600"></div>
+          <div className="h-1 w-16 bg-amber-600"></div>
         </div>
 
         <div className="space-y-12 animate-fade-in w-full">
@@ -396,7 +472,7 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
 
   return (
     <>
-      <div className="bg-white group rounded-none border border-gray-100 hover:border-orange-100 transition-colors duration-300 overflow-hidden shadow-sm min-h-[400px]">
+      <div className="bg-white group rounded-none border border-gray-100 hover:border-amber-100 transition-colors duration-300 overflow-hidden shadow-sm min-h-[400px]">
         <div className="flex flex-col lg:flex-row h-full relative">
 
           {/* Left Content Section */}
@@ -416,12 +492,12 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
                     onClick={() => setActiveTab(tab.id)}
                     className={clsx(
                       "py-4 text-xs font-bold uppercase tracking-widest transition-all relative",
-                      activeTab === tab.id ? "text-orange-600" : "text-gray-400 hover:text-gray-600"
+                      activeTab === tab.id ? "text-amber-600" : "text-gray-400 hover:text-gray-600"
                     )}
                   >
                     {tab.label}
                     <span className={clsx(
-                      "absolute bottom-0 left-0 w-full h-0.5 bg-orange-600 transform transition-transform duration-300",
+                      "absolute bottom-0 left-0 w-full h-0.5 bg-amber-600 transform transition-transform duration-300",
                       activeTab === tab.id ? "scale-x-100" : "scale-x-0"
                     )}></span>
                   </button>
@@ -450,15 +526,11 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
                   <p className="text-gray-600 leading-relaxed font-light text-xl mb-8">
                     {object.description}
                   </p>
-                  <button
+                  <CircleArrowButton
+                    text={t('complex.details')}
                     onClick={() => setIsModalOpen(true)}
-                    className="group flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-gray-800 hover:text-orange-600 transition-colors w-fit"
-                  >
-                    <div className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:border-orange-600 transition-colors">
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                    <span className="group-hover:pl-2 transition-all duration-300">{t('complex.details')}</span>
-                  </button>
+                    variant="dark"
+                  />
                 </div>
 
                 {/* GALLERY CONTENT */}
@@ -532,59 +604,29 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
         </div>
       </div>
 
-      {/* MODAL via Portal */}
-      {isModalOpen && createPortal(
-        <div className={`
-            fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-opacity duration-300
-            ${isClosingModal ? 'opacity-0' : 'opacity-100 animate-in fade-in'}
-        `}>
-          <div className="absolute inset-0" onClick={closeModal} /> {/* Click outside to close */}
-
-          <div className={`
-                bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-hidden relative shadow-2xl flex flex-col transition-all duration-300
-                ${isClosingModal ? 'scale-95 opacity-0 translate-y-4' : 'scale-100 opacity-100 translate-y-0 animate-in zoom-in-95 slide-in-from-bottom-4'}
-            `}>
-
-            <button
-              onClick={closeModal}
-              className="absolute right-4 top-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors z-20"
-            >
-              <X className="w-6 h-6 text-gray-800" />
-            </button>
-
-            <div className="w-full p-8 md:p-12 bg-white overflow-y-auto custom-scrollbar font-montserrat">
-              <div className="flex items-center gap-2 mb-6">
-                <Info className="w-5 h-5 text-orange-600" />
-                <span className="text-sm font-bold uppercase tracking-widest text-gray-500">{t('complex.detailed_info')}</span>
-              </div>
-
-              <h3 className="text-3xl font-bold font-montserrat text-gray-900 mb-6 uppercase">{object.title}</h3>
-
-              <div className="prose prose-orange text-gray-600 leading-relaxed mb-8">
-                <p className="text-lg">{object.description}</p>
-                <p>
-                  {t('complex.modal_extended_desc')}
-                </p>
-              </div>
-
-              {object.contacts && (
-                <div className="bg-orange-50 p-6 rounded-lg mb-8 border border-orange-100">
-                  <h4 className="font-bold text-orange-900 mb-2 uppercase text-xs tracking-wider">{t('complex.contacts_info')}</h4>
-                  <p className="text-orange-800 font-medium">{object.contacts}</p>
-                </div>
-              )}
-
-              <button
-                onClick={closeModal}
-                className="w-full py-4 bg-gray-900 text-white rounded-lg hover:bg-orange-700 transition-colors text-sm font-bold uppercase tracking-wider"
-              >
-                {t('generic.close')}
-              </button>
-            </div>
+      <TextModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        title={object.title}
+      >
+        <div className="space-y-8 font-montserrat">
+          <div className="flex items-center gap-2 mb-2">
+            <Info className="w-5 h-5 text-amber-600" />
+            <span className="text-sm font-bold uppercase tracking-widest text-gray-500">{t('complex.detailed_info')}</span>
           </div>
-        </div>,
-        document.body
-      )}
+
+          <div className="prose prose-amber max-w-none text-gray-600 leading-relaxed mb-8 whitespace-pre-wrap">
+            <p className="text-lg text-justify">{object.fullDescription || object.description}</p>
+          </div>
+
+          <button
+            onClick={closeModal}
+            className="w-full py-4 bg-black text-white rounded-3xl hover:bg-amber-600 transition-all shadow-lg hover:shadow-xl text-xs font-bold uppercase tracking-widest"
+          >
+            {t('generic.close')}
+          </button>
+        </div>
+      </TextModal>
     </>
   );
 };

@@ -54,10 +54,6 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
   return (
     <section id="news-section" className="bg-gray-50 font-montserrat text-gray-900 pb-12">
       <div className="max-w-[1920px] mx-auto p-4 md:p-6 lg:px-[80px]">
-        <h2 className="font-montserrat font-bold text-3xl md:text-5xl uppercase tracking-widest text-center mb-10 text-gray-900">
-          {title || t('news.title')}
-        </h2>
-
         {/* Mobile Search Bar - Shows at top only on mobile */}
         {showSearch && (
           <div className="lg:hidden mb-6">
@@ -85,10 +81,10 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
-                      <div className="border-b border-amber-200 pb-2 mb-3">
+                      <div className="border-b border-amber-600 pb-2 mb-3">
                         <p className="text-sm text-gray-500 font-montserrat">{item.date}</p>
                       </div>
-                      <h3 className="text-lg font-serif font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-3">
+                      <h3 className="text-lg font-montserrat font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-3">
                         {item.title}
                       </h3>
                     </Link>
@@ -147,7 +143,7 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
                   />
                 </div>
                 <div className="flex flex-col justify-center w-full">
-                  <div className="border-b border-amber-200 pb-2 mb-3">
+                  <div className="border-b border-amber-600 pb-2 mb-3">
                     <p className="text-gray-400 text-xs uppercase font-bold tracking-wide">{item.date}</p>
                   </div>
                   <h3 className="text-gray-900 font-bold text-base leading-snug group-hover:text-amber-600 transition-colors line-clamp-3">

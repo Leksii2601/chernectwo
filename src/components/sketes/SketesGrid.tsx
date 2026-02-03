@@ -1,11 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
+import { TextModal } from '../ui/TextModal';
+import { CircleArrowButton } from '../ui/CircleArrowButton';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useInView } from 'react-intersection-observer';
-import { useLanguage } from '@/context/LanguageContext';
 
 // Data moved inside component
 
@@ -36,6 +39,8 @@ export const SketesGrid = () => {
             link: '#life-bearing'
         },
     ];
+
+    const [selectedSkete, setSelectedSkete] = useState<any>(null);
 
     return (
         <div className="w-full relative">
@@ -128,16 +133,11 @@ const SketeItem = ({ skete, isMobile }: { skete: any, isMobile: boolean }) => {
                         {skete.description}
                     </p>
 
-                    <Link href={skete.link} className="inline-flex items-center gap-4 group/btn w-fit">
-                        {/* Button Circle */}
-                        <div className="w-12 h-12 rounded-full border border-white flex items-center justify-center transition-all duration-300 group-hover/btn:bg-white group-hover/btn:border-transparent">
-                            <ArrowRight className="w-5 h-5 text-white transition-colors duration-300 group-hover/btn:text-black" />
-                        </div>
-                        {/* Button Text */}
-                        <span className="uppercase tracking-widest text-sm font-bold transition-transform duration-300 group-hover/btn:translate-x-2">
-                            {t('skete.details')}
-                        </span>
-                    </Link>
+                    <CircleArrowButton
+                        text={t('skete.details')}
+                        href={skete.link}
+                        variant="light"
+                    />
                 </div>
             </div>
         </div>

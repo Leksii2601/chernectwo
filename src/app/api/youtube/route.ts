@@ -51,7 +51,7 @@ async function fetchYouTubeData(forceRefresh = false) {
     const liveSearchRes = await fetch(liveSearchUrl, shortCacheOptions);
     const liveSearchData = await liveSearchRes.json();
 
-    let liveNowId = liveSearchData?.items?.[0]?.id?.videoId || null;
+    const liveNowId = liveSearchData?.items?.[0]?.id?.videoId || null;
 
     if (!playlistData.items && !liveNowId) {
         return { videos: [], streams: [], liveNow: false, rawStats: { itemsFetched: 0 } };

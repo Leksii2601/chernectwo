@@ -11,6 +11,13 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        amber: {
+          400: "#d2ae6d",
+          500: "#d2ae6d",
+          600: "var(--amber-600)",
+          700: "#d2ae6d",
+          800: "#d2ae6d",
+        },
       },
       fontFamily: {
         sans: ['"Open Sans"', 'sans-serif'],

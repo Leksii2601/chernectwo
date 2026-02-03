@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { X, Calendar, Plus } from 'lucide-react';
+import { X, Calendar } from 'lucide-react';
 
 interface HistoryEvent {
     year: string;
@@ -16,6 +16,7 @@ interface HistoryEvent {
 }
 
 import { useLanguage } from '@/context/LanguageContext';
+import { PhotoInfoModal } from '../ui/PhotoInfoModal';
 
 const TIMELINE_DATA_UA: HistoryEvent[] = [
     {
@@ -547,7 +548,7 @@ export const HistoryTimeline = () => {
                 {/* Wrapped in a container that matches the static track's geometry so 100% height reaches exactly the end point */}
                 <div className="absolute left-4 lg:left-1/2 top-0 bottom-[35vw] lg:bottom-[15vw] w-[3px] -translate-x-[120%] lg:-translate-x-1/2 z-10 pointer-events-none overflow-hidden">
                     <div
-                        className="w-full bg-gradient-to-b from-amber-400 to-amber-600 shadow-[0_0_15px_rgba(217,119,6,0.5)] transition-[height] duration-500 ease-out"
+                        className="w-full bg-gradient-to-b from-amber-600 to-amber-600 shadow-[0_0_15px_rgba(217,119,6,0.5)] transition-[height] duration-500 ease-out"
                         style={{ height: `${scrollPercentage}%` }}
                     ></div>
                 </div>
@@ -605,12 +606,12 @@ export const HistoryTimeline = () => {
                                     {/* The checkpoint ring */}
                                     <div
                                         className={`relative w-6 h-6 lg:w-8 lg:h-8 rounded-full border-[3px] transition-all duration-500 ease-out bg-white
-                                            ${isPassed ? 'border-amber-500' : 'border-gray-300'}
-                                            ${isSnapped ? 'scale-125 border-amber-500' : ''}
+                                            ${isPassed ? 'border-amber-600' : 'border-gray-300'}
+                                            ${isSnapped ? 'scale-125 border-amber-600' : ''}
                                         `}
                                     >
                                         <div className={`absolute inset-[3px] rounded-full transition-all duration-500 ease-out
-                                            ${isSnapped || isPassed ? 'bg-amber-500 scale-100 opacity-100' : 'bg-transparent scale-0 opacity-0'}
+                                            ${isSnapped || isPassed ? 'bg-amber-600 scale-100 opacity-100' : 'bg-transparent scale-0 opacity-0'}
                                         `}></div>
                                     </div>
 
@@ -618,7 +619,7 @@ export const HistoryTimeline = () => {
                                     <div className={`absolute h-px w-8 lg:w-24 top-1/2 -translate-y-1/2 transition-all duration-500
                                         left-full
                                         ${!isRight ? 'lg:right-full lg:left-auto' : ''}
-                                        ${isPassed ? 'bg-amber-500' : 'bg-gray-300'}
+                                        ${isPassed ? 'bg-amber-600' : 'bg-gray-300'}
                                     `}></div>
                                 </div>
 
@@ -636,7 +637,7 @@ export const HistoryTimeline = () => {
                                         <div className={`
                                             relative overflow-hidden rounded-2xl lg:rounded-full shadow-lg transition-all duration-500
                                             w-full aspect-video md:w-48 md:h-48 lg:w-[15vw] lg:h-[15vw]
-                                            ${isPassed ? 'border-amber-400' : 'border-white'}
+                                            ${isPassed ? 'border-amber-600' : 'border-white'}
                                             group-hover:shadow-xl group-hover:scale-105
                                             order-1 
                                             ${ /* Desktop Positioning Logic - REMOVED ABSOLUTE POSITIONING TO PREVENTION OVERLAP */
@@ -664,7 +665,7 @@ export const HistoryTimeline = () => {
                                                 </span>
                                             </div>
 
-                                            <h4 className={`text-lg md:text-xl lg:text-[1.2vw] font-bold font-serif uppercase tracking-wide transition-colors duration-500
+                                            <h4 className={`text-lg md:text-xl lg:text-[1.2vw] font-bold font-montserrat uppercase tracking-wide transition-colors duration-500
                                                 ${isPassed ? 'text-gray-900' : 'text-gray-600'}
                                             `}>
                                                 {item.title}
@@ -697,14 +698,14 @@ export const HistoryTimeline = () => {
                         {/* Creative Animation Node */}
                         <div className="absolute left-4 lg:left-1/2 bottom-[35vw] lg:bottom-[15vw] -translate-x-[120%] lg:-translate-x-1/2 flex items-center justify-center">
                             {/* Outer Ring */}
-                            <div className="absolute w-[16vw] h-[16vw] lg:w-[8vw] lg:h-[8vw] rounded-full border border-amber-500/30 animate-[spin_10s_linear_infinite]"></div>
-                            <div className="absolute w-[16vw] h-[16vw] lg:w-[8vw] lg:h-[8vw] rounded-full border-t border-b border-amber-500/60 animate-[spin_5s_linear_infinite_reverse]"></div>
+                            <div className="absolute w-[16vw] h-[16vw] lg:w-[8vw] lg:h-[8vw] rounded-full border border-amber-600/30 animate-[spin_10s_linear_infinite]"></div>
+                            <div className="absolute w-[16vw] h-[16vw] lg:w-[8vw] lg:h-[8vw] rounded-full border-t border-b border-amber-600/60 animate-[spin_5s_linear_infinite_reverse]"></div>
 
                             {/* Pulse Waves */}
-                            <div className="absolute w-[8vw] h-[8vw] lg:w-[4vw] lg:h-[4vw] bg-amber-500/20 rounded-full animate-ping"></div>
+                            <div className="absolute w-[8vw] h-[8vw] lg:w-[4vw] lg:h-[4vw] bg-amber-600/20 rounded-full animate-ping"></div>
 
                             {/* Core */}
-                            <div className="relative w-[6vw] h-[6vw] lg:w-[3vw] lg:h-[3vw] bg-amber-500 rounded-full shadow-[0_0_30px_rgba(245,158,11,0.8)] flex items-center justify-center">
+                            <div className="relative w-[6vw] h-[6vw] lg:w-[3vw] lg:h-[3vw] bg-amber-600 rounded-full shadow-[0_0_30px_rgba(245,158,11,0.8)] flex items-center justify-center">
                                 <div className="w-[3vw] h-[3vw] lg:w-[1.5vw] lg:h-[1.5vw] bg-white rounded-full animate-pulse"></div>
                             </div>
                         </div>
@@ -723,53 +724,35 @@ export const HistoryTimeline = () => {
 
             </div>
 
-            {/* MODAL */}
-            {selectedEvent && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
-                    <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative shadow-2xl flex flex-col md:flex-row">
+            <PhotoInfoModal
+                isOpen={!!selectedEvent}
+                onClose={() => setSelectedEvent(null)}
+                title={selectedEvent?.title || ''}
+                image={selectedEvent?.image}
+                gallery={selectedEvent?.gallery}
+            >
+                {selectedEvent && (
+                    <div className="space-y-6">
+                        <div className="flex items-center gap-2">
+                            <Calendar className="w-5 h-5 text-amber-600" />
+                            <span className="text-xl font-black text-amber-600 font-church">{selectedEvent.year}</span>
+                            <span className="mx-2 text-gray-300">|</span>
+                            <span className="text-sm font-bold uppercase tracking-widest text-gray-500">{t('history.event_label')}</span>
+                        </div>
+
+                        <div className="prose prose-amber text-gray-700 leading-relaxed text-lg pt-4 border-t border-gray-100">
+                            <p>{selectedEvent.fullDescription}</p>
+                        </div>
 
                         <button
                             onClick={() => setSelectedEvent(null)}
-                            className="absolute right-4 top-4 p-2 bg-white/50 rounded-full hover:bg-white transition-colors z-10"
+                            className="w-full py-4 bg-black text-white rounded-3xl hover:bg-amber-600 transition-all shadow-lg hover:shadow-xl text-xs font-bold uppercase tracking-widest"
                         >
-                            <X className="w-6 h-6 text-gray-800" />
+                            {t('history.close')}
                         </button>
-
-                        <div className="w-full md:w-1/2 h-64 md:h-auto relative">
-                            <Image
-                                src={selectedEvent.image}
-                                alt={selectedEvent.title}
-                                fill
-                                className="object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
-                                <h2 className="text-5xl font-bold text-white font-church">{selectedEvent.year}</h2>
-                            </div>
-                        </div>
-
-                        <div className="w-full md:w-1/2 p-8 md:p-12 bg-white">
-                            <div className="flex items-center gap-2 mb-6">
-                                <Calendar className="w-5 h-5 text-amber-600" />
-                                <span className="text-sm font-bold uppercase tracking-widest text-gray-500">{t('history.event_label')}</span>
-                            </div>
-
-                            <h3 className="text-3xl font-bold font-serif text-gray-900 mb-6">{selectedEvent.title}</h3>
-
-                            <div className="prose prose-amber text-gray-600 leading-relaxed mb-8">
-                                <p>{selectedEvent.fullDescription}</p>
-                            </div>
-
-                            <button
-                                onClick={() => setSelectedEvent(null)}
-                                className="px-8 py-3 bg-gray-900 text-white rounded-lg hover:bg-amber-700 transition-colors text-sm font-bold uppercase tracking-wider"
-                            >
-                                {t('history.close')}
-                            </button>
-                        </div>
-
                     </div>
-                </div>
-            )}
+                )}
+            </PhotoInfoModal>
         </div>
     );
 };

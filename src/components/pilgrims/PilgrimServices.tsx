@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { X, ArrowRight, ArrowLeft, Info } from 'lucide-react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { PhotoInfoModal } from '../ui/PhotoInfoModal';
 
 export interface ServiceItem {
   id: string;
@@ -234,102 +235,51 @@ export function PilgrimServices() {
 
 
       {/* Modal */}
-      {selectedItem && (
-        <div
-          className={`fixed inset-0 z-[100] overflow-y-auto bg-black/60 backdrop-blur-md ${isClosing ? 'animate-fadeOut' : 'animate-fadeIn'}`}
-          onClick={closeModal}
-        >
-          <div className="min-h-full w-full flex justify-center p-4 py-8">
-            <div
-              className={`bg-white w-full max-w-4xl rounded-3xl shadow-2xl relative my-auto ${isClosing ? 'animate-modalOut' : 'animate-modalIn'}`}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={closeModal}
-                className="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-white/90 shadow-lg text-black hover:bg-white hover:scale-110 flex items-center justify-center transition-all"
-              >
-                <X className="w-6 h-6" />
-              </button>
-
-              {/* Hero Image */}
-              <div className="relative h-[300px] w-full bg-gray-100 rounded-t-3xl overflow-hidden group">
-                {selectedItem.gallery && selectedItem.gallery.length > 0 && (
-                  <Image
-                    src={selectedItem.gallery[currentGalleryIndex]}
-                    alt={selectedItem.title}
-                    fill
-                    className="object-cover"
-                  />
-                )}
-                <div className="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-black/80 to-transparent">
-                  <h2 className="font-montserrat text-3xl md:text-4xl text-white tracking-wide">
-                    {selectedItem.fullTitle}
-                  </h2>
-                </div>
-
-                {/* Gallery Arrows inside header if multiple images */}
-                {selectedItem.gallery && selectedItem.gallery.length > 1 && (
-                  <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <button
-                      onClick={prevImage}
-                      className="bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-3 rounded-full transition-all"
-                    >
-                      <ArrowLeft className="w-6 h-6" />
-                    </button>
-                    <button
-                      onClick={nextImage}
-                      className="bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-3 rounded-full transition-all"
-                    >
-                      <ArrowRight className="w-6 h-6" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              <div className="p-8 md:p-12">
-                <div className="space-y-8">
-                  <div>
-                    <h3 className="font-montserrat text-2xl mb-4 font-bold border-b pb-2 inline-block border-amber-500">
-                      {t('pilgrims.description_label')}
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed font-sans text-lg whitespace-pre-line">
-                      {selectedItem.description}
-                    </p>
-                  </div>
-
-                  {selectedItem.details && selectedItem.details.length > 0 && (
-                    <div>
-                      <h3 className="font-montserrat text-xl mb-4 font-bold">
-                        {t('pilgrims.details')}:
-                      </h3>
-                      <ul className="space-y-3">
-                        {selectedItem.details.map((detail, idx) => (
-                          <li key={idx} className="flex items-start gap-3 text-gray-700 text-lg">
-                            <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
-                            <span>{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* Optional: Add "Book Now" or "Contact" button if it's an excursion */}
-                  {selectedItem.id.startsWith('excursion') && (
-                    <div className="pt-6 border-t border-gray-100 flex justify-end">
-                      <Link
-                        href="/contacts"
-                        className="bg-black text-white px-8 py-3 rounded-full hover:bg-amber-600 transition-colors font-bold tracking-wider uppercase"
-                      >
-                        {t('pilgrims.book_button')}
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+      <PhotoInfoModal
+        isOpen={!!selectedItem}
+        onClose={closeModal}
+        title={selectedItem?.fullTitle || ''}
+        gallery={selectedItem?.gallery}
+      >
+        <div className="space-y-8">
+          <div>
+            <h3 className="font-montserrat text-2xl mb-4 font-bold border-b pb-2 inline-block border-amber-500">
+              {t('pilgrims.description_label')}
+            </h3>
+            <p className="text-gray-700 leading-relaxed font-sans text-lg whitespace-pre-line">
+              {selectedItem?.description}
+            </p>
           </div>
+
+          {selectedItem?.details && selectedItem.details.length > 0 && (
+            <div>
+              <h3 className="font-montserrat text-xl mb-4 font-bold">
+                {t('pilgrims.details')}:
+              </h3>
+              <ul className="space-y-3">
+                {selectedItem.details.map((detail, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-gray-700 text-lg">
+                    <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Optional: Add "Book Now" or "Contact" button if it's an excursion */}
+          {selectedItem?.id.startsWith('excursion') && (
+            <div className="pt-6 border-t border-gray-100 flex justify-end">
+              <Link
+                href="/contacts"
+                className="bg-black text-white px-8 py-3 rounded-full hover:bg-amber-600 transition-colors font-bold tracking-wider uppercase"
+              >
+                {t('pilgrims.book_button')}
+              </Link>
+            </div>
+          )}
         </div>
-      )}
+      </PhotoInfoModal>
     </section>
   );
 }

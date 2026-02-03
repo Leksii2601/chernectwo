@@ -298,7 +298,7 @@ export function isRoyalHoursDay(nday: number, mmdd: string, dow: number): boolea
     return false;
 }
 
-export function ensureRoyalHours(target: GranularReadings, date: Date) {
+export function ensureRoyalHours(target: GranularReadings, _date: Date) {
     if (!target.hours) target.hours = {};
     const label = "Цар. Год.";
     ['prime', 'terce', 'sexte', 'none'].forEach((h: any) => {
@@ -370,8 +370,8 @@ function extractPonomarReadings(source: any, target: GranularReadings, labelPref
     if (source.matins) {
         if (!target.matins) target.matins = { title: "Рання", readings: [] };
         source.matins.forEach((r: any) => {
-            const isGospel = r.Type === 'gospel' || r.Reading?.match(/^(Мф\.|Мк\.|Лк\.|Ін\.)/);
-            const lbl = isGospel ? "Раннє Євангеліє" : labelPrefix;
+            // const isGospel = r.Type === 'gospel' || r.Reading?.match(/^(Мф\.|Мк\.|Лк\.|Ін\.)/); // Unused
+            // const lbl = isGospel ? "Раннє Євангеліє" : labelPrefix; // lbl unused
             process(r, target.matins!.readings);
         });
     }
@@ -411,8 +411,8 @@ function getEothinonIndex(date: Date, paschaPrev: Date): number {
 
 export function calculateDynamicReadings(date: Date): DayReadings {
     const mmdd = formatMonthDay(date);
-    let { key } = getLectionaryKeyInfo(date);
-    const { description, effWeek, nday } = getLectionaryKeyInfo(date);
+    const { key } = getLectionaryKeyInfo(date);
+    const { description, nday } = getLectionaryKeyInfo(date);
 
     // DEBUG: Print nday as requested
     // console.log(`[DEBUG] Date: ${mmdd}, nday: ${nday}, Key: ${key}`);
@@ -486,7 +486,7 @@ export function calculateDynamicReadings(date: Date): DayReadings {
     // if (mmdd === "02-02") suppressOrdinary = true;
 
     // Triodion Sunday Rule
-    const isTriodionSunday = (nday === -70 || nday === -63 || nday === -56 || nday === -49);
+    // const isTriodionSunday = (nday === -70 || nday === -63 || nday === -56 || nday === -49); // Unused
     // --- TYPIKON RULE ENGINE (Antigravity v2) ---
     const activeRules: TypikonRule[] = [];
 
@@ -497,7 +497,7 @@ export function calculateDynamicReadings(date: Date): DayReadings {
         if (rule.triggers.nday && rule.triggers.nday.includes(nday)) active = true;
 
         if (active) {
-            console.log(`[TypikonRule] Applying: ${rule.id}`);
+
             activeRules.push(rule);
         }
     });

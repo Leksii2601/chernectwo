@@ -1,14 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import React from 'react';
 import { Footer } from '@/components/landing/Footer';
 import { PageHeader } from '@/components/PageHeader';
 import { useLanguage } from '@/context/LanguageContext';
-import { DonationTabs } from '@/components/landing/DonationTabs';
-import { Check } from 'lucide-react'; // Needed if we keep the toast logic in page, but tabs handle their own copying. 
-// Actually Tabs has internal copied state. If we want global toast, we need to lift state. 
-// For now, DonationTabs handles simple feedback.
+import { DonationTabs } from '@/components/landing/DonationTabs'; // Ensure this is just the default import
+// Check icon was unused as we rely on DonationTabs internal logic
+// createPortal was unused
+// useState/useEffect unused
 
 export default function DonatePage() {
   const { t } = useLanguage();
