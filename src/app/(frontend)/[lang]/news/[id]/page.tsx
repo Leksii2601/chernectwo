@@ -97,7 +97,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
 
           {/* Right Column: Title & Meta */}
           <div className="lg:col-span-5 flex flex-col">
-            <h1 className="font-montserrat text-3xl md:text-4xl lg:text-5xl leading-tight mb-8 text-gray-900">
+            <h1 className="font-montserrat text-3xl md:text-4xl lg:text-5xl leading-tight mb-8 text-gray-900 uppercase">
               {newsItem.title}
             </h1>
 
@@ -105,7 +105,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
               <div className="text-gray-400 text-sm font-bold uppercase tracking-wider">
                 {newsItem.date}
               </div>
-              <div className="bg-[#7A3E3E] text-white px-3 py-1 text-xs font-bold uppercase tracking-widest rounded-sm">
+              <div className="bg-amber-500 text-white px-3 py-1 text-xs font-bold uppercase tracking-widest rounded-sm">
                 {displayCategory}
               </div>
             </div>

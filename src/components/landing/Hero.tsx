@@ -1,92 +1,210 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react'
-import { clsx } from 'clsx'
-import Image from 'next/image'
-
-const slides = [
-  '/media/hero-1.jpg',
-  '/media/hero-2.png',
-  '/media/hero-3.jpg',
-  '/media/hero-4.jpg',
-  '/media/hero-5.jpg',
-
-]
-
+import React, { useEffect, useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
 export function Hero() {
+  const [mounted, setMounted] = useState(false);
+  const [revealStage, setRevealStage] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
   const { t } = useLanguage();
-  const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 8000)
-    return () => clearInterval(timer)
-  }, [])
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMounted(true);
+    // Stage 1: Curtain starts moving + Background starts reveal
+    const stage1 = setTimeout(() => setRevealStage(1), 50);
+    // Stage 2: Small front photo reveal starts
+    const stage2 = setTimeout(() => setRevealStage(2), 600);
+    // Stage 3: Text reveal starts
+    const stage3 = setTimeout(() => setRevealStage(3), 1500);
+    // Stage 4: Header reveal + Full unlock
+    const stage4 = setTimeout(() => setRevealStage(4), 2800);
+
+    return () => {
+      clearTimeout(stage1);
+      clearTimeout(stage2);
+      clearTimeout(stage3);
+      clearTimeout(stage4);
+      document.body.classList.remove('intro-active');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (revealStage < 4) {
+      document.body.classList.add('intro-active');
+    } else {
+      document.body.classList.remove('intro-active');
+    }
+  }, [revealStage]);
+
+  const curtainDuration = 1400;
+  const easeRef = "cubic-bezier(0.77, 0, 0.175, 1)";
+  const easeExpo = "cubic-bezier(0.19, 1, 0.22, 1)";
+
+  // If hero title translation contains \n, we split it for better layout
+  const titleLines = t('hero.title').split('\n');
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-black text-white">
-      {/* Background Slider */}
-      {slides.map((slide, index) => (
+    <div className={`relative w-full h-screen overflow-hidden bg-black ${revealStage < 4 ? 'intro-active' : ''}`}>
+
+      {/* Curtain - Reveals the site */}
+      <aside
+        className="fixed inset-0 z-[1000] bg-white pointer-events-none"
+        style={{
+          transition: `transform ${curtainDuration}ms ${easeRef}`,
+          transform: (mounted && revealStage >= 1) ? 'translate3d(100%, 0, 0)' : 'translate3d(0, 0, 0)',
+          willChange: 'transform'
+        }}
+      />
+
+      {/* Background Slit-Reveal */}
+      <div
+        className="absolute inset-0 z-0 overflow-hidden"
+        style={{
+          transition: `transform ${curtainDuration}ms ${easeRef}`,
+          transform: revealStage >= 1 ? 'translate3d(0%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+          willChange: 'transform'
+        }}
+      >
         <div
-          key={index}
-          className={clsx(
-            'absolute inset-0 transition-opacity duration-[2000ms] ease-in-out',
-            index === currentSlide ? 'opacity-100' : 'opacity-0'
-          )}
+          className="absolute inset-0 w-full h-full"
+          style={{
+            transition: `transform ${curtainDuration}ms ${easeRef}`,
+            transform: revealStage >= 1 ? 'translate3d(0%, 0, 0)' : 'translate3d(100%, 0, 0)',
+            willChange: 'transform'
+          }}
         >
-          <Image
-            src={slide}
-            alt="Monastery Background"
-            fill
-            className="object-cover"
-            priority={index === 0}
-          />
-          {/* Gradient Overlay requested by user */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/90 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-black/40" /> {/* General dimming */}
+          <div className="relative w-full h-full scale-[1.02]">
+            <img
+              src="/media/pic_1.jpg"
+              alt=""
+              fetchPriority="high"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ backfaceVisibility: 'hidden' }}
+            />
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
         </div>
-      ))}
+      </div>
 
-      {/* Content */}
-      <div className="absolute inset-0 flex items-center justify-center p-4">
-        <div className="mx-auto grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 items-center w-full max-w-[95%] 2xl:max-w-[1800px]">
+      {/* Front Photo Reveal */}
+      <div
+        className="absolute right-[10%] top-[20%] bottom-[20%] w-[35%] z-10 overflow-hidden pointer-events-none hidden lg:block"
+        style={{
+          transform: `translate3d(0, ${scrollY * 0.15}px, 0)`,
+          willChange: 'transform'
+        }}
+      >
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{
+            transition: `transform 1600ms ${easeRef}`,
+            transform: revealStage >= 2 ? 'translate3d(0%, 0, 0)' : 'translate3d(101%, 0, 0)',
+            willChange: 'transform'
+          }}
+        >
+          <div
+            className="absolute inset-0 overflow-hidden"
+            style={{
+              transition: `transform 1600ms ${easeRef}`,
+              transform: revealStage >= 2 ? 'translate3d(0%, 0, 0)' : 'translate3d(-101%, 0, 0)',
+              willChange: 'transform'
+            }}
+          >
+            <div
+              className="relative w-full h-full"
+              style={{
+                transition: `transform 2200ms ${easeExpo}`,
+                transform: revealStage >= 2 ? 'scale(1)' : 'scale(1.2)',
+                willChange: 'transform'
+              }}
+            >
+              <img
+                src="/media/pic_1.jpg"
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
-          {/* Left: Title */}
-          <div className="text-center lg:text-right">
-            <h1 className="font-montserrat font-bold text-2xl md:text-4xl lg:text-5xl leading-tight uppercase tracking-widest drop-shadow-lg whitespace-pre-line">
-              {t('hero.title')}
+      {/* Text Content */}
+      <div className="relative z-20 h-full flex items-center px-6 md:px-12 lg:px-20 pointer-events-none">
+        <div className="w-full max-w-xl lg:max-w-[50%] pointer-events-auto">
+          <div
+            style={{
+              transition: revealStage >= 3 ? `opacity 1800ms ${easeExpo}` : `transform 1800ms ${easeExpo}, opacity 1800ms ${easeExpo}`,
+              transform: revealStage >= 3
+                ? `translate3d(0, ${-scrollY * 0.2}px, 0)`
+                : 'translate3d(0, 100px, 0)',
+              opacity: revealStage >= 3 ? 1 : 0,
+              willChange: 'transform, opacity'
+            }}
+          >
+            <h1 className="font-montserrat font-light uppercase tracking-[0.1em] leading-tight text-white mb-6">
+              {titleLines.map((line, i) => (
+                <span
+                  key={i}
+                  className={`block ${i === 0
+                    ? 'text-4xl md:text-6xl lg:text-7xl font-normal mb-2'
+                    : 'text-sm md:text-xl lg:text-2xl opacity-70 font-light tracking-[0.2em]'
+                    }`}
+                >
+                  {line}
+                </span>
+              ))}
             </h1>
+            <div
+              className="h-[2px] bg-amber-500 origin-left"
+              style={{
+                width: revealStage >= 3 ? '120px' : '0',
+                transition: `width 2000ms ${easeExpo}`,
+                transitionDelay: '500ms'
+              }}
+            />
+
+
           </div>
-
-          {/* Divider: Vertical Line */}
-          <div className="hidden lg:block w-[1px] h-64 bg-white/50 mx-auto"></div>
-
-          {/* Right: Description + Button */}
-          <div className="text-center lg:text-left max-w-md mx-auto lg:mx-0">
-            <p className="text-2xl md:text-xl font-light mb-8 opacity-90 leading-relaxed">
-              {t('hero.description')}
-            </p>
-          </div>
-
         </div>
       </div>
 
-      {/* Scroll Indicator (Optional but good for UX) */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {slides.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentSlide(idx)}
-            className={clsx(
-              "w-2 h-2 rounded-full transition-all",
-              currentSlide === idx ? "bg-white w-6" : "bg-white/50"
-            )}
-          />
-        ))}
-      </div>
+
+      <style jsx global>{`
+                /* Hide Header components during intro stages 0-3 */
+                .intro-active div.z-\[511\],
+                .intro-active div.z-\[510\],
+                .intro-active header.z-\[500\],
+                .intro-active div.z-\[500\],
+                .intro-active button.z-\[520\],
+                .intro-active .fixed.top-6,
+                .intro-active .fixed.top-14 {
+                    opacity: 0 !important;
+                    pointer-events: none !important;
+                    transition: none !important; 
+                }
+
+                /* Lock header position/entrance for transition */
+                .intro-active div.z-\[510\], .intro-active div.z-\[511\], .intro-active .fixed.top-6, .intro-active .fixed.top-14 { 
+                    transform: translate(-50%, -100px) !important; 
+                }
+                .intro-active header.z-\[500\], .intro-active div.z-\[500\], .intro-active button.z-\[520\] { 
+                    transform: translate(-50%, 100px) !important; 
+                }
+
+                @font-face {
+                    font-family: 'KyivTypeTitling';
+                    src: url('/fonts/KyivTypeTitling-VarGX.ttf') format('truetype');
+                    font-weight: 100 900;
+                    font-style: normal;
+                }
+            `}</style>
     </div>
-  )
+  );
 }

@@ -21,7 +21,7 @@ export const metadata = {
 export default function HomePage() {
   // Using imported static news from newsData
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-amber-500 selection:text-white">
+    <main className="min-h-screen bg-black text-white selection:bg-amber-500 selection:text-white overflow-x-hidden">
       <Header />
       <Hero />
       <CalendarSection />

@@ -52,7 +52,7 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
   const latestNews = news.slice(0, 4);
 
   return (
-    <section id="news-section" className="bg-gray-50 font-montserrat text-gray-900 pb-12">
+    <section id="news-section" className="bg-gray-50 font-montserrat text-gray-900 pb-12 overflow-hidden">
       <div className="max-w-[1920px] mx-auto p-4 md:p-6 lg:px-[80px]">
         {/* Mobile Search Bar - Shows at top only on mobile */}
         {showSearch && (
@@ -84,7 +84,7 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
                       <div className="border-b border-amber-600 pb-2 mb-3">
                         <p className="text-sm text-gray-500 font-montserrat">{item.date}</p>
                       </div>
-                      <h3 className="text-lg font-montserrat font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-3">
+                      <h3 className="text-lg font-montserrat font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-3 uppercase">
                         {item.title}
                       </h3>
                     </Link>
@@ -109,7 +109,7 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
                     <div className="inline-block bg-white text-gray-900 px-4 py-1 text-xs font-bold uppercase mb-4 tracking-wider">
                       {currentNews.category}
                     </div>
-                    <h1 className="text-white text-3xl md:text-4xl font-bold leading-tight drop-shadow-md">
+                    <h1 className="text-white text-3xl md:text-4xl font-bold leading-tight drop-shadow-md uppercase">
                       {currentNews.title}
                     </h1>
                     <p className="text-gray-300 mt-2 text-sm md:text-base font-medium">{currentNews.date}</p>
@@ -146,7 +146,7 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
                   <div className="border-b border-amber-600 pb-2 mb-3">
                     <p className="text-gray-400 text-xs uppercase font-bold tracking-wide">{item.date}</p>
                   </div>
-                  <h3 className="text-gray-900 font-bold text-base leading-snug group-hover:text-amber-600 transition-colors line-clamp-3">
+                  <h3 className="text-gray-900 font-bold text-base leading-snug group-hover:text-amber-600 transition-colors line-clamp-3 uppercase">
                     {item.title}
                   </h3>
                 </div>

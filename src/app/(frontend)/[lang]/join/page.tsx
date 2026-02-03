@@ -55,48 +55,52 @@ export default function JoinPage() {
           {t('social.fill_form')}
         </p>
 
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">{t('social.form_name')}</label>
+        <form className="space-y-10" onSubmit={handleSubmit}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-1">
+              <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                {t('social.form_name')}
+              </label>
               <input
                 type="text"
                 required
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500"
-                placeholder={t('social.form_placeholder_name')}
+                className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all bg-transparent"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">{t('social.form_phone')}</label>
+            <div className="space-y-1">
+              <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                {t('social.form_phone')}
+              </label>
               <input
                 type="tel"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500"
-                placeholder={t('social.form_placeholder_phone')}
+                className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all bg-transparent"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               />
             </div>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('social.form_email')}</label>
+          <div className="space-y-1">
+            <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+              {t('social.form_email')}
+            </label>
             <input
               type="email"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500"
-              placeholder={t('social.form_placeholder_email')}
+              className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all bg-transparent"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
           </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('social.form_message')}</label>
+          <div className="space-y-1">
+            <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+              {t('social.form_message')}
+            </label>
             <textarea
-              rows={4}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-amber-500 focus:border-amber-500"
-              placeholder={t('social.form_placeholder_message')}
+              rows={3}
+              className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all resize-none bg-transparent"
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             />
@@ -105,7 +109,7 @@ export default function JoinPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-amber-500 text-white font-bold py-4 rounded-lg hover:bg-amber-600 transition-colors uppercase tracking-wider disabled:opacity-50"
+            className="bg-black text-white px-12 py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-amber-800 transition-all disabled:opacity-50"
           >
             {loading ? t('social.form_sending') : t('social.form_submit')}
           </button>

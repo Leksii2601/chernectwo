@@ -3,7 +3,7 @@ export type Language = 'UA' | 'EN';
 export const translations: Record<Language, Record<string, string>> = {
     UA: {
         'hero.title': 'Жидичинський \nСвято-Миколаївський \nМонастир',
-        'hero.description': '- один із найдавніших діючих монастирів Православної Церкви України, що бере свій початок з часів Київської Русі.',
+        'hero.description': '',
 
         'calendar.title': 'РОЗКЛАД БОГОСЛУЖІНЬ',
         'calendar.no_services': 'Богослужінь немає',
@@ -85,7 +85,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'explore.support': 'ПІДТРИМАТИ',
         'explore.contacts': 'КОНТАКТИ',
         'explore.write_note': 'НАПИСАТИ ЗАПИСКУ',
-        'nav.about': 'Про монастир',
+        'nav.about': 'Про нас',
         'nav.history': 'Історія',
         'nav.schedule': 'Розклад богослужінь',
         'nav.complex': 'Храмовий комплекс',
@@ -277,16 +277,16 @@ export const translations: Record<Language, Record<string, string>> = {
         'skete.features': 'Особливості:',
 
         'sketes.holy_spirit': 'Свято-Духівський чоловічий скит',
-        'sketes.holy_spirit_short_desc': 'Чоловічий скит на пагорбі над річкою Стир, осередок молитви, тиші та духовної праці.',
-        'sketes.holy_spirit_long_desc': 'Свято-Духівський скит — місце усамітнення, де братія монастиря зберігає давні традиції чернечого життя, молитви та праці.',
-        'sketes.holy_spirit_overview_1': 'Скит засновано 975 року. Тут зберігається дух місіонерства та давньоруської історії Волині.',
-        'sketes.holy_spirit_overview_2': 'Сучасний комплекс скита включає храм, келії та капличку. Щороку тут відбувається престольне свято — День Святого Духа.',
+        'sketes.holy_spirit_short_desc': 'Місце заснування Жидичинської обителі, де поєднуються давня історія Волині та сучасний чернечий послух.',
+        'sketes.holy_spirit_long_desc': 'Чоловічий скит розташований на пагорбі над заплавою річки Стир, що є історичним осередком монастирського життя у Древньому Жидичині. Тут братія монастиря несе молитовне служіння, зберігаючи традиції усамітнення та духовної праці.',
+        'sketes.holy_spirit_overview_1': 'Заснування обителі датується 975 роком і пов’язане з місіонерською діяльністю учнів святих Кирила і Мефодія. У Х столітті на пагорбі знаходилося древньоруське городище Скудельничі, де згодом звели перший укріплений комплекс Жидичинського монастиря. Протягом століть річка Стир біля підніжжя гори Святого Духа відігравала стратегічну роль, слугуючи важливою транспортною артерією та природним оборонним рубежем.',
+        'sketes.holy_spirit_overview_2': 'Відродження скита відбулося у 2010 році. На сьогодні комплекс включає храм Святого Духа, келії та літню капличку. Однією із головних святинь храму є ікона Вифлеємських младенців-мучеників із часткою їхніх мощей. На престольне свято, День Святого Духа,  на скиту щорічно звершується Божественна літургія просто неба, що є важливою подією в духовному житті громади.',
 
         'sketes.life_source': 'Скит Живоносне джерело',
-        'sketes.life_source_short_desc': 'Осередок молитовного життя та просвітництва, заснований на місці подвигу віри в часи випробувань.',
-        'sketes.life_source_long_desc': 'Присвячений святителю-хірургу, цей скит має особливу місію — служіння хворим та нужденним, поєднуючи молитву з ділами милосердя.',
-        'sketes.life_source_overview_1': 'Скит на честь святителя Луки Кримського став центром медичного та соціального служіння монастиря. Тут діє невелика амбулаторія, де надається перша допомога, а також проводиться духовна опіка хворих.',
-        'sketes.life_source_overview_2': 'Храм скита завжди відчинений для тих, хто просить зцілення для себе та своїх близьких. У храмі зберігається частка мощей святителя Луки.',
+        'sketes.life_source_short_desc': 'Молитовний осередок над річкою Стир, що виник довкола давніх природних джерел.',
+        'sketes.life_source_long_desc': 'Скит розташований на пагорбі між селами Жидичин і Липляни. Це місце, де чернече життя тісно переплітається з природою: братія дбає про чистоту навколишніх джерел, створюючи простір для спокою та щирої молитви.',
+        'sketes.life_source_overview_1': 'Будівництво скиту розпочалося у 2011 році з ініціативи братії Жидичинського монастиря. Місце обрали на пагорбі, де здавна з-під землі б’ють природні джерела. Назва на честь ікони «Живоносне джерело» стала символічним відображенням цієї місцевості, а монастирська спільнота взяла на себе відповідальність за збереження та впорядкування цих водних ресурсів.',
+        'sketes.life_source_overview_2': 'На сьогодні скит є місцем, що поступово розвивається та наповнюється життям. Тут панує атмосфера простоти й тиші, яка особливо відчувається під час престольного свята у п’ятницю Світлого тижня. Скит залишається відкритим для тих, хто шукає духовного зміцнення біля джерел і прагне побути наодинці з Богом серед волинських краєвидів. Розбудова обителі триває, поступово втілюючи задуми братії.',
 
         'sketes.petro_pavlo': 'Петро-Павлівський жіночий скит',
         'sketes.petro_pavlo_short_desc': 'Осередок молитовного життя та просвітництва, заснований на місці подвигу віри в часи випробувань..',
@@ -480,7 +480,7 @@ export const translations: Record<Language, Record<string, string>> = {
     },
     EN: {
         'hero.title': 'Zhydychyn \nSt. Nicholas \nMonastery',
-        'hero.description': '- one of the oldest active monasteries of the Orthodox Church of Ukraine, dating back to the times of Kyivan Rus.',
+        'hero.description': '',
 
         'calendar.title': 'SERVICE SCHEDULE',
         'calendar.no_services': 'No services scheduled',
@@ -561,7 +561,7 @@ export const translations: Record<Language, Record<string, string>> = {
         'explore.support': 'SUPPORT',
         'explore.contacts': 'CONTACTS',
         'explore.write_note': 'WRITE A NOTE',
-        'nav.about': 'About Monastery',
+        'nav.about': 'About Us',
         'nav.history': 'History',
         'nav.schedule': 'Service Schedule',
         'nav.complex': 'Church Complex',
@@ -755,17 +755,17 @@ export const translations: Record<Language, Record<string, string>> = {
         'skete.contacts_title': 'Contacts',
         'skete.features': 'Features:',
 
-        'sketes.holy_spirit': 'Holy Spirit Men’s Skete',
-        'sketes.holy_spirit_short_desc': 'A men’s skete on a hill above the Styr River, a center of prayer, silence, and spiritual work.',
-        'sketes.holy_spirit_long_desc': 'The Holy Spirit Skete is a place of solitude where the brethren preserve ancient monastic traditions of prayer and labor.',
-        'sketes.holy_spirit_overview_1': 'The skete was founded in 975. It preserves the spirit of mission and the ancient history of Volyn.',
-        'sketes.holy_spirit_overview_2': 'The modern skete complex includes a church, cells, and a chapel. Every year, the patronal feast — the Day of the Holy Spirit — is celebrated here.',
+        'sketes.holy_spirit': 'Holy Spirit Skete for Men',
+        'sketes.holy_spirit_short_desc': 'The founding site of the Zhydychyn abode, where the ancient history of Volyn and modern monastic obedience are combined.',
+        'sketes.holy_spirit_long_desc': 'The Skete for Men is located on a hill above the floodplains of the Styr River, which is the historical center of monastic life in ancient Zhydychyn. Here, the brothers of the monastery carry out their prayer service, preserving the traditions of solitude and spiritual labor.',
+        'sketes.holy_spirit_overview_1': 'The founding of the monastery dates back to 975 and is associated with the missionary activities of the disciples of Saints Cyril and Methodius. In the 10th century, the ancient Rus settlement of Skudelnychi was located on the hill, where the first fortified complex of the Zhydychyn Monastery was later built. For centuries, the Styr River at the foot of the Holy Spirit Hill played a strategic role, serving as an important transport artery and a natural defensive barrier.',
+        'sketes.holy_spirit_overview_2': 'The revival of the skete took place in 2010. Today, the complex includes the Church of the Holy Spirit, cells, and a summer chapel. One of the main shrines of the church is the icon of the Bethlehem Infant Martyrs with a particle of their relics. On the patronal feast, the Day of the Holy Spirit, the Divine Liturgy is held annually in the open air at the skete, which is an important event in the spiritual life of the community.',
 
         'sketes.life_source': 'Life-Giving Spring Skete',
-        'sketes.life_source_short_desc': 'A medical center and a temple where spiritual and physical help is provided to everyone who needs it.',
-        'sketes.life_source_long_desc': 'Dedicated to the saint-surgeon, this skete has a special mission - serving the sick and needy, combining prayer with works of mercy.',
-        'sketes.life_source_overview_1': 'The Skete in honor of St. Luke of Crimea became the center of medical and social service of the monastery. There is a small outpatient clinic where first aid is provided, as well as spiritual care for the sick.',
-        'sketes.life_source_overview_2': 'The church of the skete is always open to those who ask for healing for themselves and their loved ones. A part of the relics of St. Luke is kept in the temple.',
+        'sketes.life_source_short_desc': 'A prayer center above the Styr River, which arose around ancient natural springs.',
+        'sketes.life_source_long_desc': 'The skete is located on a hill between the villages of Zhydychyn and Lypliany. This is a place where monastic life is closely intertwined with nature: the brethren care for the purity of the surrounding springs, creating a space for peace and sincere prayer.',
+        'sketes.life_source_overview_1': 'Construction of the skete began in 2011 on the initiative of the brothers of the Zhydychyn Monastery. The site was chosen on a hill where natural springs have been flowing from the ground since ancient times. The name in honor of the "Life-Giving Spring" icon became a symbolic reflection of this area, and the monastic community took responsibility for the preservation and arrangement of these water resources.',
+        'sketes.life_source_overview_2': 'Today, the skete is a place that is gradually developing and filling with life. An atmosphere of simplicity and silence prevails here, which is especially felt during the patronal feast on the Friday of Bright Week. The skete remains open to those seeking spiritual strengthening near the springs and wishing to be alone with God amidst the Volyn landscapes. The development of the abode continues, gradually embodying the plans of the brethren.',
 
         'sketes.petro_pavlo': 'Peter and Paul Women’s Skete',
         'sketes.petro_pavlo_short_desc': 'A center of prayerful life and enlightenment, founded on the site of a feat of faith during times of trial.',

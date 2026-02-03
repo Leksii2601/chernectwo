@@ -59,7 +59,7 @@ export function Header() {
   const mainNavItems: NavItem[] = [
     {
       label: t('nav.about'),
-      href: '/about/history',
+      href: '/about',
       children: [
         { label: t('nav.history'), href: '/about/history' },
         { label: t('nav.schedule'), href: '/#calendar' },
@@ -284,13 +284,9 @@ export function Header() {
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <Link
-                href={item.label === t('nav.about') ? '#' : item.href}
-                onClick={(e) => {
-                  if (item.label === t('nav.about')) e.preventDefault();
-                }}
+                href={item.href}
                 className={clsx(
-                  "flex items-center gap-3 px-8 py-6 rounded-full text-[14.5px] font-light uppercase tracking-[0.3em] text-white/50 hover:text-white hover:bg-white/5 transition-all duration-700 whitespace-nowrap active:scale-95 hover-lamp",
-                  item.label === t('nav.about') && "cursor-pointer"
+                  "flex items-center gap-3 px-8 py-6 rounded-full text-[14.5px] font-light uppercase tracking-[0.3em] text-white/50 hover:text-white hover:bg-white/5 transition-all duration-700 whitespace-nowrap active:scale-95 hover-lamp"
                 )}
               >
                 <span>{item.label}</span>

@@ -89,9 +89,9 @@ export default function ContactsPage() {
 
     const socialLinks = [
         {
-            icon: <ViberIcon className="w-6 h-6 transition-all duration-300 group-hover:brightness-0 group-hover:invert" />,
-            href: "https://invite.viber.com/?g2=AQAB6djHxEo4k1YHgvbWNapcX0pRA%2B2o8tUn5LLB5Jv%2BX1BCZhctg2bkqIY%2BTmoM",
-            name: "Viber"
+            icon: <Facebook className="w-5 h-5" />,
+            href: "https://www.facebook.com/chernectvo.volyni",
+            name: "Facebook"
         },
         {
             icon: <Instagram className="w-5 h-5" />,
@@ -99,9 +99,9 @@ export default function ContactsPage() {
             name: "Instagram"
         },
         {
-            icon: <Send className="w-5 h-5" />,
-            href: "https://t.me/chernetstvo_volyni",
-            name: "Telegram"
+            icon: <Youtube className="w-5 h-5" />,
+            href: "https://www.youtube.com/@chernectvo_volyni",
+            name: "YouTube"
         },
         {
             icon: <WhatsappIcon className="w-5 h-5" />,
@@ -109,14 +109,14 @@ export default function ContactsPage() {
             name: "WhatsApp"
         },
         {
-            icon: <Facebook className="w-5 h-5" />,
-            href: "https://www.facebook.com/chernectvo.volyni",
-            name: "Facebook"
+            icon: <Send className="w-5 h-5" />,
+            href: "https://t.me/chernetstvo_volyni",
+            name: "Telegram"
         },
         {
-            icon: <Youtube className="w-5 h-5" />,
-            href: "https://www.youtube.com/@chernectvo_volyni",
-            name: "YouTube"
+            icon: <ViberIcon className="w-6 h-6 transition-all duration-300 group-hover:brightness-0 group-hover:invert" />,
+            href: "https://invite.viber.com/?g2=AQAB6djHxEo4k1YHgvbWNapcX0pRA%2B2o8tUn5LLB5Jv%2BX1BCZhctg2bkqIY%2BTmoM",
+            name: "Viber"
         }
     ];
 
@@ -137,7 +137,7 @@ export default function ContactsPage() {
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
                                 className={clsx(
-                                    "py-6 text-[11px] font-bold uppercase tracking-[0.3em] transition-all relative",
+                                    "py-7 text-[12px] md:text-[13px] font-bold uppercase tracking-[0.3em] transition-all relative",
                                     activeTab === tab ? "text-amber-600" : "text-gray-400 hover:text-gray-900"
                                 )}
                             >
@@ -288,8 +288,8 @@ export default function ContactsPage() {
                                         className="object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300"></div>
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                                        <div className="border border-white/80 p-6 md:p-8 backdrop-blur-[2px] group-hover:bg-white/10 transition-all duration-300 max-w-[90%]">
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
+                                        <div className="border border-white/80 p-6 md:p-8 backdrop-blur-[2px] group-hover:bg-white/10 transition-all duration-300 w-[85%] h-[140px] md:h-[200px] flex flex-col justify-center items-center">
                                             <h3 className="text-white font-montserrat font-bold text-xl md:text-2xl uppercase tracking-wider mb-2 drop-shadow-md">
                                                 {language === 'UA' ? item.title_ua : item.title_en}
                                             </h3>

@@ -180,31 +180,45 @@ export function FAQ() {
                                     >
                                         <div className="overflow-hidden">
                                             {item.isForm ? (
-                                                <div className="space-y-4 pt-2">
-                                                    <input
-                                                        type="text"
-                                                        placeholder={t('faq.form_name')}
-                                                        className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-amber-600 transition-colors text-sm"
-                                                        value={formData.name}
-                                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                    />
-                                                    <input
-                                                        type="email"
-                                                        placeholder={t('faq.form_email')}
-                                                        className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-amber-600 transition-colors text-sm"
-                                                        value={formData.email}
-                                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                    />
-                                                    <textarea
-                                                        placeholder={t('faq.form_question')}
-                                                        rows={4}
-                                                        className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-amber-600 transition-colors text-sm resize-none"
-                                                        value={formData.question}
-                                                        onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-                                                    />
+                                                <div className="space-y-8 pt-4">
+                                                    <div className="grid md:grid-cols-2 gap-8">
+                                                        <div className="space-y-1">
+                                                            <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                                                                {t('faq.form_name')}
+                                                            </label>
+                                                            <input
+                                                                type="text"
+                                                                className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all bg-transparent"
+                                                                value={formData.name}
+                                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                            />
+                                                        </div>
+                                                        <div className="space-y-1">
+                                                            <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                                                                {t('faq.form_email')}
+                                                            </label>
+                                                            <input
+                                                                type="email"
+                                                                className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all bg-transparent"
+                                                                value={formData.email}
+                                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="space-y-1">
+                                                        <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                                                            {t('faq.form_question')}
+                                                        </label>
+                                                        <textarea
+                                                            rows={3}
+                                                            className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all resize-none bg-transparent"
+                                                            value={formData.question}
+                                                            onChange={(e) => setFormData({ ...formData, question: e.target.value })}
+                                                        />
+                                                    </div>
                                                     <button
                                                         onClick={handleSubmit}
-                                                        className="bg-black text-white px-6 py-2 uppercase text-sm font-bold tracking-wider hover:bg-amber-600 transition-colors"
+                                                        className="bg-black text-white px-12 py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-amber-800 transition-all"
                                                     >
                                                         {t('faq.form_submit')}
                                                     </button>

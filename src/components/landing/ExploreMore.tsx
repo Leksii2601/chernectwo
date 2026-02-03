@@ -104,7 +104,7 @@ export function ExploreMore() {
   };
 
   return (
-    <section className="bg-white py-16 lg:py-24 group/section relative">
+    <section className="bg-white py-16 lg:py-24 group/section relative overflow-hidden">
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[80px] relative">
         <h2 className="font-montserrat font-bold text-3xl md:text-5xl uppercase tracking-widest text-left mb-8 md:mb-12 text-gray-900 animate-fade-in-up">
           {t('explore.title')}
