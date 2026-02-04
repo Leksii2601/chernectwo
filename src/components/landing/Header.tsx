@@ -24,7 +24,6 @@ export function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
-  // const [isOverFooter, setIsOverFooter] = useState(false); // Unused
   const lastScrollY = useRef(0);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -143,24 +142,6 @@ export function Header() {
     sessionStorage.setItem('liveBannerDismissed', 'true');
   };
 
-  // Footer detection removed as isOverFooter was unused
-  /*
-  useEffect(() => {
-    const footer = document.querySelector('footer');
-    if (!footer) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // setIsOverFooter(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(footer);
-    return () => observer.disconnect();
-  }, []);
-  */
-
   return (
     <>
       {/* Top Premium Live Banner bar */}
@@ -219,7 +200,7 @@ export function Header() {
       <div className={clsx(
         "fixed left-1/2 -translate-x-1/2 z-[510] transition-all duration-[2000ms] ease-[cubic-bezier(0.19,1,0.22,1)] px-4 md:px-0",
         !showMenu ? "top-[-150px] opacity-0" : (liveStatus?.isLive ? "top-14 md:top-20" : "top-6 md:top-10"),
-        "opacity-100 hidden md:block" // Hidden on mobile, actions moved to dock or separate menu
+        "opacity-100 hidden md:block"
       )}>
         <div className="flex items-center bg-black border border-white/5 rounded-full p-1.5 pr-2.5 shadow-2xl backdrop-blur-md">
           {/* Language Section */}
@@ -267,7 +248,7 @@ export function Header() {
           !showMenu
             ? "bottom-[-200px] opacity-0 translate-y-40 scale-90"
             : "bottom-12 opacity-100 translate-y-0 scale-100",
-          "hidden xl:flex" // Desktop only dock
+          "hidden xl:flex"
         )}
       >
         <div className="flex items-center gap-1">
@@ -286,7 +267,7 @@ export function Header() {
               <Link
                 href={item.href}
                 className={clsx(
-                  "flex items-center gap-3 px-8 py-6 rounded-full text-[14.5px] font-light uppercase tracking-[0.3em] text-white/50 hover:text-white hover:bg-white/5 transition-all duration-700 whitespace-nowrap active:scale-95 hover-lamp"
+                  "flex items-center gap-3 px-8 py-6 rounded-full text-[14.5px] font-light uppercase tracking-[0.3em] text-white/50 hover:text-white hover:bg-white/5 transition-all duration-700 whitespace-nowrap active:scale-95"
                 )}
               >
                 <span>{item.label}</span>
@@ -304,7 +285,7 @@ export function Header() {
                         key={child.label}
                         href={child.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="px-8 py-4 rounded-2xl text-[11px] font-light uppercase tracking-[0.3em] text-white/40 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group/item hover-lamp"
+                        className="px-8 py-4 rounded-2xl text-[11px] font-light uppercase tracking-[0.3em] text-white/40 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group/item"
                       >
                         {child.label}
                         <div className="w-2 h-2 rounded-full bg-amber-500/60 scale-0 group-hover/item:scale-100 transition-all duration-500" />
@@ -320,23 +301,23 @@ export function Header() {
 
       {/* Mobile / Tablet Minimal Header (Simplified version of the dock) */}
       <div className={clsx(
-        "fixed left-0 right-0 z-[500] xl:hidden flex items-center justify-between px-6 py-4 transition-all duration-500",
+        "fixed left-0 right-0 z-[500] xl:hidden flex items-center justify-between px-6 py-5 transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] overflow-hidden",
         liveStatus?.isLive ? "top-11 md:top-14" : "top-0",
-        scrolled ? "bg-black/80 backdrop-blur-md translate-y-0 shadow-lg" : "bg-transparent -translate-y-full"
+        scrolled ? "bg-black/90 backdrop-blur-xl translate-y-0 shadow-2xl" : "bg-transparent -translate-y-full"
       )}>
         <Link href={getLocalizedPath('/')} className="w-10 h-10 relative">
           <Image src="/media/logo.webp" alt="Logo" fill className="object-contain" />
         </Link>
-        <button onClick={() => setMobileMenuOpen(true)} className="text-white p-2">
+        <button onClick={() => setMobileMenuOpen(true)} className="text-white p-2 active:scale-95 transition-transform">
           <Menu size={32} />
         </button>
       </div>
 
       {/* Top Logo when at Top (Mobile only) */}
       <div className={clsx(
-        "fixed left-6 z-[500] md:hidden transition-opacity duration-500",
+        "fixed left-6 z-[500] md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
         liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
-        scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
+        scrolled ? "opacity-0 -translate-y-10 pointer-events-none" : "opacity-100 translate-y-0"
       )}>
         <Link href={getLocalizedPath('/')} className="w-16 h-16 relative block">
           <Image src="/media/logo.webp" alt="Logo" fill className="object-contain" />
@@ -345,14 +326,14 @@ export function Header() {
 
       {/* Mobile Top Actions (Mini Pill) */}
       <div className={clsx(
-        "fixed right-6 z-[500] md:hidden flex items-center gap-2 transition-all duration-500",
+        "fixed right-6 z-[500] md:hidden flex items-center gap-2 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
         liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
         scrolled ? "opacity-0 translate-x-10 pointer-events-none" : "opacity-100 translate-x-0"
       )}>
-        <button onClick={() => setIsSearchOpen(true)} className="w-12 h-12 bg-black/40 rounded-full flex items-center justify-center text-white/50 border border-white/10 backdrop-blur-md">
+        <button onClick={() => setIsSearchOpen(true)} className="w-12 h-12 bg-black/40 rounded-full flex items-center justify-center text-white/50 border border-white/10 backdrop-blur-md active:scale-90 transition-all">
           <Search size={20} />
         </button>
-        <button onClick={() => setMobileMenuOpen(true)} className="w-12 h-12 bg-black/40 rounded-full flex items-center justify-center text-white border border-white/10 backdrop-blur-md">
+        <button onClick={() => setMobileMenuOpen(true)} className="w-12 h-12 bg-black/40 rounded-full flex items-center justify-center text-white border border-white/10 backdrop-blur-md active:scale-90 transition-all">
           <Menu size={20} />
         </button>
       </div>
@@ -377,7 +358,7 @@ export function Header() {
 
       {/* Mobile Menu Overlay */}
       <div className={clsx(
-        "fixed inset-0 z-[600] bg-black transition-all duration-500 px-8 pt-12 pb-8 flex flex-col",
+        "fixed inset-0 z-[600] bg-black transition-all duration-500 px-8 pt-12 pb-8 flex flex-col overflow-x-hidden",
         mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
       )}>
         <div className="flex justify-between items-center mb-10 shrink-0">
@@ -390,7 +371,7 @@ export function Header() {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-6 overflow-y-auto pr-2 no-scrollbar flex-1 pb-4">
+        <nav className="flex flex-col gap-6 overflow-y-auto overflow-x-hidden pr-2 no-scrollbar flex-1 pb-4">
           {mainNavItems.map(item => {
             const hasChildren = item.children && item.children.length > 0;
             const isExpanded = expandedItems.includes(item.label);
@@ -473,7 +454,7 @@ export function Header() {
 
       {/* Search Modal */}
       <div className={clsx(
-        "fixed inset-0 z-[700] bg-black flex items-center justify-center px-6 transition-all",
+        "fixed inset-0 z-[700] bg-black flex items-center justify-center px-6 transition-all overflow-hidden",
         isSearchOpen ? "opacity-100 visible duration-500" : "opacity-0 invisible duration-0 pointer-events-none"
       )}>
         <button

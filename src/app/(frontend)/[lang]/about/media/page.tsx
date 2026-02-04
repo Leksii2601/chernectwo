@@ -343,14 +343,14 @@ function MediaPageContent() {
                                             allowFullScreen
                                         ></iframe>
                                     ) : (
-                                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-6 bg-stone-900">
-                                            <div className="mb-6 opacity-50">
-                                                <div className="w-20 h-20 rounded-full border-2 border-white/20 flex items-center justify-center mx-auto">
-                                                    <Radio className="w-8 h-8 text-white/50" />
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4 md:p-6 bg-stone-900 overflow-hidden">
+                                            <div className="mb-3 md:mb-6 opacity-35">
+                                                <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/20 flex items-center justify-center mx-auto">
+                                                    <Radio className="w-5 h-5 md:w-8 md:h-8 text-white/50" />
                                                 </div>
                                             </div>
-                                            <h2 className="text-2xl font-bold font-church mb-3">{t('media.live_offline_title')}</h2>
-                                            <p className="text-gray-400 max-w-md mb-6">
+                                            <h2 className="text-base md:text-2xl font-bold font-church mb-2 md:mb-3">{t('media.live_offline_title')}</h2>
+                                            <p className="text-[11px] md:text-base text-gray-400 max-w-[280px] md:max-w-md">
                                                 {t('media.live_offline_desc')}
                                             </p>
                                         </div>
@@ -383,7 +383,7 @@ function MediaPageContent() {
                             </div>
 
                             {/* Right Column - Absolute Overlay on Desktop, Stacked Block on Mobile */}
-                            <div className="w-full h-[400px] lg:h-full lg:absolute lg:top-0 lg:right-0 lg:bottom-0 lg:w-[32%] flex flex-col bg-stone-100 border border-t border-r border-b border-gray-200 shadow-sm overflow-hidden rounded-b-lg lg:rounded-none">
+                            <div className="w-full h-[800px] lg:h-full lg:absolute lg:top-0 lg:right-0 lg:bottom-0 lg:w-[32%] flex flex-col bg-stone-100 border border-t border-r border-b border-gray-200 shadow-sm overflow-hidden rounded-b-lg lg:rounded-none">
                                 <div className="p-4 border-b border-gray-200 bg-stone-100 flex-shrink-0">
                                     <h3 className="font-bold text-gray-800 uppercase tracking-wide flex items-center gap-2">
                                         <Radio className="w-5 h-5" />
@@ -396,9 +396,13 @@ function MediaPageContent() {
                                             key={video.id}
                                             onClick={() => {
                                                 setActiveStreamId(video.id);
-                                                // Scroll to top on mobile only
+                                                // Scroll to player on mobile only
                                                 if (window.innerWidth < 1024) {
-                                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                    const player = document.getElementById('live-player-section');
+                                                    if (player) {
+                                                        const offset = player.getBoundingClientRect().top + window.pageYOffset - 80;
+                                                        window.scrollTo({ top: offset, behavior: 'smooth' });
+                                                    }
                                                 }
                                             }}
                                             className={`flex gap-3 p-3 cursor-pointer transition-all border border-transparent hover:border-red-200 hover:bg-white hover:shadow-sm ${activeStreamId === video.id ? 'bg-white border-red-500 shadow-md ring-1 ring-red-500' : 'bg-transparent'}`}
@@ -443,15 +447,15 @@ function MediaPageContent() {
             {/* LIGHTBOX MODAL (IMAGES) */}
             {selectedImageIndex !== null && (
                 <div
-                    className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center animate-fadeIn"
+                    className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md flex items-center justify-center animate-fadeIn"
                     onClick={() => setSelectedImageIndex(null)}
                 >
                     {/* Close Button */}
                     <button
                         onClick={() => setSelectedImageIndex(null)}
-                        className="absolute top-4 right-4 z-50 text-white/50 hover:text-white transition-colors p-2"
+                        className="absolute top-6 right-6 md:top-10 md:right-10 z-[100] text-white/50 hover:text-white transition-all p-3 bg-white/5 hover:bg-white/10 rounded-full"
                     >
-                        <X className="w-10 h-10" />
+                        <X className="w-8 h-8 md:w-10 md:h-10" />
                     </button>
 
                     {/* Navigation Buttons */}
@@ -492,7 +496,7 @@ function MediaPageContent() {
             {/* LIGHTBOX MODAL (VIDEO) */}
             {selectedVideoId && (
                 <div
-                    className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center animate-fadeIn p-4 md:p-10"
+                    className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md flex items-center justify-center animate-fadeIn p-4 md:p-10"
                     onClick={() => setSelectedVideoId(null)}
                 >
                     {/* Close Button */}

@@ -193,7 +193,7 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                                 </div>
 
                                 {frequency === 'subscription' ? (
-                                    <div className="grid grid-cols-2 md:grid-cols-6 rounded-xl border border-gray-200 divide-x-2 md:divide-x divide-gray-200 overflow-visible shadow-sm relative z-0 w-full">
+                                    <div className="grid grid-cols-2 lg:grid-cols-6 rounded-xl border border-gray-200 divide-x md:divide-x divide-gray-200 overflow-visible shadow-sm relative z-0 w-full mb-8">
                                         {currentSubscriptionAmounts.map((val, index) => {
                                             const isSelected = amount === val;
 
@@ -202,30 +202,33 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                                                     key={val}
                                                     type="button"
                                                     onClick={() => handleAmountClick(val)}
-                                                    className={`relative w-full py-6 px-2 transition-all flex flex-col items-center justify-center text-center group hover:bg-amber-50 border-b md:border-b-0 border-gray-200 last:border-b-0
+                                                    className={`relative w-full py-8 px-2 transition-all flex flex-col items-center justify-center text-center group border-b md:border-b-0 border-gray-100 last:border-b-0
                                                         ${index === 0 ? 'rounded-tl-xl md:rounded-l-xl' : ''} 
                                                         ${index === 1 ? 'rounded-tr-xl md:rounded-tr-none' : ''} 
                                                         ${index === currentSubscriptionAmounts.length - 2 ? 'rounded-bl-xl md:rounded-bl-none' : ''}
                                                         ${index === currentSubscriptionAmounts.length - 1 ? 'rounded-br-xl md:rounded-r-xl' : ''}
-                                                        ${isSelected ? 'z-20 bg-white ring-2 ring-inset ring-amber-600 rounded-none first:rounded-tl-xl md:first:rounded-l-xl last:rounded-br-xl md:last:rounded-r-xl' : 'bg-white z-0 text-gray-500'}
+                                                        ${isSelected
+                                                            ? 'z-20 bg-amber-600 text-white shadow-[0_15px_35px_rgba(217,119,6,0.25)] transform scale-[1.05] border-transparent'
+                                                            : 'bg-white z-0 text-gray-400 hover:bg-amber-600 hover:text-white hover:z-10'
+                                                        }
                                                      `}
                                                 >
-                                                    <div className={`w-10 h-10 mb-2 flex items-center justify-center border-2 rounded-lg transition-colors ${isSelected ? 'border-amber-600 text-amber-600' : 'border-gray-300 text-gray-300 group-hover:border-amber-400 group-hover:text-amber-400'}`}>
+                                                    <div className={`w-10 h-10 mb-3 flex items-center justify-center border-2 rounded-lg transition-colors ${isSelected ? 'border-white/40 text-white' : 'border-gray-200 text-gray-300 group-hover:border-white/30 group-hover:text-white'}`}>
                                                         {isSelected ? (
                                                             <Layers className="w-5 h-5" />
                                                         ) : (
                                                             <Heart className="w-5 h-5" />
                                                         )}
                                                     </div>
-                                                    <span className={`text-lg font-black mb-1 uppercase ${isSelected ? 'text-gray-900' : 'text-gray-400 group-hover:text-gray-600'}`}>{val} {currentCurrency.code}</span>
-                                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wide">{t('donate.per_week')}</span>
+                                                    <span className={`text-lg font-black mb-1 uppercase tracking-tight transition-colors ${isSelected ? 'text-white' : 'text-gray-900 group-hover:text-white'}`}>{val} {currentCurrency.code}</span>
+                                                    <span className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${isSelected ? 'text-white/70' : 'text-gray-400 group-hover:text-white/60'}`}>{t('donate.per_week')}</span>
                                                 </button>
                                             )
                                         })}
                                     </div>
                                 ) : (
                                     <div className="space-y-6">
-                                        <div className="relative flex items-center border-2 border-gray-200 rounded-xl bg-white focus-within:border-amber-500 transition-colors h-16 md:h-20 pr-0 overflow-visible group">
+                                        <div className="relative flex items-center border-2 border-gray-200 rounded-xl bg-white focus-within:border-amber-600 transition-colors h-16 md:h-20 pr-0 overflow-visible group shadow-sm">
                                             {/* Currency Prefix */}
                                             <div className="pl-6 pr-2 text-3xl md:text-4xl text-gray-800 font-bold select-none h-full flex items-center">
                                                 {currentCurrency.symbol}
@@ -236,7 +239,7 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                                                 placeholder={amount > 0 ? '' : t('donate.other_amount')}
                                                 value={customAmount || (amount > 0 ? amount : '')}
                                                 onChange={handleCustomAmountChange}
-                                                className="w-full text-3xl md:text-4xl font-bold py-4 outline-none bg-transparent placeholder:text-gray-300 text-gray-800 h-full"
+                                                className="w-full text-3xl md:text-4xl font-bold py-4 outline-none bg-transparent placeholder:text-gray-300 text-gray-800 h-full font-montserrat"
                                             />
 
                                             {/* Included Dropdown for One-time - Full height, bigger font */}
@@ -260,10 +263,10 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                                                                     setCurrency(c.code as any);
                                                                     setIsCurrencyDropdownOpen(false);
                                                                 }}
-                                                                className={`w-full text-left px-5 py-4 text-lg font-bold hover:bg-amber-50 hover:text-amber-800 transition-colors flex items-center justify-between ${currency === c.code ? 'text-amber-600 bg-amber-50' : 'text-gray-700'
+                                                                className={`w-full text-left px-5 py-4 text-lg font-bold hover:bg-amber-600 hover:text-white transition-colors flex items-center justify-between ${currency === c.code ? 'text-white bg-amber-600' : 'text-gray-700'
                                                                     }`}
                                                             >
-                                                                <span>{c.code} <span className="text-gray-400 ml-1">{c.symbol}</span></span>
+                                                                <span>{c.code} <span className={`ml-1 ${currency === c.code ? 'text-white/60' : 'text-gray-400'}`}>{c.symbol}</span></span>
                                                                 {currency === c.code && <Check className="w-5 h-5" />}
                                                             </button>
                                                         ))}
@@ -273,20 +276,23 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                                         </div>
 
 
-                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                                            {amounts.map((val) => (
-                                                <button
-                                                    key={val}
-                                                    type="button"
-                                                    onClick={() => handleAmountClick(val)}
-                                                    className={`py-4 px-4 rounded-lg border-2 transition-all flex flex-col items-center justify-center min-h-[100px] ${amount === val && !customAmount
-                                                        ? 'border-amber-600 bg-amber-50 text-amber-900 shadow-md transform scale-[1.02]'
-                                                        : 'border-gray-200 hover:border-amber-300 text-gray-600 hover:bg-gray-50'
-                                                        }`}
-                                                >
-                                                    <span className="text-xl md:text-2xl font-bold">+{val} {currentCurrency.code}</span>
-                                                </button>
-                                            ))}
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                            {amounts.map((val) => {
+                                                const isSelected = amount === val && !customAmount;
+                                                return (
+                                                    <button
+                                                        key={val}
+                                                        type="button"
+                                                        onClick={() => handleAmountClick(val)}
+                                                        className={`py-6 px-4 rounded-xl border-2 transition-all flex flex-col items-center justify-center min-h-[110px] shadow-sm transform active:scale-95 ${isSelected
+                                                            ? 'border-amber-600 bg-amber-600 text-white shadow-lg scale-[1.05] z-10'
+                                                            : 'border-gray-200 hover:border-amber-600 hover:bg-amber-600 hover:text-white text-gray-900 bg-white z-0'
+                                                            }`}
+                                                    >
+                                                        <span className="text-xl md:text-2xl font-black">+{val} {currentCurrency.code}</span>
+                                                    </button>
+                                                )
+                                            })}
                                         </div>
                                     </div>
                                 )}
@@ -294,13 +300,13 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
 
                             {/* Email */}
                             <div className="mb-8">
-                                <h3 className="font-montserrat text-sm font-bold mb-3 text-gray-700 uppercase tracking-wide">
+                                <h3 className="font-montserrat text-sm font-bold mb-3 text-gray-700 uppercase tracking-widest">
                                     {t('donate.email_prompt')}
                                 </h3>
                                 <input
                                     type="email"
                                     required
-                                    className="w-full p-4 border border-gray-200 bg-gray-50 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all"
+                                    className="w-full p-5 border-2 border-gray-200 bg-white rounded-xl focus:border-amber-600 outline-none transition-all font-medium text-lg"
                                     placeholder="example@email.com"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
@@ -308,22 +314,22 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                             </div>
 
                             {/* Agreement */}
-                            <div className="mb-8">
-                                <p className="text-sm text-gray-600 mb-3 leading-relaxed">{t('donate.agree_gdpr')}</p>
-                                <div className="flex gap-6">
-                                    <label className="flex items-center gap-2 cursor-pointer group">
-                                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${agreed === true ? 'border-amber-600' : 'border-gray-300 group-hover:border-amber-400'}`}>
-                                            {agreed === true && <div className="w-2.5 h-2.5 rounded-full bg-amber-600" />}
+                            <div className="mb-8 p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                                <p className="text-sm text-gray-600 mb-5 leading-relaxed font-medium">{t('donate.agree_gdpr')}</p>
+                                <div className="flex flex-wrap gap-8">
+                                    <label className="flex items-center gap-3 cursor-pointer group">
+                                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${agreed === true ? 'border-amber-600 bg-amber-600' : 'border-gray-300 group-hover:border-amber-500'}`}>
+                                            {agreed === true && <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm" />}
                                         </div>
                                         <input type="radio" name="gdpr" className="hidden" onChange={() => setAgreed(true)} checked={agreed === true} />
-                                        <span className="text-sm font-medium">{t('donate.agree')}</span>
+                                        <span className={`text-sm font-bold transition-colors ${agreed === true ? 'text-amber-800' : 'text-gray-500 group-hover:text-gray-900'}`}>{t('donate.agree')}</span>
                                     </label>
-                                    <label className="flex items-center gap-2 cursor-pointer group">
-                                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${agreed === false ? 'border-amber-600' : 'border-gray-300 group-hover:border-amber-400'}`}>
-                                            {agreed === false && <div className="w-2.5 h-2.5 rounded-full bg-amber-600" />}
+                                    <label className="flex items-center gap-3 cursor-pointer group">
+                                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${agreed === false ? 'border-amber-600 bg-amber-600' : 'border-gray-300 group-hover:border-amber-500'}`}>
+                                            {agreed === false && <div className="w-2.5 h-2.5 rounded-full bg-white shadow-sm" />}
                                         </div>
                                         <input type="radio" name="gdpr" className="hidden" onChange={() => setAgreed(false)} checked={agreed === false} />
-                                        <span className="text-sm font-medium">{t('donate.disagree')}</span>
+                                        <span className={`text-sm font-bold transition-colors ${agreed === false ? 'text-amber-800' : 'text-gray-500 group-hover:text-gray-900'}`}>{t('donate.disagree')}</span>
                                     </label>
                                 </div>
                             </div>
@@ -331,7 +337,7 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                             {/* Submit */}
                             <button
                                 type="submit"
-                                className="w-full py-4 bg-amber-600 text-white font-montserrat font-bold text-lg uppercase tracking-widest hover:bg-amber-700 transition-colors rounded-lg shadow-lg active:translate-y-0.5"
+                                className="w-full py-5 bg-amber-600 text-white font-montserrat font-bold text-lg uppercase tracking-[0.2em] hover:bg-amber-700 transition-all rounded-xl shadow-[0_15px_45px_rgba(217,119,6,0.25)] hover:shadow-[0_20px_50px_rgba(217,119,6,0.4)] active:scale-95 duration-300"
                             >
                                 {t('donate.support_button')}
                             </button>

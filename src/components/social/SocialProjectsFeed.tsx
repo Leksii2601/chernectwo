@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Facebook, Globe, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Facebook, Globe, ArrowRight, ArrowLeft, X } from 'lucide-react';
 import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { useLanguage } from '@/context/LanguageContext';
@@ -202,6 +202,7 @@ function SocialProjectCard({ item, onClick }: { item: Initiative; onClick: (item
         <CircleArrowButton
           text={t('skete.details')}
           variant="dark"
+          useParentGroup={true}
         />
       </div>
     </div>
@@ -213,8 +214,7 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
   const [selectedInitiative, setSelectedInitiative] = useState<Initiative | null>(null);
   const [isClosing, setIsClosing] = useState(false);
   const [currentGalleryIndex, setCurrentGalleryIndex] = useState(0);
-
-
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const openModal = (item: Initiative) => {
     setSelectedInitiative(item);
@@ -224,6 +224,10 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
   };
 
   const closeModal = () => {
+    if (isFullscreen) {
+      setIsFullscreen(false);
+      return;
+    }
     setIsClosing(true);
     setTimeout(() => {
       setSelectedInitiative(null);
@@ -239,20 +243,19 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
     window.addEventListener('keydown', handleEsc);
     return () => {
       window.removeEventListener('keydown', handleEsc);
-      // Ensure scrolling is restored when leaving the page (e.g. via navigation)
       document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [isFullscreen]);
 
-  const nextImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const nextImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     if (selectedInitiative?.gallery && selectedInitiative.gallery.length > 0) {
       setCurrentGalleryIndex((prev) => (prev + 1) % selectedInitiative.gallery!.length);
     }
   };
 
-  const prevImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const prevImage = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     if (selectedInitiative?.gallery && selectedInitiative.gallery.length > 0) {
       setCurrentGalleryIndex((prev) => (prev - 1 + selectedInitiative.gallery!.length) % selectedInitiative.gallery!.length);
     }
@@ -286,7 +289,7 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
         onIndexChange={setCurrentGalleryIndex}
         hideBottomGallery={false}
       >
-        <div className="space-y-12">
+        <div className="space-y-10 md:space-y-12">
           {/* Main Text Content: About Us & Directions */}
           <div className="space-y-8">
             <div>
@@ -326,15 +329,18 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
             )}
           </div>
 
-          {/* Gallery Section - Simplified as requested */}
+          {/* Gallery Section */}
           {selectedInitiative && selectedInitiative.gallery && selectedInitiative.gallery.length > 0 && (
-            <div className="relative w-full h-[300px] md:h-[500px] bg-black overflow-hidden group">
+            <div
+              className="relative w-full h-[300px] md:h-[500px] bg-black overflow-hidden group cursor-zoom-in"
+              onClick={() => setIsFullscreen(true)}
+            >
               <Image
                 src={selectedInitiative.gallery[currentGalleryIndex]}
                 alt="Gallery"
                 fill
                 priority
-                className="object-cover"
+                className="object-cover transition-transform duration-500 hover:scale-105"
                 key={currentGalleryIndex}
               />
 
@@ -343,30 +349,76 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
 
               {/* Controls */}
               {selectedInitiative.gallery.length > 1 && (
-                <div className="absolute inset-0 flex items-center justify-between p-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 flex items-center justify-between p-4 md:p-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                   <button
                     onClick={prevImage}
-                    className="bg-black/40 hover:bg-amber-600 shadow-2xl text-white p-5 rounded-full transition-all flex items-center justify-center transform hover:scale-110 active:scale-95"
+                    className="bg-black/40 hover:bg-amber-600 shadow-2xl text-white p-2.5 md:p-5 rounded-full transition-all flex items-center justify-center transform hover:scale-110 active:scale-95"
                   >
-                    <ArrowLeft className="w-6 h-6" />
+                    <ArrowLeft className="w-4 h-4 md:w-6 md:h-6" />
                   </button>
                   <button
                     onClick={nextImage}
-                    className="bg-black/40 hover:bg-amber-600 shadow-2xl text-white p-5 rounded-full transition-all flex items-center justify-center transform hover:scale-110 active:scale-95"
+                    className="bg-black/40 hover:bg-amber-600 shadow-2xl text-white p-2.5 md:p-5 rounded-full transition-all flex items-center justify-center transform hover:scale-110 active:scale-95"
                   >
-                    <ArrowRight className="w-6 h-6" />
+                    <ArrowRight className="w-4 h-4 md:w-6 md:h-6" />
                   </button>
                 </div>
               )}
             </div>
           )}
 
-          {/* Call to Action Section */}
-          <div className="pt-16 border-t border-gray-100">
+          {/* Call to Action Section - Reduced distance */}
+          <div className="pt-6 md:pt-10 border-t border-gray-100">
             <CTAAnimation socialLinks={selectedInitiative?.socialLinks} />
           </div>
         </div>
       </PhotoInfoModal>
+
+      {/* Fullscreen Gallery Overlay */}
+      {isFullscreen && selectedInitiative?.gallery && (
+        <div
+          className="fixed inset-0 z-[2000] bg-black flex items-center justify-center transition-all duration-300 animate-fadeIn"
+          onClick={() => setIsFullscreen(false)}
+        >
+          <button
+            className="absolute top-6 right-6 text-white/50 hover:text-white z-10 p-2"
+            onClick={() => setIsFullscreen(false)}
+          >
+            <X size={32} />
+          </button>
+
+          <div className="relative w-full h-full flex items-center justify-center">
+            <Image
+              src={selectedInitiative.gallery[currentGalleryIndex]}
+              alt="Full size"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+
+          {selectedInitiative.gallery.length > 1 && (
+            <>
+              <button
+                onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition-all"
+              >
+                <ArrowLeft size={24} />
+              </button>
+              <button
+                onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-4 rounded-full transition-all"
+              >
+                <ArrowRight size={24} />
+              </button>
+            </>
+          )}
+
+          <div className="absolute bottom-10 left-0 right-0 text-center text-white/50 text-sm font-medium">
+            {currentGalleryIndex + 1} / {selectedInitiative.gallery.length}
+          </div>
+        </div>
+      )}
     </>
   );
 }

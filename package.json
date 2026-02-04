@@ -29,6 +29,7 @@
     "clsx": "^2.1.0",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
+    "framer-motion": "^12.31.0",
     "fuse.js": "^7.1.0",
     "graphql": "^16.8.1",
     "lucide-react": "^0.469.0",

@@ -109,7 +109,7 @@ export function FAQ() {
                     {/* Left Column: Info */}
                     <div className="flex flex-col gap-6 lg:gap-8 max-w-xl">
                         <div className="mb-4">
-                            <h2 className="font-montserrat font-bold text-4xl md:text-5xl uppercase tracking-widest text-left text-gray-900 border-b-2 border-black inline-block pb-2">
+                            <h2 className="font-montserrat font-bold text-3xl sm:text-4xl md:text-5xl uppercase tracking-wider text-left text-gray-900 border-b-2 border-black block sm:inline-block pb-2 leading-tight">
                                 {t('faq.subtitle')}
                             </h2>
                         </div>

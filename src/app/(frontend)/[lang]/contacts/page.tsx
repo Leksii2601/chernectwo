@@ -8,7 +8,7 @@ import { Facebook, Youtube, Download, X, Send, Instagram } from 'lucide-react';
 
 import { clsx } from 'clsx';
 import Image from 'next/image';
-import { PhotoInfoModal } from '@/components/ui/PhotoInfoModal';
+import { TextModal } from '@/components/ui/TextModal';
 
 type TabType = 'contacts' | 'map' | 'press';
 
@@ -65,6 +65,12 @@ export default function ContactsPage() {
     const [activeTab, setActiveTab] = useState<TabType>('contacts');
     const [selectedPressItem, setSelectedPressItem] = useState<PressItem | null>(null);
     const [showModal, setShowModal] = useState(false);
+
+    // Form state
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [formError, setFormError] = useState('');
 
     const handleSelectPressItem = (item: PressItem) => {
         setSelectedPressItem(item);
@@ -131,13 +137,13 @@ export default function ContactsPage() {
             {/* Tab Navigation */}
             <div className="border-b border-gray-100 bg-white sticky top-0 z-30 mt-10">
                 <div className="max-w-[1400px] mx-auto px-6 flex justify-center">
-                    <div className="flex gap-8 md:gap-16">
+                    <div className="flex gap-10 md:gap-16">
                         {(['contacts', 'map', 'press'] as TabType[]).map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
                                 className={clsx(
-                                    "py-7 text-[12px] md:text-[13px] font-bold uppercase tracking-[0.3em] transition-all relative",
+                                    "py-5 md:py-7 text-[11px] md:text-[13px] font-bold uppercase tracking-[0.15em] md:tracking-[0.3em] transition-all relative",
                                     activeTab === tab ? "text-amber-600" : "text-gray-400 hover:text-gray-900"
                                 )}
                             >
@@ -154,11 +160,11 @@ export default function ContactsPage() {
             </div>
 
             <div className={clsx(
-                "mx-auto px-6 py-16 lg:py-24 transition-all duration-500 max-w-[1100px]"
+                "mx-auto px-6 py-10 lg:py-24 transition-all duration-500 max-w-[1100px]"
             )}>
                 {activeTab === 'contacts' && (
-                    <div className="grid lg:grid-cols-2 gap-20 animate-in fade-in duration-500">
-                        <div className="space-y-12">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 animate-in fade-in duration-500">
+                        <div className="space-y-8">
                             <div>
                                 <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">
                                     {language === 'UA' ? 'Телефон' : 'Phone'}
@@ -202,31 +208,114 @@ export default function ContactsPage() {
                             <h3 className="text-lg font-bold text-gray-900 uppercase tracking-widest leading-none">
                                 {language === 'UA' ? 'Форма звернення' : 'Message Form'}
                             </h3>
-                            <form className="space-y-8">
-                                <div className="grid md:grid-cols-2 gap-8">
-                                    <div className="space-y-1">
-                                        <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
-                                            {language === 'UA' ? "Ваше ім'я" : "Your Name"}
-                                        </label>
-                                        <input type="text" className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all bg-transparent" />
+
+                            {submitStatus === 'success' ? (
+                                <div className="bg-amber-50 p-8 rounded-2xl border border-amber-100 animate-in fade-in zoom-in duration-500">
+                                    <h4 className="text-amber-900 font-bold mb-2">
+                                        {language === 'UA' ? 'Дякуємо!' : 'Thank you!'}
+                                    </h4>
+                                    <p className="text-amber-800 text-sm">
+                                        {language === 'UA'
+                                            ? 'Ваше повідомлення успішно надіслано. Ми відповімо вам найближчим часом.'
+                                            : 'Your message has been sent successfully. We will get back to you soon.'}
+                                    </p>
+                                    <button
+                                        onClick={() => setSubmitStatus('idle')}
+                                        className="mt-6 text-[10px] font-bold uppercase tracking-widest text-amber-900 underline underline-offset-4"
+                                    >
+                                        {language === 'UA' ? 'Написати ще' : 'Send another'}
+                                    </button>
+                                </div>
+                            ) : (
+                                <form
+                                    className="space-y-8"
+                                    onSubmit={async (e) => {
+                                        e.preventDefault();
+                                        setIsSubmitting(true);
+                                        setFormError('');
+
+                                        try {
+                                            const res = await fetch('/api/submit-question', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({
+                                                    name: formData.name,
+                                                    email: formData.email,
+                                                    question: formData.message
+                                                })
+                                            });
+
+                                            const data = await res.json();
+                                            if (res.ok) {
+                                                setSubmitStatus('success');
+                                                setFormData({ name: '', email: '', message: '' });
+                                            } else {
+                                                setFormError(data.error || 'Something went wrong');
+                                            }
+                                        } catch (err) {
+                                            setFormError('Failed to send message');
+                                        } finally {
+                                            setIsSubmitting(false);
+                                        }
+                                    }}
+                                >
+                                    <div className="grid md:grid-cols-2 gap-8">
+                                        <div className="space-y-1">
+                                            <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                                                {language === 'UA' ? "Ваше ім'я" : "Your Name"}
+                                            </label>
+                                            <input
+                                                type="text"
+                                                required
+                                                value={formData.name}
+                                                onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                                className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all bg-transparent"
+                                            />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
+                                                Email
+                                            </label>
+                                            <input
+                                                type="email"
+                                                required
+                                                value={formData.email}
+                                                onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                                className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all bg-transparent"
+                                            />
+                                        </div>
                                     </div>
                                     <div className="space-y-1">
                                         <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
-                                            Email
+                                            {language === 'UA' ? 'Повідомлення' : 'Message'}
                                         </label>
-                                        <input type="email" className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all bg-transparent" />
+                                        <textarea
+                                            rows={3}
+                                            required
+                                            value={formData.message}
+                                            onChange={e => setFormData({ ...formData, message: e.target.value })}
+                                            className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all resize-none bg-transparent"
+                                        />
                                     </div>
-                                </div>
-                                <div className="space-y-1">
-                                    <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">
-                                        {language === 'UA' ? 'Повідомлення' : 'Message'}
-                                    </label>
-                                    <textarea rows={3} className="w-full border-b border-gray-200 py-2 focus:border-amber-600 outline-none transition-all resize-none bg-transparent" />
-                                </div>
-                                <button className="bg-black text-white px-12 py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-amber-800 transition-all">
-                                    {language === 'UA' ? 'Надіслати' : 'Send'}
-                                </button>
-                            </form>
+
+                                    {formError && (
+                                        <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest">{formError}</p>
+                                    )}
+
+                                    <button
+                                        type="submit"
+                                        disabled={isSubmitting}
+                                        className={clsx(
+                                            "bg-black text-white px-12 py-4 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-amber-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed",
+                                            isSubmitting && "animate-pulse"
+                                        )}
+                                    >
+                                        {isSubmitting
+                                            ? (language === 'UA' ? 'Надсилається...' : 'Sending...')
+                                            : (language === 'UA' ? 'Надіслати' : 'Send')}
+                                    </button>
+                                </form>
+                            )}
                         </div>
                     </div>
                 )}
@@ -247,7 +336,7 @@ export default function ContactsPage() {
                                     <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-6">
                                         {language === 'UA' ? 'Адреса' : 'Address'}
                                     </h4>
-                                    <p className="text-gray-900 font-bold text-lg leading-tight uppercase tracking-tight">
+                                    <p className="text-gray-900 font-bold text-lg leading-tight tracking-tight">
                                         45240 Волинська область,<br />
                                         Луцький р-н, с. Жидичин,<br />
                                         вул. Ковельська, 1
@@ -257,9 +346,31 @@ export default function ContactsPage() {
                                     <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">
                                         GPS {language === 'UA' ? 'Координати' : 'Coordinates'}
                                     </h4>
-                                    <p className="text-sm text-gray-600 font-mono tracking-widest">
-                                        50.809369, 25.302041
-                                    </p>
+                                    <div className="flex items-center gap-4">
+                                        <p className="text-sm text-gray-600 font-mono tracking-widest">
+                                            50.809369, 25.302041
+                                        </p>
+                                        <div className="flex gap-2">
+                                            <button
+                                                onClick={() => {
+                                                    navigator.clipboard.writeText("50.809369, 25.302041");
+                                                    alert(language === 'UA' ? 'Координати скопійовано' : 'Coordinates copied');
+                                                }}
+                                                className="p-2 bg-gray-50 hover:bg-amber-50 rounded-lg text-gray-400 hover:text-amber-600 transition-colors"
+                                                title={language === 'UA' ? 'Копіювати' : 'Copy'}
+                                            >
+                                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                            </button>
+                                            <a
+                                                href="https://www.google.com/maps/search/?api=1&query=50.809369,25.302041"
+                                                target="_blank"
+                                                className="p-2 bg-gray-50 hover:bg-amber-50 rounded-lg text-gray-400 hover:text-amber-600 transition-colors"
+                                                title={language === 'UA' ? 'Маршрут' : 'Directions'}
+                                            >
+                                                <Send className="w-4 h-4" />
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -268,12 +379,6 @@ export default function ContactsPage() {
 
                 {activeTab === 'press' && (
                     <div className="animate-in fade-in duration-500 space-y-16">
-                        <div className="text-center mb-10 md:mb-16">
-                            <span className="font-montserrat text-gray-500 uppercase tracking-[0.2em] text-sm md:text-base">
-                                {language === 'UA' ? 'Медіа-матеріали' : 'Media Materials'}
-                            </span>
-                        </div>
-
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
                             {pressItems.map((item) => (
                                 <div
@@ -308,11 +413,10 @@ export default function ContactsPage() {
             </div>
 
             {/* Modal Layer */}
-            <PhotoInfoModal
+            <TextModal
                 isOpen={showModal && !!selectedPressItem}
                 onClose={handleCloseModal}
                 title={selectedPressItem ? (language === 'UA' ? selectedPressItem.title_ua : selectedPressItem.title_en) : ''}
-                image={selectedPressItem?.image}
             >
                 {selectedPressItem && (
                     <div className="space-y-12">
@@ -346,7 +450,7 @@ export default function ContactsPage() {
                         )}
                     </div>
                 )}
-            </PhotoInfoModal>
+            </TextModal>
 
             <Footer />
         </main>

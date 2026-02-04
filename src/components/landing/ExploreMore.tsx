@@ -119,7 +119,7 @@ export function ExploreMore() {
                     bg-white p-3 lg:p-4 rounded-full shadow-xl 
                     text-gray-900 hover:text-amber-600 hover:scale-110
                     transition-all duration-300 ease-in-out
-                    ${showLeftArrow ? 'opacity-0 group-hover/list:opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'}
+                    ${showLeftArrow ? 'opacity-100 lg:opacity-0 lg:group-hover/list:opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'}
                 `}
             aria-label="Scroll left"
           >
@@ -133,7 +133,7 @@ export function ExploreMore() {
                     bg-white p-3 lg:p-4 rounded-full shadow-xl 
                     text-gray-900 hover:text-amber-600 hover:scale-110
                     transition-all duration-300 ease-in-out
-                    ${showRightArrow ? 'opacity-0 group-hover/list:opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}
+                    ${showRightArrow ? 'opacity-100 lg:opacity-0 lg:group-hover/list:opacity-100 translate-x-0' : 'opacity-0 translate-x-4 pointer-events-none'}
                 `}
             aria-label="Scroll right"
           >

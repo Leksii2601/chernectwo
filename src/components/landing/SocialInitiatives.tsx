@@ -2,44 +2,60 @@
 
 import React from 'react';
 import Link from 'next/link';
-
 import { useLanguage } from '@/context/LanguageContext';
+import { CircleArrowButton } from '@/components/ui/CircleArrowButton';
 
 export function SocialInitiatives() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section
       id="social-initiatives"
-      className="relative w-full min-h-[600px] flex items-center justify-center bg-fixed bg-center bg-cover"
+      className="relative w-full min-h-[70vh] md:min-h-[600px] flex items-center justify-center bg-fixed bg-center bg-cover overflow-hidden"
       style={{
         backgroundImage: 'url(/media/social-initiatives.jpg)',
         backgroundAttachment: 'fixed', // Parallax effect
         backgroundPosition: 'center',
         backgroundSize: 'cover'
       }}
+      aria-labelledby="social-initiatives-title"
     >
-      {/* Dark Overlay */}
+      {/* Dark Overlay with Gradient for better text readability */}
       <div className="absolute inset-0 bg-black/60 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent z-[1] hidden md:block"></div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-left text-white">
-        <h2 className="font-montserrat text-4xl md:text-6xl mb-8 tracking-wide">
-          {t('social.title')}
-        </h2>
+      <div className="relative z-10 max-w-[1920px] w-full mx-auto px-6 sm:px-12 md:px-20 lg:px-40 py-20 text-left md:text-left">
+        <div className="max-w-4xl">
+          <h2
+            id="social-initiatives-title"
+            className="font-montserrat text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-6 md:mb-10 tracking-tight uppercase text-white leading-[1.1]"
+          >
+            {t('social.title')}
+          </h2>
 
-        <p className="font-sans text-lg md:text-xl leading-relaxed text-gray-200">
-          {t('social.description')}
-        </p>
+          <p className="font-sans text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-gray-200 mb-16 md:mb-14 max-w-3xl opacity-90">
+            {t('social.description')}
+          </p>
 
-        <div className="mt-12">
-          <Link href="/social-projects">
-            <button className="border border-white hover:bg-white hover:text-black text-white px-8 py-3 rounded-full transition duration-300 font-sans font-semibold uppercase text-sm tracking-wider">
-              {t('social.button')}
-            </button>
-          </Link>
+          <div className="flex justify-start">
+            <CircleArrowButton
+              text={t('skete.details')}
+              href={`/${language.toLowerCase()}/social-projects`}
+              variant="light"
+            />
+          </div>
         </div>
       </div>
+
+      {/* Parallax fix for mobile (disables fixed background which is buggy on iOS) */}
+      <style jsx>{`
+        @media (max-width: 1024px) {
+          section {
+            background-attachment: scroll !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

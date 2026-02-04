@@ -12,7 +12,7 @@ export default async function PilgrimsPage({ params }: { params: Promise<{ lang:
   const t = (key: string) => (translations[currentLang] && translations[currentLang][key]) || key;
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white overflow-x-hidden">
       <PageHeader title={t('nav.pilgrims')} subtitle={t('page.pilgrims_subtitle')} backgroundImage="/media/piligrims.jpg" />
 
       <PilgrimInfo />

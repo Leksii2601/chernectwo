@@ -52,7 +52,7 @@ export const projectsData: ProjectInitiative[] = [
     id: "resurrection_choir",
     icon: "/media/socialInitiatives/resurrection/logo.png",
     socialLinks: {
-      facebook: "https://www.facebook.com/resurrectionchoir"
+      facebook: "https://www.facebook.com/zhydychyn.choir.voskresinnya"
     },
     previewImage: "/media/socialInitiatives/resurrection/preview.jpg",
     gallery: [
@@ -69,7 +69,7 @@ export const projectsData: ProjectInitiative[] = [
     id: "zavtra",
     icon: "/media/socialInitiatives/zavtra/logo.png",
     socialLinks: {
-      facebook: "https://www.facebook.com/zavtra.monastery"
+      facebook: "https://www.facebook.com/info.zavtra"
     },
     previewImage: "/media/socialInitiatives/zavtra/preview.jpg",
     gallery: [
@@ -121,7 +121,7 @@ export const projectsData: ProjectInitiative[] = [
     id: "fire_brigade",
     icon: "/media/socialInitiatives/fire-brigade/logo.png",
     socialLinks: {
-      facebook: "https://www.facebook.com/fire-brigade.monastery"
+      facebook: "https://www.facebook.com/vnutrishnyabezpeka"
     },
     previewImage: "/media/socialInitiatives/fire-brigade/preview.jpg",
     gallery: [
@@ -137,7 +137,7 @@ export const projectsData: ProjectInitiative[] = [
     id: "archimandrite_gardens",
     icon: "/media/socialInitiatives/archimandrite-gardens/logo.png",
     socialLinks: {
-      facebook: "https://www.facebook.com/archimandrite-gardens.monastery"
+      facebook: "https://www.facebook.com/archimandrite.gardens"
     },
     previewImage: "/media/socialInitiatives/archimandrite-gardens/preview.jpg",
     gallery: [
@@ -153,7 +153,7 @@ export const projectsData: ProjectInitiative[] = [
     id: "history_arena",
     icon: "/media/socialInitiatives/history-arena/logo.png",
     socialLinks: {
-      facebook: "https://www.facebook.com/history-arena.monastery"
+      facebook: "https://www.facebook.com/zhydychyn.history.hall"
     },
     previewImage: "/media/socialInitiatives/history-arena/preview.jpg",
     gallery: [
@@ -169,7 +169,7 @@ export const projectsData: ProjectInitiative[] = [
     id: "chaplain_service",
     icon: "/media/socialInitiatives/chaplain-service/logo.png",
     socialLinks: {
-      facebook: "https://www.facebook.com/chaplain-service.monastery"
+      facebook: "https://www.facebook.com/kapelanskeslyzhinya"
     },
     previewImage: "/media/socialInitiatives/chaplain-service/preview.jpg",
     gallery: [
@@ -184,9 +184,6 @@ export const projectsData: ProjectInitiative[] = [
   {
     id: "reading_room",
     icon: "/media/socialInitiatives/reading-room/logo.png",
-    socialLinks: {
-      facebook: "https://www.facebook.com/reading-room.monastery"
-    },
     previewImage: "/media/socialInitiatives/reading-room/preview.jpg",
     gallery: [
       "/media/socialInitiatives/reading-room/reading-room_1.jpg",
@@ -200,9 +197,6 @@ export const projectsData: ProjectInitiative[] = [
   {
     id: "myrt",
     icon: "/media/socialInitiatives/myrt/logo.png",
-    socialLinks: {
-      facebook: "https://www.facebook.com/myrt.monastery"
-    },
     previewImage: "/media/socialInitiatives/myrt/preview.jpg",
     gallery: [
       "/media/socialInitiatives/myrt/myrt_1.jpg",

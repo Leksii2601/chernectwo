@@ -13,6 +13,7 @@ export const metadata = {
 }
 
 import { LanguageProvider } from '@/context/LanguageContext';
+import { CartProvider } from '@/context/CartContext';
 
 export async function generateStaticParams() {
   return [{ lang: 'ua' }, { lang: 'en' }]
@@ -24,11 +25,13 @@ export default async function RootLayout({ children, params }: { children: React
   return (
     <html lang={lang}>
       <body className="font-sans antialiased overflow-x-hidden">
-        <LanguageProvider initialLocale={lang}>
-          <div className="min-h-screen w-full relative">
-            {children}
-          </div>
-        </LanguageProvider>
+        <CartProvider>
+          <LanguageProvider initialLocale={lang}>
+            <div className="min-h-screen w-full relative">
+              {children}
+            </div>
+          </LanguageProvider>
+        </CartProvider>
       </body>
     </html>
   )

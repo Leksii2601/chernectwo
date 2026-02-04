@@ -47,23 +47,31 @@ export function PhotoInfoModal({
     }, []);
 
     useEffect(() => {
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose();
+        };
         if (isOpen) {
+            window.addEventListener('keydown', handleEsc);
             const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
             document.body.style.overflow = 'hidden';
+            document.body.style.height = '100vh';
             document.body.style.paddingRight = `${scrollbarWidth}px`;
+
             setTimeout(() => setAnimatingIn(true), 10);
         } else {
             setAnimatingIn(false);
+
             setTimeout(() => {
-                document.body.style.overflow = 'unset';
-                document.body.style.paddingRight = '0px';
+                document.body.style.overflow = '';
+                document.body.style.height = '';
+                document.body.style.paddingRight = '';
             }, 700); // Wait for transition
         }
         return () => {
-            document.body.style.overflow = 'unset';
-            document.body.style.paddingRight = '0px';
+            window.removeEventListener('keydown', handleEsc);
         };
-    }, [isOpen]);
+    }, [isOpen, onClose]);
 
     if (!mounted || !isOpen) return null;
 
@@ -84,24 +92,26 @@ export function PhotoInfoModal({
     return createPortal(
         <div
             className={clsx(
-                "fixed inset-0 z-[1000] p-4 md:p-10 overflow-y-auto block",
+                "fixed inset-0 z-[1000] px-2 py-6 md:p-10 overflow-y-auto flex items-center justify-center",
                 !animatingIn ? "opacity-0 invisible" : "opacity-100 visible"
             )}
             onClick={onClose}
         >
             {/* Backdrop */}
             <div className={clsx(
-                "fixed inset-0 bg-black/60 backdrop-blur-xl transition-opacity duration-700",
+                "fixed inset-0 bg-black/60 backdrop-blur-xl transition-opacity duration-700 touch-none",
                 !animatingIn ? "opacity-0" : "opacity-100"
             )} />
 
             {/* Scroll Container Position */}
-            <div className="min-h-full w-full flex justify-center py-8">
+            <div className="min-h-full w-full flex items-center justify-center py-8">
                 {/* Modal Container */}
                 <div
                     className={clsx(
-                        "relative w-full max-w-5xl bg-white rounded-t-none rounded-b-[60px] overflow-hidden shadow-2xl transition-all duration-700 my-auto",
-                        !animatingIn ? "scale-90 opacity-0 translate-y-12 blur-lg" : "scale-100 opacity-100 translate-y-0 blur-0"
+                        "relative w-full max-w-5xl bg-white rounded-t-none rounded-b-[40px] md:rounded-b-[60px] overflow-hidden shadow-2xl transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1) my-auto",
+                        !animatingIn
+                            ? "opacity-0 translate-y-[100px] md:translate-y-[150px] scale-[0.98]"
+                            : "opacity-100 translate-y-0 scale-100"
                     )}
                     onClick={(e) => e.stopPropagation()}
                 >
@@ -142,7 +152,7 @@ export function PhotoInfoModal({
                     </div>
 
                     {/* Content */}
-                    <div className="p-8 md:p-12">
+                    <div className="p-5 sm:p-8 md:p-12">
                         {children}
                     </div>
                 </div>

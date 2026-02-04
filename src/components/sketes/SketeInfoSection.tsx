@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { clsx } from 'clsx';
 import { TextModal } from '../ui/TextModal';
 import { CircleArrowButton } from '../ui/CircleArrowButton';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Info, X, MapPin, ChevronLeft, ChevronRight, Phone, Facebook } from 'lucide-react';
+import { ArrowRight, Info, X, MapPin, ChevronLeft, ChevronRight, Phone, Facebook, Maximize2 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 /* -------------------------------------------------------------------------- */
@@ -27,8 +28,6 @@ type SketeData = {
         phone?: string;
     };
 };
-
-// Data definitions moved inside components
 
 /* -------------------------------------------------------------------------- */
 /*                                SUB COMPONENT                               */
@@ -62,6 +61,7 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
 
     // UI State
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
     // Gallery
     const [galleryIndex, setGalleryIndex] = useState(0);
@@ -75,7 +75,6 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
 
     const containerRef = useRef<HTMLDivElement>(null);
 
-
     // Gallery Controls
     const nextImage = useCallback(() => {
         setGalleryIndex((prev) => (prev + 1) % skete.galleryImages.length);
@@ -84,8 +83,6 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
     const prevImage = useCallback(() => {
         setGalleryIndex((prev) => (prev - 1 + skete.galleryImages.length) % skete.galleryImages.length);
     }, [skete]);
-
-
 
     // Block ID for Anchor Links
     const sectionId = skete.id;
@@ -98,33 +95,29 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                 containerRef.current = node;
             }}
             className={clsx(
-                "flex flex-col lg:flex-row min-h-[70vh] bg-white text-black mb-0 last:mb-0 pt-12 lg:pt-24 transition-all duration-1000 ease-in-out",
-                // Animated Entrance: Fade In + Slide Up
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-24"
+                "flex flex-col lg:flex-row min-h-[70vh] bg-white text-black mb-0 last:mb-0 pt-8 lg:pt-24",
+                // Animated Entrance: Only on Desktop
+                isVisible ? "opacity-100 translate-y-0" : "lg:opacity-0 lg:translate-y-24 opacity-100 translate-y-0",
+                "lg:transition-all lg:duration-1000 lg:ease-in-out"
             )}
-            style={{ transitionDelay: `${index * 100}ms` }}
+            style={typeof window !== 'undefined' && window.innerWidth >= 1024 ? { transitionDelay: `${index * 100}ms` } : {}}
         >
 
-            {/* -------------------------------------------------------------------------- */
-                /*                             CONTENT COLUMN (LEFT)                          */
-                /* -------------------------------------------------------------------------- */
-            }
+            {/* CONTENT COLUMN (LEFT) */}
             <div className={clsx(
-                "px-8 md:px-16 lg:px-20 py-8 flex flex-col justify-center relative transition-all duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] order-2 lg:order-1",
+                "px-8 md:px-16 lg:px-20 py-4 lg:py-8 flex flex-col justify-center relative order-2 lg:order-1",
                 activeTab === 'overview' ? "w-full lg:w-1/2" : "w-full lg:w-full",
                 // Staggered reveal for desktop text
-                isVisible ? "lg:opacity-100 lg:translate-x-0" : "lg:opacity-0 lg:-translate-x-12"
+                isVisible ? "lg:opacity-100 lg:translate-x-0" : "lg:opacity-0 lg:-translate-x-12",
+                "lg:transition-all lg:duration-1000 lg:ease-[cubic-bezier(0.25,0.1,0.25,1)]"
             )}>
 
-                {/* Fixed Container for Tabs - Ensures stability */}
+                {/* Fixed Container for Tabs */}
                 <div className={clsx(
                     "w-full max-w-xl mx-auto transition-all duration-500",
                     activeTab === 'overview' ? "lg:mx-0" : "lg:mx-auto"
                 )}>
-                    <div className={clsx(
-                        "flex gap-8 mb-8 border-b border-gray-100 pb-4 transition-all duration-500",
-                        "relative"
-                    )}>
+                    <div className="flex gap-8 mb-4 md:mb-8 border-b border-gray-100 pb-4 relative">
                         <div className={clsx(
                             "flex gap-8 transition-all duration-500 ease-in-out w-fit",
                             activeTab !== 'overview' ? "pl-0 ml-[50%] -translate-x-1/2" : "ml-0 translate-x-0"
@@ -137,7 +130,7 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                                         "text-xs font-bold uppercase tracking-widest pb-4 -mb-[17px] transition-all duration-300",
                                         activeTab === tab.id
                                             ? "text-black border-b-2 border-black"
-                                            : "text-gray-400 hover:text-gray-600 border-b-2 border-transparent"
+                                            : "text-gray-300 hover:text-gray-600 border-b-2 border-transparent"
                                     )}
                                 >
                                     {tab.label}
@@ -147,11 +140,13 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                     </div>
                 </div>
 
-
                 {/* CONTENT CONTAINER */}
-                <div className="w-full relative min-h-[300px] lg:min-h-[400px]">
+                <div className={clsx(
+                    "w-full relative transition-all duration-500",
+                    activeTab === 'gallery' ? "min-h-0 lg:min-h-[400px]" : "min-h-[300px] lg:min-h-[400px]"
+                )}>
 
-                    {/* --- OVERVIEW TAB (Includes Title) --- */}
+                    {/* --- OVERVIEW TAB --- */}
                     <div className={clsx(
                         "transition-all duration-700 cubic-bezier(0.4, 0, 0.2, 1) w-full max-w-xl mx-auto lg:mx-0 mb-8",
                         activeTab === 'overview'
@@ -171,16 +166,14 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                         />
                     </div>
 
-                    {/* --- GALLERY TAB (Expanded) --- */}
+                    {/* --- GALLERY TAB --- */}
                     <div className={clsx(
-                        "transition-all duration-700 ease-in-out w-full border-t border-transparent", // Added border to prevent collapse issues
+                        "transition-all duration-700 ease-in-out w-full border-t border-transparent",
                         activeTab === 'gallery'
                             ? "opacity-100 translate-y-0 relative z-10 delay-100"
                             : "opacity-0 translate-y-20 absolute top-0 left-0 pointer-events-none z-0 scale-95"
                     )}>
-                        {/* Back Button Removed for mobile/UX */}
-
-                        <div className="w-full lg:w-[65vw] max-w-full aspect-[3/2] relative bg-black overflow-hidden group mx-auto">
+                        <div className="w-full lg:w-[65vw] max-w-full aspect-square md:aspect-[3/2] relative bg-black overflow-hidden group mx-auto cursor-zoom-in shadow-sm" onClick={() => setIsLightboxOpen(true)}>
                             <Image
                                 src={skete.galleryImages[galleryIndex]}
                                 alt="Gallery"
@@ -188,37 +181,37 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                                 sizes="(max-width: 768px) 100vw, 50vw"
                                 className="object-cover animate-in fade-in duration-500"
                                 priority={false}
-                                key={galleryIndex} // Re-animate on change
+                                key={galleryIndex}
                             />
 
-                            {/* Dark Arrows */}
+                            {/* View Icon Overlay (Mobile) */}
+                            <div className="absolute top-4 right-4 md:hidden bg-black/40 p-2 rounded-full backdrop-blur-sm">
+                                <Maximize2 className="w-4 h-4 text-white" />
+                            </div>
+
+                            {/* Navigation Arrows */}
                             <button
-                                onClick={prevImage}
+                                onClick={(e) => { e.stopPropagation(); prevImage(); }}
                                 className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white text-black shadow-lg rounded-full transition-all hover:scale-110 z-20"
                             >
                                 <ChevronLeft size={24} />
                             </button>
                             <button
-                                onClick={nextImage}
+                                onClick={(e) => { e.stopPropagation(); nextImage(); }}
                                 className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white text-black shadow-lg rounded-full transition-all hover:scale-110 z-20"
                             >
                                 <ChevronRight size={24} />
                             </button>
-
-                            {/* Minimal Counter */}
-
                         </div>
                     </div>
 
-                    {/* --- CONTACTS TAB (Expanded) --- */}
+                    {/* --- CONTACTS TAB --- */}
                     <div className={clsx(
                         "transition-all duration-700 ease-in-out w-full",
                         activeTab === 'contact'
                             ? "opacity-100 translate-y-0 relative z-10 delay-100"
                             : "opacity-0 translate-y-20 absolute top-0 left-0 pointer-events-none z-0 scale-95"
                     )}>
-                        {/* Back button removed */}
-
                         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center text-left bg-gray-50 p-8 md:p-12 rounded-xl border border-gray-100 shadow-sm">
                             <div className="space-y-8">
                                 <h3 className="text-3xl font-montserrat font-bold mb-8 text-black">{t('skete.contacts_title')}</h3>
@@ -275,24 +268,21 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            {/* -------------------------------------------------------------------------- */
-                /*                             IMAGE COLUMN (RIGHT)                           */
-                /* -------------------------------------------------------------------------- */
-            }
+            {/* IMAGE COLUMN (RIGHT) */}
             <div className={clsx(
-                "transition-all duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] order-1 lg:order-2 relative bg-white overflow-hidden flex items-center justify-center",
+                "order-1 lg:order-2 relative bg-white overflow-hidden flex items-center justify-center",
                 activeTab === 'overview'
-                    ? "h-auto w-full lg:w-1/2 opacity-100 mb-8 lg:mb-0 lg:translate-x-0"
+                    ? "h-auto w-full lg:w-1/2 opacity-100 mb-4 lg:mb-0 lg:translate-x-0"
                     : "h-0 lg:h-auto w-full lg:w-0 opacity-0 pointer-events-none mb-0 lg:mb-0 lg:translate-x-20",
                 // Staggered reveal for desktop image
-                isVisible ? "lg:opacity-100 lg:translate-x-0" : "lg:opacity-0 lg:translate-x-12"
+                isVisible ? "lg:opacity-100 lg:translate-x-0" : "lg:opacity-0 lg:translate-x-12",
+                "lg:transition-all lg:duration-1000 lg:ease-[cubic-bezier(0.25,0.1,0.25,1)]"
             )}>
                 <div className="w-full p-4 lg:p-12 relative flex items-center justify-center">
-                    <div className="w-full relative shadow-2xl rounded-sm overflow-hidden aspect-[3/2]">
+                    <div className="w-full relative shadow-md lg:shadow-2xl rounded-sm overflow-hidden aspect-[3/2]">
                         <Image
                             src={skete.image}
                             alt={skete.label}
@@ -304,14 +294,7 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
                 </div>
             </div>
 
-            {/* -------------------------------------------------------------------------- */
-                /*                                   MODAL                                    */
-                /* -------------------------------------------------------------------------- */
-            }
-            {/* -------------------------------------------------------------------------- */
-                /*                                   MODAL                                    */
-                /* -------------------------------------------------------------------------- */
-            }
+            {/* MODALS */}
             <TextModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
@@ -319,23 +302,63 @@ const SketeSectionBlock = ({ skete, index }: { skete: SketeData, index: number }
             >
                 <div className="space-y-8">
                     <div className="flex items-center gap-2 mb-2 text-amber-600">
-                        <Info className="w-5 h-5" />
                         <span className="text-xs font-bold uppercase tracking-widest">{t('skete.historical_note')}</span>
                     </div>
-
                     <div className="prose prose-sm max-w-none text-gray-600 mb-10 font-montserrat leading-relaxed text-lg">
                         {skete.overviewContent}
                     </div>
-
                     <button
                         onClick={() => setIsModalOpen(false)}
-                        className="w-full py-4 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-amber-600 transition-all rounded-3xl shadow-lg hover:shadow-xl"
+                        className="w-full py-4 bg-black text-white text-xs font-bold uppercase tracking-widest hover:bg-amber-600 transition-all rounded-3xl"
                     >
                         {t('generic.close')}
                     </button>
                 </div>
             </TextModal>
 
+            {/* FULLSCREEN LIGHTBOX */}
+            {isLightboxOpen && mounted && createPortal(
+                <div
+                    className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-xl flex items-center justify-center animate-in fade-in duration-300"
+                    onClick={() => setIsLightboxOpen(false)}
+                >
+                    <button
+                        onClick={() => setIsLightboxOpen(false)}
+                        className="absolute top-6 right-6 z-50 text-white/50 hover:text-white transition-colors p-3 bg-white/5 rounded-full"
+                    >
+                        <X size={32} />
+                    </button>
+
+                    <button
+                        onClick={(e) => { e.stopPropagation(); prevImage(); }}
+                        className="absolute left-4 md:left-12 z-50 p-4 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all active:scale-90"
+                    >
+                        <ChevronLeft size={32} />
+                    </button>
+
+                    <button
+                        onClick={(e) => { e.stopPropagation(); nextImage(); }}
+                        className="absolute right-4 md:right-12 z-50 p-4 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all active:scale-90"
+                    >
+                        <ChevronRight size={32} />
+                    </button>
+
+                    <div className="relative w-full h-full max-w-6xl max-h-[85vh] p-4 flex items-center justify-center" onClick={e => e.stopPropagation()}>
+                        <Image
+                            src={skete.galleryImages[galleryIndex]}
+                            alt="Lightbox"
+                            fill
+                            className="object-contain"
+                            priority
+                        />
+                    </div>
+
+                    <div className="absolute bottom-8 left-0 right-0 text-center text-white/50 font-bold uppercase tracking-widest text-[10px]">
+                        {galleryIndex + 1} / {skete.galleryImages.length}
+                    </div>
+                </div>,
+                document.body
+            )}
         </div>
     );
 };
@@ -359,7 +382,6 @@ export const SketeInfoSection = () => {
                 <div className="space-y-4 font-sans leading-relaxed text-gray-700">
                     <p>{t('sketes.holy_spirit_overview_1')}</p>
                     <p>{t('sketes.holy_spirit_overview_2')}</p>
-                    {/* Особливості повністю видалені */}
                 </div>
             ),
             contactInfo: {

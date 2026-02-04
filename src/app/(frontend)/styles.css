@@ -21,6 +21,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Triod';
+  src: url('/fonts/Triod_Postnaja.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -256,6 +263,24 @@ body.lock-scroll {
 .animate-glow {
   animation: glow 3s ease-in-out infinite;
 }
+
+/* Stable Parallax for Mobile */
+@media (max-width: 1024px) {
+
+  /* 
+     Fixed backgrounds on mobile are notoriously buggy due to browser UI resizing.
+     We force them to scroll if they cause issues, but keeping bg-fixed classes 
+     functional where browser supports it's better handled by removing conflicts.
+  */
+  .bg-fixed-mobile-safe {
+    background-attachment: scroll !important;
+  }
+}
+
+/* 
+   Note: Removed transform/translateZ from .bg-fixed as it broke the fixed positioning 
+   by creating a new containing block.
+*/
 
 /* Custom Scrollbar for Webkit */
 .scrollbar-thin::-webkit-scrollbar {

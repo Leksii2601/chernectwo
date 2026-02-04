@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, X, Info } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, X, Info, Maximize2 } from 'lucide-react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { useLanguage } from '@/context/LanguageContext';
 import { TextModal } from '../ui/TextModal';
 import { CircleArrowButton } from '../ui/CircleArrowButton';
+import { createPortal } from 'react-dom';
 
 type CategoryId = 'temples' | 'monuments' | 'parks' | 'economy' | 'service';
 
@@ -355,26 +356,34 @@ export const ComplexLayout = () => {
     : MOCK_OBJECTS.filter(obj => obj.categoryId === activeCategory);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 font-montserrat">
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 font-montserrat overflow-x-hidden">
       {/* Sidebar - Minimal Left Edge */}
-      <div className="w-full lg:w-72 flex-shrink-0">
-        <div className="sticky top-24">
-          {/* Mobile Horizontal Scroll */}
-          <div className="lg:hidden mb-6 overflow-x-auto pb-2 -mx-4 px-4 flex gap-3 hide-scrollbar [&::-webkit-scrollbar]:hidden">
-            {CATEGORIES.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`
-                    px-5 py-2.5 rounded-full whitespace-nowrap text-sm font-bold uppercase tracking-wide transition-all shadow-sm
-                    ${activeCategory === category.id
-                    ? 'bg-amber-600 text-white shadow-md transform scale-105'
-                    : 'bg-transparent text-gray-500 border border-gray-200 hover:border-gray-400'}
-                  `}
-              >
-                {category.label}
-              </button>
-            ))}
+      <div className="w-full lg:w-72 flex-shrink-0 lg:z-[10] relative">
+        <div className="sticky top-[70px] md:top-24 z-40 bg-white/95 backdrop-blur-sm lg:bg-transparent">
+          {/* Mobile Horizontal Scroll - Premium Tabs */}
+          <div className="lg:hidden py-4 overflow-x-auto hide-scrollbar [&::-webkit-scrollbar]:hidden border-b border-gray-100/50">
+            <div className="flex gap-2 p-1.5 bg-gray-50/50 rounded-2xl border border-gray-100 min-w-max">
+              {CATEGORIES.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setActiveCategory(category.id)}
+                  className={clsx(
+                    "px-6 py-3 rounded-xl whitespace-nowrap text-[11px] font-bold uppercase tracking-wider transition-all duration-300",
+                    activeCategory === category.id
+                      ? "bg-white text-amber-600 shadow-sm ring-1 ring-black/5"
+                      : "text-gray-400 hover:text-gray-600"
+                  )}
+                >
+                  {category.label}
+                </button>
+              ))}
+            </div>
+            {/* Scroll Indicator Dot */}
+            <div className="flex justify-center mt-3 gap-1">
+              {CATEGORIES.map(c => (
+                <div key={c.id} className={clsx("w-1 h-1 rounded-full transition-all duration-300", activeCategory === c.id ? "w-6 bg-amber-600" : "bg-gray-200")} />
+              ))}
+            </div>
           </div>
 
           {/* Desktop Vertical List */}
@@ -426,6 +435,12 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState<TabId>('overview');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const TABS: { id: TabId; label: string }[] = [
     { id: 'overview', label: t('complex.tab_overview') },
@@ -478,13 +493,14 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
           {/* Left Content Section */}
           <div className={clsx(
             "flex flex-col transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
-            activeTab === 'overview' ? "w-full lg:w-[60%] p-6 lg:p-10" : "w-full p-4 lg:p-10"
+            activeTab === 'overview' ? "w-full lg:w-[60%] p-6 lg:p-10" : "w-full p-0 lg:p-10"
           )}>
             <div className={`mb-2 w-full ${activeTab === 'overview' ? 'lg:max-w-2xl' : ''}`}>
               {/* Tabs - Centering when in gallery mode */}
               <div className={clsx(
                 "flex gap-8 border-b border-gray-100 mb-6 transition-all duration-500",
-                activeTab !== 'overview' && "justify-center"
+                activeTab !== 'overview' && "justify-center",
+                activeTab === 'gallery' && "px-6" // Padding for mobile tabs when in gallery
               )}>
                 {TABS.map(tab => (
                   <button
@@ -492,7 +508,7 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
                     onClick={() => setActiveTab(tab.id)}
                     className={clsx(
                       "py-4 text-xs font-bold uppercase tracking-widest transition-all relative",
-                      activeTab === tab.id ? "text-amber-600" : "text-gray-400 hover:text-gray-600"
+                      activeTab === tab.id ? "text-amber-600" : "text-gray-300 hover:text-gray-600"
                     )}
                   >
                     {tab.label}
@@ -543,7 +559,10 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
                   )}
                 >
                   {/* Gallery Slider - Adjusted aspect ratio and width for mobile */}
-                  <div className="w-full lg:w-[65%] aspect-[4/3] md:aspect-[3/2] relative bg-black overflow-hidden group/gallery mx-auto shadow-md">
+                  <div
+                    className="w-full lg:w-[65%] aspect-square md:aspect-[3/2] relative bg-black overflow-hidden group/gallery mx-auto cursor-zoom-in"
+                    onClick={() => setIsLightboxOpen(true)}
+                  >
                     {object.galleryImages.length > 0 ? (
                       <>
                         <Image
@@ -556,18 +575,23 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
                           key={currentImageIndex} // Re-animate on change
                         />
 
+                        {/* View Icon Overlay (Mobile) */}
+                        <div className="absolute top-4 right-4 md:hidden bg-black/40 p-2 rounded-full backdrop-blur-sm">
+                          <Maximize2 className="w-4 h-4 text-white" />
+                        </div>
+
                         {/* Navigation Arrows */}
                         <button
-                          onClick={prevImage}
+                          onClick={(e) => { e.stopPropagation(); prevImage(); }}
                           className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white text-black shadow-lg rounded-full transition-all hover:scale-110 z-20"
                         >
-                          <ChevronLeft className="w-6 h-6" />
+                          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
                         </button>
                         <button
-                          onClick={nextImage}
+                          onClick={(e) => { e.stopPropagation(); nextImage(); }}
                           className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-white/90 hover:bg-white text-black shadow-lg rounded-full transition-all hover:scale-110 z-20"
                         >
-                          <ChevronRight className="w-6 h-6" />
+                          <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
                         </button>
                       </>
                     ) : (
@@ -598,7 +622,7 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
                 className="absolute inset-0 bg-cover bg-center h-[120%]"
                 style={{ backgroundImage: `url(${coverImage})`, transformOrigin: 'center center' }}
               />
-              <div className="absolute inset-0 bg-black/10 hover:bg-transparent transition-colors duration-500"></div>
+              <div className="absolute inset-0 bg-black/10 transition-colors duration-500"></div>
             </div>
           </div>
         </div>
@@ -627,6 +651,49 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
           </button>
         </div>
       </TextModal>
+      {/* FULLSCREEN LIGHTBOX */}
+      {isLightboxOpen && mounted && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-xl flex items-center justify-center animate-in fade-in duration-300"
+          onClick={() => setIsLightboxOpen(false)}
+        >
+          <button
+            onClick={() => setIsLightboxOpen(false)}
+            className="absolute top-6 right-6 z-50 text-white/50 hover:text-white transition-colors p-3 bg-white/5 rounded-full"
+          >
+            <X size={32} />
+          </button>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            className="absolute left-4 md:left-12 z-50 p-4 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all active:scale-90"
+          >
+            <ChevronLeft size={32} />
+          </button>
+
+          <button
+            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            className="absolute right-4 md:right-12 z-50 p-4 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all active:scale-90"
+          >
+            <ChevronRight size={32} />
+          </button>
+
+          <div className="relative w-full h-full max-w-6xl max-h-[85vh] p-4 flex items-center justify-center" onClick={e => e.stopPropagation()}>
+            <Image
+              src={object.galleryImages[currentImageIndex]}
+              alt="Lightbox"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+
+          <div className="absolute bottom-8 left-0 right-0 text-center text-white/50 font-bold uppercase tracking-widest text-[10px]">
+            {currentImageIndex + 1} / {object.galleryImages.length}
+          </div>
+        </div>,
+        document.body
+      )}
     </>
   );
 };
