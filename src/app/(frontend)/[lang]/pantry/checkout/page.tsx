@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useCart } from '@/context/CartContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { Header } from '@/components/landing/Header';
+import { PantryHeader } from '@/components/pantry/PantryHeader';
 import { Footer } from '@/components/landing/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -26,9 +26,9 @@ export default function CheckoutPage() {
 
     if (cart.length === 0 && step !== 3) {
         return (
-            <main className="bg-white min-h-screen pt-32 text-center">
-                <Header variant="burger" />
-                <div className="max-w-md mx-auto py-24">
+            <main className="bg-white min-h-screen text-center overflow-x-hidden pt-20">
+                <PantryHeader />
+                <div className="max-w-md mx-auto py-24 md:py-32">
                     <ShoppingBag size={64} className="mx-auto text-gray-200 mb-8" />
                     <h1 className="font-kyiv text-3xl mb-4">Ваш кошик порожній</h1>
                     <Link href={`/${language.toLowerCase()}/pantry`} className="text-amber-600 uppercase tracking-widest font-bold text-xs hover:underline">
@@ -41,10 +41,8 @@ export default function CheckoutPage() {
     }
 
     return (
-        <main className="bg-gray-50 min-h-screen">
-            <div className="bg-black">
-                <Header variant="burger" />
-            </div>
+        <main className="bg-gray-50 min-h-screen overflow-x-hidden pt-20">
+            <PantryHeader />
 
             <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-24 md:py-32 flex flex-col lg:flex-row gap-16">
 

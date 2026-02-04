@@ -69,7 +69,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
         { label: t('nav.complex'), href: '/about/complex' },
         { label: t('nav.sketes'), href: '/about/sketes' },
         { label: t('nav.media'), href: '/about/media' },
-        { label: language === 'UA' ? 'Комора' : 'Store', href: '/store' },
+        { label: language === 'UA' ? 'Комора' : 'Pantry', href: '/pantry' },
       ]
     },
     {

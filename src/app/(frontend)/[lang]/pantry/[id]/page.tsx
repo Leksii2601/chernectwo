@@ -1,8 +1,8 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { pantryProducts } from '@/data/pantryData';
-import { Footer } from '@/components/landing/Footer';
-import { Header } from '@/components/landing/Header';
+import { PantryFooter } from '@/components/pantry/PantryFooter';
+import { PantryHeader } from '@/components/pantry/PantryHeader';
 import { ProductDetail } from '@/components/pantry/ProductDetail';
 
 export default async function ProductPage({ params }: { params: Promise<{ lang: string, id: string }> }) {
@@ -14,16 +14,12 @@ export default async function ProductPage({ params }: { params: Promise<{ lang: 
     }
 
     return (
-        <main className="bg-white min-h-screen">
-            <div className="bg-black">
-                <Header variant="burger" />
-            </div>
+        <main className="bg-white min-h-screen overflow-x-hidden pt-20">
+            <PantryHeader isProductPage={true} />
 
-            <div className="pt-24 md:pt-12">
-                <ProductDetail product={product} />
-            </div>
+            <ProductDetail product={product} />
 
-            <Footer />
+            <PantryFooter />
         </main>
     );
 }

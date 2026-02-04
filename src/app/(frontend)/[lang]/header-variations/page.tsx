@@ -54,7 +54,7 @@ export default function HeaderVariationsPage() {
                 { label: t('nav.complex'), href: '#' },
                 { label: t('nav.sketes'), href: '#' },
                 { label: t('nav.media'), href: '#' },
-                { label: language === 'UA' ? 'Комора' : 'Store', href: '#' },
+                { label: language === 'UA' ? 'Комора' : 'Pantry', href: '#' },
             ]
         },
         {

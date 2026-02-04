@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { translations, Language } from '@/data/translations';
+import { pantryTranslations } from '@/data/pantryTranslations';
 
 interface LanguageContextType {
     language: Language;
@@ -36,7 +37,9 @@ export function LanguageProvider({ children, initialLocale }: { children: React.
 
     const t = (key: string) => {
         const langData = translations[language] || translations['UA'];
-        return langData?.[key] || key;
+        const pantryData = pantryTranslations[language] || pantryTranslations['UA'];
+
+        return pantryData?.[key] || langData?.[key] || key;
     };
 
     return (

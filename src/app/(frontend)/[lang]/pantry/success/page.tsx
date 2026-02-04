@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
-import { Header } from '@/components/landing/Header';
+import { PantryHeader } from '@/components/pantry/PantryHeader';
 import { Footer } from '@/components/landing/Footer';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 
@@ -12,10 +12,8 @@ export default function SuccessPage() {
     const lang = language.toLowerCase();
 
     return (
-        <main className="bg-white min-h-screen">
-            <div className="bg-black">
-                <Header variant="burger" />
-            </div>
+        <main className="bg-white min-h-screen overflow-x-hidden pt-20">
+            <PantryHeader />
 
             <div className="max-w-2xl mx-auto px-4 py-32 text-center">
                 <div className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-10 text-green-600">

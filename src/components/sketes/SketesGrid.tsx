@@ -1,12 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
-import { TextModal } from '../ui/TextModal';
 import { CircleArrowButton } from '../ui/CircleArrowButton';
-import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
 import { clsx } from 'clsx';
 import { useInView } from 'react-intersection-observer';
 
@@ -39,8 +35,6 @@ export const SketesGrid = () => {
             link: '#life-bearing'
         },
     ];
-
-    const [selectedSkete, setSelectedSkete] = useState<any>(null);
 
     return (
         <div className="w-full relative">
