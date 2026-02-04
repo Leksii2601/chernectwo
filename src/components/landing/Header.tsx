@@ -14,7 +14,11 @@ interface NavItem {
   children?: { label: string; href: string }[];
 }
 
-export function Header() {
+interface HeaderProps {
+  variant?: 'default' | 'burger';
+}
+
+export function Header({ variant = 'default' }: HeaderProps) {
   const { t, language, setLanguage } = useLanguage();
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
