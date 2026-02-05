@@ -399,8 +399,11 @@ export const SketeInfoSection = () => {
                 '/media/sketes/petropavlivskyiskut/petropavlivskyi_2.avif',
                 '/media/sketes/petropavlivskyiskut/petropavlivskyi_3.avif',
                 '/media/sketes/petropavlivskyiskut/petropavlivskyi_4.avif',
-                '/media/sketes/petropavlivskyiskut/petropavlivskyi_5.avif',
-                '/media/sketes/petropavlivskyiskut/petropavlivskyi_6.avif'
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_5.jpg',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_6.jpg',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_7.jpg',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_8.jpg',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_9.jpg'
             ],
             overviewContent: (
                 <div className="space-y-4 font-sans leading-relaxed text-gray-700">

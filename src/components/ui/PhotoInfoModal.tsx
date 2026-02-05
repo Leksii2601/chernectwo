@@ -55,7 +55,6 @@ export function PhotoInfoModal({
             const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
             document.body.style.overflow = 'hidden';
-            document.body.style.height = '100vh';
             document.body.style.paddingRight = `${scrollbarWidth}px`;
 
             setTimeout(() => setAnimatingIn(true), 10);
@@ -64,7 +63,6 @@ export function PhotoInfoModal({
 
             setTimeout(() => {
                 document.body.style.overflow = '';
-                document.body.style.height = '';
                 document.body.style.paddingRight = '';
             }, 700); // Wait for transition
         }
@@ -92,7 +90,7 @@ export function PhotoInfoModal({
     return createPortal(
         <div
             className={clsx(
-                "fixed inset-0 z-[1000] px-2 py-6 md:p-10 overflow-y-auto flex items-center justify-center",
+                "fixed inset-0 z-[1000] px-2 py-4 md:p-10 overflow-y-auto flex justify-center items-start",
                 !animatingIn ? "opacity-0 invisible" : "opacity-100 visible"
             )}
             onClick={onClose}
@@ -108,7 +106,7 @@ export function PhotoInfoModal({
                 {/* Modal Container */}
                 <div
                     className={clsx(
-                        "relative w-full max-w-5xl bg-white rounded-t-none rounded-b-[40px] md:rounded-b-[60px] overflow-hidden shadow-2xl transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1) my-auto",
+                        "relative w-full max-w-5xl bg-white rounded-t-none rounded-b-[40px] md:rounded-b-[60px] overflow-hidden shadow-2xl transition-all duration-[800ms] cubic-bezier(0.16, 1, 0.3, 1) my-4 md:my-auto",
                         !animatingIn
                             ? "opacity-0 translate-y-[100px] md:translate-y-[150px] scale-[0.98]"
                             : "opacity-100 translate-y-0 scale-100"

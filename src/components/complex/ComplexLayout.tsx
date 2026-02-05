@@ -310,7 +310,10 @@ export const ComplexLayout = () => {
       categoryId: 'service',
       title: t('complex.e6_title'),
       description: t('complex.e6_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      previewImage: '/media/church-complex/service/shelter/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/service/shelter/hero.jpg'
+      ],
       fullDescription: t('complex.e6_full_desc')
     },
     {
@@ -331,7 +334,14 @@ export const ComplexLayout = () => {
       categoryId: 'service',
       title: t('complex.e1_title'),
       description: t('complex.e1_desc'),
-      galleryImages: ['/media/church-complex.jpg'],
+      previewImage: '/media/church-complex/service/parking/hero.jpg',
+      galleryImages: [
+        '/media/church-complex/service/parking/parking_1.jpg',
+        '/media/church-complex/service/parking/parking_2.jpg',
+        '/media/church-complex/service/parking/parking_3.jpg',
+        '/media/church-complex/service/parking/parking_4.jpg',
+        '/media/church-complex/service/parking/parking_5.jpg'
+      ],
       fullDescription: t('complex.e1_full_desc')
     },
   ];
@@ -346,7 +356,9 @@ export const ComplexLayout = () => {
       '/media/church-complex/economy/economy_1.jpg',
       '/media/church-complex/economy/economy_2.jpg',
       '/media/church-complex/economy/economy_3.jpg',
-      '/media/church-complex/economy/economy_4.jpg'
+      '/media/church-complex/economy/economy_4.jpg',
+      '/media/church-complex/economy/economy_5.jpg',
+      '/media/church-complex/economy/economy_6.jpg'
     ],
     fullDescription: t('complex.economy_full_desc')
   };

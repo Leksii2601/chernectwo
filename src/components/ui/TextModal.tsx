@@ -34,7 +34,6 @@ export function TextModal({
             const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
             document.body.style.overflow = 'hidden';
-            document.body.style.height = '100vh';
             document.body.style.paddingRight = `${scrollbarWidth}px`;
 
             setTimeout(() => setAnimatingIn(true), 10);
@@ -43,7 +42,6 @@ export function TextModal({
 
             setTimeout(() => {
                 document.body.style.overflow = '';
-                document.body.style.height = '';
                 document.body.style.paddingRight = '';
             }, 300);
         }
@@ -57,7 +55,7 @@ export function TextModal({
     return createPortal(
         <div
             className={clsx(
-                "fixed inset-0 z-[1000] px-2 py-6 md:p-10 transition-all duration-300 overflow-y-auto flex items-center justify-center",
+                "fixed inset-0 z-[1000] px-2 py-4 md:p-10 transition-all duration-300 overflow-y-auto flex justify-center items-start",
                 !animatingIn ? "opacity-0 invisible" : "opacity-100 visible"
             )}
             onClick={onClose}
@@ -71,7 +69,7 @@ export function TextModal({
             {/* Modal Container - Temple Complex style */}
             <div
                 className={clsx(
-                    "relative w-full max-w-5xl bg-white rounded-t-none rounded-b-[60px] overflow-hidden shadow-2xl transition-all duration-700 my-auto",
+                    "relative w-full max-w-5xl bg-white rounded-t-none rounded-b-[40px] md:rounded-b-[60px] overflow-hidden shadow-2xl transition-all duration-700 my-4 md:my-auto",
                     !animatingIn ? "scale-90 opacity-0 translate-y-12 blur-lg" : "scale-100 opacity-100 translate-y-0 blur-0"
                 )}
                 onClick={(e) => e.stopPropagation()}

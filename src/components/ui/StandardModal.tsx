@@ -26,13 +26,13 @@ export const StandardModal = ({
 
     return createPortal(
         <div className={`
-            fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md transition-opacity duration-300
+            fixed inset-0 z-[99999] flex justify-center items-start p-4 bg-black/95 backdrop-blur-md transition-opacity duration-300 overflow-y-auto
             ${isClosing ? 'opacity-0' : 'opacity-100 animate-in fade-in'}
         `}>
             <div className="absolute inset-0" onClick={onClose} /> {/* Click outside to close */}
 
             <div className={`
-                bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-hidden relative shadow-2xl flex flex-col transition-all duration-300
+                bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-hidden relative shadow-2xl flex flex-col transition-all duration-300 my-auto
                 ${isClosing ? 'scale-95 opacity-0 translate-y-4' : 'scale-100 opacity-100 translate-y-0 animate-in zoom-in-95 slide-in-from-bottom-4'}
             `}>
 
