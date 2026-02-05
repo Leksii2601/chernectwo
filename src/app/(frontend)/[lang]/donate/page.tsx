@@ -4,6 +4,7 @@ import React from 'react';
 import { Footer } from '@/components/landing/Footer';
 import { PageHeader } from '@/components/PageHeader';
 import { useLanguage } from '@/context/LanguageContext';
+import Script from 'next/script';
 import { DonationTabs } from '@/components/landing/DonationTabs'; // Ensure this is just the default import
 // Check icon was unused as we rely on DonationTabs internal logic
 // createPortal was unused
@@ -14,6 +15,11 @@ export default function DonatePage() {
 
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col">
+      <Script
+        id="wayforpay-widget"
+        src="https://secure.wayforpay.com/server/pay-widget.js?ref=button"
+        strategy="afterInteractive"
+      />
       <PageHeader
         title={t('donate.title')}
         subtitle={t('page.donate_subtitle')}

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { PageHeader } from '@/components/PageHeader';
 import { Footer } from '@/components/landing/Footer';
 import { useLanguage } from '@/context/LanguageContext';
-import { Facebook, Youtube, Download, X, Send, Instagram } from 'lucide-react';
+import { Facebook, Youtube, Download, X, Send, Instagram, Copy, Check } from 'lucide-react';
 
 import { clsx } from 'clsx';
 import Image from 'next/image';
@@ -45,17 +45,37 @@ const pressItems: PressItem[] = [
         subtitle_ua: 'ЕПІСТОЛЯРНИЙ ЕТИКЕТ',
         subtitle_en: 'FORMS OF ADDRESS',
         image: '/media/hero-1.jpg',
-        description_ua: 'Правила та норми звернення до Намісника та братії монастиря під час офіційного листування чи особистого спілкування.',
-        description_en: 'Rules and norms of addressing the Abbot and the brethren of the monastery during official correspondence or personal communication.',
+        description_ua: 'Правила та норми звернення до намісника та братії монастиря під час офіційного листування чи особистого спілкування, а також офіційне найменування монашої інституції.',
+        description_en: 'Rules and norms of addressing the Abbot and the brethren of the monastery during official correspondence or personal communication, as well as the official naming of the monastic institution.',
         details_ua: [
-            'Намісник: Високопреподобний архімандрит Костянтин',
-            'Звернення: "Отче наміснику" або "Отець Костянтин"',
-            'Братія: Всечесні отці та братія'
+            'Звернення',
+            'Посада: намісник Свято-Миколаївського Жидичинського монастиря',
+            'Звернення для листування: наміснику Свято-Миколаївського Жидичинського монастиря архімандриту Константину (Марченко)',
+            'Звернення офіційне: Високопреподобний архімандрит Костянтин',
+            'Звернення особисте: "Отче наміснику" або "Отець Костянтин"',
+            'Звернення до братії: всечесні отці та браття',
+            '',
+            'Юридична назва: РО "Свято-Миколаївський чоловічий монастир Волинської єпархії УПЦ (ПЦУ)", код ЄДРПОУ 26278106',
+            '',
+            'Скорочена назва:',
+            'Свято-Миколаївський Жидичинський монастир',
+            'Монастир Святителя Миколая села Жидичин',
+            'Жидичинський Свято-Миколаївський монастир'
         ],
         details_en: [
-            'Abbot: Very Reverend Archimandrite Konstantin',
-            'Address: "Father Abbot" or "Father Konstantin"',
-            'Brethren: Reverend Fathers and Brethren'
+            'Addressing',
+            'Position: Abbot of the St. Nicholas Zhydychyn Monastery',
+            'Correspondence address: To the Abbot of the St. Nicholas Zhydychyn Monastery, Archimandrite Konstantin (Marchenko)',
+            'Official address: Very Reverend Archimandrite Konstantin',
+            'Personal address: "Father Abbot" or "Father Konstantin"',
+            'Brethren address: Reverend Fathers and Brethren',
+            '',
+            'Legal Name: RO "Holy Nicholas Monastery of the Volyn Eparchy of the OCU", EDRPOU code 26278106',
+            '',
+            'Shortened Name:',
+            'Holy Nicholas Zhydychyn Monastery',
+            'Monastery of Saint Nicholas the Wonderworker of Zhydychyn village',
+            'Zhydychyn Holy Nicholas Monastery'
         ]
     },
 ];
@@ -65,6 +85,7 @@ export default function ContactsPage() {
     const [activeTab, setActiveTab] = useState<TabType>('contacts');
     const [selectedPressItem, setSelectedPressItem] = useState<PressItem | null>(null);
     const [showModal, setShowModal] = useState(false);
+    const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
     // Form state
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -80,6 +101,7 @@ export default function ContactsPage() {
     const handleCloseModal = () => {
         setShowModal(false);
         setSelectedPressItem(null);
+        setCopiedIndex(null);
     };
 
     // Custom Icons not available in Lucide
@@ -433,13 +455,48 @@ export default function ContactsPage() {
                             <h4 className="text-xs font-bold text-amber-600 uppercase tracking-[0.3em] leading-none">
                                 {language === 'UA' ? 'ДЕТАЛІ ТА ВИМОГИ:' : 'DETAILS & REQUIREMENTS:'}
                             </h4>
-                            <ul className="space-y-5">
-                                {(language === 'UA' ? selectedPressItem.details_ua : selectedPressItem.details_en).map((detail, idx) => (
-                                    <li key={idx} className="flex items-start gap-5 text-gray-800 font-bold text-base md:text-lg border-l-4 border-amber-600/20 pl-6 py-1 hover:border-amber-600 transition-colors">
-                                        <span>{detail}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                            <div className="space-y-4">
+                                {(language === 'UA' ? selectedPressItem.details_ua : selectedPressItem.details_en).map((detail, idx) => {
+                                    if (!detail) return <div key={idx} className="h-2" />;
+
+                                    const headerTerms = [
+                                        'Звернення', 'Назва', 'Скорочена назва:', 'Юридична назва:',
+                                        'Addressing', 'Name', 'Shortened Name:', 'Legal Name:'
+                                    ];
+                                    const isHeader = headerTerms.some(term => detail.startsWith(term) && detail.length < 30);
+
+                                    return (
+                                        <div key={idx} className="group flex flex-col gap-2">
+                                            {isHeader ? (
+                                                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-4 first:mt-0">
+                                                    {detail}
+                                                </span>
+                                            ) : (
+                                                <div className="flex items-center justify-between gap-4 p-3 md:p-4 bg-gray-50 rounded-2xl hover:bg-amber-50 transition-all duration-300">
+                                                    <span className="text-gray-900 font-bold text-sm md:text-base leading-snug">
+                                                        {detail}
+                                                    </span>
+                                                    <button
+                                                        onClick={() => {
+                                                            navigator.clipboard.writeText(detail);
+                                                            setCopiedIndex(idx);
+                                                            setTimeout(() => setCopiedIndex(null), 2000);
+                                                        }}
+                                                        className="p-2 rounded-xl text-gray-400 hover:text-amber-600 hover:bg-white transition-all shrink-0 shadow-sm md:shadow-none hover:shadow-md"
+                                                        title={language === 'UA' ? "Копіювати" : "Copy"}
+                                                    >
+                                                        {copiedIndex === idx ? (
+                                                            <Check className="w-5 h-5 text-green-600" />
+                                                        ) : (
+                                                            <Copy className="w-5 h-5" />
+                                                        )}
+                                                    </button>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
 
                         {selectedPressItem.id === 'brandbook' && (

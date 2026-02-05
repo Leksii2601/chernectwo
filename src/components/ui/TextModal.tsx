@@ -84,16 +84,15 @@ export function TextModal({
                     <X className="w-6 h-6 transition-transform duration-500 group-hover:rotate-90" />
                 </button>
 
-                {/* Header Title (now part of content padding or separate block?) */}
-                {/* Contacts modal puts title over image. Here we don't have image. We should keep title but style it nicely. */}
-                <div className="p-5 md:p-12 lg:p-16 pr-16 md:pr-24 pb-0 md:pb-0 lg:pb-0">
+                {/* Header Title */}
+                <div className="px-6 md:px-16 lg:px-20 pt-10 md:pt-16 pb-6">
                     <h3 className="font-montserrat text-2xl md:text-4xl font-bold text-gray-900 uppercase tracking-widest mb-0">
                         {title}
                     </h3>
                 </div>
 
                 {/* Content */}
-                <div className="p-5 md:p-12 pt-0 text-gray-700 leading-relaxed text-base md:text-lg">
+                <div className="px-6 md:px-16 lg:px-20 pb-10 md:pb-16 text-gray-700 leading-relaxed text-base md:text-lg">
                     {children}
                 </div>
             </div>
