@@ -376,7 +376,9 @@ export const SketeInfoSection = () => {
                 '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_1.avif',
                 '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_2.avif',
                 '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_3.avif',
-                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_4.avif'
+                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_4.avif',
+                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_5.jpg',
+                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_6.png'
             ],
             overviewContent: (
                 <div className="space-y-4 font-sans leading-relaxed text-gray-700">

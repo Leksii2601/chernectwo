@@ -218,7 +218,10 @@ export const ComplexLayout = () => {
         '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_2.png',
         '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_3.jpg',
         '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_4.jpg',
-        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_5.jpg'
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_5.jpg',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_6.jpg',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_7.jpg'
+
       ],
       fullDescription: t('complex.p2_full_desc')
     },
@@ -227,10 +230,12 @@ export const ComplexLayout = () => {
       categoryId: 'parks',
       title: t('complex.p4_title'),
       description: t('complex.p4_desc'),
-      previewImage: '/media/church-complex/parks/monastery-gardens/hero.jpg',
+      previewImage: '/media/church-complex/parks/monastery-gardens/hero.png',
       galleryImages: [
         '/media/church-complex/parks/monastery-gardens/monastery-gardens_1.png',
-        '/media/church-complex/parks/monastery-gardens/monastery-gardens_2.png'
+        '/media/church-complex/parks/monastery-gardens/monastery-gardens_2.png',
+        '/media/church-complex/parks/monastery-gardens/hero.png',
+        '/media/church-complex/parks/monastery-gardens/monastery-gardens_3.png',
       ],
       fullDescription: t('complex.p4_full_desc')
     },
@@ -239,12 +244,14 @@ export const ComplexLayout = () => {
       categoryId: 'parks',
       title: t('complex.p5_title'),
       description: t('complex.p5_desc'),
-      previewImage: '/media/church-complex/parks/soborna-square/hero.jpg',
+      previewImage: '/media/church-complex/parks/soborna-square/hero.png',
       galleryImages: [
         '/media/church-complex/parks/soborna-square/soborna-square_1.jpg',
         '/media/church-complex/parks/soborna-square/soborna-square_2.png',
         '/media/church-complex/parks/soborna-square/soborna-square_3.jpg',
-        '/media/church-complex/parks/soborna-square/soborna-square_4.jpg'
+        '/media/church-complex/parks/soborna-square/soborna-square_4.jpg',
+        '/media/church-complex/parks/soborna-square/soborna-square_5.png',
+        '/media/church-complex/parks/soborna-square/soborna-square_6.jpg',
       ],
       fullDescription: t('complex.p5_full_desc')
     },
@@ -325,7 +332,8 @@ export const ComplexLayout = () => {
       galleryImages: [
         '/media/church-complex/service/toilet/toilet_1.jpg',
         '/media/church-complex/service/toilet/toilet_2.jpg',
-        '/media/church-complex/service/toilet/toilet_3.jpg'
+        '/media/church-complex/service/toilet/toilet_3.jpg',
+        '/media/church-complex/service/toilet/toilet_4.png'
       ],
       fullDescription: t('complex.e3_full_desc')
     },
