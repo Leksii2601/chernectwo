@@ -1,14 +1,8 @@
-=== OCU RULES GENERATOR ===
-
-Pascha 2026: Sun Apr 12 2026
-
-Processing 364 entries for 2026...
-Generated 288 rules
 import { TypikonRule } from './TypikonRules';
 
 /**
  * Auto-generated OCU Rules from readings_2026.json
- * Generated on: 2026-02-06T12:19:16.939Z
+ * Generated on: 2026-02-06T12:22:50.075Z
  * Pascha 2026: Sun Apr 12 2026
  * 
  * This file contains liturgical rules extracted from the 2026 OCU Calendar (pages 5-82).
@@ -417,6 +411,31 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
         }
     },
     {
+        "id": "2026-01-14 Тріод.",
+        "triggers": {
+            "nday": [
+                -88
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Пет._4:12-5:5",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._12:38-44",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
         "id": "2026-01-15 Тріод.",
         "triggers": {
             "mmdd": [
@@ -483,6 +502,31 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
                     {
                         "reading": "Лк. 24 зач.; 6:17-23",
                         "label": "Св."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-01-17 Тріод.",
+        "triggers": {
+            "nday": [
+                -85
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "2 Тим._3:10-15",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Лк._18:10-14",
+                        "label": "Тріод."
                     }
                 ]
             }
@@ -561,6 +605,106 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
         }
     },
     {
+        "id": "2026-01-20 Тріод.",
+        "triggers": {
+            "nday": [
+                -82
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "2 Пет._3:1-18",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._13:24-31",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-01-21 Тріод.",
+        "triggers": {
+            "nday": [
+                -81
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Ін._1:8-2:6",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._13:31-14:2",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-01-22 Тріод.",
+        "triggers": {
+            "nday": [
+                -80
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Ін._2:7-17",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._14:3-9",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-01-23 Тріод.",
+        "triggers": {
+            "nday": [
+                -79
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "2 Тим._3:1-9",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Лк._20:45-21:4",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
         "id": "2026-01-24 Ряд.",
         "triggers": {
             "mmdd": [
@@ -591,6 +735,31 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
                     {
                         "reading": "Ін. 36 зач.; 10:9-16",
                         "label": "Св."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-01-25 Тріод.",
+        "triggers": {
+            "nday": [
+                -77
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Пет._2:21b-3:9",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._12:13-17",
+                        "label": "Тріод."
                     }
                 ]
             }
@@ -633,6 +802,56 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
         }
     },
     {
+        "id": "2026-01-27 Тріод.",
+        "triggers": {
+            "nday": [
+                -75
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Пет._4:1-11",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._12:28-37",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-01-28 Тріод.",
+        "triggers": {
+            "nday": [
+                -74
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Пет._4:12-5:5",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._12:38-44",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
         "id": "2026-01-29 Св.",
         "triggers": {
             "mmdd": [
@@ -655,6 +874,31 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
                     {
                         "reading": "Мф. 11 зач.; 5:14-19",
                         "label": "Св."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-01-30 Тріод.",
+        "triggers": {
+            "nday": [
+                -72
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "2 Тим._2:11-19",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Лк._18:2-8a",
+                        "label": "Тріод."
                     }
                 ]
             }
@@ -755,6 +999,156 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
                     {
                         "reading": "Лк. 8 зач.; 2:25-32",
                         "label": "Св."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-03 Тріод.",
+        "triggers": {
+            "nday": [
+                -68
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "2 Пет._3:1-18",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._13:24-31",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-04 Тріод.",
+        "triggers": {
+            "nday": [
+                -67
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Ін._1:8-2:6",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._13:31-14:2",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-05 Тріод.",
+        "triggers": {
+            "nday": [
+                -66
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Ін._2:7-17",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._14:3-9",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-06 Тріод.",
+        "triggers": {
+            "nday": [
+                -65
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "2 Тим._3:1-9",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Лк._20:45-21:4",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-07 Тріод.",
+        "triggers": {
+            "nday": [
+                -64
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Кор._6:12-20",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Лк._15:11-32",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-08 Тріод.",
+        "triggers": {
+            "nday": [
+                -63
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Ін._2:18-3:10a",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._11:1-11",
+                        "label": "Тріод."
                     }
                 ]
             }
@@ -869,6 +1263,206 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
         }
     },
     {
+        "id": "2026-02-12 Тріод.",
+        "triggers": {
+            "nday": [
+                -59
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "2 Ін._1:1-13",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._15:22, 25, 33-41",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-13 Тріод.",
+        "triggers": {
+            "nday": [
+                -58
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Кор._10:23-28",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Лк._21:8-9, 25-27, 33-36",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-14 Тріод.",
+        "triggers": {
+            "nday": [
+                -57
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "1 Кор._8:8-9:2",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мф._25:31-46",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-15 Тріод.",
+        "triggers": {
+            "nday": [
+                -56
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "3 Ін._1:1-15",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Лк._19:29-40, 22:7-39",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-16 Тріод.",
+        "triggers": {
+            "nday": [
+                -55
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Юди_1:1-10",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Лк._22:39-42, 22:45b-23:1",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-18 Тріод.",
+        "triggers": {
+            "nday": [
+                -53
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Юди_1:11-25",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Лк._23:1b-34a, 44-56",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-20 Тріод.",
+        "triggers": {
+            "nday": [
+                -51
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Рим._14:19-26",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мф._6:1-13",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-21 Тріод.",
+        "triggers": {
+            "nday": [
+                -50
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Рим._13:11b-14:4",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мф._6:14-21",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
         "id": "2026-02-22 Св.",
         "triggers": {
             "mmdd": [
@@ -925,6 +1519,106 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
         }
     },
     {
+        "id": "2026-02-27 Тріод.",
+        "triggers": {
+            "nday": [
+                -44
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._1:1-12",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._2:23-3:5",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-02-28 Тріод.",
+        "triggers": {
+            "nday": [
+                -43
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._11:24-26, 11:32-12:2a",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Ін._1:43-51",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-03-06 Тріод.",
+        "triggers": {
+            "nday": [
+                -37
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._3:12-16",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._1:35-44",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-03-07 Тріод.",
+        "triggers": {
+            "nday": [
+                -36
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._1:10-2:3",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._2:1-12",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
         "id": "2026-03-08 Св.",
         "triggers": {
             "mmdd": [
@@ -953,6 +1647,56 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
         }
     },
     {
+        "id": "2026-03-13 Тріод.",
+        "triggers": {
+            "nday": [
+                -30
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._10:32-38a",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._2:14-17",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-03-14 Тріод.",
+        "triggers": {
+            "nday": [
+                -29
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._4:14-5:6",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._8:34b-9:1",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
         "id": "2026-03-16 Св.",
         "triggers": {
             "mmdd": [
@@ -975,6 +1719,56 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
                     {
                         "reading": "Лк. 24 зач.; 6:17-23",
                         "label": "Св."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-03-20 Тріод.",
+        "triggers": {
+            "nday": [
+                -23
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._6:9-12",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._7:31-37",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-03-21 Тріод.",
+        "triggers": {
+            "nday": [
+                -22
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._6:13-20",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._9:17-31",
+                        "label": "Тріод."
                     }
                 ]
             }
@@ -1037,6 +1831,56 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
         }
     },
     {
+        "id": "2026-03-27 Тріод.",
+        "triggers": {
+            "nday": [
+                -16
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._9:24-28",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._8:27-31",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-03-28 Тріод.",
+        "triggers": {
+            "nday": [
+                -15
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._9:11-14",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мк._10:32b-45",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
         "id": "2026-03-31 Св.",
         "triggers": {
             "mmdd": [
@@ -1065,13 +1909,85 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
         }
     },
     {
+        "id": "2026-04-03 Тріод.",
+        "triggers": {
+            "nday": [
+                -9
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Євр._12:28-13:8",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Ін._11:1-45",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-04-04 Тріод.",
+        "triggers": {
+            "nday": [
+                -8
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Флп._4:4-9",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Ін._12:1-18",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "id": "2026-04-10 Тріод.",
+        "triggers": {
+            "nday": [
+                -2
+            ]
+        },
+        "action": "REPLACE_LITURGY",
+        "data": {
+            "liturgy": {
+                "apostle": [
+                    {
+                        "reading": "Рим._6:3-11",
+                        "label": "Тріод."
+                    }
+                ],
+                "gospel": [
+                    {
+                        "reading": "Мф._28:1-20",
+                        "label": "Тріод."
+                    }
+                ]
+            }
+        }
+    },
+    {
         "id": "2026-04-11 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-11"
-            ],
-            "year": [
-                2026
+            "nday": [
+                -1
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1095,11 +2011,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-18 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-18"
-            ],
-            "year": [
-                2026
+            "nday": [
+                6
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1123,11 +2036,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-19 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-19"
-            ],
-            "year": [
-                2026
+            "nday": [
+                7
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1151,11 +2061,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-20 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-20"
-            ],
-            "year": [
-                2026
+            "nday": [
+                8
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1179,11 +2086,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-21 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-21"
-            ],
-            "year": [
-                2026
+            "nday": [
+                9
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1243,11 +2147,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-23 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-23"
-            ],
-            "year": [
-                2026
+            "nday": [
+                11
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1307,11 +2208,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-25 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-25"
-            ],
-            "year": [
-                2026
+            "nday": [
+                13
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1335,11 +2233,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-26 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-26"
-            ],
-            "year": [
-                2026
+            "nday": [
+                14
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1363,11 +2258,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-27 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-27"
-            ],
-            "year": [
-                2026
+            "nday": [
+                15
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1391,11 +2283,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-28 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-28"
-            ],
-            "year": [
-                2026
+            "nday": [
+                16
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1455,11 +2344,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-04-30 Ряд.",
         "triggers": {
-            "mmdd": [
-                "04-30"
-            ],
-            "year": [
-                2026
+            "nday": [
+                18
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1483,11 +2369,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-01 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-01"
-            ],
-            "year": [
-                2026
+            "nday": [
+                19
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1511,11 +2394,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-02 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-02"
-            ],
-            "year": [
-                2026
+            "nday": [
+                20
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1539,11 +2419,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-03 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-03"
-            ],
-            "year": [
-                2026
+            "nday": [
+                21
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1567,11 +2444,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-04 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-04"
-            ],
-            "year": [
-                2026
+            "nday": [
+                22
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1595,11 +2469,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-05 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-05"
-            ],
-            "year": [
-                2026
+            "nday": [
+                23
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1623,11 +2494,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-06 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-06"
-            ],
-            "year": [
-                2026
+            "nday": [
+                24
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1723,11 +2591,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-09 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-09"
-            ],
-            "year": [
-                2026
+            "nday": [
+                27
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1787,11 +2652,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-11 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-11"
-            ],
-            "year": [
-                2026
+            "nday": [
+                29
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1815,11 +2677,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-12 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-12"
-            ],
-            "year": [
-                2026
+            "nday": [
+                30
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1843,11 +2702,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-13 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-13"
-            ],
-            "year": [
-                2026
+            "nday": [
+                31
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1871,11 +2727,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-14 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-14"
-            ],
-            "year": [
-                2026
+            "nday": [
+                32
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1899,11 +2752,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-15 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-15"
-            ],
-            "year": [
-                2026
+            "nday": [
+                33
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1927,11 +2777,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-16 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-16"
-            ],
-            "year": [
-                2026
+            "nday": [
+                34
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1955,11 +2802,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-17 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-17"
-            ],
-            "year": [
-                2026
+            "nday": [
+                35
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -1983,11 +2827,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-18 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-18"
-            ],
-            "year": [
-                2026
+            "nday": [
+                36
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2011,11 +2852,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-19 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-19"
-            ],
-            "year": [
-                2026
+            "nday": [
+                37
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2075,11 +2913,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-21 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-21"
-            ],
-            "year": [
-                2026
+            "nday": [
+                39
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2103,11 +2938,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-22 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-22"
-            ],
-            "year": [
-                2026
+            "nday": [
+                40
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2167,11 +2999,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-24 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-24"
-            ],
-            "year": [
-                2026
+            "nday": [
+                42
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2195,11 +3024,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-25 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-25"
-            ],
-            "year": [
-                2026
+            "nday": [
+                43
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2223,11 +3049,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-26 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-26"
-            ],
-            "year": [
-                2026
+            "nday": [
+                44
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2251,11 +3074,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-27 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-27"
-            ],
-            "year": [
-                2026
+            "nday": [
+                45
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2279,11 +3099,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-28 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-28"
-            ],
-            "year": [
-                2026
+            "nday": [
+                46
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2307,11 +3124,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-29 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-29"
-            ],
-            "year": [
-                2026
+            "nday": [
+                47
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2335,11 +3149,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-30 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-30"
-            ],
-            "year": [
-                2026
+            "nday": [
+                48
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -2363,11 +3174,8 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
     {
         "id": "2026-05-31 Ряд.",
         "triggers": {
-            "mmdd": [
-                "05-31"
-            ],
-            "year": [
-                2026
+            "nday": [
+                49
             ]
         },
         "action": "REPLACE_LITURGY",
@@ -8293,10 +9101,3 @@ export const GENERATED_OCU_RULES_2026: TypikonRule[] = [
         }
     }
 ];
-
-=== STATISTICS ===
-Total rules: 288
-SUPPRESS_SAINTS: 0
-REPLACE_LITURGY: 288
-Rules with nday trigger: 0
-Rules with mmdd trigger: 288

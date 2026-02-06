@@ -40,41 +40,44 @@ function calculateNday(dateStr: string): number {
 
 // Helper function to check if a reading is movable (Triodion/Pentecostarion)
 function isMovableFeast(label: string, date: string): boolean {
-    const movableIndicators = [
-        'Тріод',
-        'тиж.',
-        'тижн',
-        'сиропусн',
-        'Заупокій',
-        'Лазарев',
-        'Вхід',
-        'Вознес',
-        'П\'ятдесятн',
-        'Митар',
-        'Блудн',
-        'Страшн',
-        'Прощ',
-        'Неділя про',
-        'Неділя перед',
-        'Неділя після',
-        'Субота перед',
-        'Субота після'
-    ];
-    
-    // Sunday readings during certain periods are movable
-    const dateObj = new Date(date);
     const nday = calculateNday(date);
     
-    // Triodion period (roughly 10 weeks before Pascha to Pascha)
-    // Pentecostarion period (Pascha to Pentecost Sunday, nday 0 to 49)
+    // Triodion period: 10 weeks before Pascha (nday -70 to -1)
     const isTriodionPeriod = nday >= -70 && nday < 0;
-    const isPentecostPeriod = nday >= 0 && nday <= 50;
     
-    if ((isTriodionPeriod || isPentecostPeriod) && label.includes('Неділя')) {
+    // Pentecostarion period: Pascha to Pentecost Sunday (nday 0 to 49)
+    const isPentecostPeriod = nday >= 0 && nday <= 49;
+    
+    // Explicit Triodion label
+    if (label.includes('Тріод')) {
         return true;
     }
     
-    return movableIndicators.some(indicator => label.includes(indicator));
+    // During Triodion or Pentecostarion, Sunday readings and certain labels are movable
+    if (isTriodionPeriod || isPentecostPeriod) {
+        const movableIndicators = [
+            'Неділя',
+            'тиж.',
+            'тижн',
+            'сиропусн',
+            'Заупокій',
+            'Лазарев',
+            'Вхід',
+            'Вознес',
+            'П\'ятдесятн',
+            'Митар',
+            'Блудн',
+            'Страшн',
+            'Прощ',
+            'перед Богоявл',
+            'після Богоявл',
+            'Ряд.' // During Triodion/Pentecostarion, ordinary readings are movable
+        ];
+        
+        return movableIndicators.some(indicator => label.includes(indicator));
+    }
+    
+    return false;
 }
 
 // Helper function to check if label is ordinary reading only that should be suppressed
@@ -153,7 +156,7 @@ function generateOCURules(): TypikonRule[] {
         return date.getFullYear() === 2026;
     });
     
-    console.log(`Processing ${filtered.length} entries for 2026...`);
+    console.error(`Processing ${filtered.length} entries for 2026...`);
     
     for (const entry of filtered) {
         const { date, readings: dayReadings } = entry;
@@ -177,10 +180,11 @@ function generateOCURules(): TypikonRule[] {
         
         // Separate movable and fixed readings
         const movableReadings = dayReadings.filter(r => isMovableFeast(r.label, date));
-        const fixedReadings = dayReadings.filter(r => !isMovableFeast(r.label, date) || isMajorFixedFeast(r.label));
+        const fixedReadings = dayReadings.filter(r => !isMovableFeast(r.label, date) && !isMajorFixedFeast(r.label));
+        const majorFeastReadings = dayReadings.filter(r => isMajorFixedFeast(r.label));
         
         // Process readings and create rule
-        if (fixedReadings.length > 0 || dayReadings.length > 1) {
+        if (dayReadings.length > 0) {
             const apostle = dayReadings.map(r => ({
                 reading: normalizeReading(r.apostle),
                 label: r.label.trim()
@@ -193,17 +197,17 @@ function generateOCURules(): TypikonRule[] {
             
             // Determine trigger type based on readings
             const hasMovable = movableReadings.length > 0;
-            const hasFixed = fixedReadings.length > 0;
+            const hasFixed = fixedReadings.length > 0 || majorFeastReadings.length > 0;
             const isPurelyMovable = hasMovable && !hasFixed && movableReadings.length === dayReadings.length;
             
-            // If purely movable (e.g., Triodion Sunday), use nday; otherwise use mmdd
-            const useMmdd = !isPurelyMovable;
+            // If purely movable (e.g., Triodion readings), use nday; otherwise use mmdd
+            const useNday = isPurelyMovable;
             
             const rule: TypikonRule = {
                 id: `${date} ${dayReadings[0].label}`,
-                triggers: useMmdd 
-                    ? { mmdd: [mmdd], year: [2026] }
-                    : { nday: [nday] },
+                triggers: useNday 
+                    ? { nday: [nday] }
+                    : { mmdd: [mmdd], year: [2026] },
                 action: 'REPLACE_LITURGY',
                 data: {
                     liturgy: {
@@ -217,7 +221,7 @@ function generateOCURules(): TypikonRule[] {
         }
     }
     
-    console.log(`Generated ${rules.length} rules`);
+    console.error(`Generated ${rules.length} rules`);
     return rules;
 }
 
