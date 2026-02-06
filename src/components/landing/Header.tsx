@@ -258,7 +258,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
         <div className="flex items-center gap-1">
           {/* Logo */}
           <Link href={getLocalizedPath('/')} className="w-14 h-14 relative mr-10 ml-3 hover:scale-110 transition-transform duration-1000 cursor-pointer">
-            <Image src="/media/logo.webp" alt="Logo" fill className="object-contain" />
+            <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
           </Link>
 
           {mainNavItems.map((item) => (

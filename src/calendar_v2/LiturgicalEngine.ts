@@ -5,7 +5,7 @@ import ponomarLivesRaw from './data/ponomar_raw/ponomar_lives_ua.json';
 import calendarCidsRaw from './data/calendar_cids.json';
 import gapMapRaw from './data/gap_map.json';
 import { PaschalionReader } from './PaschalionReader';
-import { OCU_2026_RULES, TypikonRule } from './TypikonRules';
+import { OCU_RULES, TypikonRule } from './TypikonRules';
 
 // --- Types ---
 
@@ -491,13 +491,19 @@ export function calculateDynamicReadings(date: Date): DayReadings {
     const activeRules: TypikonRule[] = [];
 
     // 1. Evaluate Triggers
-    OCU_2026_RULES.forEach(rule => {
-        let active = false;
-        if (rule.triggers.mmdd && rule.triggers.mmdd.includes(mmdd)) active = true;
-        if (rule.triggers.nday && rule.triggers.nday.includes(nday)) active = true;
+    OCU_RULES.forEach(rule => {
+        let triggersMatch = false;
+        if (rule.triggers.mmdd && rule.triggers.mmdd.includes(mmdd)) triggersMatch = true;
+        if (rule.triggers.nday && rule.triggers.nday.includes(nday)) triggersMatch = true;
 
-        if (active) {
+        // Year Isolation (Filter)
+        if (triggersMatch && rule.triggers.year) {
+            if (!rule.triggers.year.includes(year)) {
+                triggersMatch = false;
+            }
+        }
 
+        if (triggersMatch) {
             activeRules.push(rule);
         }
     });
@@ -670,11 +676,23 @@ export function calculateDynamicReadings(date: Date): DayReadings {
                     result.liturgy.gospel = [];
                 }
                 if (rule.data.liturgy) {
+                    const addUnique = (targetList: any[], newItem: any) => {
+                        const exists = targetList.some(existing => {
+                            // Simple normalization check
+                            return normalizeBookNames(existing.reading) === normalizeBookNames(newItem.reading);
+                        });
+                        if (!exists) targetList.push(newItem);
+                    };
+
                     rule.data.liturgy.apostle?.forEach(r => {
-                        result.liturgy.apostle.push({ reading: r.reading, label: r.label, type: r.type });
+                        const item = { reading: r.reading, label: r.label, type: r.type };
+                        if (rule.action === 'REPLACE_LITURGY') result.liturgy.apostle.push(item);
+                        else addUnique(result.liturgy.apostle, item);
                     });
                     rule.data.liturgy.gospel?.forEach(r => {
-                        result.liturgy.gospel.push({ reading: r.reading, label: r.label, type: r.type });
+                        const item = { reading: r.reading, label: r.label, type: r.type };
+                        if (rule.action === 'REPLACE_LITURGY') result.liturgy.gospel.push(item);
+                        else addUnique(result.liturgy.gospel, item);
                     });
                 }
             }
@@ -721,8 +739,15 @@ export function calculateDynamicReadings(date: Date): DayReadings {
         // Special Actions
         if (rule.action === 'SET_ALITURGICAL') {
             result.liturgy = { title: "Літургія не звершується", apostle: [], gospel: [] };
-            if (!result.vespers) result.vespers = { title: "Вечірня", readings: [] };
-            result.hours = {};
+            if (result.vespers) {
+                // Clean vespers readings but keep object? Or just set title.
+                // Actually, if we want to suppress vespers (unless ADD_VESPERS used?),
+                // usually Aliturgical implies Vespers *is* served (often separately) or it's standard.
+                // But in the context of "Clean UI", we might want to keep it if it was populated.
+                // The 'delete result.vespers' logic later handles removal if empty/not special.
+                // Let's just update the title.
+            }
+            // Do NOT wipe hours.
         }
     });
 
@@ -736,6 +761,7 @@ export function calculateDynamicReadings(date: Date): DayReadings {
             .replace(/(\d)[вВ]/g, "$1") // Remove Cyrillic 'v' ONLY if it follows a digit (suffix)
             .replace(/\(mid\.\)/gi, "(з середини)")
             .replace(/\(from half\)/gi, "(з середини)")
+            .replace(/\(\.\)/g, "(від половини)")
             .trim();
     };
 
@@ -746,6 +772,7 @@ export function calculateDynamicReadings(date: Date): DayReadings {
                 if (r.label.toLowerCase() === 'sexte') r.label = "6-й час";
                 if (r.label.toLowerCase() === 'matins') r.label = "Рання";
                 if (r.label.toLowerCase() === 'vespers') r.label = "Вечірня";
+                if (r.label.toLowerCase() === 'morning') r.label = "Ранкове Євангеліє";
             }
         });
     };
@@ -755,6 +782,17 @@ export function calculateDynamicReadings(date: Date): DayReadings {
     if (result.matins) cleanList(result.matins.readings);
     if (result.vespers) cleanList(result.vespers.readings);
     if (result.hours) Object.values(result.hours).forEach((arr: any) => cleanList(arr));
+
+    // CLEAN UI: Vespers Removal
+    // Remove vespers unless Great Lent, Triodion Sunday, Eve, or Aliturgical
+    const isGreatLent = (nday >= -48 && nday < 0);
+    const isTriodionSunday = (nday >= -70 && nday < -48 && dow === 0);
+    const isAliturgical = result.liturgy.title.includes("не звершується") || result.liturgy.title.includes("Ранішосвячених");
+    const isEve = result.saints.some(s => s.toLowerCase().includes("навечір'я")) || (result.metadata?.description || "").toLowerCase().includes("навечір'я");
+
+    if (!isGreatLent && !isTriodionSunday && !isAliturgical && !isEve) {
+        delete result.vespers;
+    }
 
     // Lenten Weekdays (Great Lent)
     const hasLiturgyContent = result.liturgy.apostle.length > 0 || result.liturgy.gospel.length > 0;
