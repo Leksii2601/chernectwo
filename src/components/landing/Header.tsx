@@ -258,7 +258,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
         <div className="flex items-center gap-1">
           {/* Logo */}
           <Link href={getLocalizedPath('/')} className="w-14 h-14 relative mr-10 ml-3 hover:scale-110 transition-transform duration-1000 cursor-pointer">
-            <Image src="/media/logo.webp" alt="Logo" fill className="object-contain" />
+            <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
           </Link>
 
           {mainNavItems.map((item) => (
@@ -310,7 +310,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
         scrolled ? "bg-black/90 backdrop-blur-xl translate-y-0 shadow-2xl" : "bg-transparent -translate-y-full"
       )}>
         <Link href={getLocalizedPath('/')} className="w-10 h-10 relative">
-          <Image src="/media/logo.webp" alt="Logo" fill className="object-contain" />
+          <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
         </Link>
         <button onClick={() => setMobileMenuOpen(true)} className="text-white p-2 active:scale-95 transition-transform">
           <Menu size={32} />
@@ -324,7 +324,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
         scrolled ? "opacity-0 -translate-y-10 pointer-events-none" : "opacity-100 translate-y-0"
       )}>
         <Link href={getLocalizedPath('/')} className="w-16 h-16 relative block">
-          <Image src="/media/logo.webp" alt="Logo" fill className="object-contain" />
+          <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
         </Link>
       </div>
 

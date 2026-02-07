@@ -29,7 +29,7 @@ export function SocialInitiatives() {
         <div className="max-w-4xl">
           <h2
             id="social-initiatives-title"
-            className="font-montserrat text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-6 md:mb-10 tracking-tight uppercase text-white leading-[1.1]"
+            className="font-montserrat text-2xl sm:text-3xl md:text-5xl lg:text-7xl mb-6 md:mb-10 tracking-tight uppercase text-white leading-[1.1]"
           >
             {t('social.title')}
           </h2>

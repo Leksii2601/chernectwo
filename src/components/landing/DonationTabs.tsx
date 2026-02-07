@@ -71,6 +71,16 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                 const orderReference = 'Order_' + Date.now();
                 const orderDate = Math.floor(Date.now() / 1000);
 
+                // Setup recurring parameters if needed
+                const isSubscription = frequency === 'subscription';
+                const regularParams = isSubscription ? {
+                    regularMode: 'real',
+                    regularAmount: finalAmount,
+                    regularCount: 0, // 0 means unlimited
+                    regularOn: 'Y',
+                    regularPeriod: 'weekly'
+                } : {};
+
                 // 1. Get signature from our API
                 const response = await fetch('/api/wayforpay/signature', {
                     method: 'POST',
@@ -79,7 +89,8 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                         amount: finalAmount,
                         currency: finalCurrency,
                         orderReference,
-                        orderDate
+                        orderDate,
+                        ...regularParams
                     })
                 });
 
@@ -87,32 +98,43 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
 
                 if (data.error) throw new Error(data.error);
 
-                setShowPaymentFields(true);
-
-                // Wait for DOM to update with iframe
-                setTimeout(() => {
-                    const form = document.getElementById('wayforpay-form') as HTMLFormElement;
-                    if (form) {
-                        // Populate hidden fields
-                        (form.querySelector('input[name="merchantAccount"]') as HTMLInputElement).value = data.merchantAccount;
-                        (form.querySelector('input[name="merchantDomainName"]') as HTMLInputElement).value = data.merchantDomainName;
-                        (form.querySelector('input[name="merchantSignature"]') as HTMLInputElement).value = data.merchantSignature;
-                        (form.querySelector('input[name="orderReference"]') as HTMLInputElement).value = data.orderReference;
-                        (form.querySelector('input[name="orderDate"]') as HTMLInputElement).value = data.orderDate;
-                        (form.querySelector('input[name="amount"]') as HTMLInputElement).value = data.amount;
-                        (form.querySelector('input[name="currency"]') as HTMLInputElement).value = data.currency;
-                        (form.querySelector('input[name="productName[]"]') as HTMLInputElement).value = data.productName;
-                        (form.querySelector('input[name="productPrice[]"]') as HTMLInputElement).value = data.productPrice;
-                        (form.querySelector('input[name="productCount[]"]') as HTMLInputElement).value = data.productCount;
-                        (form.querySelector('input[name="clientEmail"]') as HTMLInputElement).value = email;
-                        (form.querySelector('input[name="language"]') as HTMLInputElement).value = language === 'UA' ? 'UA' : 'EN';
-
-                        form.submit();
-
-                        // Smooth scroll to payment area
-                        document.getElementById('wayforpay-container')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Initialize WayForPay widget (Modal window)
+                const wayforpay = new window.Wayforpay();
+                wayforpay.run({
+                    merchantAccount: data.merchantAccount,
+                    merchantDomainName: data.merchantDomainName,
+                    merchantSignature: data.merchantSignature,
+                    orderReference: data.orderReference,
+                    orderDate: data.orderDate,
+                    amount: data.amount,
+                    currency: data.currency,
+                    productName: [data.productName],
+                    productPrice: [data.productPrice],
+                    productCount: [data.productCount],
+                    clientEmail: email,
+                    language: language === 'UA' ? 'UA' : 'EN',
+                    // Add regular fields if they exist in the response
+                    ...(data.regularOn === 'Y' ? {
+                        regularMode: data.regularMode,
+                        regularAmount: data.regularAmount,
+                        regularCount: data.regularCount,
+                        regularOn: data.regularOn,
+                        regularPeriod: data.regularPeriod
+                    } : {})
+                },
+                    function (response: any) {
+                        // Success callback
+                        console.log("Payment success", response);
+                    },
+                    function (response: any) {
+                        // Decline/Fail callback
+                        console.log("Payment declined/failed", response);
+                    },
+                    function (response: any) {
+                        // Pending callback
+                        console.log("Payment pending", response);
                     }
-                }, 100);
+                );
 
             } catch (err) {
                 console.error("WayForPay transaction failed:", err);
@@ -430,38 +452,6 @@ export const DonationTabs: React.FC<DonationTabsProps> = ({ className }) => {
                                 </div>
                             </form>
 
-                            {/* Hidden WayForPay Form - Outside main form to avoid nested forms error */}
-                            <form id="wayforpay-form" action="https://secure.wayforpay.com/pay" method="post" target="wayforpay-iframe" className="hidden">
-                                <input name="merchantAccount" value="" readOnly />
-                                <input name="merchantDomainName" value="" readOnly />
-                                <input name="merchantSignature" value="" readOnly />
-                                <input name="orderReference" value="" readOnly />
-                                <input name="orderDate" value="" readOnly />
-                                <input name="amount" value="" readOnly />
-                                <input name="currency" value="" readOnly />
-                                <input name="productName[]" value="" readOnly />
-                                <input name="productPrice[]" value="" readOnly />
-                                <input name="productCount[]" value="" readOnly />
-                                <input name="clientEmail" value="" readOnly />
-                                <input name="language" value={language === 'UA' ? 'UA' : 'EN'} readOnly />
-                            </form>
-
-                            {/* Payment Methods Visuals - Appears only after clicking Support */}
-                            {showPaymentFields && (
-                                <div id="wayforpay-container" className="my-8 animate-in fade-in slide-in-from-top-4 duration-500">
-                                    <div className="relative w-full min-h-[600px] bg-white rounded-2xl border border-gray-100 shadow-inner overflow-hidden">
-                                        <iframe
-                                            name="wayforpay-iframe"
-                                            id="wayforpay-iframe"
-                                            className="absolute inset-0 w-full h-full border-none"
-                                            title="Payment Form"
-                                        ></iframe>
-                                    </div>
-                                    <p className="mt-4 text-center text-gray-400 text-[10px] uppercase tracking-widest font-bold">
-                                        {language === 'UA' ? 'Оплата через захищений шлюз WayForPay' : 'Payment via secure WayForPay gateway'}
-                                    </p>
-                                </div>
-                            )}
                         </>
                     )}
 

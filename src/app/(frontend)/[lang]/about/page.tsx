@@ -43,6 +43,7 @@ function AboutSection({ section, index, language }: { section: Section, index: n
       ref={sectionRef}
       className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-24 px-6 md:px-12 lg:px-32 mb-24 lg:mb-48 last:mb-0`}
     >
+
       {/* Image Block */}
       <div
         className="w-full lg:w-1/2 aspect-[4/3] lg:aspect-auto lg:h-[650px] relative overflow-hidden group shadow-2xl"
@@ -154,7 +155,7 @@ export default function AboutPage() {
       <PageHeader
         title={t('nav.about')}
         subtitle={t('page.about_subtitle')}
-        backgroundImage="/media/history.jpg"
+        backgroundImage="/media/about-us.jpg"
       />
 
       <div className="py-20 lg:py-48 overflow-hidden">

@@ -20,11 +20,12 @@ const WhatsappIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
 export function Footer() {
   const { t, language } = useLanguage();
-  const langPrefix = `/${language.toLowerCase()}`;
+  const langPrefix = language.toLowerCase() === 'ua' ? '/ua' : '/en';
 
   return (
     <footer id="footer" className="bg-black text-white py-16 px-4 sm:px-6 lg:px-8 border-t border-white/10">
@@ -33,9 +34,14 @@ export function Footer() {
           {/* Logo Section */}
           <div className="flex flex-col justify-between h-full">
             <div className="mb-8 lg:mb-0">
-              <h2 className="font-montserrat text-3xl md:text-4xl tracking-wide text-white mb-4 whitespace-pre-line">
-                {t('footer.title')}
-              </h2>
+              <Link href={langPrefix} className="inline-block relative w-80 md:w-[250px] aspect-[1] hover:opacity-80 transition-opacity">
+                <Image
+                  src="/media/text-logo.png"
+                  alt="Zhydychyn Monastery"
+                  fill
+                  className="object-contain object-left"
+                />
+              </Link>
             </div>
           </div>
 
