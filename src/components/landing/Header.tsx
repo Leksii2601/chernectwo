@@ -228,14 +228,14 @@ export function Header({ variant = 'default' }: HeaderProps) {
           <div className="flex items-center gap-1.5 ml-1.5">
             <Link
               href={getLocalizedPath('/prayer-requests')}
-              className="flex items-center gap-2.5 rounded-full text-[11.5px] font-light uppercase tracking-[0.2em] px-5 py-3 transition-all duration-500 hover:bg-white hover:text-black text-white/60"
+              className="flex items-center gap-2.5 rounded-full text-[11.5px] font-light uppercase tracking-[0.2em] px-5 py-3 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-white hover:text-black text-white/60"
             >
               <MessageSquareDiff size={14} strokeWidth={1} />
               <span>{t('nav.write_note')}</span>
             </Link>
             <Link
               href={getLocalizedPath('/donate')}
-              className="flex items-center gap-2.5 rounded-full text-[11.5px] font-normal uppercase tracking-[0.2em] px-5 py-3 transition-all duration-500 bg-amber-500/10 text-amber-500 border border-amber-500/20 hover:bg-amber-500 hover:text-black"
+              className="flex items-center gap-2.5 rounded-full text-[11.5px] font-normal uppercase tracking-[0.2em] px-5 py-3 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] bg-amber-500/10 text-amber-500 border border-amber-500/20 hover:bg-amber-500 hover:text-black hover:scale-105"
             >
               <Heart size={14} strokeWidth={1} />
               <span>{t('nav.donate')}</span>
@@ -310,7 +310,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
         scrolled ? "bg-black/90 backdrop-blur-xl translate-y-0 shadow-2xl" : "bg-transparent -translate-y-full"
       )}>
         <Link href={getLocalizedPath('/')} className="w-10 h-10 relative">
-          <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
+          <Image src="/media/gold_and_white_logo.png" alt="Logo" fill className="object-contain" />
         </Link>
         <button onClick={() => setMobileMenuOpen(true)} className="text-white p-2 active:scale-95 transition-transform">
           <Menu size={32} />
@@ -319,25 +319,25 @@ export function Header({ variant = 'default' }: HeaderProps) {
 
       {/* Top Logo when at Top (Mobile only) */}
       <div className={clsx(
-        "fixed left-6 z-[500] md:hidden transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
+        "fixed left-6 z-[500] md:hidden transition-all duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] delay-100 will-change-[transform,opacity,filter]",
         liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
-        scrolled ? "opacity-0 -translate-y-10 pointer-events-none" : "opacity-100 translate-y-0"
+        scrolled ? "opacity-0 -translate-y-4 pointer-events-none" : "opacity-100 translate-y-0"
       )}>
         <Link href={getLocalizedPath('/')} className="w-16 h-16 relative block">
-          <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
+          <Image src="/media/gold_and_white_logo.png" alt="Logo" fill className="object-contain" />
         </Link>
       </div>
 
       {/* Mobile Top Actions (Mini Pill) */}
       <div className={clsx(
-        "fixed right-6 z-[500] md:hidden flex items-center gap-2 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]",
+        "fixed right-6 z-[500] md:hidden flex items-center gap-2 transition-all duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] delay-200 will-change-[transform,opacity,filter]",
         liveStatus?.isLive ? "top-14 md:top-18" : "top-6",
-        scrolled ? "opacity-0 translate-x-10 pointer-events-none" : "opacity-100 translate-x-0"
+        scrolled ? "opacity-0 translate-x-4 pointer-events-none" : "opacity-100 translate-x-0"
       )}>
-        <button onClick={() => setIsSearchOpen(true)} className="w-12 h-12 bg-black/40 rounded-full flex items-center justify-center text-white/50 border border-white/10 backdrop-blur-md active:scale-90 transition-all">
+        <button onClick={() => setIsSearchOpen(true)} className="w-12 h-12 bg-black/60 rounded-full flex items-center justify-center text-white/50 border border-white/10 backdrop-blur-2xl active:scale-95 transition-all duration-700 ease-out hover:scale-105 will-change-transform">
           <Search size={20} />
         </button>
-        <button onClick={() => setMobileMenuOpen(true)} className="w-12 h-12 bg-black/40 rounded-full flex items-center justify-center text-white border border-white/10 backdrop-blur-md active:scale-90 transition-all">
+        <button onClick={() => setMobileMenuOpen(true)} className="w-12 h-12 bg-black/60 rounded-full flex items-center justify-center text-white border border-white/10 backdrop-blur-2xl active:scale-95 transition-all duration-700 ease-out hover:scale-105 will-change-transform">
           <Menu size={20} />
         </button>
       </div>
@@ -442,14 +442,14 @@ export function Header({ variant = 'default' }: HeaderProps) {
           <Link
             href={getLocalizedPath('/prayer-requests')}
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full py-5 rounded-xl border border-white/10 text-center text-lg font-medium uppercase tracking-[0.2em] text-white/90 hover:bg-white hover:text-black transition-all"
+            className="w-full py-5 rounded-xl border border-white/10 text-center text-lg font-medium uppercase tracking-[0.2em] text-white/90 hover:bg-white hover:text-black transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.98]"
           >
             {language === 'UA' ? 'Написати записку' : 'Write a Note'}
           </Link>
           <Link
             href={getLocalizedPath('/donate')}
             onClick={() => setMobileMenuOpen(false)}
-            className="w-full py-5 rounded-xl bg-amber-600 text-black text-center text-xl font-black uppercase tracking-[0.2em] hover:bg-white transition-all shadow-[0_10px_30px_rgba(217,119,6,0.3)]"
+            className="w-full py-5 rounded-xl bg-amber-600 text-black text-center text-xl font-black uppercase tracking-[0.2em] hover:bg-white transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] shadow-[0_10px_30px_rgba(217,119,6,0.3)] active:scale-[0.98]"
           >
             {t('nav.donate')}
           </Link>

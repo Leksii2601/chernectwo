@@ -36,7 +36,7 @@ export function Footer() {
             <div className="mb-8 lg:mb-0">
               <Link href={langPrefix} className="inline-block relative w-80 md:w-[250px] aspect-[1] hover:opacity-80 transition-opacity">
                 <Image
-                  src="/media/text-logo.png"
+                  src="/media/logos/white_logo.png"
                   alt="Zhydychyn Monastery"
                   fill
                   className="object-contain object-left"

@@ -38,17 +38,30 @@ export const ComplexLayout = () => {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<CategoryId>('temples');
   const titleRef = useRef<HTMLDivElement>(null);
+  const manuallyTriggeredScroll = useRef(false);
+  const isFirstMount = useRef(true);
 
   useEffect(() => {
-    if (titleRef.current) {
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+
+    if (manuallyTriggeredScroll.current && titleRef.current) {
       const offset = 120; // Enough space for the fixed header
       const elementPosition = titleRef.current.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({
         top: elementPosition - offset,
         behavior: 'smooth'
       });
+      manuallyTriggeredScroll.current = false;
     }
   }, [activeCategory]);
+
+  const handleCategoryChange = (id: CategoryId) => {
+    manuallyTriggeredScroll.current = true;
+    setActiveCategory(id);
+  };
 
   const CATEGORIES: Category[] = [
     { id: 'temples', label: t('complex.cat_temples') },
@@ -380,28 +393,22 @@ export const ComplexLayout = () => {
       {/* Sidebar - Minimal Left Edge */}
       <div className="w-full lg:w-72 flex-shrink-0 lg:z-[10] relative">
         <div className="sticky top-[70px] md:top-24 z-40 bg-white/95 backdrop-blur-sm lg:bg-transparent">
-          {/* Mobile Horizontal Scroll - Premium Tabs */}
-          <div className="lg:hidden py-4 overflow-x-auto hide-scrollbar [&::-webkit-scrollbar]:hidden border-b border-gray-100/50">
-            <div className="flex gap-2 p-1.5 bg-gray-50/50 rounded-2xl border border-gray-100 min-w-max">
+          {/* Mobile Categories - Clean Grid Block */}
+          <div className="lg:hidden py-6 border-b border-gray-100/50">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 px-1">
               {CATEGORIES.map((category) => (
                 <button
                   key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
+                  onClick={() => handleCategoryChange(category.id)}
                   className={clsx(
-                    "px-6 py-3 rounded-xl whitespace-nowrap text-[11px] font-bold uppercase tracking-wider transition-all duration-300",
+                    "px-4 py-3.5 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all duration-300 border flex items-center justify-center text-center leading-tight",
                     activeCategory === category.id
-                      ? "bg-white text-amber-600 shadow-sm ring-1 ring-black/5"
-                      : "text-gray-400 hover:text-gray-600"
+                      ? "bg-amber-600 border-amber-600 text-white shadow-md shadow-amber-600/20"
+                      : "bg-gray-50 border-gray-100 text-gray-500 hover:border-gray-300"
                   )}
                 >
                   {category.label}
                 </button>
-              ))}
-            </div>
-            {/* Scroll Indicator Dot */}
-            <div className="flex justify-center mt-3 gap-1">
-              {CATEGORIES.map(c => (
-                <div key={c.id} className={clsx("w-1 h-1 rounded-full transition-all duration-300", activeCategory === c.id ? "w-6 bg-amber-600" : "bg-gray-200")} />
               ))}
             </div>
           </div>
@@ -411,7 +418,7 @@ export const ComplexLayout = () => {
             {CATEGORIES.map((category) => (
               <button
                 key={category.id}
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() => handleCategoryChange(category.id)}
                 className={`
                     text-left px-6 py-4 text-base uppercase tracking-wider transition-all duration-300 -ml-[2px] border-l-2
                     ${activeCategory === category.id
@@ -512,8 +519,8 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
 
           {/* Left Content Section */}
           <div className={clsx(
-            "flex flex-col transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
-            activeTab === 'overview' ? "w-full lg:w-[60%] p-6 lg:p-10" : "w-full p-0 lg:p-10"
+            "flex-grow flex flex-col transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)]",
+            activeTab === 'overview' ? "lg:flex-1 p-6 lg:p-10" : "w-full p-0 lg:p-10"
           )}>
             <div className={`mb-2 w-full ${activeTab === 'overview' ? 'lg:max-w-2xl' : ''}`}>
               {/* Tabs - Centering when in gallery mode */}
@@ -624,19 +631,18 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
 
           </div>
 
-          {/* Right Image Section - Only for Overview */}
           <div className={`
-             bg-gray-200 relative order-first lg:order-last transition-all duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] overflow-hidden
+             bg-gray-200 relative order-first lg:order-last transition-all duration-1000 ease-[cubic-bezier(0.25,0.1,0.25,1)] overflow-hidden shrink-0
              ${activeTab === 'overview'
-              ? 'w-full lg:w-[40%] opacity-100 h-64 lg:h-auto min-h-[400px]'
+              ? 'w-full lg:w-[40%] xl:w-[500px] opacity-100 h-64 lg:h-auto min-h-[400px]'
               : 'w-full lg:w-0 opacity-0 h-0 lg:h-auto min-h-0 pointer-events-none'}
         `}>
             {/* 
                 Fixed Width Container for Image:
-                Use a container that maintains a stable width (e.g. 40vw) even when parent is 0 width.
-                This prevents the image 'jerking' or resizing during the parent's width transition.
+                Added max-width [474px] to anchor the photo context to your 1536px workspace proportions.
+                This prevents the 'cover' scaling from changing the framing on wider monitors.
              */}
-            <div className="absolute inset-y-0 right-0 w-full lg:w-[40vw] h-full overflow-hidden">
+            <div className="absolute inset-y-0 right-0 w-full lg:w-[40vw] xl:w-[614px] h-full overflow-hidden">
               <div
                 ref={parallaxRef}
                 className="absolute inset-0 bg-cover bg-center h-[120%]"

@@ -1,14 +1,22 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 export function FAQ() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     const [isExpanded, setIsExpanded] = useState(false);
     const [formData, setFormData] = useState({ name: '', email: '', question: '' });
+
+    const getLocalizedPath = (path: string) => {
+        const langPrefix = language.toLowerCase();
+        const cleanPath = path.startsWith('/') ? path : `/${path}`;
+        if (cleanPath.startsWith('/ua/') || cleanPath.startsWith('/en/')) return cleanPath;
+        return `/${langPrefix}${cleanPath === '/' ? '' : cleanPath}`;
+    };
 
     const faqData = [
         {
@@ -17,7 +25,16 @@ export function FAQ() {
         },
         {
             question: t('faq.question_2'),
-            answer: t('faq.answer_2')
+            answer: (
+                <>
+                    {t('faq.answer_2_intro')}{' '}
+                    <Link href="#calendar" className="text-amber-600 hover:text-amber-700 underline font-medium">
+                        {t('faq.answer_2_link')}
+                    </Link>.
+                    <br /><br />
+                    {t('faq.answer_2_details')}
+                </>
+            )
         },
         {
             question: t('faq.question_3'),
@@ -50,10 +67,10 @@ export function FAQ() {
             question: t('faq.question_8'),
             answer: (
                 <>
-                    {t('faq.answer_8_text')}{' '}
-                    <a href="https://zhydychyn.center/pages/travallerInfo/" target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700 underline break-all">
-                        https://zhydychyn.center/pages/travallerInfo/
-                    </a>
+                    {t('faq.answer_8_intro')}{' '}
+                    <Link href={getLocalizedPath('/pilgrims')} className="text-amber-600 hover:text-amber-700 underline font-medium uppercase">
+                        {t('faq.answer_8_link')}
+                    </Link>.
                 </>
             )
         },

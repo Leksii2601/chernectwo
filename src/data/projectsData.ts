@@ -9,7 +9,13 @@ export interface ProjectInitiative {
     instagram?: string;
     phone?: string;
     whatsapp?: string;
+    viber?: string;
+    youtube?: string;
   };
+  reports?: {
+    year: string;
+    file: string;
+  }[];
 }
 
 export const projectsData: ProjectInitiative[] = [
@@ -19,6 +25,11 @@ export const projectsData: ProjectInitiative[] = [
       facebook: "https://www.facebook.com/ZhydychynCenter",
       website: "https://zhydychyn.center"
     },
+    reports: [
+      { year: "2025", file: "https://drive.google.com/file/d/1mLykIrM7dgX6T9CgrA6hPHdQMJUTqaMQ/view" },
+      { year: "2024", file: "https://drive.google.com/file/d/1fKVtPdclosh6hURrN2C2Tv03mFgV-QoL/view" },
+      { year: "2023", file: "https://drive.google.com/file/d/1GJ_gL7dInkFdLjPCpjAnp1-cINVHAN68/view" }
+    ],
     icon: "/media/socialInitiatives/zhydychyn-center/logo.png",
     previewImage: "/media/socialInitiatives/zhydychyn-center/preview.jpg",
     gallery: [
@@ -38,6 +49,10 @@ export const projectsData: ProjectInitiative[] = [
     socialLinks: {
       facebook: "https://www.facebook.com/symoncyrenemovement"
     },
+    reports: [
+      { year: "2025", file: "https://drive.google.com/file/d/1mLrRmpMKxWKDZHLudILeGYslH31_2h4_/view" },
+      { year: "2024", file: "https://drive.google.com/file/d/1bUT403kzNJ-fi6boBzVUG7Xv8xwwMUCK/view" }
+    ],
     gallery: [
       "/media/socialInitiatives/volunteer-movement/volunteer-movement_1.jpg",
       "/media/socialInitiatives/volunteer-movement/volunteer-movement_2.jpg",
@@ -123,6 +138,10 @@ export const projectsData: ProjectInitiative[] = [
     socialLinks: {
       facebook: "https://www.facebook.com/zhydychyn.palamar.ua/"
     },
+    reports: [
+      { year: "2025", file: "https://drive.google.com/file/d/1gP5cLmV5-UiQyvunCKfwST2t4_VvZlEF/view" },
+      { year: "2024", file: "https://drive.google.com/file/d/1L4LjlECJwBCjpvamH1ZSdZBn3L0gERIY/view" }
+    ],
     previewImage: "/media/socialInitiatives/palamar/preview.jpg",
     gallery: [
       "/media/socialInitiatives/palamar/palamar_1.jpg",
@@ -147,6 +166,10 @@ export const projectsData: ProjectInitiative[] = [
     socialLinks: {
       facebook: "https://www.facebook.com/vnutrishnyabezpeka"
     },
+    reports: [
+      { year: "2025", file: "https://drive.google.com/file/d/16pnrvxDSng0KNyHxHT9Rlw8PlBl-Ut4h/view" },
+      { year: "2024", file: "https://drive.google.com/file/d/1k0eGqCC0kyDSqTxnIHyP2BgPhSCRoyu1/view" }
+    ],
     previewImage: "/media/socialInitiatives/fire-brigade/preview.png",
     gallery: [
       "/media/socialInitiatives/fire-brigade/fire-brigade_1.jpg",

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Facebook, Globe, ArrowRight, ArrowLeft, X } from 'lucide-react';
+import { Facebook, Globe, ArrowRight, ArrowLeft, X, Youtube, Instagram, Phone, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { useLanguage } from '@/context/LanguageContext';
@@ -18,8 +18,28 @@ export interface Initiative {
   socialLinks?: {
     facebook?: string;
     website?: string;
+    instagram?: string;
+    phone?: string;
+    whatsapp?: string;
+    viber?: string;
+    youtube?: string;
   };
+  reports?: {
+    year: string;
+    file: string;
+  }[];
 }
+
+
+// Viber SVG Icon
+const ViberIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className} xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.344 14.8c-.37-.58-2.12-2.58-2.45-2.73-.34-.14-.52-.14-.76.13-.24.26-.9 1.14-1.12 1.38-.2.22-.43.25-.79.05a10.05 10.05 0 01-2.92-1.81c-.81-.72-1.42-1.57-1.74-2.18-.18-.36-.02-.56.16-.74.16-.16.36-.4.54-.6.18-.21.23-.35.34-.58.11-.23.05-.44-.04-.63-.08-.19-.76-1.84-1.04-2.51-.27-.66-.54-.57-.75-.58h-.64c-.21 0-.57.08-.87.41-.3.33-1.14 1.13-1.14 2.76s1.22 3.19 1.38 3.41c.17.22 2.39 3.65 5.8 5.12 3.4 1.48 3.4 1.48 4.02 1.48.62 0 2-.81 2.22-2.31.22-1.49.22-1.63-.04-2.1z" />
+    <path d="M14.654 1.577a7.7 7.7 0 014.28 2.062 7.7 7.7 0 012.06 4.28.63.63 0 11-1.24.21c-.24-1.43-.87-2.74-1.84-3.71s-2.28-1.6-3.71-1.84a.63.63 0 01.21-1.24z" />
+    <path d="M15.424 4.31a4.9 4.9 0 012.02 1.14 4.9 4.9 0 011.14 2.02.63.63 0 01-1.18.43c-.2-.55-.52-1.04-.94-1.46s-.91-.74-1.46-.94a.63.63 0 01.42-1.19z" />
+    <path d="M16.48 7.39a.63.63 0 01-.19.87.64.64 0 01-.87-.19.63.63 0 111.06-.68z" />
+  </svg>
+);
 
 // CTA Animation Component
 const CTAAnimation = ({ socialLinks }: { socialLinks?: Initiative['socialLinks'] }) => {
@@ -73,8 +93,8 @@ const CTAAnimation = ({ socialLinks }: { socialLinks?: Initiative['socialLinks']
             `}
       >
         <div className={`
-                overflow-hidden whitespace-normal md:whitespace-nowrap transition-all duration-700 ease-out
-                ${animationState === 'final' ? 'max-w-[300px] sm:max-w-[500px] opacity-100 mr-2 md:mr-4' : 'max-w-0 opacity-0'}
+                transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]
+                ${animationState === 'final' ? 'opacity-100 translate-x-0 mr-4 visible' : 'opacity-0 -translate-x-8 invisible pointer-events-none'}
                 bg-transparent p-0
               `}>
           <span className="font-montserrat text-base sm:text-2xl md:text-3xl uppercase text-black block text-right leading-tight md:group-hover:text-amber-600 transition-colors">
@@ -101,7 +121,7 @@ const CTAAnimation = ({ socialLinks }: { socialLinks?: Initiative['socialLinks']
       </Link>
 
       {/* Social Networks - Increased size and stabilized animation */}
-      <div className={`flex items-center gap-6 mt-10 transition-all duration-700 delay-300
+      <div className={`flex flex-wrap items-center justify-center gap-4 sm:gap-6 mt-10 transition-all duration-700 delay-300
             ${animationState === 'final' ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
         `}>
         {socialLinks?.facebook && (
@@ -109,10 +129,68 @@ const CTAAnimation = ({ socialLinks }: { socialLinks?: Initiative['socialLinks']
             href={socialLinks.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-14 h-14 rounded-full bg-gray-100 text-black shadow-sm transition-all duration-300 transform-gpu hover:scale-110 hover:bg-black hover:text-white will-change-transform"
+            className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-100 text-black shadow-sm transition-all duration-300 transform-gpu hover:scale-110 hover:bg-[#1877F2] hover:text-white will-change-transform"
             title="Facebook"
           >
-            <Facebook className="w-6 h-6" />
+            <Facebook className="w-5 h-5 md:w-6 md:h-6" />
+          </a>
+        )}
+
+        {socialLinks?.instagram && (
+          <a
+            href={socialLinks.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-100 text-black shadow-sm transition-all duration-300 transform-gpu hover:scale-110 hover:bg-[#E4405F] hover:text-white will-change-transform"
+            title="Instagram"
+          >
+            <Instagram className="w-5 h-5 md:w-6 md:h-6" />
+          </a>
+        )}
+
+        {socialLinks?.youtube && (
+          <a
+            href={socialLinks.youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-100 text-black shadow-sm transition-all duration-300 transform-gpu hover:scale-110 hover:bg-[#FF0000] hover:text-white will-change-transform"
+            title="YouTube"
+          >
+            <Youtube className="w-5 h-5 md:w-6 md:h-6" />
+          </a>
+        )}
+
+        {socialLinks?.whatsapp && (
+          <a
+            href={socialLinks.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-100 text-black shadow-sm transition-all duration-300 transform-gpu hover:scale-110 hover:bg-[#25D366] hover:text-white will-change-transform"
+            title="WhatsApp"
+          >
+            <MessageSquare className="w-5 h-5 md:w-6 md:h-6" />
+          </a>
+        )}
+
+        {socialLinks?.viber && (
+          <a
+            href={socialLinks.viber}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-100 text-black shadow-sm transition-all duration-300 transform-gpu hover:scale-110 hover:bg-[#7360F2] hover:text-white will-change-transform"
+            title="Viber"
+          >
+            <ViberIcon className="w-5 h-5 md:w-6 md:h-6" />
+          </a>
+        )}
+
+        {socialLinks?.phone && (
+          <a
+            href={`tel:${socialLinks.phone}`}
+            className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-100 text-black shadow-sm transition-all duration-300 transform-gpu hover:scale-110 hover:bg-black hover:text-white will-change-transform"
+            title="Телефон"
+          >
+            <Phone className="w-5 h-5 md:w-6 md:h-6" />
           </a>
         )}
 
@@ -121,10 +199,10 @@ const CTAAnimation = ({ socialLinks }: { socialLinks?: Initiative['socialLinks']
             href={socialLinks.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center w-14 h-14 rounded-full bg-gray-100 text-black shadow-sm transition-all duration-300 transform-gpu hover:scale-110 hover:bg-black hover:text-white will-change-transform"
+            className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-100 text-black shadow-sm transition-all duration-300 transform-gpu hover:scale-110 hover:bg-amber-600 hover:text-white will-change-transform"
             title="Веб-сайт"
           >
-            <Globe className="w-6 h-6" />
+            <Globe className="w-5 h-5 md:w-6 md:h-6" />
           </a>
         )}
       </div>
@@ -326,6 +404,31 @@ export function SocialProjectsFeed({ initiatives }: { initiatives: Initiative[] 
                   </p>
                 </div>
               )
+            )}
+
+            {/* Reports Section */}
+            {selectedInitiative?.reports && selectedInitiative.reports.length > 0 && (
+              <div className="pt-4 animate-fade-in-up">
+                <h3 className="font-montserrat text-2xl mb-4 font-bold">
+                  {t('social.reports')}
+                </h3>
+                <div className="flex flex-wrap gap-4">
+                  {selectedInitiative.reports
+                    .sort((a, b) => b.year.localeCompare(a.year))
+                    .map((report, idx) => (
+                      <a
+                        key={idx}
+                        href={report.file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-gray-50/50 border border-gray-100 px-6 py-4 rounded-xl font-bold text-xs tracking-[0.2em] uppercase hover:border-amber-600 hover:text-amber-600 transition-all flex items-center gap-4 group shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                      >
+                        <span>{t('social.report_for')} {report.year}</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </a>
+                    ))}
+                </div>
+              </div>
             )}
           </div>
 

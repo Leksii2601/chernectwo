@@ -10,6 +10,12 @@ import '@fontsource/montserrat/700.css';
 export const metadata = {
   description: 'Zhydychyn Monastery',
   title: 'Zhydychyn Monastery',
+  icons: {
+    icon: [
+      { url: '/media/favicon_black.png', media: '(prefers-color-scheme: light)' },
+      { url: '/media/favicon_white.png', media: '(prefers-color-scheme: dark)' },
+    ],
+  },
 }
 
 import { LanguageProvider } from '@/context/LanguageContext';

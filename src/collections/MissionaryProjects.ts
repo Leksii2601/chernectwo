@@ -66,16 +66,35 @@ export const MissionaryProjects: CollectionConfig = {
       ]
     },
     {
-        name: 'status',
-        type: 'select',
-        defaultValue: 'active',
-        options: [
-            { label: 'Активний', value: 'active' },
-            { label: 'Завершений', value: 'completed' }
-        ],
-        admin: {
-            position: 'sidebar'
+      name: 'reports',
+      type: 'array',
+      label: 'Звіти за роки',
+      fields: [
+        {
+          name: 'year',
+          type: 'text',
+          label: 'Рік',
+          required: true,
+        },
+        {
+          name: 'file',
+          type: 'text',
+          label: 'Посилання на звіт (PDF / Google Drive)',
+          required: true,
         }
+      ]
+    },
+    {
+      name: 'status',
+      type: 'select',
+      defaultValue: 'active',
+      options: [
+        { label: 'Активний', value: 'active' },
+        { label: 'Завершений', value: 'completed' }
+      ],
+      admin: {
+        position: 'sidebar'
+      }
     },
     {
       name: 'socialLinks',
@@ -86,7 +105,7 @@ export const MissionaryProjects: CollectionConfig = {
           name: 'facebook',
           type: 'text',
           label: 'Facebook',
-          required: true, 
+          required: true,
           defaultValue: 'https://www.facebook.com/',
         },
         {
@@ -103,6 +122,16 @@ export const MissionaryProjects: CollectionConfig = {
           name: 'whatsapp',
           type: 'text',
           label: 'WhatsApp',
+        },
+        {
+          name: 'viber',
+          type: 'text',
+          label: 'Viber',
+        },
+        {
+          name: 'youtube',
+          type: 'text',
+          label: 'YouTube',
         }
       ]
     }

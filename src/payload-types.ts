@@ -272,12 +272,21 @@ export interface MissionaryProject {
         id?: string | null;
       }[]
     | null;
+  reports?:
+    | {
+        year: string;
+        file: string;
+        id?: string | null;
+      }[]
+    | null;
   status?: ('active' | 'completed') | null;
   socialLinks: {
     facebook: string;
     instagram?: string | null;
     phone?: string | null;
     whatsapp?: string | null;
+    viber?: string | null;
+    youtube?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -317,6 +326,7 @@ export interface PrayerRequest {
     | null;
   email: string;
   amount?: number | null;
+  currency?: ('UAH' | 'EUR' | 'USD') | null;
   status?: ('pending' | 'paid' | 'failed' | 'printed') | null;
   printedAt?: string | null;
   updatedAt: string;
@@ -554,6 +564,13 @@ export interface MissionaryProjectsSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  reports?:
+    | T
+    | {
+        year?: T;
+        file?: T;
+        id?: T;
+      };
   status?: T;
   socialLinks?:
     | T
@@ -562,6 +579,8 @@ export interface MissionaryProjectsSelect<T extends boolean = true> {
         instagram?: T;
         phone?: T;
         whatsapp?: T;
+        viber?: T;
+        youtube?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -599,6 +618,7 @@ export interface PrayerRequestsSelect<T extends boolean = true> {
       };
   email?: T;
   amount?: T;
+  currency?: T;
   status?: T;
   printedAt?: T;
   updatedAt?: T;

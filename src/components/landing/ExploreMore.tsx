@@ -158,7 +158,7 @@ export function ExploreMore() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="group relative flex-shrink-0 snap-start w-[75vw] sm:w-[50vw] md:w-[40vw] lg:w-[22%] aspect-[3/4] overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-[1.03]"
+                  className="group relative flex-shrink-0 snap-start snap-always w-[75vw] sm:w-[50vw] md:w-[40vw] lg:w-[22%] aspect-[3/4] overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-[1.03]"
                 >
                   <Image
                     src={item.image}

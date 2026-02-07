@@ -54,6 +54,17 @@ export const PrayerRequests: CollectionConfig = {
       type: 'number',
     },
     {
+      name: 'currency',
+      label: 'Валюта',
+      type: 'select',
+      defaultValue: 'UAH',
+      options: [
+        { label: 'UAH', value: 'UAH' },
+        { label: 'EUR', value: 'EUR' },
+        { label: 'USD', value: 'USD' },
+      ],
+    },
+    {
       name: 'status',
       label: 'Статус оплати',
       type: 'select',
@@ -66,12 +77,12 @@ export const PrayerRequests: CollectionConfig = {
       ],
     },
     {
-        name: 'printedAt',
-        label: 'Дата друку',
-        type: 'date',
-        admin: {
-            readOnly: true
-        }
+      name: 'printedAt',
+      label: 'Дата друку',
+      type: 'date',
+      admin: {
+        readOnly: true
+      }
     }
   ],
 }

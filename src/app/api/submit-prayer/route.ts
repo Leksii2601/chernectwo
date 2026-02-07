@@ -6,7 +6,7 @@ export async function POST(req: Request) {
   try {
     const payload = await getPayload({ config: configPromise })
     const body = await req.json()
-    const { notes, email, total } = body
+    const { notes, email, total, currency = 'UAH' } = body
 
     if (!notes || !notes.length || !email) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
@@ -16,7 +16,6 @@ export async function POST(req: Request) {
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
     // 2. Create Records in Payload
-    // We create a separate entry for each prayer note in the basket
     const createdNotes = [];
 
     for (const note of notes) {
@@ -28,6 +27,7 @@ export async function POST(req: Request) {
           names: note.names.map((n: string) => ({ name: n })),
           email,
           amount: note.amount,
+          currency: note.currency || currency,
           status: 'paid', // Simulating successful payment
         },
       })
@@ -108,7 +108,7 @@ export async function POST(req: Request) {
               ${notesHtml.replace(/font-family: serif;/g, "font-family: 'Triod', serif;").replace(/font-family: 'Times New Roman', serif;/g, "font-family: 'Triod', 'Times New Roman', serif;")}
 
               <div style="text-align: center; border-top: 1px solid #eee; padding-top: 20px; margin-top: 20px;">
-                <p style="color: #999; font-size: 12px;">Загальна сума пожертви: ${total} грн</p>
+                <p style="color: #999; font-size: 12px;">Загальна сума пожертви: ${total} ${currency === 'UAH' ? '₴' : currency === 'EUR' ? '€' : '$'}</p>
               </div>
             </div>
           </body>
