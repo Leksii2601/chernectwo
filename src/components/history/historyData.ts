@@ -205,7 +205,7 @@ export const TIMELINE_DATA_UA: HistoryEvent[] = [
         title: 'Усипальниця',
         shortDescription: 'Віднайдення Монастирської усипальниці.',
         fullDescription: '15 лютого 2020 року в підземеллях Миколаївського храму було віднайдено давню монастирську усипальницю.',
-        image: '/media/history/history_22.jpg',
+        image: '/media/history/history_24.jpg',
         side: 'right',
         layoutType: 'default',
     },
