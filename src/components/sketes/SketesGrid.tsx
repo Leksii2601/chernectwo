@@ -123,7 +123,7 @@ const SketeItem = ({ skete, isMobile }: { skete: any, isMobile: boolean }) => {
                         ? (inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12")
                         : "opacity-0 translate-y-8 group-hover:opacity-100 group-hover:translate-y-0"
                 )}>
-                    <p className="text-gray-100 text-sm leading-relaxed font-sans max-w-sm">
+                    <p className="text-gray-100 text-sm leading-relaxed font-montserrat max-w-sm">
                         {skete.description}
                     </p>
 

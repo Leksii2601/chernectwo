@@ -12,7 +12,7 @@ export const metadata = {
 export default function CalendarNewPage() {
     return (
         <main className="min-h-screen bg-black text-white selection:bg-amber-500 selection:text-white">
-            <Header />
+            {/* <Header /> header temporarily removed for test */}
             <CalendarSectionNew />
             <Footer />
         </main>

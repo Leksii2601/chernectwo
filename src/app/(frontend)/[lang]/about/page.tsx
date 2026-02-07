@@ -136,7 +136,7 @@ export default function AboutPage() {
       description: language === 'UA'
         ? 'Ми продовжуємо місію служіння громаді через волонтерство, освіту, культуру та допомогу тим, хто цього потребує.'
         : 'We continue the mission of serving the community through volunteering, education, culture, and helping those in need.',
-      image: '/media/explore-more-social-initiatives.jpg',
+      image: '/media/explore-more-social-initiatives.jpeg',
       href: `${langPrefix}/social-projects`,
     },
     {

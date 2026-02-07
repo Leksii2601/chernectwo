@@ -36,9 +36,11 @@ export const HistoryTimeline = () => {
             const trackHeight = lineRef.current.offsetHeight;
             const windowHeight = window.innerHeight;
 
-            // "Eye Level" = 50% from top of viewport is where the "active point" is
-            // This offset determines at what visual height the line triggers things
-            const eyeLevelOffset = windowHeight * 0.5;
+            // "Eye Level" = Where the "active point" is.
+            // On mobile, trigger earlier (lower on screen, 75%) so users see it sooner.
+            // On desktop, trigger at center (50%).
+            const isMobile = window.innerWidth < 1024;
+            const eyeLevelOffset = windowHeight * (isMobile ? 0.8 : 0.7);
             const triggerPoint = eyeLevelOffset;
 
             // Current scroll position relative to the TIMELINE TRACK top (not container)
@@ -68,7 +70,11 @@ export const HistoryTimeline = () => {
 
                 // Check strictly for "current" status (snap effect)
                 // Use viewport distance directly
-                if (Math.abs(nodeCenterOnScreen - triggerPoint) < 40) {
+                // "Snap" / Active State Range
+                // Desktop: Significantly wider range (250px) to enhance the glow effect duration.
+                // Mobile: Increased range (100px).
+                const snapRange = isMobile ? 100 : 250;
+                if (Math.abs(nodeCenterOnScreen - triggerPoint) < snapRange) {
                     currentActiveIndex = idx;
                 }
             });
@@ -132,7 +138,7 @@ export const HistoryTimeline = () => {
 
                 <TimelineTrack lineRef={lineRef} progressRef={progressRef} />
 
-                <div className="space-y-16 lg:space-y-[15vh] relative z-10 pt-12 pb-32">
+                <div className="space-y-16 lg:space-y-[15vh] relative z-10 pt-12 pb-0">
                     {TIMELINE_DATA.map((item, index) => (
                         <TimelineItem
                             key={index}

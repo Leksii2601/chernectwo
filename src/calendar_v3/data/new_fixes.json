@@ -1,0 +1,120 @@
+[
+  {
+    "id": "global-theophany-01-06",
+    "triggers": { "mmdd": ["01-06"] },
+    "action": "REPLACE_LITURGY",
+    "priority": 100,
+    "data": {
+      "title": "СВЯТЕ БОГОЯВЛЕННЯ. ХРЕЩЕННЯ ГОСПОДА БОГА І СПАСИТЕЛЯ НАШОГО ІСУСА ХРИСТА",
+      "liturgy": {
+        "apostle": [{ "reading": "Тит. 2:11-14; 3:4-7 (зач. 302)", "label": "Свята" }],
+        "gospel": [{ "reading": "Мф. 3:13-17 (зач. 6)", "label": "Свята" }]
+      },
+      "matins": [{ "reading": "Мк. 1:9-11 (зач. 2)", "label": "Ран." }]
+    }
+  },
+  {
+    "id": "global-synaxis-john-01-07",
+    "triggers": { "mmdd": ["01-07"] },
+    "action": "REPLACE_LITURGY",
+    "priority": 100,
+    "data": {
+      "title": "Собор Предтечі і Хрестителя Господнього Іоана",
+      "liturgy": {
+        "apostle": [{ "reading": "Діян. 19:1-8 (зач. 42)", "label": "Предтечі" }],
+        "gospel": [{ "reading": "Ін. 1:29-34 (зач. 3)", "label": "Предтечі" }]
+      }
+    }
+  },
+  {
+    "id": "2026-fix-01-04-sun-before-theophany",
+    "triggers": { "mmdd": ["01-04"], "year": [2026] },
+    "action": "REPLACE_LITURGY",
+    "priority": 50,
+    "data": {
+      "liturgy": {
+        "apostle": [
+          { "reading": "2 Тим. 4:5-8 (зач. 298)", "label": "Неділі" },
+          { "reading": "Рим. 8:3-9 (зач. 96)", "label": "Собору" }
+        ],
+        "gospel": [
+          { "reading": "Мк. 1:1-8 (зач. 1)", "label": "Неділі" },
+          { "reading": "Лк. 10:1-15 (зач. 50)", "label": "Собору" }
+        ]
+      },
+      "matins": [{ "reading": "Ін. 20:11-18 (зач. 64)", "label": "Вск. 8" }]
+    }
+  },
+  {
+    "id": "2026-fix-01-19-mon-ryad",
+    "triggers": { "mmdd": ["01-19"], "year": [2026] },
+    "action": "REPLACE_LITURGY",
+    "priority": 50,
+    "data": {
+      "liturgy": {
+        "apostle": [
+          { "reading": "Як. 2:14-26 (зач. 53)", "label": "Ряд." },
+          { "reading": "Гал. 5:22-6:2 (зач. 213)", "label": "Прп." }
+        ],
+        "gospel": [
+          { "reading": "Мк. 10:46-52 (зач. 48)", "label": "Ряд." },
+          { "reading": "Мф. 11:27-30 (зач. 43)", "label": "Прп." }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2026-fix-01-23-fri-ryad",
+    "triggers": { "mmdd": ["01-23"], "year": [2026] },
+    "action": "REPLACE_LITURGY",
+    "priority": 50,
+    "data": {
+      "liturgy": {
+        "apostle": [{ "reading": "1 Пет. 1:1-2, 10-12, 2:6-10 (зач. 58)", "label": "Ряд." }],
+        "gospel": [{ "reading": "Мк. 12:1-12 (зач. 53)", "label": "Ряд." }]
+      }
+    }
+  },
+  {
+    "id": "2026-fix-01-26-mon-ryad",
+    "triggers": { "mmdd": ["01-26"], "year": [2026] },
+    "action": "REPLACE_LITURGY",
+    "priority": 50,
+    "data": {
+      "liturgy": {
+        "apostle": [
+          { "reading": "1 Пет. 2:21-3:9 (зач. 59)", "label": "Ряд." },
+          { "reading": "1 Пет. 3:10-22 (зач. 60)", "label": "Свт.?" }
+        ],
+        "gospel": [
+          { "reading": "Мк. 12:13-17 (зач. 54)", "label": "Ряд." },
+          { "reading": "Мк. 12:18-27 (зач. 55)", "label": "Свт.?" }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2026-fix-01-28-wed-ryad",
+    "triggers": { "mmdd": ["01-28"], "year": [2026] },
+    "action": "REPLACE_LITURGY",
+    "priority": 50,
+    "data": {
+      "liturgy": {
+        "apostle": [{ "reading": "1 Пет. 4:1-11 (зач. 61)", "label": "Ряд." }],
+        "gospel": [{ "reading": "Мк. 12:28-37 (зач. 56)", "label": "Ряд." }]
+      }
+    }
+  },
+  {
+    "id": "2026-fix-01-29-thu-ryad",
+    "triggers": { "mmdd": ["01-29"], "year": [2026] },
+    "action": "REPLACE_LITURGY",
+    "priority": 50,
+    "data": {
+      "liturgy": {
+        "apostle": [{ "reading": "1 Пет. 4:12-5:5 (зач. 62)", "label": "Ряд." }],
+        "gospel": [{ "reading": "Мк. 12:38-44 (зач. 57)", "label": "Ряд." }]
+      }
+    }
+  }
+]

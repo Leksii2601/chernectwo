@@ -46,7 +46,7 @@ export function ExploreMore() {
     {
       label: t('explore.social'),
       href: `${langPrefix}/social-projects`,
-      image: '/media/explore-more-social-initiatives.jpg',
+      image: '/media/explore-more-social-initiatives.jpeg',
     },
     {
       label: t('explore.pilgrims'),

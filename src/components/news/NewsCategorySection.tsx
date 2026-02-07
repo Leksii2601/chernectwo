@@ -72,7 +72,7 @@ export function NewsCategorySection({ title, items, id }: NewsCategorySectionPro
             <div className="border-b border-amber-600 pb-2 mb-3">
               <p className="text-sm text-gray-500 font-montserrat">{item.date}</p>
             </div>
-            <h3 className="text-xl font-montserrat font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-2 uppercase">
+            <h3 className="text-xl font-montserrat font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-2">
               {item.title}
             </h3>
           </Link>

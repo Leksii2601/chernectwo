@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Image from 'next/image';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { HistoryEvent } from './historyData';
 
 interface TimelineItemProps {
@@ -31,7 +32,7 @@ const TimelineVisual = ({ image, index, isPassed, isSnapped }: { image: string, 
     return (
         <div className={`relative w-[260px] h-[260px] md:w-[300px] md:h-[300px] flex-shrink-0 ${marginClass} mb-4`}>
             {/* Background Circle */}
-            <div className={`absolute w-full h-full rounded-full bg-amber-600 z-0 transition-transform duration-700 ${bgClasses} ${isSnapped ? 'scale-105' : 'scale-100'}`} />
+            <div className={`absolute w-full h-full rounded-full bg-amber-600 z-0 transition-transform ${bgClasses} ${isSnapped ? 'scale-105 duration-700' : 'scale-100 duration-[1500ms] delay-500'}`} />
 
             {/* Main Image */}
             <div className={`relative w-full h-full rounded-full overflow-hidden shadow-xl z-10 transition-transform duration-500 bg-white`}>
@@ -55,6 +56,18 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
     onClick
 }) => {
     const isRight = item.side === 'right';
+    const containerRef = useRef(null);
+
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
+
+    // Parallax Effects:
+    // Text moves slightly UP as you scroll down (Increased range)
+    const yText = useTransform(scrollYProgress, [0, 1], [70, -70]);
+    // Image moves slightly DOWN (opposite) creates depth
+    const yImage = useTransform(scrollYProgress, [0, 1], [-70, 70]);
 
     // Decorative Background Shapes Logic
     const randomSizeBase = index % 5;
@@ -70,10 +83,14 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
     const circleColor = isRight ? 'bg-amber-50' : 'bg-stone-100';
 
     return (
-        <div className={`relative flex flex-col lg:flex-row items-start w-full mb-24 lg:mb-32 ${isRight ? 'lg:justify-end' : 'lg:justify-start'}`}>
+        <div
+            ref={containerRef}
+            className={`relative flex flex-col lg:flex-row items-start w-full mb-24 lg:mb-32 ${isRight ? 'lg:justify-end' : 'lg:justify-start'}`}
+        >
 
             {/* DECORATIVE BACKGROUND SHAPE */}
-            <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 -z-10 transition-all duration-1000 ease-out 
+            <div className={`hidden lg:block absolute top-1/2 -translate-y-1/2 -z-10 transition-all ease-out 
+                ${isSnapped ? 'duration-1000' : 'duration-[2000ms] delay-500'}
                 ${shapeClasses} ${circleColor}
                 ${isRight ? 'right-0' : 'left-0'}
                 ${isSnapped ? 'scale-110 !opacity-70 !bg-amber-100' : 'opacity-50'}
@@ -127,8 +144,11 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
                     onClick={() => onClick(item)}
                 >
                     {/* Text Block - Title/Year FIRST as requested */}
-                    <div className={`flex flex-col z-10 
-                        items-start ${isRight ? 'lg:items-start text-left' : 'lg:items-end text-right'}
+                    {/* z-0 to sit behind image relative to stack */}
+                    <motion.div
+                        style={{ y: yText }}
+                        className={`flex flex-col relative z-0
+                        items-start text-left ${isRight ? 'lg:items-start lg:text-left' : 'lg:items-end lg:text-right'}
                     `}>
                         <div className="flex flex-row items-baseline gap-4 mb-2 lg:mb-4">
                             <span
@@ -150,9 +170,12 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
                         `}>
                             {item.shortDescription}
                         </p>
-                    </div>
+                    </motion.div>
 
-                    <TimelineVisual image={item.image} index={index} isPassed={isPassed} isSnapped={isSnapped} />
+                    {/* Image Block - Higher Z-Index to overlap text if they cross */}
+                    <motion.div style={{ y: yImage }} className="relative z-20">
+                        <TimelineVisual image={item.image} index={index} isPassed={isPassed} isSnapped={isSnapped} />
+                    </motion.div>
 
                 </div>
             </div>

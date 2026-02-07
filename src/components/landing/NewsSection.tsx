@@ -84,7 +84,7 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
                       <div className="border-b border-amber-600 pb-2 mb-3">
                         <p className="text-sm text-gray-500 font-montserrat">{item.date}</p>
                       </div>
-                      <h3 className="text-lg font-montserrat font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-3 uppercase">
+                      <h3 className="text-lg font-montserrat font-bold text-gray-900 leading-tight group-hover:text-amber-700 transition-colors line-clamp-3">
                         {item.title}
                       </h3>
                     </Link>
@@ -109,7 +109,7 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
                     <div className="inline-block bg-white text-gray-900 px-4 py-1 text-xs font-bold uppercase mb-4 tracking-wider">
                       {currentNews.category}
                     </div>
-                    <h1 className="text-white text-3xl md:text-4xl font-bold leading-tight drop-shadow-md uppercase">
+                    <h1 className="text-white text-3xl md:text-4xl font-bold leading-tight drop-shadow-md">
                       {currentNews.title}
                     </h1>
                     <p className="text-gray-300 mt-2 text-sm md:text-base font-medium">{currentNews.date}</p>
@@ -146,7 +146,7 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
                   <div className="border-b border-amber-600 pb-2 mb-3">
                     <p className="text-gray-400 text-xs uppercase font-bold tracking-wide">{item.date}</p>
                   </div>
-                  <h3 className="text-gray-900 font-bold text-base leading-snug group-hover:text-amber-600 transition-colors line-clamp-3 uppercase">
+                  <h3 className="text-gray-900 font-bold text-base leading-snug group-hover:text-amber-600 transition-colors line-clamp-3">
                     {item.title}
                   </h3>
                 </div>

@@ -5,7 +5,10 @@ import React, { useState, useMemo } from 'react'
 import { generateCalendar } from '@/utils/calendarGenerator_test'
 import { clsx } from 'clsx'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { useLanguage } from '@/context/LanguageContext';
+import { useLanguage } from '@/context/LanguageContext'
+// import { useLiturgicalData } from '@/hooks/useLiturgicalData' // V2 Hook - Deprecated for this view
+import { useCalendarV3 } from '@/hooks/useCalendarV3' // V3 Hook
+import { ParemiaReadingsList } from '@/components/liturgical/ParemiaReadingsList'
 
 export function CalendarSectionNew() {
     const { t, language } = useLanguage();
@@ -16,6 +19,7 @@ export function CalendarSectionNew() {
     const [currentDate, setCurrentDate] = useState(new Date());
     const currentYear = currentDate.getFullYear();
 
+    // Generate calendar data (original approach)
     const fullCalendarData = useMemo(() => {
         return [...generateCalendar(currentYear, language), ...generateCalendar(currentYear + 1, language)];
     }, [currentYear, language]);
@@ -31,6 +35,9 @@ export function CalendarSectionNew() {
 
     const selectedDayData = fullCalendarData[selectedIndex];
     const upcomingDays = fullCalendarData.slice(selectedIndex + 1, selectedIndex + 3);
+
+    // NEW: Fetch enhanced liturgical data using our rule manager (V3)
+    const liturgicalData = useCalendarV3(currentDate);
 
     const handleSelectDate = (dateIso: string) => {
         const [y, m, d] = dateIso.split('-').map(Number);
@@ -55,11 +62,25 @@ export function CalendarSectionNew() {
         return [...Array(offset).fill(null), ...days];
     }, [currentDate, fullCalendarData]);
 
+    // NEW: Merge liturgical data into selected day data
+    const enhancedSelectedDay = useMemo(() => {
+        if (!selectedDayData) return null;
+
+        return {
+            ...selectedDayData,
+            // Override title with liturgical data (if available)
+            title: liturgicalData.primaryTitle || selectedDayData.title,
+            // Add rank indicator
+            isMajorFeast: liturgicalData.isMajorFeast,
+            rank: liturgicalData.rank,
+        };
+    }, [selectedDayData, liturgicalData]);
+
     return (
         <section id="calendar" className="py-20 px-2 lg:px-4 bg-gray-50 text-gray-800 font-sans min-h-screen">
             <div className="container mx-auto max-w-7xl">
                 <h2 className="font-montserrat font-bold text-3xl md:text-5xl uppercase tracking-widest text-center mb-16 text-gray-800">
-                    {t('calendar.title')} (NEW ENGINE)
+                    {t('calendar.title')}
                 </h2>
 
                 <div className="flex flex-col lg:flex-row gap-8 items-start justify-center">
@@ -129,49 +150,134 @@ export function CalendarSectionNew() {
 
                     {/* Content */}
                     <div className="flex-1 w-full max-w-4xl order-2 lg:order-1">
-                        {selectedDayData && (
+                        {enhancedSelectedDay && (
                             <div className="bg-white shadow-md p-6 mb-4">
                                 <div className="flex items-start gap-6 mb-4">
                                     <div className="flex flex-col items-center bg-gray-100 p-4 min-w-[100px]">
-                                        <div className="text-5xl font-bold text-gray-700">{selectedDayData.dayNumber}</div>
-                                        <div className="text-sm text-gray-600 uppercase font-bold mt-1">{MONTHS[parseInt(selectedDayData.date.split('-')[1]) - 1]}</div>
+                                        <div className="text-5xl font-bold text-gray-700">{enhancedSelectedDay.dayNumber}</div>
+                                        <div className="text-sm text-gray-600 uppercase font-bold mt-1">{MONTHS[parseInt(enhancedSelectedDay.date.split('-')[1]) - 1]}</div>
                                     </div>
                                     <div className="flex-1">
-                                        <h2 className={clsx(
-                                            "text-lg font-bold mb-2",
-                                            selectedDayData.isHoliday ? "text-red-700" : "text-gray-800"
-                                        )}>
-                                            {selectedDayData.title}
-                                        </h2>
+                                        <div className="flex items-start gap-3 mb-2">
+                                            <h2 className={clsx(
+                                                "text-lg font-bold flex-1",
+                                                enhancedSelectedDay.isHoliday ? "text-red-700" : "text-gray-800"
+                                            )}>
+                                                {enhancedSelectedDay.title}
+                                            </h2>
+
+                                            {/* NEW: Major Feast Badge Removed */}
+                                        </div>
+
                                         <p className="text-sm text-gray-500 leading-relaxed">
-                                            {selectedDayData.saints.join(", ")}
+                                            {/* Fix: use V3 saints if available, else selectedDayData saints */}
+                                            {selectedDayData.saints && selectedDayData.saints.length > 0 
+                                                ? selectedDayData.saints.join(", ")
+                                                : liturgicalData.saints.join(", ")}
                                         </p>
 
-                                        <div className="mt-4 p-3 bg-amber-50 rounded text-sm text-gray-800 border-l-4 border-amber-400">
-                                            <h4 className="font-bold mb-1">Богослужбові читання:</h4>
+                                        {/* NEW: Simplified Display (Manual Wins Style) - Reverted to Clean List */}
+                                        <div className="mt-4 p-4 bg-gray-50 rounded text-sm text-gray-800">
+                                            {liturgicalData.rules.length > 0 ? (
+                                                <div className="space-y-6">
+                                                    {liturgicalData.rules.map((rule, ruleIdx) => (
+                                                        <div key={ruleIdx} className="space-y-4">
 
-                                            {selectedDayData.readingsStructured ? (
+                                                            {/* Matins Line */}
+                                                            {(rule.data.matins && rule.data.matins.length > 0) || (rule.data.rubrics && rule.data.rubrics.length > 0) ? (
+                                                                <div className="space-y-2">
+                                                                     {rule.data.matins && rule.data.matins.length > 0 && (
+                                                                        <div className="text-gray-700 italic border-l-2 border-gray-300 pl-2">
+                                                                            <span className="font-bold text-gray-900 not-italic">Рання: </span>
+                                                                            {rule.data.matins.map(r => r.reading).join(', ')}
+                                                                        </div>
+                                                                     )}
+                                                                     {/* Rubrics Display */}
+                                                                     {rule.data.rubrics && rule.data.rubrics.length > 0 && (
+                                                                        <div className="bg-amber-50 border border-amber-100 p-2 rounded text-sm text-amber-800">
+                                                                             <div className="font-bold mb-1">Уставні вказівки:</div>
+                                                                             <ul className="list-disc list-inside">
+                                                                                 {rule.data.rubrics.map((rubric: string, idx: number) => (
+                                                                                     <li key={idx}>{rubric}</li>
+                                                                                 ))}
+                                                                             </ul>
+                                                                        </div>
+                                                                     )}
+                                                                </div>
+                                                            ) : null}
+
+                                                            {/* Liturgy Table - Simple Grid */}
+                                                            {(rule.data.liturgy?.apostle || rule.data.liturgy?.gospel) && (
+                                                                <div className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
+                                                                    {Array.from({ length: Math.max(rule.data.liturgy?.apostle?.length || 0, rule.data.liturgy?.gospel?.length || 0) }).map((_, i) => {
+                                                                        const ap = rule.data.liturgy?.apostle?.[i];
+                                                                        const gs = rule.data.liturgy?.gospel?.[i];
+                                                                        const label = ap?.label || gs?.label;
+
+                                                                        return (
+                                                                            <React.Fragment key={i}>
+                                                                                {label && (
+                                                                                    <div className="col-span-2 font-bold text-gray-800 mt-2 first:mt-0 border-b border-gray-200 pb-1">
+                                                                                        {label}
+                                                                                    </div>
+                                                                                )}
+
+                                                                                {ap && (
+                                                                                    <>
+                                                                                        <div className="font-bold text-gray-500 text-right">АП:</div>
+                                                                                        <div>{ap.reading}</div>
+                                                                                    </>
+                                                                                )}
+
+                                                                                {gs && (
+                                                                                    <>
+                                                                                        <div className="font-bold text-red-800 text-right">ЄВ:</div>
+                                                                                        <div>{gs.reading}</div>
+                                                                                    </>
+                                                                                )}
+                                                                            </React.Fragment>
+                                                                        );
+                                                                    })}
+                                                                </div>
+                                                            )}
+
+                                                            {/* Aliturgical / Lenten Readings (Simple List for Manual Mode) */}
+                                                            {(rule.data.hours || (rule.data.vespers && rule.data.vespers.length > 0)) && (
+                                                                <div className="space-y-2 mt-4 pt-4 border-t border-gray-200">
+                                                                    {rule.data.hours && Object.entries(rule.data.hours).map(([key, readings], hIdx) => (
+                                                                        <div key={hIdx}>
+                                                                            <span className="font-bold text-gray-700">{key}: </span>
+                                                                            {(readings || []).map(r => r.reading).join(', ')}
+                                                                        </div>
+                                                                    ))}
+
+                                                                    {rule.data.vespers && rule.data.vespers.length > 0 && (
+                                                                        <div>
+                                                                            <span className="font-bold text-gray-700">Вечірня: </span>
+                                                                            <ul className="list-none ml-0 inline">
+                                                                                {rule.data.vespers.map((r, vIdx) => (
+                                                                                    <li key={vIdx} className="inline mr-2 after:content-[','] last:after:content-['']">
+                                                                                        {r.reading}
+                                                                                    </li>
+                                                                                ))}
+                                                                            </ul>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            )}
+
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ) : selectedDayData.readingsStructured ? (
+                                                // Fallback to old data structure
                                                 <div className="space-y-4 mt-2">
-
                                                     {selectedDayData.readingsStructured.metadata && (
                                                         <div className="text-xs text-gray-500 italic mb-2">
                                                             {selectedDayData.readingsStructured.metadata.description}
                                                         </div>
                                                     )}
 
-                                                    {/* Vespers */}
-                                                    {selectedDayData.readingsStructured.vespers && selectedDayData.readingsStructured.vespers.readings.length > 0 && (
-                                                        <div className="mb-3">
-                                                            <div className="font-bold text-amber-800 border-b border-amber-600 mb-1">Вечірня:</div>
-                                                            <ul className="ml-2 list-disc list-inside text-xs text-gray-700">
-                                                                {selectedDayData.readingsStructured.vespers.readings.map((r: any, i: number) => (
-                                                                    <li key={i}>{r.reading}</li>
-                                                                ))}
-                                                            </ul>
-                                                        </div>
-                                                    )}
-
-                                                    {/* Matins Gospel */}
                                                     {selectedDayData.readingsStructured.matinsGospel && (
                                                         <div>
                                                             <div className="font-bold text-amber-700">Раннє Євангеліє:</div>
@@ -179,7 +285,6 @@ export function CalendarSectionNew() {
                                                         </div>
                                                     )}
 
-                                                    {/* Liturgy */}
                                                     {(selectedDayData.readingsStructured.liturgy.apostle.length > 0 || selectedDayData.readingsStructured.liturgy.gospel.length > 0) && (
                                                         <div>
                                                             <div className="font-bold text-amber-700">Літургія:</div>
@@ -201,24 +306,6 @@ export function CalendarSectionNew() {
                                                             </div>
                                                         </div>
                                                     )}
-
-                                                    {/* Hours */}
-                                                    {selectedDayData.readingsStructured.hours && Object.keys(selectedDayData.readingsStructured.hours).length > 0 && (
-                                                        <div>
-                                                            <div className="font-bold text-amber-700 border-t border-amber-600 mt-2 pt-1">Часи:</div>
-                                                            <div className="ml-2 text-xs grid grid-cols-2 gap-2 mt-1">
-                                                                {Object.entries(selectedDayData.readingsStructured.hours).map(([hName, readings]) => (
-                                                                    <div key={hName} className="">
-                                                                        <span className="capitalize font-semibold text-gray-600">{hName}:</span>
-                                                                        <div className="">
-                                                                            {Array.isArray(readings) ? readings.map(r => r.reading).join(", ") : ""}
-                                                                        </div>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        </div>
-                                                    )}
-
                                                 </div>
                                             ) : (
                                                 <pre className="whitespace-pre-wrap font-sans">{selectedDayData.readings}</pre>

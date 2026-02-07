@@ -60,6 +60,13 @@ export function Footer() {
               </div>
 
               <div>
+                <p className="text-gray-400 text-xs mb-1 uppercase tracking-wide">{t('footer.email')}</p>
+                <a href="mailto:chernectwo@gmail.com" className="text-lg hover:text-amber-600 transition-colors">
+                  chernectwo@gmail.com
+                </a>
+              </div>
+
+              <div>
                 <p className="text-gray-400 text-xs mb-1 uppercase tracking-wide">{t('footer.address_label')}</p>
                 <a
                   href="https://maps.app.goo.gl/iVE1sepfWAnbwx6E8"
@@ -109,77 +116,36 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Socials Column */}
+          {/* Partners Column */}
           <div className="flex flex-col">
             <h3 className="text-gray-400 text-sm font-medium uppercase tracking-wider mb-6 pb-2 border-b border-white/20">
-              {t('footer.socials')}
+              {t('footer.partners')}
             </h3>
 
             <ul className="space-y-4">
               <li>
-                <a
-                  href="https://www.facebook.com/chernectvo.volyni"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-lg hover:text-amber-600 transition-colors"
-                >
-                  <Facebook className="w-5 h-5" />
-                  <span>Facebook</span>
+                <a href="https://www.pomisna.info/" target="_blank" rel="noopener noreferrer" className="text-lg leading-relaxed hover:text-amber-600 transition-colors block">
+                  {t('footer.partner_pcu')}
                 </a>
               </li>
               <li>
-                <a
-                  href="https://www.instagram.com/chernetstvovolyni"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-lg hover:text-amber-600 transition-colors"
-                >
-                  <Instagram className="w-5 h-5" />
-                  <span>Instagram</span>
+                <a href="https://pravoslaviavolyni.org.ua/" target="_blank" rel="noopener noreferrer" className="text-lg leading-relaxed hover:text-amber-600 transition-colors block">
+                  {t('footer.partner_volyn')}
                 </a>
               </li>
               <li>
-                <a
-                  href="https://www.youtube.com/@chernectvo_volyni"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-lg hover:text-amber-600 transition-colors"
-                >
-                  <Youtube className="w-5 h-5" />
-                  <span>YouTube</span>
+                <a href="https://www.archangel.kiev.ua/" target="_blank" rel="noopener noreferrer" className="text-lg leading-relaxed hover:text-amber-600 transition-colors block">
+                  {t('footer.partner_michael')}
                 </a>
               </li>
               <li>
-                <a
-                  href="https://whatsapp.com/channel/0029VbCZlG3GpLHWYKNea425"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-lg hover:text-amber-600 transition-colors"
-                >
-                  <WhatsappIcon className="w-5 h-5" />
-                  <span>WhatsApp</span>
+                <a href="https://zhydychyn.center/" target="_blank" rel="noopener noreferrer" className="text-lg leading-relaxed hover:text-amber-600 transition-colors block">
+                  {t('footer.partner_zhydychyn')}
                 </a>
               </li>
               <li>
-                <a
-                  href="https://t.me/chernetstvo_volyni"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-lg hover:text-amber-600 transition-colors"
-                >
-                  <Send className="w-5 h-5" />
-                  <span>Telegram</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://invite.viber.com/?g2=AQAB6djHxEo4k1YHgvbWNapcX0pRA%2B2o8tUn5LLB5Jv%2BX1BCZhctg2bkqIY%2BTmoM"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-lg hover:text-amber-600 transition-colors"
-                >
-                  <ViberIcon className="w-6 h-6 transition-all duration-300" />
-                  <span>Viber</span>
+                <a href="https://work-together.com.ua" target="_blank" rel="noopener noreferrer" className="text-lg leading-relaxed hover:text-amber-600 transition-colors block">
+                  {t('footer.partner_spilna')}
                 </a>
               </li>
             </ul>
@@ -187,10 +153,67 @@ export function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end md:items-center pt-8 border-t border-white/10">
-          <p className="text-sm text-gray-500">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/10">
+          <p className="text-sm text-gray-500 order-2 md:order-1">
             {new Date().getFullYear()} {t('footer.copyright')}
           </p>
+
+          <div className="flex flex-wrap gap-4 order-1 md:order-2">
+            <a
+              href="https://www.facebook.com/chernectvo.volyni"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-10 h-10 flex items-center justify-center border border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all rounded-full"
+              title="Facebook"
+            >
+              <Facebook className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.instagram.com/chernetstvovolyni"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-10 h-10 flex items-center justify-center border border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all rounded-full"
+              title="Instagram"
+            >
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a
+              href="https://www.youtube.com/@chernectvo_volyni"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-10 h-10 flex items-center justify-center border border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all rounded-full"
+              title="YouTube"
+            >
+              <Youtube className="w-5 h-5" />
+            </a>
+            <a
+              href="https://whatsapp.com/channel/0029VbCZlG3GpLHWYKNea425"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-10 h-10 flex items-center justify-center border border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all rounded-full"
+              title="WhatsApp"
+            >
+              <WhatsappIcon className="w-5 h-5" />
+            </a>
+            <a
+              href="https://t.me/chernetstvo_volyni"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-10 h-10 flex items-center justify-center border border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all rounded-full"
+              title="Telegram"
+            >
+              <Send className="w-5 h-5" />
+            </a>
+            <a
+              href="https://invite.viber.com/?g2=AQAB6djHxEo4k1YHgvbWNapcX0pRA%2B2o8tUn5LLB5Jv%2BX1BCZhctg2bkqIY%2BTmoM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-10 h-10 flex items-center justify-center border border-white/20 text-white hover:bg-white hover:text-black hover:border-white transition-all rounded-full"
+              title="Viber"
+            >
+              <ViberIcon className="w-6 h-6 transition-all duration-300" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

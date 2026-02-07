@@ -97,7 +97,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
 
           {/* Right Column: Title & Meta */}
           <div className="lg:col-span-5 flex flex-col">
-            <h1 className="font-montserrat text-3xl md:text-4xl lg:text-5xl leading-tight mb-8 text-gray-900 uppercase">
+            <h1 className="font-montserrat text-3xl md:text-4xl lg:text-5xl leading-tight mb-8 text-gray-900">
               {newsItem.title}
             </h1>
 
