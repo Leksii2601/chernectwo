@@ -41,18 +41,18 @@ function calculateNday(dateStr: string): number {
 // Helper function to check if a reading is movable (Triodion/Pentecostarion)
 function isMovableFeast(label: string, date: string): boolean {
     const nday = calculateNday(date);
-    
+
     // Triodion period: 10 weeks before Pascha (nday -70 to -1)
     const isTriodionPeriod = nday >= -70 && nday < 0;
-    
+
     // Pentecostarion period: Pascha to Pentecost Sunday (nday 0 to 49)
     const isPentecostPeriod = nday >= 0 && nday <= 49;
-    
+
     // Explicit Triodion label
     if (label.includes('Тріод')) {
         return true;
     }
-    
+
     // During Triodion or Pentecostarion, Sunday readings and certain labels are movable
     if (isTriodionPeriod || isPentecostPeriod) {
         const movableIndicators = [
@@ -73,10 +73,10 @@ function isMovableFeast(label: string, date: string): boolean {
             'після Богоявл',
             'Ряд.' // During Triodion/Pentecostarion, ordinary readings are movable
         ];
-        
+
         return movableIndicators.some(indicator => label.includes(indicator));
     }
-    
+
     return false;
 }
 
@@ -85,15 +85,15 @@ function isMovableFeast(label: string, date: string): boolean {
 function shouldSuppressSaints(readings: ReadingEntry['readings'], date: string): boolean {
     if (readings.length === 0) return false;
     if (readings.length !== 1) return false; // Only single readings can be suppression candidates
-    
+
     const label = readings[0].label.trim();
     const nday = calculateNday(date);
-    
+
     // Only suppress "Ряд." during specific periods where we know minor saints interfere
     // Generally during major feast preparation or Triodion/Lent periods
     const isTriodionPeriod = nday >= -70 && nday < 0;
     const isPentecostPeriod = nday >= 0 && nday <= 50;
-    
+
     // During Triodion or immediately after Pentecost, "Ряд." might indicate suppression needed
     // But be conservative - only if label is exactly "Ряд." without other context
     if (label === 'Ряд.' && (isTriodionPeriod || isPentecostPeriod)) {
@@ -103,7 +103,7 @@ function shouldSuppressSaints(readings: ReadingEntry['readings'], date: string):
             return false; // Has real readings, don't suppress
         }
     }
-    
+
     return false; // Default: don't suppress
 }
 
@@ -111,10 +111,10 @@ function shouldSuppressSaints(readings: ReadingEntry['readings'], date: string):
 function shouldSkipEntry(readings: ReadingEntry['readings'], date: string): boolean {
     // Skip empty readings
     if (readings.length === 0) return true;
-    
+
     // Skip if readings don't have actual apostle/gospel text
     if (readings.length === 1 && !readings[0].apostle && !readings[0].gospel) return true;
-    
+
     return false;
 }
 
@@ -141,7 +141,7 @@ function isMajorFixedFeast(label: string): boolean {
         'Різдва',
         'Воздвиж'
     ];
-    
+
     return majorFeasts.some(feast => label.includes(feast));
 }
 
@@ -149,78 +149,82 @@ function isMajorFixedFeast(label: string): boolean {
 function generateOCURules(): TypikonRule[] {
     const readings: ReadingEntry[] = readings2026Raw as any;
     const rules: TypikonRule[] = [];
-    
+
     // Filter to only include dates from 2026 (pages 5-82 likely covers the full year)
     const filtered = readings.filter(entry => {
         const date = new Date(entry.date);
         return date.getFullYear() === 2026;
     });
-    
+
     console.error(`Processing ${filtered.length} entries for 2026...`);
-    
+
     for (const entry of filtered) {
         const { date, readings: dayReadings } = entry;
-        
+
         // Skip entries that should be ignored
         if (shouldSkipEntry(dayReadings, date)) continue;
-        
+
         const [month, day] = date.substring(5).split('-');
         const mmdd = `${month}-${day}`;
         const nday = calculateNday(date);
-        
+
         // Check if this should be a suppression rule (very conservative)
         if (shouldSuppressSaints(dayReadings, date)) {
             rules.push({
                 id: `${date} Suppress Saints`,
                 triggers: { mmdd: [mmdd], year: [2026] },
-                action: 'SUPPRESS_SAINTS'
+                action: 'SUPPRESS_SAINTS',
+                data: {
+                    title: 'Suppress Saints'
+                }
             });
             continue;
         }
-        
+
         // Separate movable and fixed readings
         const movableReadings = dayReadings.filter(r => isMovableFeast(r.label, date));
         const fixedReadings = dayReadings.filter(r => !isMovableFeast(r.label, date) && !isMajorFixedFeast(r.label));
         const majorFeastReadings = dayReadings.filter(r => isMajorFixedFeast(r.label));
-        
+
         // Process readings and create rule
         if (dayReadings.length > 0) {
             const apostle = dayReadings.map(r => ({
                 reading: normalizeReading(r.apostle),
                 label: r.label.trim()
             }));
-            
+
             const gospel = dayReadings.map(r => ({
                 reading: normalizeReading(r.gospel),
                 label: r.label.trim()
             }));
-            
+
             // Determine trigger type based on readings
             const hasMovable = movableReadings.length > 0;
             const hasFixed = fixedReadings.length > 0 || majorFeastReadings.length > 0;
             const isPurelyMovable = hasMovable && !hasFixed && movableReadings.length === dayReadings.length;
-            
+
             // If purely movable (e.g., Triodion readings), use nday; otherwise use mmdd
             const useNday = isPurelyMovable;
-            
+
             const rule: TypikonRule = {
                 id: `${date} ${dayReadings[0].label}`,
-                triggers: useNday 
+                triggers: useNday
                     ? { nday: [nday] }
                     : { mmdd: [mmdd], year: [2026] },
                 action: 'REPLACE_LITURGY',
                 data: {
+                    title: dayReadings.map(r => r.label.trim()).join('. '),
                     liturgy: {
                         apostle,
                         gospel
                     }
                 }
             };
-            
+
             rules.push(rule);
         }
     }
-    
+
     console.error(`Generated ${rules.length} rules`);
     return rules;
 }
@@ -229,9 +233,9 @@ function generateOCURules(): TypikonRule[] {
 function main() {
     console.error('=== OCU RULES GENERATOR ===\n');
     console.error(`Pascha 2026: ${PASCHA_2026.toDateString()}\n`);
-    
+
     const rules = generateOCURules();
-    
+
     // Output TypeScript code to stdout
     console.log('import { TypikonRule } from \'./TypikonRules\';');
     console.log('');
@@ -249,15 +253,15 @@ function main() {
     console.log(' */');
     console.log('');
     console.log('export const GENERATED_OCU_RULES_2026: TypikonRule[] = [');
-    
+
     rules.forEach((rule, idx) => {
         const json = JSON.stringify(rule, null, 4);
         const indented = json.split('\n').map(line => '    ' + line).join('\n');
         console.log(indented + (idx < rules.length - 1 ? ',' : ''));
     });
-    
+
     console.log('];');
-    
+
     // Statistics to stderr
     console.error('\n=== STATISTICS ===');
     console.error(`Total rules: ${rules.length}`);

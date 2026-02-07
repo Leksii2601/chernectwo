@@ -62,7 +62,7 @@ const MATINS_GOSPELS: Record<string, { reading: string; label: string }[]> = {
 
 // Major fixed feasts that should always use mmdd (not year-specific)
 const MAJOR_FIXED_FEASTS = [
-    'Богоявл', 'Обрізання', 'Стрітення', 'Благовіщ', 'Преображ', 
+    'Богоявл', 'Обрізання', 'Стрітення', 'Благовіщ', 'Преображ',
     'Успіння', 'Різдва', 'Воздвиж', 'Покров', 'Введення'
 ];
 
@@ -89,7 +89,7 @@ function getWeekdayName(dateStr: string): string {
 
 function sanitizeReading(text: string): string {
     if (!text) return '';
-    
+
     let sanitized = text
         // Remove underscores
         .replace(/_/g, '')
@@ -105,7 +105,7 @@ function sanitizeReading(text: string): string {
         // Clean extra spaces
         .replace(/\s+/g, ' ')
         .trim();
-    
+
     // Convert Roman numerals to Arabic if found (e.g., "X, 9-16" -> "10:9-16")
     sanitized = sanitized.replace(/\b([IVX]+),\s*(\d+)/g, (match, roman, verses) => {
         const arabicMap: Record<string, number> = {
@@ -116,7 +116,7 @@ function sanitizeReading(text: string): string {
         const arabic = arabicMap[roman];
         return arabic ? `${arabic}:${verses}` : match;
     });
-    
+
     return sanitized;
 }
 
@@ -126,34 +126,34 @@ function sanitizeReading(text: string): string {
 
 function isMovableFeast(label: string, date: string): boolean {
     const nday = calculateNday(date);
-    
+
     // Triodion period: ~10 weeks before Pascha
     const isTriodionPeriod = nday >= -88 && nday < 0;
-    
+
     // Pentecostarion period: Pascha to Pentecost
     const isPentecostPeriod = nday >= 0 && nday <= 49;
-    
+
     // Explicit movable indicators
     const movableIndicators = [
         'Тріод', 'Неділя', 'тиж.', 'тижн', 'сиропусн', 'Заупокій',
         'Лазарев', 'Вхід', 'Вознес', 'П\'ятдесятн', 'Митар', 'Блудн',
         'Страшн', 'Прощ'
     ];
-    
+
     if (movableIndicators.some(ind => label.includes(ind))) {
         return true;
     }
-    
+
     // Theophany week labels that move based on Theophany day
     if (label.includes('перед Богоявл') || label.includes('після Богоявл')) {
         return false; // Handle these specially with logic
     }
-    
+
     // During Triodion/Pentecostarion, ordinary readings are movable
     if ((isTriodionPeriod || isPentecostPeriod) && label === 'Ряд.') {
         return true;
     }
-    
+
     return false;
 }
 
@@ -178,26 +178,26 @@ function getTheophanyWeekLogic(dateStr: string): { isTheophanyWeek: boolean; pos
     const date = new Date(dateStr + 'T12:00:00');
     const theophanyDay = THEOPHANY_2026.getDay(); // 2 = Tuesday
     const currentDay = date.getDay();
-    
+
     // Calculate days from Theophany
     const diffMs = date.getTime() - THEOPHANY_2026.getTime();
     const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
-    
+
     // Saturday before Theophany (Jan 03 in 2026 since Theophany is Tuesday)
     if (diffDays === -3 && currentDay === 6) {
         return { isTheophanyWeek: true, position: 'saturday_before' };
     }
-    
+
     // Sunday before Theophany (Jan 04 in 2026)
     if (diffDays === -2 && currentDay === 0) {
         return { isTheophanyWeek: true, position: 'sunday_before' };
     }
-    
+
     // Sunday after Theophany (first Sunday after Jan 6)
     if (diffDays > 0 && diffDays <= 7 && currentDay === 0) {
         return { isTheophanyWeek: true, position: 'sunday_after' };
     }
-    
+
     return { isTheophanyWeek: false, position: '' };
 }
 
@@ -208,63 +208,66 @@ function getTheophanyWeekLogic(dateStr: string): { isTheophanyWeek: boolean; pos
 function generateOCURules(): TypikonRule[] {
     const readings: ReadingEntry[] = readings2026Raw as any;
     const rules: TypikonRule[] = [];
-    
+
     // Filter to 2026 entries
     const filtered = readings.filter(entry => {
         const date = new Date(entry.date);
         return date.getFullYear() === 2026;
     });
-    
+
     console.error(`Processing ${filtered.length} entries for 2026...`);
     console.error(`Pascha 2026: ${PASCHA_2026.toDateString()}`);
     console.error(`Theophany 2026: ${THEOPHANY_2026.toDateString()}\n`);
-    
+
     for (const entry of filtered) {
         const { date, readings: dayReadings } = entry;
-        
+
         // Skip empty entries
         if (!dayReadings || dayReadings.length === 0) continue;
         if (dayReadings.every(r => !r.apostle && !r.gospel)) continue;
-        
+
         const [, year, month, day] = date.match(/(\d{4})-(\d{2})-(\d{2})/)!;
         const mmdd = `${month}-${day}`;
         const nday = calculateNday(date);
-        
+
         // Check Theophany week logic
         const theophanyLogic = getTheophanyWeekLogic(date);
-        
+
         // Determine if this should use nday or mmdd trigger
         const hasMovableReadings = dayReadings.some(r => isMovableFeast(r.label, date));
         const hasFixedReadings = dayReadings.some(r => !isMovableFeast(r.label, date));
         const isPurelyMovable = hasMovableReadings && !hasFixedReadings;
-        
+
         // Build liturgy data
         const apostle = dayReadings.map(r => ({
             reading: sanitizeReading(r.apostle),
             label: r.label.trim()
         }));
-        
+
         const gospel = dayReadings.map(r => ({
             reading: sanitizeReading(r.gospel),
             label: r.label.trim()
         }));
-        
+
         // Extract matins from readings if present
         const matinsFromData = dayReadings.find(r => r.matins);
-        let matins: { gospel: { reading: string; label: string }[] } | undefined;
-        
+        let matins: { reading: string, label: string, type?: string }[] | undefined;
+
         if (matinsFromData && matinsFromData.matins) {
-            matins = {
-                gospel: [{
-                    reading: sanitizeReading(matinsFromData.matins),
-                    label: matinsFromData.label.trim()
-                }]
-            };
+            matins = [{
+                reading: sanitizeReading(matinsFromData.matins),
+                label: matinsFromData.label.trim(),
+                type: 'gospel'
+            }];
         } else if (MATINS_GOSPELS[mmdd]) {
             // Fallback to predefined matins
-            matins = { gospel: MATINS_GOSPELS[mmdd] };
+            matins = MATINS_GOSPELS[mmdd].map(m => ({
+                reading: m.reading,
+                label: m.label,
+                type: 'gospel'
+            }));
         }
-        
+
         // Create rule
         const rule: TypikonRule = {
             id: `${date} ${dayReadings[0].label}`,
@@ -273,27 +276,28 @@ function generateOCURules(): TypikonRule[] {
                 : { mmdd: [mmdd] }, // Remove year property for universality
             action: 'REPLACE_LITURGY',
             data: {
+                title: dayReadings.map(r => r.label.trim()).filter((v, i, a) => a.indexOf(v) === i).join('. '),
                 liturgy: {
                     apostle,
                     gospel
                 }
             }
         };
-        
+
         // Add matins if available
         if (matins) {
             rule.data.matins = matins;
         }
-        
+
         rules.push(rule);
     }
-    
+
     console.error(`\n=== GENERATION COMPLETE ===`);
     console.error(`Total rules: ${rules.length}`);
     console.error(`Rules with nday: ${rules.filter(r => r.triggers.nday).length}`);
     console.error(`Rules with mmdd: ${rules.filter(r => r.triggers.mmdd).length}`);
     console.error(`Rules with matins: ${rules.filter(r => r.data.matins).length}`);
-    
+
     return rules;
 }
 
@@ -305,9 +309,9 @@ function main() {
     console.error('='.repeat(80));
     console.error('OCU LITURGICAL DATABASE ARCHITECT v2.0');
     console.error('='.repeat(80));
-    
+
     const rules = generateOCURules();
-    
+
     // Output TypeScript
     console.log('import { TypikonRule } from \'./TypikonRules\';');
     console.log('');
@@ -332,13 +336,13 @@ function main() {
     console.log(' */');
     console.log('');
     console.log('export const GENERATED_OCU_RULES_2026: TypikonRule[] = [');
-    
+
     rules.forEach((rule, idx) => {
         const json = JSON.stringify(rule, null, 4);
         const indented = json.split('\n').map(line => '    ' + line).join('\n');
         console.log(indented + (idx < rules.length - 1 ? ',' : ''));
     });
-    
+
     console.log('];');
 }
 
