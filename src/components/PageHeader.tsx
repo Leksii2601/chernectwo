@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import Image from 'next/image';
 import { Header } from '@/components/landing/Header';
 import { clsx } from 'clsx';
 
@@ -15,16 +15,27 @@ export function PageHeader({ title, subtitle, backgroundImage, className, titleC
   return (
     <div
       className={clsx(
-        "relative min-h-screen shadow-lg bg-cover bg-center bg-no-repeat bg-fixed flex flex-col justify-center pb-10 md:pb-0",
+        "relative min-h-screen shadow-lg flex flex-col justify-center pb-10 md:pb-0 overflow-hidden",
         className
       )}
-      style={{
-        backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
-        backgroundColor: backgroundImage ? undefined : 'rgba(0,0,0,0.9)'
-      }}
     >
+      {/* Background Image using next/image for high quality */}
+      {backgroundImage ? (
+        <Image
+          src={backgroundImage}
+          alt={title}
+          fill
+          priority
+          quality={95}
+          className="object-cover object-center z-0"
+          sizes="100vw"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-black/90 z-0" />
+      )}
+
       {/* Dark overlay ensuring text readability */}
-      <div className="absolute inset-0 bg-black/50 z-0"></div>
+      <div className="absolute inset-0 bg-black/50 z-[1]"></div>
 
       <Header />
 

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
 export function Hero() {
@@ -81,12 +82,14 @@ export function Hero() {
           }}
         >
           <div className="relative w-full h-full scale-[1.02]">
-            <img
+            <Image
               src="/media/pic_1.jpg"
-              alt=""
-              fetchPriority="high"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ backfaceVisibility: 'hidden' }}
+              alt="Monastery Background"
+              fill
+              priority
+              quality={95}
+              className="object-cover"
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-black/60" />
           </div>
@@ -125,10 +128,14 @@ export function Hero() {
                 willChange: 'transform'
               }}
             >
-              <img
+              <Image
                 src="/media/pic_1.jpg"
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover"
+                alt="Monastery Detail"
+                fill
+                priority
+                quality={95}
+                className="object-cover"
+                sizes="35vw"
               />
             </div>
           </div>
@@ -149,7 +156,7 @@ export function Hero() {
             }}
           >
             <h1 className="font-montserrat font-light uppercase tracking-[0.1em] leading-tight text-white mb-6">
-              {titleLines.map((line, i) => (
+              {titleLines.map((line: string, i: number) => (
                 <span
                   key={i}
                   className={`block ${i === 0
