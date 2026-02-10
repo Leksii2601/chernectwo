@@ -41,6 +41,7 @@ export const LegalSettings: GlobalConfig = {
                     label: 'Код ЄДРПОУ',
                     type: 'text',
                     required: true,
+                    defaultValue: '00000000',
                 },
                 {
                     name: 'legalAddress',
@@ -64,6 +65,7 @@ export const LegalSettings: GlobalConfig = {
                     label: 'Email для юридичних запитів',
                     type: 'email',
                     required: true,
+                    defaultValue: 'info@zhydychyn-monastery.com',
                 },
             ],
         },
@@ -121,6 +123,7 @@ export const LegalSettings: GlobalConfig = {
             name: 'lastUpdatedDate',
             label: '📅 Дата останнього оновлення (для всіх документів)',
             type: 'date',
+            defaultValue: () => new Date().toISOString(),
             required: true,
         },
     ],
