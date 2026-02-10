@@ -7,6 +7,18 @@ const defaultLocale = 'ua';
 export function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
 
+    // Check if path is localized admin -> redirect to /admin
+    // This allows users to access /admin even if they accidentally go to /ua/admin
+    const isLocalizedAdmin = locales.some(
+        (locale) => pathname === `/${locale}/admin` || pathname.startsWith(`/${locale}/admin/`)
+    );
+
+    if (isLocalizedAdmin) {
+        const newUrl = new URL('/admin', request.url);
+        newUrl.search = request.nextUrl.search;
+        return NextResponse.redirect(newUrl);
+    }
+
     // Skip paths that should not be localized
     // We can also double check here although matcher handles most
     if (
