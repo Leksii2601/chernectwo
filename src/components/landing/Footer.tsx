@@ -45,7 +45,7 @@ export function Footer({ isLoading }: FooterProps) {
             <div className="mb-8 lg:mb-0">
               <Link href={langPrefix} className="inline-block relative w-80 md:w-[250px] aspect-[1] hover:opacity-80 transition-opacity">
                 <Image
-                  src="/media/logos/white_logo.avif"
+                  src="/media/logo.avif"
                   alt="St. Nicholas Zhydychyn Monastery"
                   fill
                   className="object-contain object-left"

@@ -46,8 +46,22 @@ interface LegalPageContentProps {
     hideHeaderFooter?: boolean;
 }
 
-function replacePlaceholders(text: string, settings: LegalSettings, language: string): string {
+function replacePlaceholders(text: string, settings: LegalSettings, language: string, specificDate?: string): string {
     if (!text) return '';
+
+    // Use specific document date if provided, otherwise global setting
+    let dateStr = language === 'UA' ? settings.lastUpdatedDate : settings.lastUpdatedDateEN;
+    
+    if (specificDate) {
+        // Format specific date
+        // Note: The specificDate comes in ISO format from updatedAt 
+        dateStr = new Date(specificDate).toLocaleDateString(language === 'UA' ? 'uk-UA' : 'en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+    }
+
     return text
         .replace(/\{\{LEGAL_ENTITY_NAME\}\}/g, settings.organization.legalEntityName)
         .replace(/\{\{EDRPOU_CODE\}\}/g, settings.organization.edrpouCode)
@@ -59,7 +73,7 @@ function replacePlaceholders(text: string, settings: LegalSettings, language: st
         .replace(/\{\{ANALYTICS_SERVICES\}\}/g, settings.providers.analyticsServices)
         .replace(/\{\{MAX_REFUND_DAYS\}\}/g, String(settings.refund.maxRefundDays))
         .replace(/\{\{REFUND_PROCESSING_DAYS\}\}/g, String(settings.refund.refundProcessingDays))
-        .replace(/\{\{DATE\}\}/g, language === 'UA' ? settings.lastUpdatedDate : settings.lastUpdatedDateEN);
+        .replace(/\{\{DATE\}\}/g, dateStr);
 }
 
 export function LegalPageContent({
@@ -80,13 +94,14 @@ export function LegalPageContent({
             .catch(err => console.error('Failed to load legal settings:', err));
     }, []);
 
-    const processText = (text: string): string => {
-        if (!settings) return text;
-        return replacePlaceholders(text, settings, language);
-    };
-
     // Determine which content to use: Payload CMS or Default (Translations)
     const cmsPageData = settings ? settings[pageSlug] : null;
+
+    const processText = (text: string): string => {
+        if (!settings) return text;
+        const specificDate = cmsPageData?.updatedAt;
+        return replacePlaceholders(text, settings, language, specificDate);
+    };
 
     // Helper to get sections from any of the possible names
     const getCmsSections = (data: any) => {

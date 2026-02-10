@@ -43,6 +43,7 @@ export async function GET() {
                 subtitleEN: doc.subtitleEN,
                 sectionsUA: doc.sectionsUA,
                 sectionsEN: doc.sectionsEN,
+                updatedAt: doc.updatedAt,
             };
         });
 
