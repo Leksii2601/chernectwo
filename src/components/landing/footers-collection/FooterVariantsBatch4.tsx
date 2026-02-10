@@ -18,7 +18,7 @@ export function FooterVariant6() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
                     <div className="space-y-8">
                         <div className="relative w-20 h-20">
-                            <Image src="/media/logo.png" alt="Logo" fill className="object-contain grayscale" />
+                            <Image src="/media/logo.avif" alt="Logo" fill className="object-contain grayscale" />
                         </div>
                         <h4 className="text-xl font-bold font-montserrat tracking-wide">Жидичинський Свято-Миколаївський монастир</h4>
                         <p className="text-gray-500 text-sm leading-relaxed">
@@ -96,7 +96,7 @@ export function FooterVariant7() {
                 <div className="flex flex-col items-center space-y-10">
                     <div className="relative w-40 h-40 group">
                         <div className="absolute inset-0 bg-amber-600/20 rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                        <Image src="/media/logo.png" alt="Logo" fill className="object-contain relative z-10 p-4" />
+                        <Image src="/media/logo.avif" alt="Logo" fill className="object-contain relative z-10 p-4" />
                     </div>
                     <div className="text-center space-y-4">
                         <h3 className="text-2xl font-black uppercase tracking-[0.4em] bg-gradient-to-b from-white to-gray-600 bg-clip-text text-transparent">ЖИДИЧИН</h3>
@@ -135,7 +135,7 @@ export function FooterVariant8() {
                 <div className="flex flex-col lg:flex-row justify-between items-start gap-20">
                     <div className="lg:w-1/2 space-y-12">
                         <Link href="#" className="inline-block relative w-32 h-32">
-                            <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
+                            <Image src="/media/logo.avif" alt="Logo" fill className="object-contain" />
                         </Link>
                         <h3 className="text-5xl md:text-6xl font-black tracking-tight leading-none uppercase">
                             {language === 'UA' ? 'Древній Жидичин чекає на вас' : 'Ancient Zhydychyn awaits you'}
@@ -185,7 +185,7 @@ export function FooterVariant9() {
         <footer className="bg-[#050505] text-white py-20 px-6 border-t border-amber-600/20">
             <div className="max-w-md mx-auto text-center space-y-16">
                 <Link href="#" className="inline-block relative w-20 h-20 mx-auto">
-                    <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
+                    <Image src="/media/logo.avif" alt="Logo" fill className="object-contain" />
                 </Link>
                 <div className="space-y-10">
                     <nav className="flex flex-col gap-6 text-xl font-bold uppercase tracking-widest">

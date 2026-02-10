@@ -5,8 +5,15 @@ import Link from 'next/link';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
-export function FAQ() {
+import { Skeleton } from '@/components/ui/Skeleton';
+
+interface FAQProps {
+    isLoading?: boolean;
+}
+
+export function FAQ({ isLoading }: FAQProps) {
     const { t, language } = useLanguage();
+
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     const [isExpanded, setIsExpanded] = useState(false);
     const [formData, setFormData] = useState({ name: '', email: '', question: '' });
@@ -117,6 +124,25 @@ export function FAQ() {
             alert(t('faq.form_error'));
         }
     };
+
+    if (isLoading) {
+        return (
+            <div className="py-20 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div className="flex flex-col gap-6">
+                    <Skeleton className="h-10 w-48 mb-4 border-b-2" />
+                    <Skeleton className="h-6 w-full" />
+                    <Skeleton className="h-4 w-5/6" />
+                    <Skeleton className="h-4 w-full" />
+                </div>
+                <div className="flex flex-col gap-4">
+                    <Skeleton className="h-10 w-32 mb-8" />
+                    {[1, 2, 3, 4, 5].map((i) => (
+                        <Skeleton key={i} className="h-16 w-full" />
+                    ))}
+                </div>
+            </div>
+        );
+    }
 
     return (
         <section className="bg-white text-black py-16 lg:py-24">

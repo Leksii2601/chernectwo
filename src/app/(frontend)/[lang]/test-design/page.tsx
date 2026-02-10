@@ -41,7 +41,7 @@ export default function TestDesignPage() {
             <Header />
 
             {/* Preload hero image for maximum speed */}
-            <link rel="preload" href="/media/pic_1.jpg" as="image" fetchPriority="high" />
+            <link rel="preload" href="/media/pic_1.avif" as="image" fetchPriority="high" />
 
             {/* 2. THE MAIN WIPE (CURTAIN) - White layer that reveals everything */}
             <aside
@@ -84,7 +84,7 @@ export default function TestDesignPage() {
                                 <div className="ImageBack-sc-17f28ux-7 relative w-full h-full scale-[1.02]">
                                     {/* Using standard img for faster, hydration-free rendering and precision */}
                                     <img
-                                        src="/media/pic_1.jpg"
+                                        src="/media/pic_1.avif"
                                         alt=""
                                         fetchPriority="high"
                                         loading="eager"
@@ -127,7 +127,7 @@ export default function TestDesignPage() {
                                         }}
                                     >
                                         <img
-                                            src="/media/pic_1.jpg"
+                                            src="/media/pic_1.avif"
                                             alt=""
                                             fetchPriority="high"
                                             loading="eager"
@@ -204,7 +204,7 @@ export default function TestDesignPage() {
                                 </div>
                                 <div className="relative aspect-[4/3] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
                                     <Image
-                                        src="/media/monastery-church.jpg"
+                                        src="/media/monastery-church.avif"
                                         alt="Alt"
                                         fill
                                         className="object-cover"
@@ -217,9 +217,9 @@ export default function TestDesignPage() {
                         <section className="py-32 px-10 md:px-20 lg:px-32 bg-black border-y border-zinc-900">
                             <div className="grid md:grid-cols-3 gap-8">
                                 {[
-                                    { title: 'Богослужіння', desc: 'Приєднуйтесь до щоденної спільної молитви та літургії.', img: '/media/history.jpg' },
-                                    { title: 'Паломництво', desc: 'Відчуйте благодать святого місця під час духовних поїздок.', img: '/media/church-complex.jpg' },
-                                    { title: 'Допомога', desc: 'Ваша підтримка допомагає відновлювати святиню.', img: '/media/monastery-church.jpg' },
+                                    { title: 'Богослужіння', desc: 'Приєднуйтесь до щоденної спільної молитви та літургії.', img: '/media/history.avif' },
+                                    { title: 'Паломництво', desc: 'Відчуйте благодать святого місця під час духовних поїздок.', img: '/media/church-complex.avif' },
+                                    { title: 'Допомога', desc: 'Ваша підтримка допомагає відновлювати святиню.', img: '/media/monastery-church.avif' },
                                 ].map((item, i) => (
                                     <div key={i} className="group cursor-pointer">
                                         <div className="relative aspect-square overflow-hidden mb-6">

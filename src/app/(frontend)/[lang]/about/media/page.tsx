@@ -42,20 +42,20 @@ function MediaPageContent() {
     const [activeTab, setActiveTab] = useState<'gallery' | 'video' | 'live'>(initialTab);
 
     const MOCK_GALLERY_IMAGES = [
-        { src: '/media/history.jpg', title: t('media.mock_history') },
-        { src: '/media/life.jpg', title: t('media.mock_life') },
-        { src: '/media/piligrims.jpg', title: t('media.mock_pilgrims') },
-        { src: '/media/donate.jpg', title: t('media.mock_donate') },
-        { src: '/media/contacts.jpg', title: t('media.mock_arch') },
-        { src: '/media/donate.jpg', title: t('media.mock_social') },
-        { src: '/media/life.jpg', title: t('media.mock_service') },
-        { src: '/media/history.jpg', title: t('media.mock_archive') },
+        { src: '/media/history.avif', title: t('media.mock_history') },
+        { src: '/media/gallery.avif', title: t('media.mock_life') },
+        { src: '/media/piligrims.avif', title: t('media.mock_pilgrims') },
+        { src: '/media/donate.avif', title: t('media.mock_donate') },
+        { src: '/media/contacts.avif', title: t('media.mock_arch') },
+        { src: '/media/donate.avif', title: t('media.mock_social') },
+        { src: '/media/gallery.avif', title: t('media.mock_service') },
+        { src: '/media/history.avif', title: t('media.mock_archive') },
     ];
 
     const VIDEOS = [
-        { id: '1', title: t('media.video_1'), thumbnail: '/media/history.jpg', duration: '12:45' },
-        { id: '2', title: t('media.video_2'), thumbnail: '/media/life.jpg', duration: '45:20' },
-        { id: '3', title: t('media.video_3'), thumbnail: '/media/piligrims.jpg', duration: '15:10' },
+        { id: '1', title: t('media.video_1'), thumbnail: '/media/history.avif', duration: '12:45' },
+        { id: '2', title: t('media.video_2'), thumbnail: '/media/gallery.avif', duration: '45:20' },
+        { id: '3', title: t('media.video_3'), thumbnail: '/media/piligrims.avif', duration: '15:10' },
     ];
 
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
@@ -70,8 +70,8 @@ function MediaPageContent() {
     const [videoPage, setVideoPage] = useState(1);
     const VIDEOS_PER_PAGE = 9;
 
-    // State for Video Modal (Recent Videos)
     const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
+    const [isLoadingMedia, setIsLoadingMedia] = useState(true);
 
     // State for Live Tab Player
     // null = default state (show live if live, or offline message)
@@ -79,6 +79,7 @@ function MediaPageContent() {
     const [activeStreamId, setActiveStreamId] = useState<string | null>(null);
 
     useEffect(() => {
+        setIsLoadingMedia(true);
         // Fetch Cached Data (Videos + Streams)
         fetch('/api/youtube')
             .then(res => res.json())
@@ -97,7 +98,8 @@ function MediaPageContent() {
                     setFetchedChannelId(data.channelId);
                 }
             })
-            .catch(err => console.error('Failed to fetch media', err));
+            .catch(err => console.error('Failed to fetch media', err))
+            .finally(() => setIsLoadingMedia(false));
     }, []);
 
     // Handle ESC key to close lightboxes & Lock Body Scroll
@@ -157,11 +159,11 @@ function MediaPageContent() {
     const channelEmbed = `https://www.youtube.com/embed/live_stream?channel=${effectiveChannelId}`;
 
     return (
-        <main className="min-h-screen bg-stone-50">
+        <main className="min-h-screen bg-stone-50 animate-fade-in-fast">
             <PageHeader
                 title={t('explore.media')}
                 subtitle={t('media.subtitle')}
-                backgroundImage="/media/gallery.jpg"
+                backgroundImage="/media/gallery.avif"
             />
 
             <div className="max-w-[1200px] mx-auto px-4 py-12 lg:py-24">
@@ -244,42 +246,55 @@ function MediaPageContent() {
                 {/* 2. VIDEO GRID */}
                 {activeTab === 'video' && (
                     <div className="animate-fadeIn">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                            {currentVideos.map((video: VideoItem) => (
-                                <div
-                                    key={video.id}
-                                    onClick={() => setSelectedVideoId(video.id)}
-                                    className="bg-white overflow-hidden shadow-sm group cursor-pointer hover:bg-gray-50 transition-colors"
-                                >
-                                    <div className="relative h-56 bg-gray-200">
-                                        <Image
-                                            src={video.thumbnail}
-                                            alt={video.title}
-                                            fill
-                                            className="object-cover group-hover:opacity-90 transition-opacity"
-                                        />
-                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <div className="bg-black/50 rounded-full p-3">
-                                                <Play className="w-8 h-8 text-white fill-current" />
+                        {isLoadingMedia ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                                {[1, 2, 3, 4, 5, 6].map(i => (
+                                    <div key={i} className="bg-white/50 animate-pulse rounded-lg h-72"></div>
+                                ))}
+                            </div>
+                        ) : currentVideos.length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                                {currentVideos.map((video: VideoItem) => (
+                                    <div
+                                        key={video.id}
+                                        onClick={() => setSelectedVideoId(video.id)}
+                                        className="bg-white overflow-hidden shadow-sm group cursor-pointer hover:bg-gray-50 transition-colors"
+                                    >
+                                        <div className="relative h-56 bg-gray-200">
+                                            <Image
+                                                src={video.thumbnail}
+                                                alt={video.title}
+                                                fill
+                                                unoptimized
+                                                className="object-cover group-hover:opacity-90 transition-opacity"
+                                            />
+                                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <div className="bg-black/50 rounded-full p-3">
+                                                    <Play className="w-8 h-8 text-white fill-current" />
+                                                </div>
                                             </div>
                                         </div>
+                                        <div className="p-4">
+                                            <h3 className="font-bold text-lg text-gray-900 leading-tight mb-2 group-hover:text-red-800 transition-colors line-clamp-2">
+                                                {video.title}
+                                            </h3>
+                                            {video.publishedAt && (
+                                                <p className="text-gray-500 text-sm">
+                                                    {new Date(video.publishedAt).toLocaleDateString('uk-UA')}
+                                                </p>
+                                            )}
+                                        </div>
                                     </div>
-                                    <div className="p-4">
-                                        <h3 className="font-bold text-lg text-gray-900 leading-tight mb-2 group-hover:text-red-800 transition-colors line-clamp-2">
-                                            {video.title}
-                                        </h3>
-                                        {video.publishedAt && (
-                                            <p className="text-gray-500 text-sm">
-                                                {new Date(video.publishedAt).toLocaleDateString('uk-UA')}
-                                            </p>
-                                        )}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="text-center py-20 text-gray-500 italic">
+                                {t('media.no_videos')}
+                            </div>
+                        )}
 
                         {/* Pagination Controls */}
-                        {totalVideoPages > 1 && (
+                        {!isLoadingMedia && totalVideoPages > 1 && (
                             <div className="flex justify-center items-center gap-4 pb-8">
                                 <button
                                     onClick={() => setVideoPage(p => Math.max(1, p - 1))}
@@ -391,7 +406,13 @@ function MediaPageContent() {
                                     </h3>
                                 </div>
                                 <div className="flex-1 overflow-y-auto p-2 space-y-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-                                    {fetchedStreams.length > 0 ? fetchedStreams.map((video: VideoItem) => (
+                                    {isLoadingMedia ? (
+                                        <div className="space-y-3 p-2">
+                                            {[1, 2, 3, 4].map(i => (
+                                                <div key={i} className="flex gap-3 bg-white/50 animate-pulse h-20 rounded"></div>
+                                            ))}
+                                        </div>
+                                    ) : fetchedStreams.length > 0 ? fetchedStreams.map((video: VideoItem) => (
                                         <div
                                             key={video.id}
                                             onClick={() => {
@@ -412,6 +433,7 @@ function MediaPageContent() {
                                                     src={video.thumbnail}
                                                     alt={video.title}
                                                     fill
+                                                    unoptimized
                                                     className="object-cover"
                                                 />
                                                 {activeStreamId === video.id && (
@@ -432,8 +454,8 @@ function MediaPageContent() {
                                             </div>
                                         </div>
                                     )) : (
-                                        <div className="p-8 text-center text-gray-400 text-sm">
-                                            {t('media.loading_archive')}
+                                        <div className="p-8 text-center text-gray-400 text-sm italic">
+                                            {t('media.no_archive')}
                                         </div>
                                     )}
                                 </div>

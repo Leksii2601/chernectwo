@@ -19,11 +19,13 @@ interface NewsSectionProps {
   searchResults?: NewsItem[];
   isSearching?: boolean;
   title?: string;
+  isLoading?: boolean;
 }
 
 import { useLanguage } from '@/context/LanguageContext';
+import { NewsSectionSkeleton } from './LandingSkeleton';
 
-export function NewsSection({ news, showSearch = false, searchResults = [], isSearching = false, title }: NewsSectionProps) {
+export function NewsSection({ news, showSearch = false, searchResults = [], isSearching = false, title, isLoading, showTitle = false }: NewsSectionProps & { showTitle?: boolean }) {
   const { t } = useLanguage();
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
 
@@ -43,6 +45,8 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
     return () => clearInterval(interval);
   }, [hasNews, news?.length, isSearching]);
 
+  if (isLoading) return <NewsSectionSkeleton />;
+
   // If no news, don't crash, maybe show empty state or hide
   if (!hasNews) return null;
 
@@ -54,6 +58,11 @@ export function NewsSection({ news, showSearch = false, searchResults = [], isSe
   return (
     <section id="news-section" className="bg-gray-50 font-montserrat text-gray-900 pb-12 overflow-hidden">
       <div className="max-w-[1920px] mx-auto p-4 md:p-6 lg:px-[80px]">
+        {showTitle && (
+          <h2 className="font-montserrat font-bold text-3xl md:text-5xl uppercase tracking-widest text-center mb-8 md:mb-12 text-gray-900 animate-fade-in-up">
+            {t('nav.news')}
+          </h2>
+        )}
         {/* Mobile Search Bar - Shows at top only on mobile */}
         {showSearch && (
           <div className="lg:hidden mb-6">

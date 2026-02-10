@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import { Plus, ChevronDown, Check } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -35,6 +36,11 @@ interface PrayerFormProps {
     selectedCurrency: CurrencyType;
     setSelectedCurrency: (currency: CurrencyType) => void;
     showMinAmountError?: boolean;
+    agreedToTerms: boolean;
+    setAgreedToTerms: (val: boolean) => void;
+    children?: React.ReactNode; // For mobile note insertion
+    onSubmit: () => void;
+    isSubmitting: boolean;
 }
 
 export const PrayerForm: React.FC<PrayerFormProps> = ({
@@ -59,9 +65,14 @@ export const PrayerForm: React.FC<PrayerFormProps> = ({
     setDonationAmount,
     selectedCurrency,
     setSelectedCurrency,
-    showMinAmountError
+    showMinAmountError,
+    agreedToTerms,
+    setAgreedToTerms,
+    children,
+    onSubmit,
+    isSubmitting
 }) => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const HEALTH_RED = "#E31B1B";
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
@@ -109,7 +120,7 @@ export const PrayerForm: React.FC<PrayerFormProps> = ({
                 }
             `}</style>
             <div className="space-y-6">
-                <p className="text-gray-500 font-light italic leading-relaxed text-sm md:text-base border-l-2 pl-4 py-1" style={{ borderColor: '#d2ae6d' }}>
+                <p className="text-gray-500 font-light italic leading-relaxed text-sm md:text-base border-l-2 pl-4 py-1 hidden sm:block" style={{ borderColor: '#d2ae6d' }}>
                     {t('prayer.visit_message')}
                 </p>
 
@@ -148,12 +159,17 @@ export const PrayerForm: React.FC<PrayerFormProps> = ({
                             {t('prayer.term_label')}
                             <div className="h-[1px] flex-1 bg-gray-100 hidden sm:block"></div>
                         </div>
-                        <div className="bg-gray-50/50 p-1 rounded-xl flex flex-col sm:flex-row gap-1 border border-gray-100">
+                        <div className="bg-gray-50/50 p-1 rounded-xl flex gap-1 border border-gray-100">
                             {services.map((s) => (
                                 <button
                                     key={s.id}
                                     onClick={() => setSelectedService(s)}
-                                    className={`flex-1 py-3 px-4 rounded-lg font-bold uppercase text-[10px] tracking-widest transition-all duration-300 flex items-center justify-center ${selectedService.id === s.id ? 'bg-white text-gray-900 shadow-sm ring-1 ring-gray-100' : 'text-gray-400 hover:text-gray-600'}`}
+                                    className="flex-1 py-3 px-2 sm:px-4 rounded-lg font-bold uppercase text-[9px] sm:text-[10px] tracking-widest transition-all duration-500 flex items-center justify-center text-center"
+                                    style={{
+                                        backgroundColor: selectedService.id === s.id ? '#d2ae6d' : 'transparent', // Amber-600
+                                        color: selectedService.id === s.id ? 'white' : '#9CA3AF',
+                                        boxShadow: selectedService.id === s.id ? '0 4px 12px rgba(217, 119, 6, 0.2)' : 'none'
+                                    }}
                                 >
                                     {t(s.nameKey)}
                                 </button>
@@ -162,7 +178,12 @@ export const PrayerForm: React.FC<PrayerFormProps> = ({
                     </div>
                 </div>
 
-                <div className="space-y-3 pt-2">
+                {/* Mobile Note Insert */}
+                <div className="block lg:hidden mt-8">
+                    {children}
+                </div>
+
+                <div className="space-y-3 pt-2 hidden sm:block">
                     <div className="flex items-center justify-between">
                         <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">{t('prayer.names_label')}</span>
                         <span className={`text-[10px] font-bold tracking-widest ${namesLength >= maxNames ? 'text-red-500' : 'text-amber-600'}`}>
@@ -209,7 +230,7 @@ export const PrayerForm: React.FC<PrayerFormProps> = ({
                     </div>
 
                     <div className="space-y-3">
-                        <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">{t('prayer.total_amount')}</span>
+                        <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">{t('prayer.donation_amount')}</span>
 
                         {/* Unified Input and Dropdown */}
                         <div className={`
@@ -273,11 +294,62 @@ export const PrayerForm: React.FC<PrayerFormProps> = ({
                     </div>
                 </div>
 
+                {/* Terms Checkbox */}
+                <div className="flex items-start gap-3 pt-4 group">
+                    <div
+                        onClick={() => setAgreedToTerms(!agreedToTerms)}
+                        className={`w-5 h-5 rounded border flex-shrink-0 flex items-center justify-center transition-all cursor-pointer ${agreedToTerms ? 'bg-amber-600 border-amber-600' : 'bg-white border-gray-300 group-hover:border-amber-500'}`}
+                    >
+                        {agreedToTerms && <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />}
+                    </div>
+                    <p className="text-[10px] sm:text-[11px] text-gray-500 font-medium leading-relaxed select-none">
+                        {language === 'UA' ? (
+                            <>
+                                Я погоджуюсь із{' '}
+                                <Link href={`/${language.toLowerCase()}/legal`} className="text-amber-600 hover:text-amber-700 underline">
+                                    правилами та умовами надання послуг
+                                </Link>
+                                {' '}і даю згоду на обробку{' '}
+                                <Link href={`/${language.toLowerCase()}/legal`} className="text-amber-600 hover:text-amber-700 underline">
+                                    персональних даних
+                                </Link>
+                            </>
+                        ) : (
+                            <>
+                                I agree to the{' '}
+                                <Link href={`/${language.toLowerCase()}/legal`} className="text-amber-600 hover:text-amber-700 underline">
+                                    terms and conditions
+                                </Link>
+                                {' '}and consent to the processing of{' '}
+                                <Link href={`/${language.toLowerCase()}/legal`} className="text-amber-600 hover:text-amber-700 underline">
+                                    personal data
+                                </Link>
+                            </>
+                        )}
+                    </p>
+                </div>
+
                 <div className="p-4 bg-amber-50/50 rounded-xl border border-amber-100 flex flex-col items-center gap-2 text-center mt-4">
                     <span className="text-amber-700 text-[10px] font-bold uppercase tracking-wider opacity-60">{t('prayer.total_amount')}</span>
                     <p className="text-amber-900 text-[11px] font-bold uppercase tracking-widest px-4">
                         {t('prayer.donation_message')}
                     </p>
+                </div>
+
+                {/* Submit Button */}
+                <div className="pt-4">
+                    <button
+                        onClick={onSubmit}
+                        disabled={namesLength === 0 || isSubmitting || !agreedToTerms}
+                        className="w-full bg-black text-white h-12 lg:h-14 rounded-xl font-bold text-[10px] lg:text-xs uppercase tracking-[0.4em] hover:bg-amber-600 disabled:bg-gray-100 disabled:text-gray-300 transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-3"
+                    >
+                        {isSubmitting ? (
+                            <>
+                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                {t('prayer.processing')}
+                            </>
+                        ) : (t('prayer.submit'))}
+                    </button>
                 </div>
             </div>
         </div>

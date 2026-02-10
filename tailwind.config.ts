@@ -28,6 +28,8 @@ const config: Config = {
         'fade-in': 'fadeIn 1s ease-in-out',
         'cross-fade': 'crossFade 10s infinite',
         'fadeInScale': 'fadeInScale 0.3s ease-out forwards',
+        'shimmer': 'shimmer 2s infinite',
+        'fade-in-fast': 'fadeIn 0.5s ease-out forwards',
       },
       keyframes: {
         fadeIn: {
@@ -41,6 +43,9 @@ const config: Config = {
         flowDown: {
           '0%': { transform: 'scaleY(0)', opacity: '0.5' },
           '100%': { transform: 'scaleY(1)', opacity: '1' },
+        },
+        shimmer: {
+          '100%': { transform: 'translateX(100%)' },
         },
       }
     },

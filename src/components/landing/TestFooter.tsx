@@ -38,7 +38,7 @@ export function TestFooter() {
                     <div className="lg:col-span-2 space-y-8">
                         <Link href={langPrefix} className="inline-block relative w-64 md:w-80 aspect-[3/1] hover:opacity-80 transition-all duration-500">
                             <Image
-                                src="/media/text-logo.png"
+                                src="/media/text-logo.avif"
                                 alt="Zhydychyn Monastery"
                                 fill
                                 className="object-contain object-left filter brightness-110"

@@ -377,8 +377,8 @@ export const SketeInfoSection = () => {
                 '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_2.avif',
                 '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_3.avif',
                 '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_4.avif',
-                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_5.jpg',
-                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_6.png'
+                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_5.avif',
+                '/media/sketes/sviatodukhivskyiskut/sviatodukhivskyi_6.avif'
             ],
             overviewContent: (
                 <div className="space-y-4 font-sans leading-relaxed text-gray-700">
@@ -401,11 +401,11 @@ export const SketeInfoSection = () => {
                 '/media/sketes/petropavlivskyiskut/petropavlivskyi_2.avif',
                 '/media/sketes/petropavlivskyiskut/petropavlivskyi_3.avif',
                 '/media/sketes/petropavlivskyiskut/petropavlivskyi_4.avif',
-                '/media/sketes/petropavlivskyiskut/petropavlivskyi_5.jpg',
-                '/media/sketes/petropavlivskyiskut/petropavlivskyi_6.jpg',
-                '/media/sketes/petropavlivskyiskut/petropavlivskyi_7.jpg',
-                '/media/sketes/petropavlivskyiskut/petropavlivskyi_8.jpg',
-                '/media/sketes/petropavlivskyiskut/petropavlivskyi_9.jpg'
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_5.avif',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_6.avif',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_7.avif',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_8.avif',
+                '/media/sketes/petropavlivskyiskut/petropavlivskyi_9.avif'
             ],
             overviewContent: (
                 <div className="space-y-4 font-sans leading-relaxed text-gray-700">

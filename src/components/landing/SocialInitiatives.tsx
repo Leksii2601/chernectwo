@@ -5,15 +5,23 @@ import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { CircleArrowButton } from '@/components/ui/CircleArrowButton';
 
-export function SocialInitiatives() {
+import { SocialInitiativesSkeleton } from './LandingSkeleton';
+
+interface SocialInitiativesProps {
+  isLoading?: boolean;
+}
+
+export function SocialInitiatives({ isLoading }: SocialInitiativesProps) {
   const { t, language } = useLanguage();
+
+  if (isLoading) return <SocialInitiativesSkeleton />;
 
   return (
     <section
       id="social-initiatives"
       className="relative w-full min-h-[70vh] md:min-h-[600px] flex items-center justify-center bg-fixed bg-center bg-cover overflow-hidden"
       style={{
-        backgroundImage: 'url(/media/social-initiatives.jpg)',
+        backgroundImage: 'url(/media/social-initiatives.avif)',
         backgroundAttachment: 'fixed', // Parallax effect
         backgroundPosition: 'center',
         backgroundSize: 'cover'

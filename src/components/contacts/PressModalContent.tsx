@@ -109,7 +109,7 @@ export const PressModalContent: React.FC<PressModalContentProps> = ({
                                         onClick={() => setFullscreenImage(logo.key)}
                                     >
                                         <Image
-                                            src={`/media/logos/${logo.key}.png`}
+                                            src={`/media/logos/${logo.key}.avif`}
                                             alt={logo.name_en}
                                             width={200}
                                             height={200}

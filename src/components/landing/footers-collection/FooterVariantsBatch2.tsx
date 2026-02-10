@@ -21,7 +21,7 @@ export function FooterVariant2() {
                 {/* Top Logo */}
                 <Link href={langPrefix} className="mb-16 hover:opacity-70 transition-opacity">
                     <div className="relative w-24 h-24 mb-6 mx-auto">
-                        <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
+                        <Image src="/media/logo.avif" alt="Logo" fill className="object-contain" />
                     </div>
                     <div className="text-center font-montserrat text-lg tracking-[0.5em] uppercase font-light">
                         Жидичин
@@ -83,7 +83,7 @@ export function FooterVariant3() {
                 {/* Left Section: Branding & Socials */}
                 <div className="p-10 lg:p-20 space-y-16">
                     <Link href={langPrefix} className="inline-block relative w-32 h-32">
-                        <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
+                        <Image src="/media/logo.avif" alt="Logo" fill className="object-contain" />
                     </Link>
                     <div className="space-y-6">
                         <h3 className="text-4xl md:text-5xl font-black tracking-tighter leading-none">

@@ -78,19 +78,18 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t1_title'),
       description: t('complex.t1_desc'),
-      previewImage: '/media/church-complex/temples/mykolaivskyi/hero.jpg',
+      previewImage: '/media/church-complex/temples/mykolaivskyi/hero.avif',
       galleryImages: [
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_1.jpg',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_2.jpg',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_3.jpg',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_4.jpg',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_5.jpg',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_6.jpg',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_7.jpg',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_8.jpg',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_9.png',
-        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_10.jpg'
-
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_1.avif',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_2.avif',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_3.avif',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_4.avif',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_5.avif',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_6.avif',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_7.avif',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_8.avif',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_9.avif',
+        '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_10.avif'
       ],
       fullDescription: t('complex.t1_full_desc')
     },
@@ -99,13 +98,13 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t4_title'),
       description: t('complex.t4_desc'),
-      previewImage: '/media/church-complex/temples/sviatoshynskyi/hero.jpg',
+      previewImage: '/media/church-complex/temples/sviatoshynskyi/hero.avif',
       galleryImages: [
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_1.jpg',
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_2.jpg',
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_3.jpg',
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_4.png',
-        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.jpg'
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_1.avif',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_2.avif',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_3.avif',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_4.avif',
+        '/media/church-complex/temples/sviatoshynskyi/sviatoshynskyi_5.avif'
       ],
       fullDescription: t('complex.t4_full_desc')
     },
@@ -114,18 +113,18 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t3_title'),
       description: t('complex.t3_desc'),
-      previewImage: '/media/church-complex/temples/uspenskyi/hero.jpg',
+      previewImage: '/media/church-complex/temples/uspenskyi/hero.avif',
       galleryImages: [
-        '/media/church-complex/temples/uspenskyi/uspenskyi_1.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_2.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_3.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_4.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_5.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_6.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_7.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_8.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_9.jpg',
-        '/media/church-complex/temples/uspenskyi/uspenskyi_10.jpg'
+        '/media/church-complex/temples/uspenskyi/uspenskyi_1.avif',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_2.avif',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_3.avif',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_4.avif',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_5.avif',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_6.avif',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_7.avif',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_8.avif',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_9.avif',
+        '/media/church-complex/temples/uspenskyi/uspenskyi_10.avif'
       ],
       fullDescription: t('complex.t3_full_desc')
     },
@@ -134,15 +133,15 @@ export const ComplexLayout = () => {
       categoryId: 'temples',
       title: t('complex.t5_title'),
       description: t('complex.t5_desc'),
-      previewImage: '/media/church-complex/temples/voskresenskyi/hero.jpg',
+      previewImage: '/media/church-complex/temples/voskresenskyi/hero.avif',
       galleryImages: [
-        '/media/church-complex/temples/voskresenskyi/voskresenskyi_1.jpg',
-        '/media/church-complex/temples/voskresenskyi/voskresenskyi_2.jpg',
-        '/media/church-complex/temples/voskresenskyi/voskresenskyi_3.jpg',
-        '/media/church-complex/temples/voskresenskyi/voskresenskyi_4.jpg',
-        '/media/church-complex/temples/voskresenskyi/voskresenskyi_5.jpg',
-        '/media/church-complex/temples/voskresenskyi/voskresenskyi_6.jpg',
-        '/media/church-complex/temples/voskresenskyi/voskresenskyi_7.jpg'
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_1.avif',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_2.avif',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_3.avif',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_4.avif',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_5.avif',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_6.avif',
+        '/media/church-complex/temples/voskresenskyi/voskresenskyi_7.avif'
       ],
       fullDescription: t('complex.t5_full_desc')
     },
@@ -153,15 +152,15 @@ export const ComplexLayout = () => {
       categoryId: 'monuments',
       title: t('complex.m1_title'),
       description: t('complex.m1_desc'),
-      previewImage: '/media/church-complex/monuments/metropolitan-palace/hero.jpg',
+      previewImage: '/media/church-complex/monuments/metropolitan-palace/hero.avif',
       galleryImages: [
-        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_1.jpg',
-        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_2.jpg',
-        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_3.jpg',
-        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_4.jpg',
-        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_5.jpg',
-        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_6.jpg',
-        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_7.jpg'
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_1.avif',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_2.avif',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_3.avif',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_4.avif',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_5.avif',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_6.avif',
+        '/media/church-complex/monuments/metropolitan-palace/metropolitan-palace_7.avif'
       ],
       fullDescription: t('complex.m1_full_desc')
     },
@@ -170,16 +169,16 @@ export const ComplexLayout = () => {
       categoryId: 'monuments',
       title: t('complex.m2_title'),
       description: t('complex.m2_desc'),
-      previewImage: '/media/church-complex/monuments/great-bell-tower/hero.png',
+      previewImage: '/media/church-complex/monuments/great-bell-tower/hero.avif',
       galleryImages: [
-        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_1.jpg',
-        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_2.jpg',
-        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_3.jpg',
-        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_4.jpg',
-        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_5.jpg',
-        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_6.jpg',
-        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_7.jpg',
-        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_8.png'
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_1.avif',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_2.avif',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_3.avif',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_4.avif',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_5.avif',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_6.avif',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_7.avif',
+        '/media/church-complex/monuments/great-bell-tower/great-bell-tower_8.avif'
       ],
       fullDescription: t('complex.m2_full_desc')
     },
@@ -188,14 +187,14 @@ export const ComplexLayout = () => {
       categoryId: 'monuments',
       title: t('complex.m4_title'),
       description: t('complex.m4_desc'),
-      previewImage: '/media/church-complex/monuments/small-bell-tower/hero.jpg',
+      previewImage: '/media/church-complex/monuments/small-bell-tower/hero.avif',
       galleryImages: [
-        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_1.png',
-        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_2.jpg',
-        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_3.jpg',
-        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_4.jpg',
-        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_5.jpg',
-        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_6.jpg'
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_1.avif',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_2.avif',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_3.avif',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_4.avif',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_5.avif',
+        '/media/church-complex/monuments/small-bell-tower/small-bell-tower_6.avif'
       ],
       fullDescription: t('complex.m4_full_desc')
     },
@@ -205,17 +204,17 @@ export const ComplexLayout = () => {
       categoryId: 'parks',
       title: t('complex.p1_title'),
       description: t('complex.p1_desc'),
-      previewImage: '/media/church-complex/parks/free-people-square/hero.jpg',
+      previewImage: '/media/church-complex/parks/free-people-square/hero.avif',
       galleryImages: [
-        '/media/church-complex/parks/free-people-square/free-people-square_1.jpg',
-        '/media/church-complex/parks/free-people-square/free-people-square_2.png',
-        '/media/church-complex/parks/free-people-square/free-people-square_3.png',
-        '/media/church-complex/parks/free-people-square/free-people-square_4.jpg',
-        '/media/church-complex/parks/free-people-square/free-people-square_5.jpg',
-        '/media/church-complex/parks/free-people-square/free-people-square_6.jpg',
-        '/media/church-complex/parks/free-people-square/free-people-square_7.jpg',
-        '/media/church-complex/parks/free-people-square/free-people-square_8.jpg',
-        '/media/church-complex/parks/free-people-square/free-people-square_9.jpg',
+        '/media/church-complex/parks/free-people-square/free-people-square_1.avif',
+        '/media/church-complex/parks/free-people-square/free-people-square_2.avif',
+        '/media/church-complex/parks/free-people-square/free-people-square_3.avif',
+        '/media/church-complex/parks/free-people-square/free-people-square_4.avif',
+        '/media/church-complex/parks/free-people-square/free-people-square_5.avif',
+        '/media/church-complex/parks/free-people-square/free-people-square_6.avif',
+        '/media/church-complex/parks/free-people-square/free-people-square_7.avif',
+        '/media/church-complex/parks/free-people-square/free-people-square_8.avif',
+        '/media/church-complex/parks/free-people-square/free-people-square_9.avif',
 
       ],
       fullDescription: t('complex.p1_full_desc')
@@ -225,15 +224,15 @@ export const ComplexLayout = () => {
       categoryId: 'parks',
       title: t('complex.p2_title'),
       description: t('complex.p2_desc'),
-      previewImage: '/media/church-complex/parks/polycarp-sikorsky-square/hero.jpg',
+      previewImage: '/media/church-complex/parks/polycarp-sikorsky-square/hero.avif',
       galleryImages: [
-        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_1.jpg',
-        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_2.png',
-        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_3.jpg',
-        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_4.jpg',
-        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_5.jpg',
-        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_6.jpg',
-        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_7.jpg'
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_1.avif',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_2.avif',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_3.avif',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_4.avif',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_5.avif',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_6.avif',
+        '/media/church-complex/parks/polycarp-sikorsky-square/polycarp-sikorsky-square_7.avif'
 
       ],
       fullDescription: t('complex.p2_full_desc')
@@ -243,12 +242,12 @@ export const ComplexLayout = () => {
       categoryId: 'parks',
       title: t('complex.p4_title'),
       description: t('complex.p4_desc'),
-      previewImage: '/media/church-complex/parks/monastery-gardens/hero.png',
+      previewImage: '/media/church-complex/parks/monastery-gardens/hero.avif',
       galleryImages: [
-        '/media/church-complex/parks/monastery-gardens/monastery-gardens_1.png',
-        '/media/church-complex/parks/monastery-gardens/monastery-gardens_2.png',
-        '/media/church-complex/parks/monastery-gardens/hero.png',
-        '/media/church-complex/parks/monastery-gardens/monastery-gardens_3.png',
+        '/media/church-complex/parks/monastery-gardens/monastery-gardens_1.avif',
+        '/media/church-complex/parks/monastery-gardens/monastery-gardens_2.avif',
+        '/media/church-complex/parks/monastery-gardens/hero.avif',
+        '/media/church-complex/parks/monastery-gardens/monastery-gardens_3.avif',
       ],
       fullDescription: t('complex.p4_full_desc')
     },
@@ -257,14 +256,14 @@ export const ComplexLayout = () => {
       categoryId: 'parks',
       title: t('complex.p5_title'),
       description: t('complex.p5_desc'),
-      previewImage: '/media/church-complex/parks/soborna-square/hero.png',
+      previewImage: '/media/church-complex/parks/soborna-square/hero.avif',
       galleryImages: [
-        '/media/church-complex/parks/soborna-square/soborna-square_1.jpg',
-        '/media/church-complex/parks/soborna-square/soborna-square_2.png',
-        '/media/church-complex/parks/soborna-square/soborna-square_3.jpg',
-        '/media/church-complex/parks/soborna-square/soborna-square_4.jpg',
-        '/media/church-complex/parks/soborna-square/soborna-square_5.png',
-        '/media/church-complex/parks/soborna-square/soborna-square_6.jpg',
+        '/media/church-complex/parks/soborna-square/soborna-square_1.avif',
+        '/media/church-complex/parks/soborna-square/soborna-square_2.avif',
+        '/media/church-complex/parks/soborna-square/soborna-square_3.avif',
+        '/media/church-complex/parks/soborna-square/soborna-square_4.avif',
+        '/media/church-complex/parks/soborna-square/soborna-square_5.avif',
+        '/media/church-complex/parks/soborna-square/soborna-square_6.avif',
       ],
       fullDescription: t('complex.p5_full_desc')
     },
@@ -273,9 +272,9 @@ export const ComplexLayout = () => {
       categoryId: 'parks',
       title: t('complex.p3_title'),
       description: t('complex.p3_desc'),
-      previewImage: '/media/church-complex/parks/roman-skyra-square/roman-skyra-square_1.png',
+      previewImage: '/media/church-complex/parks/roman-skyra-square/roman-skyra-square_1.avif',
       galleryImages: [
-        '/media/church-complex/parks/roman-skyra-square/roman-skyra-square_1.png'
+        '/media/church-complex/parks/roman-skyra-square/roman-skyra-square_1.avif'
       ],
       fullDescription: t('complex.p3_full_desc')
     },
@@ -286,13 +285,13 @@ export const ComplexLayout = () => {
       categoryId: 'service',
       title: t('complex.e2_title'),
       description: t('complex.e2_desc'),
-      previewImage: '/media/church-complex/service/zhydychyn-center/hero.jpg',
+      previewImage: '/media/church-complex/service/zhydychyn-center/hero.avif',
       galleryImages: [
-        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_1.png',
-        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_2.png',
-        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_3.jpg',
-        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_4.jpg',
-        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_5.jpg'
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_1.avif',
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_2.avif',
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_3.avif',
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_4.avif',
+        '/media/church-complex/service/zhydychyn-center/zhydychyn-center_5.avif'
       ],
       fullDescription: t('complex.e2_full_desc')
     },
@@ -301,11 +300,11 @@ export const ComplexLayout = () => {
       categoryId: 'service',
       title: t('complex.e5_title'),
       description: t('complex.e5_desc'),
-      previewImage: '/media/church-complex/service/resilience_centre/hero.jpg',
+      previewImage: '/media/church-complex/service/resilience_centre/hero.avif',
       galleryImages: [
-        '/media/church-complex/service/resilience_centre/resilience_centre_1.jpg',
-        '/media/church-complex/service/resilience_centre/resilience_centre_2.jpg',
-        '/media/church-complex/service/resilience_centre/resilience_centre_3.jpg'
+        '/media/church-complex/service/resilience_centre/resilience_centre_1.avif',
+        '/media/church-complex/service/resilience_centre/resilience_centre_2.avif',
+        '/media/church-complex/service/resilience_centre/resilience_centre_3.avif'
       ],
       fullDescription: t('complex.e5_full_desc')
     },
@@ -314,14 +313,14 @@ export const ComplexLayout = () => {
       categoryId: 'service',
       title: t('complex.e4_title'),
       description: t('complex.e4_desc'),
-      previewImage: '/media/church-complex/service/play_ground/hero.jpg',
+      previewImage: '/media/church-complex/service/play_ground/hero.avif',
       galleryImages: [
-        '/media/church-complex/service/play_ground/play_ground_1.jpg',
-        '/media/church-complex/service/play_ground/play_ground_2.jpg',
-        '/media/church-complex/service/play_ground/play_ground_3.jpg',
-        '/media/church-complex/service/play_ground/play_ground_4.jpg',
-        '/media/church-complex/service/play_ground/play_ground_5.jpg',
-        '/media/church-complex/service/play_ground/play_ground_6.jpg'
+        '/media/church-complex/service/play_ground/play_ground_1.avif',
+        '/media/church-complex/service/play_ground/play_ground_2.avif',
+        '/media/church-complex/service/play_ground/play_ground_3.avif',
+        '/media/church-complex/service/play_ground/play_ground_4.avif',
+        '/media/church-complex/service/play_ground/play_ground_5.avif',
+        '/media/church-complex/service/play_ground/play_ground_6.avif'
       ],
       fullDescription: t('complex.e4_full_desc')
     },
@@ -330,9 +329,9 @@ export const ComplexLayout = () => {
       categoryId: 'service',
       title: t('complex.e6_title'),
       description: t('complex.e6_desc'),
-      previewImage: '/media/church-complex/service/shelter/hero.jpg',
+      previewImage: '/media/church-complex/service/shelter/hero.avif',
       galleryImages: [
-        '/media/church-complex/service/shelter/hero.jpg'
+        '/media/church-complex/service/shelter/hero.avif'
       ],
       fullDescription: t('complex.e6_full_desc')
     },
@@ -341,12 +340,12 @@ export const ComplexLayout = () => {
       categoryId: 'service',
       title: t('complex.e3_title'),
       description: t('complex.e3_desc'),
-      previewImage: '/media/church-complex/service/toilet/hero.jpg',
+      previewImage: '/media/church-complex/service/toilet/hero.avif',
       galleryImages: [
-        '/media/church-complex/service/toilet/toilet_1.jpg',
-        '/media/church-complex/service/toilet/toilet_2.jpg',
-        '/media/church-complex/service/toilet/toilet_3.jpg',
-        '/media/church-complex/service/toilet/toilet_4.png'
+        '/media/church-complex/service/toilet/toilet_1.avif',
+        '/media/church-complex/service/toilet/toilet_2.avif',
+        '/media/church-complex/service/toilet/toilet_3.avif',
+        '/media/church-complex/service/toilet/toilet_4.avif'
       ],
       fullDescription: t('complex.e3_full_desc')
     },
@@ -355,13 +354,13 @@ export const ComplexLayout = () => {
       categoryId: 'service',
       title: t('complex.e1_title'),
       description: t('complex.e1_desc'),
-      previewImage: '/media/church-complex/service/parking/hero.jpg',
+      previewImage: '/media/church-complex/service/parking/hero.avif',
       galleryImages: [
-        '/media/church-complex/service/parking/parking_1.jpg',
-        '/media/church-complex/service/parking/parking_2.jpg',
-        '/media/church-complex/service/parking/parking_3.jpg',
-        '/media/church-complex/service/parking/parking_4.jpg',
-        '/media/church-complex/service/parking/parking_5.jpg'
+        '/media/church-complex/service/parking/parking_1.avif',
+        '/media/church-complex/service/parking/parking_2.avif',
+        '/media/church-complex/service/parking/parking_3.avif',
+        '/media/church-complex/service/parking/parking_4.avif',
+        '/media/church-complex/service/parking/parking_5.avif'
       ],
       fullDescription: t('complex.e1_full_desc')
     },
@@ -372,14 +371,14 @@ export const ComplexLayout = () => {
     categoryId: 'economy',
     title: t('complex.economy_title'),
     description: t('complex.economy_desc'),
-    previewImage: '/media/church-complex/economy/hero.jpg',
+    previewImage: '/media/church-complex/economy/hero.avif',
     galleryImages: [
-      '/media/church-complex/economy/economy_1.jpg',
-      '/media/church-complex/economy/economy_2.jpg',
-      '/media/church-complex/economy/economy_3.jpg',
-      '/media/church-complex/economy/economy_4.jpg',
-      '/media/church-complex/economy/economy_5.jpg',
-      '/media/church-complex/economy/economy_6.jpg'
+      '/media/church-complex/economy/economy_1.avif',
+      '/media/church-complex/economy/economy_2.avif',
+      '/media/church-complex/economy/economy_3.avif',
+      '/media/church-complex/economy/economy_4.avif',
+      '/media/church-complex/economy/economy_5.avif',
+      '/media/church-complex/economy/economy_6.avif'
     ],
     fullDescription: t('complex.economy_full_desc')
   };
@@ -478,7 +477,7 @@ const ComplexObjectCard = ({ object }: { object: ComplexObject }) => {
   const parallaxRef = useRef<HTMLDivElement>(null);
 
   // Use the previewImage if provided, otherwise the first gallery image or placeholder
-  const coverImage = object.previewImage || (object.galleryImages.length > 0 ? object.galleryImages[0] : '/media/church-complex.jpg');
+  const coverImage = object.previewImage || (object.galleryImages.length > 0 ? object.galleryImages[0] : '/media/church-complex.avif');
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % object.galleryImages.length);

@@ -32,7 +32,7 @@ export function FooterVariant4() {
 
                         <div className="lg:col-span-1 space-y-8">
                             <div className="relative w-24 h-24">
-                                <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
+                                <Image src="/media/logo.avif" alt="Logo" fill className="object-contain" />
                             </div>
                             <div className="space-y-4">
                                 <h4 className="text-xl font-bold tracking-tight">Жидичинський Монастир</h4>

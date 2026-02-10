@@ -4,7 +4,13 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
-export function Hero() {
+import { HeroSkeleton } from './LandingSkeleton';
+
+interface HeroProps {
+  isLoading?: boolean;
+}
+
+export function Hero({ isLoading }: HeroProps) {
   const [mounted, setMounted] = useState(false);
   const [revealStage, setRevealStage] = useState(0);
   const [scrollY, setScrollY] = useState(0);
@@ -51,6 +57,8 @@ export function Hero() {
   // If hero title translation contains \n, we split it for better layout
   const titleLines = t('hero.title').split('\n');
 
+  if (isLoading) return <HeroSkeleton />;
+
   return (
     <div className={`relative w-full h-screen overflow-hidden bg-black ${revealStage < 4 ? 'intro-active' : ''}`}>
 
@@ -83,7 +91,7 @@ export function Hero() {
         >
           <div className="relative w-full h-full scale-[1.02]">
             <Image
-              src="/media/pic_1.jpg"
+              src="/media/pic_1.avif"
               alt="Monastery Background"
               fill
               priority
@@ -129,7 +137,7 @@ export function Hero() {
               }}
             >
               <Image
-                src="/media/pic_1.jpg"
+                src="/media/pic_1.avif"
                 alt="Monastery Detail"
                 fill
                 priority

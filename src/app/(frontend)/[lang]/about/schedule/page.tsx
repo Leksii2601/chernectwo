@@ -14,7 +14,7 @@ export default function SchedulePage() {
       <PageHeader
         title={t('explore.schedule')}
         subtitle={t('page.schedule_subtitle')}
-        backgroundImage="/media/schedule_hero.jpg"
+        backgroundImage="/media/schedule_hero.avif"
       />
       <div className="max-w-[1200px] mx-auto px-4 py-12">
         <p className="text-xl text-center text-gray-500">{t('generic.under_construction')}</p>

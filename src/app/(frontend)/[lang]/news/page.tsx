@@ -9,6 +9,27 @@ import { PageHeader } from '@/components/PageHeader';
 
 import { translations } from '@/data/translations';
 
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const isUa = lang === 'ua' || lang === 'UA';
+
+  return {
+    title: isUa ? 'Новини | Свято-Миколаївський Жидичинський монастир' : 'News | St. Nicholas Zhydychyn Monastery',
+    description: isUa
+      ? 'Останні новини та публікації Свято-Миколаївського Жидичинського монастиря.'
+      : 'Latest news and publications of the St. Nicholas Zhydychyn Monastery.',
+    openGraph: {
+      title: isUa ? 'Новини | Свято-Миколаївський Жидичинський монастир' : 'News | St. Nicholas Zhydychyn Monastery',
+      description: isUa
+        ? 'Будьте в курсі подій нашої обителі.'
+        : 'Stay updated with the events of our monastery.',
+      images: ['/media/news.avif'],
+    },
+  };
+}
+
 export default async function NewsPage(props: {
   params: Promise<{ lang: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -32,8 +53,8 @@ export default async function NewsPage(props: {
   }
 
   return (
-    <main className="min-h-screen bg-white">
-      <PageHeader title={t('nav.news')} subtitle={t('page.news_subtitle')} backgroundImage="/media/news.jpg" />
+    <main className="min-h-screen bg-white animate-fade-in-fast">
+      <PageHeader title={t('nav.news')} subtitle={t('page.news_subtitle')} backgroundImage="/media/news.avif" />
 
       {/* 
          Top Section: NewsSection.

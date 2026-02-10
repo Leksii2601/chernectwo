@@ -12,11 +12,11 @@ export default function SketesPage() {
     const { t } = useLanguage();
 
     return (
-        <main className="min-h-screen bg-black">
+        <main className="min-h-screen bg-black animate-fade-in-fast">
             <PageHeader
                 title={t('explore.sketes')}
                 subtitle={t('explore.sketes_subtitle')}
-                backgroundImage="/media/sketes.jpg"
+                backgroundImage="/media/sketes.avif"
                 className="!h-[100vh] !min-h-screen !justify-center !pb-0"
             />
 

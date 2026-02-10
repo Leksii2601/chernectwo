@@ -65,8 +65,8 @@ export const MissionaryProjects: CollectionConfig = {
         }
       ]
     },
-    {
-      name: 'reports',
+    /* {
+      name: 'reports_v2',
       type: 'array',
       label: 'Звіти за роки',
       fields: [
@@ -83,7 +83,7 @@ export const MissionaryProjects: CollectionConfig = {
           required: true,
         }
       ]
-    },
+    }, */
     {
       name: 'status',
       type: 'select',

@@ -23,7 +23,7 @@ const transportServices: ServiceItem[] = [
     id: 'public-transport',
     title: 'Громадський транспорт',
     subtitle: 'Маршрутне таксі',
-    image: '/media/public_transport.jpg',
+    image: '/media/public_transport.avif',
     fullTitle: 'Доїзд громадським транспортом',
     description: 'Завдяки близькості до Луцька (всього 7 км), дістатися до обителі громадським транспортом можна швидко та за доступною ціною.\n\nЗвідки вирушати?\nНайзручніше починати подорож від РЦ «Промінь» (зупинка «Центральна бібліотека для дітей» по вул. Стрілецькій).\n\nОсновні маршрути:\nДо монастиря курсують три регулярні приміські автобуси:\n№ 51 (Луцьк – Кульчин)\n№ 117 (Луцьк – Клепачів)\n№ 149 (Луцьк – Озерце)',
     details: []
@@ -32,7 +32,7 @@ const transportServices: ServiceItem[] = [
     id: 'car',
     title: 'Власним авто',
     subtitle: 'GPS навігація',
-    image: '/media/by_your_transport.jpg',
+    image: '/media/by_your_transport.avif',
     fullTitle: 'Доїзд власним автомобілем',
     description: 'Доїзд до монастиря на власному транспорті є максимально комфортним. Необхідна інформація:',
     details: [
@@ -47,7 +47,7 @@ const transportServices: ServiceItem[] = [
     id: 'social-bus',
     title: 'Соціальний автобус',
     subtitle: 'Недільні рейси',
-    image: '/media/social_transport.jpg',
+    image: '/media/social_transport.avif',
     fullTitle: 'Монастирський автобус',
     description: 'Жидичинський Свято-Миколаївський монастир організовує безкоштовний доїзд вірян на богослужіння у недільні та святкові дні. Наш соціальний автобус курсує за визначеним графіком, щоб забезпечити комфортну подорож до обителі та назад.\n\nВажливо: У будні дні довезення не здійснюється – просимо користуватися громадським транспортом (деталі у вкладці «Автобусом»).\n\nДля груп: Ми пропонуємо можливість трансферу з Луцька для організованих паломницьких груп за попереднім замовленням.\n\nКонтакти: +38 (067) 104 22 88',
     details: []
@@ -59,7 +59,7 @@ const excursionServices: ServiceItem[] = [
     id: 'excursion-overview',
     title: 'ОГЛЯДОВА',
     subtitle: '1-1.5 год',
-    image: '/media/history.jpg',
+    image: '/media/history.avif',
     fullTitle: 'Оглядова екскурсія',
     description: 'Коротка подорож історією тисячолітньої обителі. Ви дізнаєтесь про основні віхи становлення монастиря, відвідаєте головні храми та відчуєте спокій монастирської природи.',
     details: [
@@ -76,7 +76,7 @@ const excursionServices: ServiceItem[] = [
     id: 'excursion-basic',
     title: 'БАЗОВА',
     subtitle: '2.5 год',
-    image: '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_10.jpg',
+    image: '/media/church-complex/temples/mykolaivskyi/mykolaivskyi_10.avif',
     fullTitle: 'Базова екскурсія',
     description: 'Під час базової екскурсії ми розкриваємо існуючий та історичний контекст території обителі, відтворюючи картину життя давнього монастиря. Маршрут охоплює діючі храми, віддалені скити, територію стародавнього городища та парк короля Данила.',
     details: [
@@ -98,7 +98,7 @@ const excursionServices: ServiceItem[] = [
     id: 'excursion-full',
     title: 'ПОВНА',
     subtitle: '3.5-4 год',
-    image: '/media/excurison_full.jpg',
+    image: '/media/excurison_full.avif',
     fullTitle: 'Повна екскурсія',
     description: 'Цей маршрут пропонує цілісний погляд на духовне життя Древнього Жидичина, поєднуючи історію центрального монастирського комплексу з тишею віддалених молитовних місць. Особливістю подорожі є візит до Петро-Павлівського жіночого скита, що дозволяє глибше відчути сучасний ритм монастирського життя.',
     details: [
@@ -189,7 +189,7 @@ export function PilgrimServices() {
     <section className="bg-white pb-24">
 
       {/* Transport Section */}
-      <ParallaxHeader title={t('pilgrims.transport_title')} image="/media/pilgrim_info.jpg" />
+      <ParallaxHeader title={t('pilgrims.transport_title')} image="/media/pilgrim_info.avif" />
 
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[80px] my-16 md:my-24">
         <div className="text-center mb-10 md:mb-16">
@@ -203,7 +203,7 @@ export function PilgrimServices() {
       </div>
 
       {/* Excursion Section */}
-      <ParallaxHeader title={t('pilgrims.excursions_title')} image="/media/piligrim_excursion.jpg" />
+      <ParallaxHeader title={t('pilgrims.excursions_title')} image="/media/piligrim_excursion.avif" />
 
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[80px] my-16 md:my-24">
         <div className="text-center mb-10 md:mb-16">

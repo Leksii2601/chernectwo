@@ -23,8 +23,17 @@ const WhatsappIcon = ({ className }: { className?: string }) => (
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 
-export function Footer() {
+import { FooterSkeleton } from './LandingSkeleton';
+
+interface FooterProps {
+  isLoading?: boolean;
+}
+
+export function Footer({ isLoading }: FooterProps) {
   const { t, language } = useLanguage();
+
+  if (isLoading) return <FooterSkeleton />;
+
   const langPrefix = language.toLowerCase() === 'ua' ? '/ua' : '/en';
 
   return (
@@ -36,8 +45,8 @@ export function Footer() {
             <div className="mb-8 lg:mb-0">
               <Link href={langPrefix} className="inline-block relative w-80 md:w-[250px] aspect-[1] hover:opacity-80 transition-opacity">
                 <Image
-                  src="/media/logos/white_logo.png"
-                  alt="Zhydychyn Monastery"
+                  src="/media/logos/white_logo.avif"
+                  alt="St. Nicholas Zhydychyn Monastery"
                   fill
                   className="object-contain object-left"
                 />
@@ -154,11 +163,33 @@ export function Footer() {
 
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/10">
-          <p className="text-sm text-gray-500 order-2 md:order-1">
+          <p className="text-sm text-gray-500 order-3 md:order-1">
             {new Date().getFullYear()} {t('footer.copyright')}
           </p>
 
-          <div className="flex flex-wrap gap-4 order-1 md:order-2">
+          {/* Legal Links */}
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 order-1 md:order-2">
+            <Link
+              href={`${langPrefix}/legal?tab=privacy`}
+              className="text-sm text-gray-500 hover:text-amber-600 transition-colors"
+            >
+              {t('footer.privacy_policy')}
+            </Link>
+            <Link
+              href={`${langPrefix}/legal?tab=terms`}
+              className="text-sm text-gray-500 hover:text-amber-600 transition-colors"
+            >
+              {t('footer.terms_of_service')}
+            </Link>
+            <Link
+              href={`${langPrefix}/legal?tab=refund`}
+              className="text-sm text-gray-500 hover:text-amber-600 transition-colors"
+            >
+              {t('footer.refund_policy')}
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap gap-4 order-2 md:order-3">
             <a
               href="https://www.facebook.com/chernectvo.volyni"
               target="_blank"

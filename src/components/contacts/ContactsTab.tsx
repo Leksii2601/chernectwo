@@ -25,7 +25,7 @@ export const ContactsTab: React.FC<ContactsTabProps> = ({
     formError,
     setFormError
 }) => {
-    const { language } = useLanguage();
+    const { t, language } = useLanguage();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -60,6 +60,14 @@ export const ContactsTab: React.FC<ContactsTabProps> = ({
     return (
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 animate-in fade-in duration-500">
             <div className="space-y-8">
+                <div>
+                    <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">
+                        {language === 'UA' ? 'Адреса' : 'Address'}
+                    </h4>
+                    <p className="text-xl md:text-2xl font-bold text-gray-900 leading-tight tracking-tight whitespace-pre-line">
+                        {t('contacts.address_val')}
+                    </p>
+                </div>
                 <div>
                     <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">
                         {language === 'UA' ? 'Телефон' : 'Phone'}

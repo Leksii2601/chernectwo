@@ -75,6 +75,7 @@ export interface Config {
     'prayer-requests': PrayerRequest;
     'join-requests': JoinRequest;
     questions: Question;
+    'legal-documents': LegalDocument;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +91,7 @@ export interface Config {
     'prayer-requests': PrayerRequestsSelect<false> | PrayerRequestsSelect<true>;
     'join-requests': JoinRequestsSelect<false> | JoinRequestsSelect<true>;
     questions: QuestionsSelect<false> | QuestionsSelect<true>;
+    'legal-documents': LegalDocumentsSelect<false> | LegalDocumentsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -101,9 +103,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'live-stream': LiveStream;
+    'legal-settings': LegalSetting;
   };
   globalsSelect: {
     'live-stream': LiveStreamSelect<false> | LiveStreamSelect<true>;
+    'legal-settings': LegalSettingsSelect<false> | LegalSettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -272,13 +276,6 @@ export interface MissionaryProject {
         id?: string | null;
       }[]
     | null;
-  reports?:
-    | {
-        year: string;
-        file: string;
-        id?: string | null;
-      }[]
-    | null;
   status?: ('active' | 'completed') | null;
   socialLinks: {
     facebook: string;
@@ -359,6 +356,34 @@ export interface Question {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-documents".
+ */
+export interface LegalDocument {
+  id: number;
+  slug: string;
+  titleUA: string;
+  subtitleUA?: string | null;
+  sectionsUA?:
+    | {
+        title: string;
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  titleEN: string;
+  subtitleEN?: string | null;
+  sectionsEN?:
+    | {
+        title: string;
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -412,6 +437,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'questions';
         value: number | Question;
+      } | null)
+    | ({
+        relationTo: 'legal-documents';
+        value: number | LegalDocument;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -564,13 +593,6 @@ export interface MissionaryProjectsSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
-  reports?:
-    | T
-    | {
-        year?: T;
-        file?: T;
-        id?: T;
-      };
   status?: T;
   socialLinks?:
     | T
@@ -644,6 +666,33 @@ export interface QuestionsSelect<T extends boolean = true> {
   name?: T;
   email?: T;
   question?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-documents_select".
+ */
+export interface LegalDocumentsSelect<T extends boolean = true> {
+  slug?: T;
+  titleUA?: T;
+  subtitleUA?: T;
+  sectionsUA?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        id?: T;
+      };
+  titleEN?: T;
+  subtitleEN?: T;
+  sectionsEN?:
+    | T
+    | {
+        title?: T;
+        content?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -752,6 +801,47 @@ export interface LiveStream {
   createdAt?: string | null;
 }
 /**
+ * Налаштування для сторінок Політики конфіденційності, Умов використання та Політики повернення.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-settings".
+ */
+export interface LegalSetting {
+  id: number;
+  /**
+   * Ці дані використовуються як автоматичні заповнювачі {{LEGAL_ENTITY_NAME}}, {{EDRPOU_CODE}}, {{LEGAL_ADDRESS}}.
+   */
+  companyData: {
+    legalEntityName: string;
+    edrpouCode: string;
+    legalAddress: string;
+  };
+  /**
+   * Для заповнювача {{CONTACT_EMAIL}}.
+   */
+  contactDetails: {
+    contactEmail: string;
+  };
+  /**
+   * Для заповнювачів {{PAYMENT_PROVIDER}}, {{HOSTING_PROVIDER}}, {{ANALYTICS_SERVICES}}.
+   */
+  technicalProviders?: {
+    paymentProvider?: string | null;
+    hostingProvider?: string | null;
+    analyticsServices?: string | null;
+  };
+  /**
+   * Для заповнювачів {{MAX_REFUND_DAYS}}, {{REFUND_PROCESSING_DAYS}}.
+   */
+  refundParameters?: {
+    maxRefundDays?: number | null;
+    refundProcessingDays?: number | null;
+  };
+  lastUpdatedDate: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "live-stream_select".
  */
@@ -783,6 +873,41 @@ export interface LiveStreamSelect<T extends boolean = true> {
         latestLiveStatus?: T;
         lastUpdated?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-settings_select".
+ */
+export interface LegalSettingsSelect<T extends boolean = true> {
+  companyData?:
+    | T
+    | {
+        legalEntityName?: T;
+        edrpouCode?: T;
+        legalAddress?: T;
+      };
+  contactDetails?:
+    | T
+    | {
+        contactEmail?: T;
+      };
+  technicalProviders?:
+    | T
+    | {
+        paymentProvider?: T;
+        hostingProvider?: T;
+        analyticsServices?: T;
+      };
+  refundParameters?:
+    | T
+    | {
+        maxRefundDays?: T;
+        refundProcessingDays?: T;
+      };
+  lastUpdatedDate?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

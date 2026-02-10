@@ -6,8 +6,13 @@ import Link from 'next/link';
 import { useInView } from 'react-intersection-observer';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { Skeleton } from '@/components/ui/Skeleton';
 
-export function ExploreMore() {
+interface ExploreMoreProps {
+  isLoading?: boolean;
+}
+
+export function ExploreMore({ isLoading }: ExploreMoreProps) {
   const { t, language } = useLanguage();
   const langPrefix = `/${language.toLowerCase()}`;
 
@@ -15,53 +20,53 @@ export function ExploreMore() {
     {
       label: t('explore.history'),
       href: `${langPrefix}/about/history`,
-      image: '/media/explore-more-history.jpg',
+      image: '/media/explore-more-history.avif',
     },
     {
       label: t('explore.schedule'),
       href: '#calendar',
-      image: '/media/hero-4.jpg',
+      image: '/media/hero-4.avif',
     },
     {
       label: t('explore.architecture'),
       href: `${langPrefix}/about/complex`,
-      image: '/media/hero-1.jpg',
+      image: '/media/hero-1.avif',
     },
     {
       label: t('explore.sketes'),
       href: `${langPrefix}/about/sketes`,
-      image: '/media/explore-more-sketes.jpg',
+      image: '/media/explore-more-sketes.avif',
     },
 
     {
       label: t('explore.news'),
       href: `${langPrefix}/news`,
-      image: '/media/explore-more-news.jpg',
+      image: '/media/explore-more-news.avif',
     },
     {
       label: t('explore.media'),
       href: `${langPrefix}/about/media`,
-      image: '/media/explore-more-media.jpg',
+      image: '/media/explore-more-media.avif',
     },
     {
       label: t('explore.social'),
       href: `${langPrefix}/social-projects`,
-      image: '/media/explore-more-social-initiatives.jpeg',
+      image: '/media/explore-more-social-initiatives.avif',
     },
     {
       label: t('explore.pilgrims'),
       href: `${langPrefix}/pilgrims`,
-      image: '/media/explore-more-piligrim.jpg',
+      image: '/media/explore-more-piligrim.avif',
     },
     {
       label: t('explore.support'),
       href: `${langPrefix}/donate`,
-      image: '/media/donate.jpg',
+      image: '/media/donate.avif',
     },
     {
       label: t('explore.contacts'),
       href: `${langPrefix}/contacts`,
-      image: '/media/explore-more-contacts.jpg',
+      image: '/media/explore-more-contacts.avif',
     },
   ];
 
@@ -102,6 +107,19 @@ export function ExploreMore() {
       });
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="py-20 px-6 max-w-7xl mx-auto">
+        <Skeleton className="h-10 w-48 mb-12" />
+        <div className="flex gap-6 overflow-hidden">
+          {[1, 2, 3, 4].map((i) => (
+            <Skeleton key={i} className="w-[300px] h-[400px] flex-shrink-0 rounded-xl" />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section className="bg-white py-16 lg:py-24 group/section relative overflow-hidden">

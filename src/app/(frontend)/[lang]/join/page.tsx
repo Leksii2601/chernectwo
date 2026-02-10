@@ -41,7 +41,7 @@ export default function JoinPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white animate-fade-in-fast">
       <div className="pt-32 pb-16 px-4 max-w-3xl mx-auto relative">
         <Link
           href="/social-projects"

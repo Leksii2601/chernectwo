@@ -63,11 +63,21 @@ export const TimelineItem: React.FC<TimelineItemProps> = ({
         offset: ["start end", "end start"]
     });
 
+    const [isMobile, setIsMobile] = React.useState(false);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     // Parallax Effects:
     // Text moves slightly UP as you scroll down (Increased range)
-    const yText = useTransform(scrollYProgress, [0, 1], [70, -70]);
+    // On mobile, we passing 0 to disable the effect
+    const yText = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [70, -70]);
     // Image moves slightly DOWN (opposite) creates depth
-    const yImage = useTransform(scrollYProgress, [0, 1], [-70, 70]);
+    const yImage = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-70, 70]);
 
     // Decorative Background Shapes Logic
     const randomSizeBase = index % 5;

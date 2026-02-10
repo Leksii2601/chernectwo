@@ -23,7 +23,7 @@ export default function DonatePage() {
       <PageHeader
         title={t('donate.title')}
         subtitle={t('page.donate_subtitle')}
-        backgroundImage="/media/donate.jpg"
+        backgroundImage="/media/donate.avif"
         titleClassName="normal-case md:text-[5rem]"
       />
 

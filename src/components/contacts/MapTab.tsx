@@ -4,7 +4,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { copyToClipboard } from './utils';
 
 export const MapTab: React.FC = () => {
-    const { language } = useLanguage();
+    const { t, language } = useLanguage();
 
     return (
         <div className="animate-in fade-in duration-500">
@@ -22,10 +22,8 @@ export const MapTab: React.FC = () => {
                         <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-6">
                             {language === 'UA' ? 'Адреса' : 'Address'}
                         </h4>
-                        <p className="text-gray-900 font-bold text-lg leading-tight tracking-tight">
-                            45240 Волинська область,<br />
-                            Луцький р-н, с. Жидичин,<br />
-                            вул. Ковельська, 1
+                        <p className="text-gray-900 font-bold text-lg leading-tight tracking-tight whitespace-pre-line">
+                            {t('contacts.address_val')}
                         </p>
                     </div>
                     <div className="pt-8 border-t border-gray-100">

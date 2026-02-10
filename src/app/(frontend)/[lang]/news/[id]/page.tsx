@@ -12,6 +12,8 @@ import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
 
+import { parseUkrainianDate } from '@/utils/dateUtils';
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const newsItem = newsData.find((n) => n.id === id);
@@ -22,16 +24,29 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     };
   }
 
+  const images = newsItem.image ? [{ url: newsItem.image }] : undefined;
+
   return {
     title: newsItem.title,
     description: newsItem.shortDescription,
-    // openGraph: {
-    //   title: newsItem.title,
-    //   description: newsItem.shortDescription,
-    //   images: [newsItem.image],
-    // },
+    openGraph: {
+      title: newsItem.title,
+      description: newsItem.shortDescription,
+      type: 'article',
+      publishedTime: parseUkrainianDate(newsItem.date),
+      authors: ['Жидичинський монастир'],
+      images: images,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: newsItem.title,
+      description: newsItem.shortDescription,
+      images: images,
+    },
   };
 }
+
+import { JsonLd } from '@/components/JsonLd';
 
 export default async function NewsDetailPage({ params }: { params: Promise<{ id: string, lang: string }> }) {
   const { id, lang } = await params;
@@ -67,8 +82,25 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
   const displaySubtitle = categorySubKey ? t(categorySubKey) : newsItem.subtitle;
   const displayTitle = categoryTitleKey ? t(categoryTitleKey) : newsItem.category;
 
+  const isoDate = parseUkrainianDate(newsItem.date);
+
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": newsItem.title,
+    "image": [newsItem.image],
+    "datePublished": isoDate,
+    "dateModified": isoDate,
+    "author": [{
+      "@type": "Organization",
+      "name": "Жидичинський монастир",
+      "url": "https://www.chernectvo.com"
+    }]
+  };
+
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white animate-fade-in-fast">
+      <JsonLd data={jsonLdData} />
       <PageHeader
         title={displayTitle}
         subtitle={displaySubtitle}

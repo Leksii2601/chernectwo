@@ -1,35 +1,41 @@
 import React from 'react'
-import { Header } from '@/components/landing/Header'
-import { Hero } from '@/components/landing/Hero'
-import { CalendarSection } from '@/components/landing/CalendarSection'
-import { NewsSection } from '@/components/landing/NewsSection'
-import { SocialInitiatives } from '@/components/landing/SocialInitiatives'
-import { ExploreMore } from '@/components/landing/ExploreMore'
-import { FAQ } from '@/components/landing/FAQ'
-import { Footer } from '@/components/landing/Footer'
-
-import { newsData } from '@/data/newsData'
-
+import { LandingClient } from '@/components/landing/LandingClient'
+import { JsonLd } from '@/components/JsonLd';
 
 export const metadata = {
-  title: 'Жидичинський Свято-Миколаївський монастир',
-  description: 'Офіційний сайт Жидичинського Свято-Миколаївського монастиря',
+  title: 'Свято-Миколаївський Жидичинський монастир | Головна',
+  description: 'Офіційний сайт Свято-Миколаївського Жидичинського монастиря. Духовний центр, історія, новини та служіння.',
+  openGraph: {
+    title: 'Свято-Миколаївський Жидичинський монастир',
+    description: 'Офіційний сайт монастиря. Духовний центр, історія та новини.',
+    images: ['/media/pic_1.avif'],
+  },
 }
-
-// export const dynamic = 'force-dynamic'; // No longer needed as we are static here
 
 export default function HomePage() {
-  // Using imported static news from newsData
+  const jsonLdData = {
+    "@context": "https://schema.org",
+    "@type": "PlaceOfWorship",
+    "name": "Жидичинський Свято-Миколаївський монастир",
+    "image": "https://www.chernectvo.com/media/logo.avif",
+    "@id": "https://www.chernectvo.com",
+    "url": "https://www.chernectvo.com",
+    "telephone": "+38 (067) 104 22 88",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "вул. Ковельська, 1",
+      "addressLocality": "с. Жидичин, Луцький р-н",
+      "addressRegion": "Волинська область",
+      "postalCode": "45240",
+      "addressCountry": "UA"
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-amber-500 selection:text-white overflow-x-hidden">
-      <Header />
-      <Hero />
-      <CalendarSection />
-      <NewsSection news={newsData} />
-      <SocialInitiatives />
-      <ExploreMore />
-      <FAQ />
-      <Footer />
-    </main>
+    <>
+      <JsonLd data={jsonLdData} />
+      <LandingClient />
+    </>
   )
 }
+

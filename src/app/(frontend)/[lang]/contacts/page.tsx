@@ -55,11 +55,11 @@ export default function ContactsPage() {
     };
 
     return (
-        <main className="min-h-screen bg-white font-montserrat tracking-tight overflow-x-hidden">
+        <main className="min-h-screen bg-white font-montserrat tracking-tight overflow-x-hidden animate-fade-in-fast">
             <PageHeader
                 title={t('contacts.title')}
                 subtitle={t('page.contacts_subtitle')}
-                backgroundImage="/media/contacts.jpg"
+                backgroundImage="/media/contacts.avif"
             />
 
             {/* Tab Navigation */}
@@ -144,7 +144,7 @@ export default function ContactsPage() {
                             <X className="w-8 h-8" />
                         </button>
                         <Image
-                            src={`/media/logos/${fullscreenImage}.jpg`}
+                            src={`/media/logos/${fullscreenImage}.avif`}
                             alt="Fullscreen Logo"
                             fill
                             className="object-contain"

@@ -40,7 +40,7 @@ export function FooterVariant1() {
 
                     <div className="space-y-10">
                         <Link href={langPrefix} className="inline-block relative w-48 aspect-square hover:scale-105 transition-transform duration-700">
-                            <Image src="/media/text-logo.png" alt="Logo" fill className="object-contain object-left" />
+                            <Image src="/media/text-logo.avif" alt="Logo" fill className="object-contain object-left" />
                         </Link>
                         <p className="text-gray-500 text-lg leading-relaxed max-w-xs font-light tracking-wide">
                             {language === 'UA'

@@ -19,7 +19,7 @@ const SERVICES: ServiceType[] = [
 ];
 
 export default function PrayerNotePage() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const [noteType, setNoteType] = useState<'health' | 'repose'>('health');
     const [names, setNames] = useState<string[]>([]);
     const [currentName, setCurrentName] = useState('');
@@ -32,6 +32,7 @@ export default function PrayerNotePage() {
     const [donationAmount, setDonationAmount] = useState('');
     const [selectedCurrency, setSelectedCurrency] = useState<CurrencyType>('UAH');
     const [showMinAmountError, setShowMinAmountError] = useState(false);
+    const [agreedToTerms, setAgreedToTerms] = useState(false);
 
     const handleDonationChange = (val: string) => {
         setDonationAmount(val);
@@ -90,26 +91,17 @@ export default function PrayerNotePage() {
     };
 
     const updateName = (index: number, newName: string) => {
-        // 1. Character filtering (allow letters, spaces, hyphens, apostrophes)
-        // Using regex to remove invalid characters
         const filtered = newName.replace(/[^a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ\s'-]/g, '');
-
-        // 2. Auto-capitalization (First letter uppercase, rest as typed)
         const formatted = filtered.length > 0 ? filtered.charAt(0).toUpperCase() + filtered.slice(1) : '';
-
         const updatedNames = [...names];
 
-        // If index is beyond current names, we'll append
         if (index >= updatedNames.length) {
             updatedNames.push(formatted);
         } else {
             updatedNames[index] = formatted;
         }
 
-        // 3. Compacting (Rise to top): Remove empty strings from the middle
-        // This ensures names always occupy continuous lines from the top
         const compacted = updatedNames.filter(n => n.trim() !== '');
-
         setNames(compacted);
         setShowNoNamesError(false);
     };
@@ -129,7 +121,11 @@ export default function PrayerNotePage() {
             return;
         }
 
-        // Min amount validation
+        if (!agreedToTerms) {
+            alert(language === 'UA' ? 'Будь ласка, погодьтеся з правилами' : 'Please agree to the terms');
+            return;
+        }
+
         const amount = Number(donationAmount) || 0;
         const minAmount = selectedCurrency === 'UAH' ? 100 : 5;
         if (amount < minAmount) {
@@ -167,6 +163,7 @@ export default function PrayerNotePage() {
                 setNames([]);
                 setUserEmail('');
                 setDonationAmount('');
+                setAgreedToTerms(false);
                 setShowNoNamesError(false);
                 setShowEmailError(false);
                 setShowMinAmountError(false);
@@ -181,21 +178,19 @@ export default function PrayerNotePage() {
         }
     };
 
-
     return (
         <main className="min-h-screen bg-white font-montserrat overflow-x-hidden pb-32 lg:pb-0">
             <PageHeader
                 title={t('prayer.title')}
                 subtitle={t('page.prayer_subtitle')}
-                backgroundImage="/media/prayer-requests.jpg"
+                backgroundImage="/media/prayer-requests.avif"
             />
 
             <div className="max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[120px] py-12 lg:py-32">
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-32 items-start justify-center">
 
-                    {/* LEFT COLUMN: The Note Visual */}
-                    <div ref={noteRef} className="w-full lg:w-[480px] flex-shrink-0 flex flex-col items-center gap-6 order-2 lg:order-1 animate-fade-in">
-
+                    {/* LEFT COLUMN: The Note Visual (Desktop only) */}
+                    <div ref={noteRef} className="hidden lg:flex w-full lg:w-[480px] flex-shrink-0 flex-col items-center gap-6 animate-fade-in">
                         <PrayerNote
                             noteType={noteType}
                             selectedService={selectedService}
@@ -207,7 +202,7 @@ export default function PrayerNotePage() {
                     </div>
 
                     {/* RIGHT COLUMN: Controls Form */}
-                    <div className="w-full lg:flex-1 max-w-xl space-y-8 order-1 lg:order-2">
+                    <div className="w-full lg:flex-1 max-w-xl space-y-8">
                         <PrayerForm
                             noteType={noteType}
                             setNoteType={setNoteType}
@@ -232,25 +227,23 @@ export default function PrayerNotePage() {
                             selectedCurrency={selectedCurrency}
                             setSelectedCurrency={handleCurrencyChange}
                             showMinAmountError={showMinAmountError}
-                        />
-
-                        {/* Submit Button Block */}
-                        <div className="lg:static fixed bottom-0 left-0 right-0 bg-white border-t lg:border-none p-4 lg:p-0 z-[100] transition-all">
-                            <div className="max-w-xl mx-auto lg:mx-0">
-                                <button
-                                    onClick={handleSubmit}
-                                    disabled={names.length === 0 || isSubmitting}
-                                    className="w-full bg-black text-white h-12 lg:h-14 rounded-xl font-bold text-[10px] lg:text-xs uppercase tracking-[0.4em] hover:bg-amber-600 disabled:bg-gray-100 disabled:text-gray-300 transition-all shadow-lg active:scale-[0.98] flex items-center justify-center gap-3"
-                                >
-                                    {isSubmitting ? (
-                                        <>
-                                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                            {t('prayer.processing')}
-                                        </>
-                                    ) : (t('prayer.submit'))}
-                                </button>
+                            agreedToTerms={agreedToTerms}
+                            setAgreedToTerms={setAgreedToTerms}
+                            onSubmit={handleSubmit}
+                            isSubmitting={isSubmitting}
+                        >
+                            {/* This is passed as children to PrayerForm, displayed only on mobile */}
+                            <div className="flex lg:hidden justify-center w-full">
+                                <PrayerNote
+                                    noteType={noteType}
+                                    selectedService={selectedService}
+                                    names={names}
+                                    namesPerNote={NAMES_PER_NOTE}
+                                    onUpdateName={updateName}
+                                    onRemoveName={removeName}
+                                />
                             </div>
-                        </div>
+                        </PrayerForm>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,9 @@ import { PhotoReports } from './collections/PhotoReports'
 import { PrayerRequests } from './collections/PrayerRequests'
 import { JoinRequests } from './collections/JoinRequests'
 import { Questions } from './collections/Questions'
+import { LegalDocuments } from './collections/LegalDocuments'
 import { LiveStream } from './globals/LiveStream'
+import { LegalSettings } from './globals/LegalSettings'
 // import { PrintPrayersLink } from './components/admin/PrintPrayersLink'
 
 const filename = fileURLToPath(import.meta.url)
@@ -37,8 +39,8 @@ export default buildConfig({
         ]
     } */
   },
-  collections: [Users, Media, News, MissionaryProjects, PhotoReports, PrayerRequests, JoinRequests, Questions],
-  globals: [LiveStream],
+  collections: [Users, Media, News, MissionaryProjects, PhotoReports, PrayerRequests, JoinRequests, Questions, LegalDocuments],
+  globals: [LiveStream, LegalSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

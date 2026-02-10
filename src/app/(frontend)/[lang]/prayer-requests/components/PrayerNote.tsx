@@ -42,7 +42,7 @@ export const PrayerNote: React.FC<PrayerNoteProps> = ({
             <div className="p-0 relative z-10">
                 <div className="w-full h-auto mb-4 flex justify-center pt-8 px-6 relative">
                     <Image
-                        src="/media/header.png"
+                        src="/media/header.avif"
                         alt="Ornament"
                         width={280}
                         height={60}
@@ -105,7 +105,7 @@ export const PrayerNote: React.FC<PrayerNoteProps> = ({
                 <div className="w-full flex justify-center px-8 pb-10">
                     <div className="text-center w-full flex flex-col items-center">
                         <Image
-                            src="/media/footer.png"
+                            src="/media/footer.avif"
                             alt="Monastery"
                             width={280}
                             height={80}

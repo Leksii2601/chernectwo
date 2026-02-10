@@ -3,8 +3,8 @@ import { revalidateTag } from 'next/cache';
 import { getPayload } from 'payload';
 import configPromise from '@payload-config';
 
-const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
-const CHANNEL_ID = process.env.YOUTUBE_CHANNEL_ID;
+const FALLBACK_YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
+const FALLBACK_CHANNEL_ID = process.env.YOUTUBE_CHANNEL_ID;
 
 // Helper to decode HTML entities
 const decodeHTMLEntities = (text: string) => {
@@ -17,9 +17,27 @@ const decodeHTMLEntities = (text: string) => {
         .replace(/&gt;/g, '>');
 };
 
+// Helper for fetch with timeout
+async function fetchWithTimeout(url: string, options: RequestInit = {}, timeout = 10000) {
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    try {
+        const response = await fetch(url, {
+            ...options,
+            signal: controller.signal,
+        });
+        clearTimeout(id);
+        return response;
+    } catch (e) {
+        clearTimeout(id);
+        throw e;
+    }
+}
+
 // Core Fetch Logic
-async function fetchYouTubeData(forceRefresh = false) {
-    if (!YOUTUBE_API_KEY || !CHANNEL_ID) {
+async function fetchYouTubeData(apiKey: string, channelId: string, forceRefresh = false) {
+    if (!apiKey || !channelId) {
+        console.error('[YouTube API] Missing Credentials:', { hasApiKey: !!apiKey, hasChannelId: !!channelId });
         throw new Error('Missing Credentials');
     }
 
@@ -32,23 +50,33 @@ async function fetchYouTubeData(forceRefresh = false) {
         : { next: { revalidate: 30, tags: ['youtube'] } };
 
     // 1. Get Channel 'Uploads' Playlist ID
-    const channelUrl = `https://www.googleapis.com/youtube/v3/channels?key=${YOUTUBE_API_KEY}&id=${CHANNEL_ID}&part=contentDetails`;
-    const channelRes = await fetch(channelUrl, cacheOptions);
+    const channelUrl = `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${channelId}&part=contentDetails`;
+    const channelRes = await fetchWithTimeout(channelUrl, cacheOptions);
     const channelData = await channelRes.json();
+
+    if (channelData.error) {
+        console.error('[YouTube API] Channel Fetch Error:', channelData.error);
+        throw new Error(`YouTube API Error: ${channelData.error.message}`);
+    }
+
     const uploadsPlaylistId = channelData?.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
 
     if (!uploadsPlaylistId) {
-        throw new Error('Could not find uploads playlist');
+        console.warn('[YouTube API] Could not find uploads playlist for channel:', channelId);
+        // If we can't find uploads, we might still have a live now candidate if it was passed or found in search
     }
 
     // 2. Fetch Playlist Items (Videos + Streams mixed)
-    const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?key=${YOUTUBE_API_KEY}&playlistId=${uploadsPlaylistId}&part=snippet,contentDetails&maxResults=50`;
-    const playlistRes = await fetch(playlistUrl, cacheOptions);
-    const playlistData = await playlistRes.json();
+    let playlistData: any = { items: [] };
+    if (uploadsPlaylistId) {
+        const playlistUrl = `https://www.googleapis.com/youtube/v3/playlistItems?key=${apiKey}&playlistId=${uploadsPlaylistId}&part=snippet,contentDetails&maxResults=50`;
+        const playlistRes = await fetchWithTimeout(playlistUrl, cacheOptions);
+        playlistData = await playlistRes.json();
+    }
 
     // 2b. Add a direct search for currently live events (most reliable way to check live status)
-    const liveSearchUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&type=video&eventType=live&part=snippet`;
-    const liveSearchRes = await fetch(liveSearchUrl, shortCacheOptions);
+    const liveSearchUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&type=video&eventType=live&part=snippet`;
+    const liveSearchRes = await fetchWithTimeout(liveSearchUrl, shortCacheOptions, 5000); // Shorter timeout for live check
     const liveSearchData = await liveSearchRes.json();
 
     const liveNowId = liveSearchData?.items?.[0]?.id?.videoId || null;
@@ -63,8 +91,12 @@ async function fetchYouTubeData(forceRefresh = false) {
         videoIds.unshift(liveNowId);
     }
 
-    const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${YOUTUBE_API_KEY}&id=${videoIds.join(',')}&part=snippet,liveStreamingDetails`;
-    const detailsRes = await fetch(detailsUrl, cacheOptions);
+    if (videoIds.length === 0) {
+        return { videos: [], streams: [], liveNow: false, rawStats: { itemsFetched: 0 } };
+    }
+
+    const detailsUrl = `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoIds.join(',')}&part=snippet,liveStreamingDetails`;
+    const detailsRes = await fetchWithTimeout(detailsUrl, cacheOptions);
     const detailsData = await detailsRes.json();
 
     // Process Items
@@ -194,7 +226,7 @@ export async function GET() {
             videos: cached.videos || [],
             streams: cached.streams || [],
             liveNow: cached.latestLiveStatus || false,
-            channelId: CHANNEL_ID,
+            channelId: globalData.channelID || FALLBACK_CHANNEL_ID,
             lastUpdated: cached.lastUpdated
         });
 
@@ -208,9 +240,13 @@ export async function POST() {
     try {
         console.log('Refreshing YouTube Data and syncing with Payload...');
         const payload = await getPayload({ config: configPromise });
+        const globalData = await payload.findGlobal({ slug: 'live-stream' });
+
+        const apiKey = FALLBACK_YOUTUBE_API_KEY || ''; // If not in global, we take from env
+        const channelId = globalData.channelID || FALLBACK_CHANNEL_ID || '';
 
         // 1. Force fetch fresh data from YouTube
-        const data = await fetchYouTubeData(true);
+        const data = await fetchYouTubeData(apiKey, channelId, true);
 
         // 2. Update Payload Global
         await payload.updateGlobal({
@@ -219,7 +255,7 @@ export async function POST() {
                 cachedData: {
                     videos: data.videos,
                     streams: data.streams,
-                    latestLiveStatus: data.liveNow, // This is crucial for the indicator
+                    latestLiveStatus: data.liveNow,
                     lastUpdated: new Date().toISOString()
                 },
                 syncStats: {

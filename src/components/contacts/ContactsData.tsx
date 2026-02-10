@@ -20,7 +20,7 @@ export const pressItems: PressItem[] = [
         title_en: 'BRANDBOOK',
         subtitle_ua: 'ВІЗУАЛЬНИЙ СТИЛЬ',
         subtitle_en: 'VISUAL IDENTITY',
-        image: '/media/contacts_1.jpg',
+        image: '/media/contacts_1.avif',
         description_ua: 'Офіційні матеріали, логотипи та правила візуального стилю Жидичинської обителі для коректного використання у медіа.',
         description_en: 'Official materials, logos, and visual style rules of the Zhydychyn Monastery for correct media usage.',
         details_ua: [],
@@ -32,7 +32,7 @@ export const pressItems: PressItem[] = [
         title_en: 'TITLES',
         subtitle_ua: 'ЕПІСТОЛЯРНИЙ ЕТИКЕТ',
         subtitle_en: 'FORMS OF ADDRESS',
-        image: '/media/contacts_2.jpg',
+        image: '/media/contacts_2.avif',
         description_ua: 'Правила та норми звернення до намісника та братії монастиря під час офіційного листування чи особистого спілкування, а також офіційне найменування монашої інституції.',
         description_en: 'Rules and norms of addressing the Abbot and the brethren of the monastery during official correspondence or personal communication, as well as the official naming of the monastic institution.',
         details_ua: [

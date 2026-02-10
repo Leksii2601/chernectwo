@@ -3,7 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Search, Heart, ChevronDown, Globe, MessageSquareDiff, Menu, X, Radio } from 'lucide-react';
+import { Search, Heart, ChevronDown, Globe, MessageSquareDiff, Menu, X, Radio, EyeOff } from 'lucide-react';
+import { AccessibilityMenu } from '../accessibility/AccessibilityMenu';
 import { clsx } from 'clsx';
 import { useLanguage } from '@/context/LanguageContext';
 import { useRouter } from 'next/navigation';
@@ -16,9 +17,12 @@ interface NavItem {
 
 interface HeaderProps {
   variant?: 'default' | 'burger';
+  isLoading?: boolean;
 }
 
-export function Header({ variant = 'default' }: HeaderProps) {
+import { HeaderSkeleton } from './LandingSkeleton';
+
+export function Header({ variant = 'default', isLoading }: HeaderProps) {
   const { t, language, setLanguage } = useLanguage();
   const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
@@ -27,6 +31,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isAccessOpen, setIsAccessOpen] = useState(false);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const lastScrollY = useRef(0);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -69,7 +74,8 @@ export function Header({ variant = 'default' }: HeaderProps) {
         { label: t('nav.complex'), href: '/about/complex' },
         { label: t('nav.sketes'), href: '/about/sketes' },
         { label: t('nav.media'), href: '/about/media' },
-        { label: language === 'UA' ? 'Комора' : 'Pantry', href: '/pantry' },
+        // Комора тимчасово прихована — буде на окремому піддомені
+        // { label: language === 'UA' ? 'Комора' : 'Pantry', href: '/pantry' },
       ]
     },
     {
@@ -146,8 +152,11 @@ export function Header({ variant = 'default' }: HeaderProps) {
     sessionStorage.setItem('liveBannerDismissed', 'true');
   };
 
+  if (isLoading) return <HeaderSkeleton />;
+
   return (
     <>
+      <AccessibilityMenu isOpen={isAccessOpen} onClose={() => setIsAccessOpen(false)} />
       {/* Top Premium Live Banner bar */}
       {liveStatus?.isLive && (
         <div className="fixed top-0 left-0 right-0 z-[600] animate-fadeInDown">
@@ -216,6 +225,15 @@ export function Header({ variant = 'default' }: HeaderProps) {
             </div>
           </div>
 
+          {/* Accessibility Button */}
+          <button
+            onClick={() => setIsAccessOpen(true)}
+            className="flex items-center justify-center w-12 h-10 text-white/30 hover:text-white transition-colors border-r border-white/10"
+            title={language === 'UA' ? 'Налаштування доступності' : 'Accessibility Settings'}
+          >
+            <EyeOff size={14} strokeWidth={1.5} />
+          </button>
+
           {/* Search Button */}
           <button
             onClick={() => setIsSearchOpen(true)}
@@ -257,9 +275,11 @@ export function Header({ variant = 'default' }: HeaderProps) {
       >
         <div className="flex items-center gap-1">
           {/* Logo */}
-          <Link href={getLocalizedPath('/')} className="w-14 h-14 relative mr-10 ml-3 hover:scale-110 transition-transform duration-1000 cursor-pointer">
-            <Image src="/media/logo.png" alt="Logo" fill className="object-contain" />
-          </Link>
+          <div className="header-logo-link-container flex items-center justify-start ml-3 mr-6">
+            <Link href={getLocalizedPath('/')} className="w-[52px] h-[52px] relative hover:scale-110 transition-transform duration-1000 cursor-pointer">
+              <Image src="/media/gold_and_white_logo.avif" alt="Logo" fill className="object-contain" priority />
+            </Link>
+          </div>
 
           {mainNavItems.map((item) => (
             <div
@@ -310,7 +330,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
         scrolled ? "bg-black/90 backdrop-blur-xl translate-y-0 shadow-2xl" : "bg-transparent -translate-y-full"
       )}>
         <Link href={getLocalizedPath('/')} className="w-10 h-10 relative">
-          <Image src="/media/gold_and_white_logo.png" alt="Logo" fill className="object-contain" />
+          <Image src="/media/gold_and_white_logo.avif" alt="Logo" fill className="object-contain" />
         </Link>
         <button onClick={() => setMobileMenuOpen(true)} className="text-white p-2 active:scale-95 transition-transform">
           <Menu size={32} />
@@ -324,7 +344,7 @@ export function Header({ variant = 'default' }: HeaderProps) {
         scrolled ? "opacity-0 -translate-y-4 pointer-events-none" : "opacity-100 translate-y-0"
       )}>
         <Link href={getLocalizedPath('/')} className="w-16 h-16 relative block">
-          <Image src="/media/gold_and_white_logo.png" alt="Logo" fill className="object-contain" />
+          <Image src="/media/gold_and_white_logo.avif" alt="Logo" fill className="object-contain" />
         </Link>
       </div>
 
@@ -366,9 +386,22 @@ export function Header({ variant = 'default' }: HeaderProps) {
         mobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
       )}>
         <div className="flex justify-between items-center mb-10 shrink-0">
-          <div className="flex gap-4">
-            <button onClick={() => setLanguage('UA')} className={clsx("text-xs font-bold tracking-widest transition-all", language === 'UA' ? "text-amber-500" : "text-white/20")}>UA</button>
-            <button onClick={() => setLanguage('EN')} className={clsx("text-xs font-bold tracking-widest transition-all", language === 'EN' ? "text-amber-500" : "text-white/20")}>EN</button>
+          <div className="flex items-center gap-6">
+            <div className="flex gap-4">
+              <button onClick={() => setLanguage('UA')} className={clsx("text-xs font-bold tracking-widest transition-all", language === 'UA' ? "text-amber-500" : "text-white/20")}>UA</button>
+              <button onClick={() => setLanguage('EN')} className={clsx("text-xs font-bold tracking-widest transition-all", language === 'EN' ? "text-amber-500" : "text-white/20")}>EN</button>
+            </div>
+
+            {/* Mobile Accessibility Toggle */}
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setIsAccessOpen(true);
+              }}
+              className="p-2 text-white/30 hover:text-amber-500 transition-colors"
+            >
+              <EyeOff size={20} />
+            </button>
           </div>
           <button onClick={() => setMobileMenuOpen(false)} className="text-white/40 hover:text-white transition-colors">
             <X size={32} strokeWidth={1} />
@@ -490,6 +523,20 @@ export function Header({ variant = 'default' }: HeaderProps) {
                 @keyframes rotate-nav {
                     from { transform: rotate(0deg); }
                     to { transform: rotate(360deg); }
+                }
+                .animate-fade-in {
+                    animation: fade-in 0.3s ease-out forwards;
+                }
+                .animate-scale-in {
+                    animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                }
+                @keyframes fade-in {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes scale-in {
+                    from { opacity: 0; transform: scale(0.9) translateY(10px); }
+                    to { opacity: 1; transform: scale(1) translateY(0); }
                 }
             `}</style>
     </>

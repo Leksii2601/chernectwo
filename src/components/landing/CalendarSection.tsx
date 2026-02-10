@@ -5,9 +5,15 @@ import { generateCalendar } from '@/utils/calendarGenerator'
 import { clsx } from 'clsx'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useLanguage } from '@/context/LanguageContext';
+import { CalendarSectionSkeleton } from './LandingSkeleton';
 
-export function CalendarSection() {
+interface CalendarSectionProps {
+  isLoading?: boolean;
+}
+
+export function CalendarSection({ isLoading }: CalendarSectionProps) {
   const { t, language } = useLanguage();
+
   const MONTHS = t('calendar.months').split(',');
   const MONTHS_GENITIVE = t('calendar.months_genitive').split(',');
   const WEEKDAYS = t('calendar.weekdays').split(',');
@@ -60,6 +66,8 @@ export function CalendarSection() {
     const offset = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
     return [...Array(offset).fill(null), ...days];
   }, [currentDate, fullCalendarData]);
+
+  if (isLoading) return <CalendarSectionSkeleton />;
 
   return (
     <section id="calendar" className="py-20 px-2 lg:px-4 bg-gray-50 text-gray-800 font-sans min-h-screen overflow-hidden">

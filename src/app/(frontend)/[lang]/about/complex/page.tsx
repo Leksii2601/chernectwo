@@ -11,12 +11,12 @@ export default function ComplexPage() {
   const { t } = useLanguage();
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white animate-fade-in-fast">
       {/* 1. Header with Title */}
       <PageHeader
         title={t('explore.architecture')}
         subtitle={t('page.complex_subtitle')}
-        backgroundImage="/media/church-complex.jpg"
+        backgroundImage="/media/church-complex.avif"
       />
 
       {/* 2. Map Placeholder Section */}
